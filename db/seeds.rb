@@ -3,51 +3,97 @@
 
 # Users
 
-fritz = User.create!(
-  name: "Fritz Chesterton",
-  address: "35 Stout St\nThorndon\nWellington",
-  email: "fritz@maily.com",
-  password: "0hsosecret",
-  password_confirmation: "0hsosecret"
-)
+CITIES = [
+  "Wellington", "Auckland", "Christchurch", "Hamilton", "Dunedin", "Lincoln", "Oamaru",
+  "Whangarei", "Wanaka", "Hawea", "Timaru", "Rotorua", "Ashburton", "Kaikoura", "Fairlie"
+]
 
-anselm = User.create!(
-  name: "Anselm Costantini",
-  address: "44 Strasbourge St\nMartinborough",
-  email: "cost0100@maily.com",
-  password: "0hsosecret",
-  password_confirmation: "0hsosecret"
-)
+print "Creating users "
+
+30.times do
+  print "."
+  name = Faker::Name.name
+
+  User.create!(
+    name: name,
+    address: "#{Faker::Address.street_address}\n#{CITIES.sample}",
+    email: Faker::Internet.free_email(name),
+    password: "0hsosecret",
+    password_confirmation: "0hsosecret"
+  )
+end
+
+puts
 
 # Products
 
-loot_box1 = Product.create!(
-  name: "Mystery Loot Box",
-  description: "A random collection of cool stuff.",
-  price: 10.50,
-  quantity: 10,
-  seller: fritz
-)
-loot_box2 = Product.create!(
-  name: "Magical Loot Box",
-  description: "An awesome random collection of cool stuff.",
-  price: 49.99,
-  quantity: 10,
-  seller: fritz
-)
+print "Creating products "
 
-goku_beanie = Product.create!(name: "Goku Beanie", price: 15.00, quantity: 20, seller: anselm)
-piccolo_tee = Product.create!(name: "Piccolo T-shirt", price: 20.00, quantity: 15, seller: anselm)
-krillin_badge = Product.create!(name: "Krillin Badge", price: 0.50, quantity: 100, seller: anselm)
+# category => product types (categories are not yet used)
+PRODUCT_TYPES = {
+  "Artworks" => ["painting", "sculpture", "print", "poster"],
+  "Clothing" => ["T-shirt", "jersey", "hoodie", "shirt", "trousers", "socks", "skirt", "dress"],
+  "Accessories" => ["scarf", "hat", "gloves"],
+  "Jewelry" => ["ring", "necklace", "earrings"],
+  "Miscellaneous" => ["loot box", "mystery gift"]
+}
+
+ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
+
+PRODUCT_NAMES = [
+  50.times.map { Faker::App.name },
+  50.times.map { Faker::Team.creature.singularize },
+  50.times.map { Faker::Book.title },
+  10.times.map { Faker::Book.genre },
+  50.times.map { Faker::Hipster.word },
+  50.times.map { Faker::StarWars.character }
+].flatten
+
+100.times do
+  print "."
+
+  Product.create!(
+    name: "#{PRODUCT_NAMES.sample.humanize} #{ALL_PRODUCT_TYPES.sample}",
+    description: Faker::Hipster.paragraph,
+    price: rand(1..500) + [0, 0.50, 0.99].sample,
+    quantity: 1, # Will be updated later
+    seller: User.all.sample
+  )
+end
+
+puts
 
 # Orders
 
-loot_box_order = Order.create!(buyer: anselm)
-loot_box_order.order_items.create!(product: loot_box1, quantity: 2)
-loot_box_order.order_items.create!(product: loot_box2, quantity: 1)
+print "Creating orders "
 
-goku_order = Order.create!(buyer: fritz)
-goku_order.order_items.create!(product: goku_beanie, quantity: 1)
+QUANTITIES = [1] * 10 + [2] * 5 + [3] * 3 + (4..20).to_a
 
-krillin_order = Order.create!(buyer: fritz)
-krillin_order.order_items.create!(product: krillin_badge, quantity: 20)
+150.times do
+  print "."
+  buyer = User.all.sample
+  possible_products = Product.where.not(seller: buyer)
+
+  order = Order.create!(buyer: buyer)
+  rand(1..5).times do
+    order.order_items.create!(product: possible_products.to_a.sample, quantity: QUANTITIES.sample)
+  end
+end
+
+puts
+
+print "Updating product quantities "
+
+REMAINING_QUANTITIES = [0] * 40 + (1..100).to_a
+
+Product.all.each do |product|
+  print "."
+  ordered_quantity = OrderItem.where(product: product).sum(:quantity)
+
+  total_quantity = ordered_quantity + REMAINING_QUANTITIES.sample
+  total_quantity += rand(1..10) if total_quantity.zero?
+
+  product.update_attributes!(quantity: total_quantity)
+end
+
+puts
