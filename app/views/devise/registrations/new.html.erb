@@ -11,40 +11,44 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="row">
           <div class="col-md-6">
-            <h3><span class="badge badge-default">1</span> Login details</h3>
+            <h3><span class="circled-number">1</span> Login details</h3>
 
-            <div class="form-group">
-              <%= f.label :email %>
-              <%= f.text_field :email, class: "form-control" %>
+            <div class="form-group has-feedback">
+              <%= f.label :email, class: "sr-only" %>
+              <%= f.text_field :email, placeholder: "Email address", class: "form-control", autofocus: true %>
+              <i class="glyphicon glyphicon-globe form-control-feedback" aria-hidden="true"></i>
             </div>
-            <div class="form-group">
-              <%= f.label :password do %>
-                Password <span class="text-muted">(<%= @minimum_password_length %> characters or more)</span>
+            <div class="form-group has-feedback">
+              <%= f.label :password, class: "sr-only" do %>
+                Password (<%= @minimum_password_length %> characters or more)
               <% end %>
-              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              <%= f.password_field :password, placeholder: "Password", autocomplete: "off", class: "form-control" %>
+              <i class="glyphicon glyphicon-lock form-control-feedback" aria-hidden="true"></i>
             </div>
             <div class="form-group">
-              <%= f.label :password_confirmation %>
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              <%= f.label :password_confirmation, class: "sr-only" %>
+              <%= f.password_field :password_confirmation, placeholder: "Confirm password", autocomplete: "off", class: "form-control" %>
             </div>
           </div>
           <div class="col-md-6">
-            <h3><span class="badge badge-default">2</span> Personal details</h3>
+            <h3><span class="circled-number">2</span> Personal details</h3>
 
-            <div class="form-group">
-              <%= f.label :name %>
-              <%= f.text_field :name, autofocus: true, class: "form-control" %>
+            <div class="form-group has-feedback">
+              <%= f.label :name, class: "sr-only" %>
+              <%= f.text_field :name, placeholder: "Name", class: "form-control" %>
+              <i class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></i>
             </div>
-            <div class="form-group">
-              <%= f.label :address %>
-              <%= f.text_area :address, class: "form-control" %>
+            <div class="form-group has-feedback">
+              <%= f.label :address, class: "sr-only" %>
+              <%= f.text_area :address, placeholder: "Address", rows: 3, class: "form-control" %>
               <p class="help-block">We need this so that sellers know where to send the products you buy.</p>
+              <i class="glyphicon glyphicon-map-marker form-control-feedback" aria-hidden="true"></i>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3><span class="badge badge-default">3</span> Go for it!</h3>
+            <h3><span class="circled-number">3</span> Go for it!</h3>
             <%= f.submit "Register", class: "btn btn-primary btn-lg" %>
           </div>
         </div>

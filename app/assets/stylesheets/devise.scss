@@ -1,0 +1,11 @@
+.circled-number {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: $padding-xs-horizontal;
+  padding-top: 0.15em;
+
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 100%;
+}
