@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders, except: [:edit, :update]
   resources :products
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
