@@ -1,0 +1,30 @@
+<div id="top">
+  <div class="container">
+    <div class="col-md-6 offer">
+      <a href="#" class="btn btn-success btn-sm">Offer of the day</a>
+      <a href="#">Get 20% off if you order from 3 different categories!</a>
+    </div>
+    <div class="col-md-6">
+      <ul class="menu">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to current_user.name, "#" %>
+          </li>
+          <li>
+            <%= link_to "Dashboard", "#" %>
+          </li>
+          <li>
+            <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Login", new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to "Register", new_user_registration_path %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
