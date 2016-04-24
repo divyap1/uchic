@@ -53,7 +53,7 @@ PRODUCT_NAMES = [
   print "."
 
   Product.create!(
-    name: "#{PRODUCT_NAMES.sample.humanize} #{ALL_PRODUCT_TYPES.sample}",
+    name: "#{PRODUCT_NAMES.sample.titleize} #{ALL_PRODUCT_TYPES.sample}",
     description: Faker::Hipster.paragraph,
     price: rand(1..500) + [0, 0.50, 0.99].sample,
     quantity: 1, # Will be updated later
