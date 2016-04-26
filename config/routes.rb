@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   root to: "products#index"
 
   resources :orders, except: [:edit, :update]
