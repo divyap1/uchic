@@ -13,23 +13,24 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true%>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+    <%= f.label :price%><br>
+    <%= f.number_field :price, required: true, :step => 0.01 %>
   </div>
   <div class="field">
-    <%= f.label :quantity %><br>
-    <%= f.text_field :quantity %>
+    <%= f.label :quantity%><br>
+    <%= f.number_field :quantity, required: true %>
   </div>
   <div class="field">
+    <!--This will be hidden once login is setup, as user shouldnt be able to set seller-->
     <%= f.label :seller_id %><br>
-    <%= f.text_field :seller_id %>
+    <%= f.text_field :seller_id, :value => user_signed_in? ? current_user.id : -1 %>
   </div>
   <div class="actions">
     <%= f.submit %>
