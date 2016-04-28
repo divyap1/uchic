@@ -15,6 +15,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    
+    #Must be signed in to add a product
     unless user_signed_in?
         @product.errors.add(:permission, 'You must be logged in to perform this action.')
     end
@@ -22,6 +24,12 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
+
+    #Can only edit products you added
+    unless user_signed_in? && @product.seller_id == current_user.id
+      @product.errors.add(:permission, 'You do not have permission to edit this product.')
+    end 
+
   end
 
   # POST /products
