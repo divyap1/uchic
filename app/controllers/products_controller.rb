@@ -57,11 +57,22 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+
+    String notice = "";
+
+    #Check the current user posted the product
+    if user_signed_in? && @product.seller_id == current_user.id
+      @product.destroy
+      notice = 'Product was successfully destroyed.'
+    else
+      notice = 'You do not have permissions to delete this item.'
+    end 
+
+   respond_to do |format|
+      format.html { redirect_to products_url, notice: notice }
       format.json { head :no_content }
     end
+
   end
 
   private

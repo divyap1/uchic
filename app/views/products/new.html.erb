@@ -4,7 +4,7 @@
 
             <h1>Add Product</h1>
 
-            <%if !@product.errors.include?(:permission) %>
+            <%unless @product.errors.include?(:permission) %>
 
 	            <%= form_for(@product) do |f| %>
 	            <%if @product.errors.any? %>
@@ -46,13 +46,9 @@
 
  			<%end %>
             <%else%>
- 				<a href="/users/sign_in">
-		            <div class="alert alert-danger" role="alert">
-					  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-					  <span class="sr-only">Error:</span>
-					 You must be logged in to add a new product
-					</div>
-				</a>
+
+           		<%= render :partial => "error",  :locals => {:error => "You must be logged in to add a new product", :link => "/users/sign_in"} %>
+ 				
             <%end %>
 
             <br>
