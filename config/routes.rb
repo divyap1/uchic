@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :products
 
   devise_scope :user do
-    get "/users/show" => "registrations#show"
+    get "/users/show" => "registrations#show", as: :show_user_registration
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }
