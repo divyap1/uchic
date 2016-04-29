@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :orders, except: [:edit, :update]
   resources :products
 
+  devise_scope :user do
+    get "/users/show" => "registrations#show"
+  end
+
   devise_for :users, controllers: { registrations: 'registrations' }
 
   # The priority is based upon order of creation: first created -> highest priority.
