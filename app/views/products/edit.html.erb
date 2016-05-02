@@ -47,7 +47,7 @@
  			<%end %>
             <%else%>
 
-           		<%= render :partial => "error",  :locals => {:error => "You must be logged in to add a new product", :link => "/users/sign_in"} %>
+           		<%= render :partial => "error",  :locals => {:error => "You do not have the appropriate permissions to edit this product.", :link => "/users/sign_in"} %>
  				
             <%end %>
 
