@@ -17,6 +17,9 @@
             <%= link_to "Account settings", show_user_registration_path %>
           </li>
           <li>
+            <%= link_to "Order History", orders_path %>
+          </li>
+          <li>
             <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
           </li>
         <% else %>
