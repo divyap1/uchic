@@ -1,10 +1,10 @@
 <div id="top">
   <div class="container">
-    <div class="col-md-6 offer">
-      <a href="#" class="btn btn-success btn-sm">Offer of the day</a>
+    <div class="col-md-6 offer" data-animate="fadeInDown">
+      <a href="#" class="btn btn-success btn-sm" data-animate-hover="shake">Offer of the Day</a>
       <a href="#">Get 20% off if you order from 3 different categories!</a>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" data-animate="fadeInDown">
       <ul class="menu">
         <% if user_signed_in? %>
           <li>
@@ -14,7 +14,7 @@
             <%= link_to "Dashboard", "#" %>
           </li>
           <li>
-            <%= link_to "Account settings", show_user_registration_path %>
+            <%= link_to "Account Settings", show_user_registration_path %>
           </li>
           <li>
             <%= link_to "Order History", orders_path %>
