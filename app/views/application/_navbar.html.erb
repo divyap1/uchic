@@ -1,19 +1,16 @@
-<!-- *** NAVBAR ***
-_________________________________________________________ -->
+<!-- *** NAVBAR *** -->
 
 <div class="navbar navbar-default yamm" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="/">
-                <img src="/assets/theme/logo.png" alt="Obaju logo" class="hidden-xs">
-                <img src="/assets/theme/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
+            <a class="navbar-brand home" href="/" data-animate-hover="bounce">
+                <img src="/assets/theme/logo.png" alt="Site logo" class="hidden-xs">
+                <img src="/assets/theme/logo-small.png" alt="Site logo" class="visible-xs"><span class="sr-only">Go to Homepage</span>
             </a>
 
             <div class="navbar-buttons">
-
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <i class="fa fa-align-justify"></i>
                 </button>
@@ -22,12 +19,8 @@ _________________________________________________________ -->
                     <i class="fa fa-search"></i>
                 </button>
                 <a class="btn btn-default navbar-toggle" href="basket.html">
-                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Items in cart</span>
                 </a>
-
-
-
-
             </div>
         </div>
         <!--/.navbar-header -->
@@ -39,15 +32,16 @@ _________________________________________________________ -->
                     <%= link_to "Home", root_url %>
                 </li>
                 <li class="dropdown yamm-fw">
-                    <a href="/products" class="dropdown-toggle disabled" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> Browse <span class="glyphicon glyphicon-chevron-down"></span></a>
+                    <a href="/products" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> Browse</b><span class="glyphicon glyphicon-chevron-down"></span></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <h5>Category 1</h5>
+                                        <h5><%= link_to "Category 1", products_path %></h5>
                                         <ul>
                                             <li><%= link_to "Subcategory", products_path %>
+                                            </li>
 
                                             <li><%= link_to "Subcategory", products_path %>
                                             </li>
@@ -60,7 +54,7 @@ _________________________________________________________ -->
                                         </ul>
                                     </div>
                                     <div class="col-sm-4">
-                                        <h5>Category 2</h5>
+                                        <h5><%= link_to "Category 2", products_path %></h5>
                                         <ul>
                                             <li><%= link_to "Subcategory", products_path %>
                                             </li>
@@ -71,7 +65,7 @@ _________________________________________________________ -->
                                         </ul>
                                     </div>
                                     <div class="col-sm-4">
-                                        <h5>Similar Category 1</h5>
+                                        <h5><%= link_to "Category 3", products_path %></h5>
                                         <ul>
                                             <li><%= link_to "Subcategory", products_path %>
                                             </li>
@@ -80,7 +74,7 @@ _________________________________________________________ -->
                                             <li><%= link_to "Subcategory", products_path %>
                                             </li>
                                         </ul>
-                                        <h5>Similar Category 2</h5>
+                                        <h5><%= link_to "Category 5", products_path %></h5>
                                         <ul>
                                             <li><%= link_to "Subcategory", products_path %>
                                             </li>
@@ -99,13 +93,13 @@ _________________________________________________________ -->
 
 
                 <li class="dropdown yamm-fw">
-                    <a href="/products/new" class="dropdown-toggle disabled" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Sell <span class="glyphicon glyphicon-chevron-down"></span></a>
+                    <a href="/products/new" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Sell <span class="glyphicon glyphicon-chevron-down"></span></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <h5>Sell an item</h5>
+                                        <h5>Sell an Item</h5>
                                         <ul>
                                             <li>
                                             <%= link_to "Category One", new_product_path %>
@@ -113,28 +107,58 @@ _________________________________________________________ -->
                                             <li>
                                             <%= link_to "Category Two", new_product_path %>
                                             </li>
+                                            <li>
+                                            <%= link_to "Category Three", new_product_path %>
+                                            </li>
+                                            <li>
+                                            <%= link_to "Category Four", new_product_path %>
+                                            </li>
                                         </ul>
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <h5>My</h5>
+                                        <h5>My Items</h5>
                                         <ul>
-                                            <li><a href="#">Update an existing Item</a>
+                                            <li><a href="#">Update an Existing Item</a>
                                             </li>
-                                            <li><a href="#">View current listings</a>
+                                            <li><a href="#">View Current Listings</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <!-- /.yamm-content -->
                         </li>
                     </ul>
                 </li>
-            </ul>
 
-        </div>
+                <li class="dropdown yamm-fw">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Extra<span class="glyphicon glyphicon-chevron-down"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5>About</h5>
+                                                <ul>
+                                                    <li><%= link_to "FAQ", about_faq_path %>
+                                                    </li>
+                                                    <li><%= link_to "Contact Us", about_contact_us_path %>
+                                                    </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+
         <!--/.nav-collapse -->
 
         <div class="navbar-buttons">
@@ -175,15 +199,15 @@ _________________________________________________________ -->
             </div>
 
             <div class="navbar-collapse collapse right" id="basket-overview">
-                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Items in cart</span></a>
             </div>
             <!--/.nav-collapse -->
 
             <div class="navbar-collapse collapse right" id="search-not-mobile">
-                <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
-                    <span class="sr-only">Toggle search</span>
-                    <i class="fa fa-search"></i>
-                </button>
+                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
             </div>
 
         </div>
@@ -192,7 +216,7 @@ _________________________________________________________ -->
 
             <form class="navbar-form" role="search">
 
-                <%= form_tag products_path, :method => 'get' do %>  
+                <%= form_tag products_path, :method => 'get' do %>
                     <%= text_field_tag :search, params[:search], class: "form-control", style: "text-align:left;", placeholder: "Search" %>
                     <%= submit_tag "Search", class: "btn btn-primary", :name => nil %>
                 <% end %>
