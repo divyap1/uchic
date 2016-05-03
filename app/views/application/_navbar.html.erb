@@ -32,7 +32,7 @@
                     <%= link_to "Home", root_url %>
                 </li>
                 <li class="dropdown yamm-fw">
-                    <a href="/products" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200"> Browse</b><span class="glyphicon glyphicon-chevron-down"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Browse<span class="glyphicon glyphicon-chevron-down"></span></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
@@ -162,6 +162,23 @@
         <!--/.nav-collapse -->
 
         <div class="navbar-buttons">
+            <div class="navbar-collapse collapse right" id="colour-changer">
+              <button type="button" class="btn navbar-btn btn-primary dropdown-toggle" data-toggle="collapse" data-target="#style-switch">
+                <i class="fa fa-adjust"></i>
+              </button>
+               <form class="collapse" id="style-switch">
+                 <label for="colour">Select Theme Colour</label>
+                <select class="form-control" name="colour" id="colour">
+                    <option value="">Select Colour</option>
+                    <option value="default">Turquoise</option>
+                    <option value="green">Green</option>
+                    <option value="pink">Pink</option>
+                    <option value="blue">Blue</option>
+                    <option value="mono">Mono</option>
+                    <option value="violet">Violet</option>
+                </select>
+              </form>
+          </div>
 
             <div class="navbar-collapse collapse right">
               <button class="btn navbar-btn btn-primary dropdown-toggle" type="button" id="settingsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -178,7 +195,7 @@
                     <%= link_to "Dashboard", "#" %>
                   </li>
                   <li>
-                    <%= link_to "Account settings", show_user_registration_path %>
+                    <%= link_to "Account Settings", show_user_registration_path %>
                   </li>
                   <li>
                     <%= link_to "Order History", orders_path %>

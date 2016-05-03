@@ -961,16 +961,17 @@ h1 {
   box-sizing: border-box;
   width: 200px;
   padding: 20px;
-  position: fixed;
-  top: 120px;
-  left: 20px;
+  position: absolute;
+  top: 100%;
+  left: 80%;
   background: #fff;
   border: solid 1px #eeeeee;
+  z-index: 200;
 }
 /*!
  * Yamm!3
  * Yet another megamenu for Bootstrap 3
- * 
+ *
  * http://geedmo.github.com/yamm3
  */
 .yamm .nav,

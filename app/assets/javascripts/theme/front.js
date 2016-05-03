@@ -34,7 +34,7 @@ function demo() {
 
 	if ($(this).val() !== '') {
 
-	    var theme_csspath = 'css/style.' + $(this).val() + '.css';
+	    var theme_csspath = '/assets/theme/style.' + $(this).val() + '.css';
 
 	    $('link#theme-stylesheet').attr("href", theme_csspath);
 
