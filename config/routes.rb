@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
   resources :categories
-  root to: "products#index"
+  root to: "application#welcome"
 
   resources :orders, except: [:edit, :update]
   resources :products
 
+  devise_scope :user do
+    get "/users/show" => "registrations#show", as: :show_user_registration
+  end
+
   devise_for :users, controllers: { registrations: 'registrations' }
+
+  get 'about/contact_us' => 'application#contact_us'
+
+  get 'about/faq' => 'application#faq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

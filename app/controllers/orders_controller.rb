@@ -4,12 +4,17 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    if user_signed_in?
+      @orders = Order.where(buyer_id: current_user.id)
+    end
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+    unless user_signed_in? && @order.buyer_id == current_user.id
+      @order.errors.add(:permission, 'You do not have permission to view this order.')
+    end 
   end
 
   # GET /orders/new

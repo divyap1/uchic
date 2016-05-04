@@ -1,9 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box without-spacing">
 
-<p>
-  <strong>Buyer:</strong>
-  <%= @order.buyer_id %>
-</p>
+        	<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+            <h1>Order <%= @order.id %></h1>
+
+            <% unless @order.errors.include?(:permission) %>
+				<p>
+				  <strong>Buyer:</strong>
+				  <%= @order.buyer_id %>
+				</p>
+			<% else %>
+				<%= render :partial => "error",  :locals => {:error => @order.errors[:permission][0], :link => orders_path } %>
+			<% end %>
+
+			<%= link_to 'Back', orders_path %>
+
+		</div>
+	</div>
+</div>
+

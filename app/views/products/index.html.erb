@@ -1,6 +1,8 @@
-<p id="notice"><%= notice %></p>
+<h1>View Products</h1>
 
-<h1>Listing Products</h1>
+<%if notice %>
+  <%= render :partial => "error",  :locals => {:error => notice, :link => "/users/sign_in"} %>
+<% end %>
 
 <table>
   <thead>

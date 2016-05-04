@@ -1,16 +1,16 @@
-<!-- *** NAVBAR ***
-_________________________________________________________ -->
+<!-- *** NAVBAR *** -->
 
 <div class="navbar navbar-default yamm" role="navigation" id="navbar">
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
-                <img src="/assets/theme/logo.png" alt="Obaju logo" class="hidden-xs">
-                <img src="/assets/theme/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
+            <a class="navbar-brand home" href="/" data-animate-hover="bounce">
+                <img src="/assets/theme/logo.png" alt="Site logo" class="hidden-xs">
+                <img src="/assets/theme/logo-small.png" alt="Site logo" class="visible-xs"><span class="sr-only">Go to Homepage</span>
             </a>
+
             <div class="navbar-buttons">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
                     <span class="sr-only">Toggle navigation</span>
                     <i class="fa fa-align-justify"></i>
                 </button>
@@ -19,7 +19,7 @@ _________________________________________________________ -->
                     <i class="fa fa-search"></i>
                 </button>
                 <a class="btn btn-default navbar-toggle" href="basket.html">
-                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">3 items in cart</span>
+                    <i class="fa fa-shopping-cart"></i>  <span class="hidden-xs">Items in cart</span>
                 </a>
             </div>
         </div>
@@ -28,55 +28,59 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="index.html">Home</a>
+                <li class="active">
+                    <%= link_to "Home", root_url %>
                 </li>
                 <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Browse <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Browse<span class="glyphicon glyphicon-chevron-down"></span></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <h5>Category 1</h5>
+                                    <div class="col-sm-4">
+                                        <h5><%= link_to "Category 1", products_path %></h5>
                                         <ul>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
+                                            </li>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <h5>Category 2</h5>
+                                    <div class="col-sm-4">
+                                        <h5><%= link_to "Category 2", products_path %></h5>
                                         <ul>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <h5>Similar Category 1</h5>
+                                    <div class="col-sm-4">
+                                        <h5><%= link_to "Category 3", products_path %></h5>
                                         <ul>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
                                         </ul>
-                                        <h5>Similar Category 2</h5>
+                                        <h5><%= link_to "Category 5", products_path %></h5>
                                         <ul>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
-                                            <li><a href="category.html">Subcategory</a>
+                                            <li><%= link_to "Subcategory", products_path %>
                                             </li>
                                         </ul>
                                     </div>
@@ -89,98 +93,138 @@ _________________________________________________________ -->
 
 
                 <li class="dropdown yamm-fw">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
+                    <a href="/products/new" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Sell <span class="glyphicon glyphicon-chevron-down"></span></a>
                     <ul class="dropdown-menu">
                         <li>
                             <div class="yamm-content">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <h5>Shop</h5>
+                                    <div class="col-sm-6">
+                                        <h5>Sell an Item</h5>
                                         <ul>
-                                            <li><a href="index.html">Homepage</a>
+                                            <li>
+                                            <%= link_to "Category One", new_product_path %>
                                             </li>
-                                            <li><a href="category.html">Category - sidebar left</a>
+                                            <li>
+                                            <%= link_to "Category Two", new_product_path %>
                                             </li>
-                                            <li><a href="category-right.html">Category - sidebar right</a>
+                                            <li>
+                                            <%= link_to "Category Three", new_product_path %>
                                             </li>
-                                            <li><a href="category-full.html">Category - full width</a>
-                                            </li>
-                                            <li><a href="detail.html">Product detail</a>
+                                            <li>
+                                            <%= link_to "Category Four", new_product_path %>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <h5>User</h5>
+
+                                    <div class="col-sm-6">
+                                        <h5>My Items</h5>
                                         <ul>
-                                            <li><a href="register.html">Register / login</a>
+                                            <li><a href="#">Update an Existing Item</a>
                                             </li>
-                                            <li><a href="customer-orders.html">Orders history</a>
-                                            </li>
-                                            <li><a href="customer-order.html">Order history detail</a>
-                                            </li>
-                                            <li><a href="customer-wishlist.html">Wishlist</a>
-                                            </li>
-                                            <li><a href="customer-account.html">Customer account / change password</a>
+                                            <li><a href="#">View Current Listings</a>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <h5>Order process</h5>
-                                        <ul>
-                                            <li><a href="basket.html">Shopping cart</a>
-                                            </li>
-                                            <li><a href="checkout1.html">Checkout - step 1</a>
-                                            </li>
-                                            <li><a href="checkout2.html">Checkout - step 2</a>
-                                            </li>
-                                            <li><a href="checkout3.html">Checkout - step 3</a>
-                                            </li>
-                                            <li><a href="checkout4.html">Checkout - step 4</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Pages and blog</h5>
-                                        <ul>
-                                            <li><a href="blog.html">Blog listing</a>
-                                            </li>
-                                            <li><a href="post.html">Blog Post</a>
-                                            </li>
-                                            <li><a href="faq.html">FAQ</a>
-                                            </li>
-                                            <li><a href="text.html">Text page</a>
-                                            </li>
-                                            <li><a href="text-right.html">Text page - right sidebar</a>
-                                            </li>
-                                            <li><a href="404.html">404 page</a>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
                             </div>
                             <!-- /.yamm-content -->
                         </li>
                     </ul>
                 </li>
-            </ul>
 
-        </div>
+                <li class="dropdown yamm-fw">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Extra<span class="glyphicon glyphicon-chevron-down"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="yamm-content">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h5>About</h5>
+                                                <ul>
+                                                    <li><%= link_to "FAQ", about_faq_path %>
+                                                    </li>
+                                                    <li><%= link_to "Contact Us", about_contact_us_path %>
+                                                    </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.yamm-content -->
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+
+
         <!--/.nav-collapse -->
 
         <div class="navbar-buttons">
+            <div class="navbar-collapse collapse right" id="colour-changer">
+              <button type="button" class="btn navbar-btn btn-primary dropdown-toggle" data-toggle="collapse" data-target="#style-switch">
+                <i class="fa fa-adjust"></i>
+              </button>
+               <form class="collapse" id="style-switch">
+                 <label for="colour">Select Theme Colour</label>
+                <select class="form-control" name="colour" id="colour">
+                    <option value="">Select Colour</option>
+                    <option value="default">Turquoise</option>
+                    <option value="green">Green</option>
+                    <option value="pink">Pink</option>
+                    <option value="blue">Blue</option>
+                    <option value="mono">Mono</option>
+                    <option value="violet">Violet</option>
+                </select>
+              </form>
+          </div>
+
+            <div class="navbar-collapse collapse right">
+              <button class="btn navbar-btn btn-primary dropdown-toggle" type="button" id="settingsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-cog"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+
+                 <% if user_signed_in? %>
+                  <li>
+                    <%= link_to current_user.name, show_user_registration_path %>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                    <%= link_to "Dashboard", "#" %>
+                  </li>
+                  <li>
+                    <%= link_to "Account Settings", show_user_registration_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Order History", orders_path %>
+                  </li>
+                    <li role="separator" class="divider"></li>
+                  <li>
+                    <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to "Login", new_user_session_path %>
+                  </li>
+                  <li>
+                    <%= link_to "Register", new_user_registration_path %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
 
             <div class="navbar-collapse collapse right" id="basket-overview">
-                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">3 items in cart</span></a>
+                <a href="basket.html" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span class="hidden-sm">Items in cart</span></a>
             </div>
             <!--/.nav-collapse -->
 
             <div class="navbar-collapse collapse right" id="search-not-mobile">
-                <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
-                    <span class="sr-only">Toggle search</span>
-                    <i class="fa fa-search"></i>
-                </button>
+                    <button type="button" class="btn navbar-btn btn-primary" data-toggle="collapse" data-target="#search">
+                        <span class="sr-only">Toggle search</span>
+                        <i class="fa fa-search"></i>
+                    </button>
             </div>
 
         </div>
@@ -188,14 +232,12 @@ _________________________________________________________ -->
         <div class="collapse clearfix" id="search">
 
             <form class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                    <span class="input-group-btn">
 
-		<button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <%= form_tag products_path, :method => 'get' do %>
+                    <%= text_field_tag :search, params[:search], class: "form-control", style: "text-align:left;", placeholder: "Search" %>
+                    <%= submit_tag "Search", class: "btn btn-primary", :name => nil %>
+                <% end %>
 
-	    </span>
-                </div>
             </form>
 
         </div>

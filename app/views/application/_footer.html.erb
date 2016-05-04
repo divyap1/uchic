@@ -1,31 +1,33 @@
 <!-- *** FOOTER ***
 _________________________________________________________ -->
-<div id="footer" data-animate="fadeInUp">
+<div id="footer">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6">
-                <h4>Pages</h4>
+                <h4>User Section</h4>
 
                 <ul>
-                    <li><a href="text.html">About us</a>
-                    </li>
-                    <li><a href="text.html">Terms and conditions</a>
-                    </li>
-                    <li><a href="faq.html">FAQ</a>
-                    </li>
-                    <li><a href="contact.html">Contact us</a>
-                    </li>
-                </ul>
-
-                <hr>
-
-                <h4>User section</h4>
-
-                <ul>
-                    <li><a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
-                    </li>
-                    <li><a href="register.html">Regiter</a>
-                    </li>
+                    <% if user_signed_in? %>
+                      <li>
+                        <%= link_to "Dashboard", "#" %>
+                      </li>
+                      <li>
+                        <%= link_to "Account settings", show_user_registration_path %>
+                      </li>
+                      <li>
+                        <%= link_to "Order History", orders_path %>
+                      </li>
+                      <li>
+                        <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
+                      </li>
+                    <% else %>
+                      <li>
+                        <%= link_to "Login", new_user_session_path %>
+                      </li>
+                      <li>
+                        <%= link_to "Register", new_user_registration_path %>
+                      </li>
+                    <% end %>
                 </ul>
 
                 <hr class="hidden-md hidden-lg hidden-sm">
@@ -35,7 +37,7 @@ _________________________________________________________ -->
 
             <div class="col-md-3 col-sm-6">
 
-                <h4>Top categories</h4>
+                <h4>Top Categories</h4>
 
                 <h5>Category 1</h5>
 
@@ -67,16 +69,13 @@ _________________________________________________________ -->
 
                 <h4>Contact Details</h4>
 
-                <p><strong>Victoria University</strong>
-                    <br>SWEN303
-                    <br>donot@email.com
-                    <br>
-                    <strong>New Zealand</strong>
+                <p><strong>Victoria University of Wellington</strong>
+                    <br>Victoria University
+                    <br>PO Box 600
+                    <br>Wellington 6140
+                    <br>NEW ZEALAND
                 </p>
 
-                <a href="contact.html">Go to contact page</a>
-
-                <hr class="hidden-md hidden-lg">
 
             </div>
             <!-- /.col-md-3 -->
@@ -91,20 +90,12 @@ _________________________________________________________ -->
 
                 <form>
                     <div class="input-group">
-
                         <input type="text" class="form-control">
-
                         <span class="input-group-btn">
-
-	    <button class="btn btn-default" type="button">Subscribe!</button>
-
-	</span>
-
+                    	    <button class="btn btn-default" type="button">Subscribe!</button>
+                    	</span>
                     </div>
-                    <!-- /input-group -->
                 </form>
-
-                <hr>
 
             </div>
             <!-- /.col-md-3 -->
@@ -128,7 +119,7 @@ _________________________________________________________ -->
 
         </div>
         <div class="col-md-6">
-            <p class="pull-right">Template by <a href="http://bootstrapious.com/e-commerce-templates">Bootstrap Ecommerce Templates</a> with support from <a href="http://kakusei.cz">Designové předměty</a> 
+            <p class="pull-right">Template by <a href="http://bootstrapious.com/e-commerce-templates">Bootstrap Ecommerce Templates</a> with support from <a href="http://kakusei.cz">Designové předměty</a>
                 <!-- Not removing these links is part of the licence conditions of the template. Thanks for understanding :) -->
             </p>
         </div>
