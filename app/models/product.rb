@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to :seller, class_name: 'User'
+  belongs_to :category
   has_many :order_items
   has_many :orders, through: :order_items
   has_many :buyers, through: :orders

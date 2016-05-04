@@ -38,6 +38,13 @@ PRODUCT_TYPES = {
   "Miscellaneous" => ["loot box", "mystery gift"]
 }
 
+# creates categories in system
+PRODUCT_TYPES.each_pair do |category, sub|
+  Category.create(name: category)
+  print category.class
+  print "#{category}"
+end
+
 ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
 
 PRODUCT_NAMES = [
