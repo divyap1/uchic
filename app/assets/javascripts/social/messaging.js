@@ -107,7 +107,7 @@
   client.subscribe("/messages", function(data) {
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
-        partnerId: data.receiver_id,
+        partnerId: data.sender_id,
         message: data.message
       }, "received");
     }

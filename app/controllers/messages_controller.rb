@@ -32,6 +32,8 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
+        MessageBroadcastController.publish('/messages', @message.attributes)
+
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
