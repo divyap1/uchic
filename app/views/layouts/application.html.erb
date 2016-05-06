@@ -9,13 +9,16 @@
     <meta name="author" content="Divya Patel, Hannah Craighhead, Ben Evens, Jono Mingard">
     <meta name="keywords" content="Shopping, Online Marketplace, SWEN303, VUW">
 
+    <% if user_signed_in? %>
+      <meta name="user_id" content="<%= current_user.id %>">
+    <% end %>
+
     <title> Shopping </title>  <%# TODO: Change to website name  %>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
     <%= stylesheet_link_tag "application", media: 'all' %>
     <!-- <link href="/assets/theme/style.default.css" rel="stylesheet" id="theme-stylesheet"> -->
-    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
 
     <link rel="shortcut icon" href="favicon.png">
@@ -28,14 +31,8 @@
     <%= render "application/footer" %>
   </div>
 
-<!-- *** SCRIPTS TO INCLUDE *** -->
-<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="/assets/theme/jquery.cookie.js"></script>
-<script src="/assets/theme/waypoints.min.js"></script>
-<script src="/assets/theme/modernizr.js"></script>
-<script src="/assets/theme/bootstrap-hover-dropdown.js"></script>
-<script src="/assets/theme/owl.carousel.min.js"></script>
-<script src="/assets/theme/front.js"></script>
+  <div id="message_popups"></div>
 
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>

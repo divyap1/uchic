@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   root to: "application#welcome"
 
   get "/dashboard" => "users#dashboard", as: :user_dashboard

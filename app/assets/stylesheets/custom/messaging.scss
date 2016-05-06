@@ -1,0 +1,32 @@
+#message_popups {
+  position: fixed;
+  bottom: 0;
+  left: $padding-large-horizontal;
+  right: $padding-large-horizontal;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  z-index: 1100;
+
+  .message-popup {
+    width: 30em;
+    padding: $padding-base-horizontal;
+    background: white;
+    border: 1px solid $gray-lighter;
+    border-top-left-radius: $border-radius-base;
+    border-top-right-radius: $border-radius-base;
+    display: flex;
+    flex-direction: column;
+
+    .messages {
+      overflow: auto;
+      flex: 1;
+    }
+
+    input {
+      margin-top: $padding-small-vertical;
+    }
+  }
+}
