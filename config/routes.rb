@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  resources :categories
   root to: "application#welcome"
+
+  get "/dashboard" => "users#dashboard", as: :user_dashboard
 
   resources :orders, except: [:edit, :update]
   resources :products
+  resources :categories
 
   devise_scope :user do
     get "/users/show" => "registrations#show", as: :show_user_registration
+    get "/users/:id/profile" => "users#profile", as: :user_profile
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }

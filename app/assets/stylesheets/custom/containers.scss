@@ -14,10 +14,9 @@
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 .box .box-header {
-  background: #f7f7f7;
   margin: -20px -20px 20px;
-  padding: 20px;
-  border-bottom: solid 1px $gray-lighter;
+  padding: $padding-large-vertical $padding-large-horizontal;
+  font-size: 2rem;
 }
 .box .box-header:before,
 .box .box-header:after {

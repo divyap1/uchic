@@ -1,0 +1,31 @@
+.user-profile {
+  > h1.name {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  > .info {
+    text-align: center;
+    margin-bottom: $padding-large-vertical;
+
+    .divider {
+      display: inline-block;
+      padding: 0 $padding-base-vertical;
+    }
+  }
+
+  .commissions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: $padding-large-vertical $padding-base-horizontal;
+
+    .message {
+      flex: 1;
+    }
+
+    .message.not-accepting {
+      color: $gray;
+    }
+  }
+}
