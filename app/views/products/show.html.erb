@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%if notice %>
+  <%= render :partial => "notice",  :locals => {:notice => notice} %>
+<% end %>
 
 <p>
   <strong>Name:</strong>

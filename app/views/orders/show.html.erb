@@ -2,7 +2,9 @@
     <div class="col-md-12">
         <div class="box without-spacing">
 
-        	<p id="notice"><%= notice %></p>
+        	<%if notice %>
+			  <%= render :partial => "notice",  :locals => {:notice => notice} %>
+			<% end %>
 
             <h1>Order <%= @order.id %></h1>
 
