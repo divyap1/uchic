@@ -1,50 +1,3 @@
-if ($.cookie("theme_csspath")) {
-    $('link#theme-stylesheet').attr("href", $.cookie("theme_csspath"));
-}
-
-$(function() {
-
-    animations();
-    productDetailGallery(4000);
-    carousels();
-    utils();
-    demo();
-});
-
-
-$(window).load(function() {
-    $(this).alignElementsSameHeight();
-});
-
-$(window).resize(function() {
-    setTimeout(function() {
-	$(this).alignElementsSameHeight();
-    }, 150);
-});
-
-/* for demo purpose only - can be deleted */
-
-function demo() {
-
-    if ($.cookie("theme_csspath")) {
-	$('link#theme-stylesheet').attr("href", $.cookie("theme_csspath"));
-    }
-
-    $("#colour").change(function() {
-
-	if ($(this).val() !== '') {
-
-	    var theme_csspath = '/assets/theme/style.' + $(this).val() + '.css';
-
-	    $('link#theme-stylesheet').attr("href", theme_csspath);
-
-	    $.cookie("theme_csspath", theme_csspath, {expires: 365, path: '/'});
-	}
-
-	return false;
-    });
-}
-
 /* product detail gallery */
 
 function productDetailGallery(confDetailSwitch) {
@@ -235,3 +188,20 @@ $.fn.alignElementsSameHeight = function() {
 
 
 }
+
+if ($.cookie("theme_csspath")) {
+    $('link#theme-stylesheet').attr("href", $.cookie("theme_csspath"));
+}
+
+$(window).alignElementsSameHeight();
+
+$(window).resize(function() {
+    setTimeout(function() {
+	$(this).alignElementsSameHeight();
+    }, 150);
+});
+
+animations();
+productDetailGallery(4000);
+carousels();
+utils();
