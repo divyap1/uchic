@@ -1,8 +1,72 @@
-.navbar-header .navbar-brand {
-  padding-top: 17px;
-  font-size: 3.5rem;
-  font-family: "Gochi Hand";
-  font-weight: normal;
+.navbar {
+  border: none;
+
+  .navbar-header .navbar-brand {
+    font-size: 3.5rem;
+    font-family: "Gochi Hand";
+    font-weight: normal;
+  }
+
+  .navbar-nav {
+    > li > a {
+      padding-top: $navbar-padding-vertical / 2;
+      padding-bottom: $navbar-padding-vertical / 2;
+      padding-left: $navbar-padding-horizontal * 1.25;
+      padding-right: $navbar-padding-horizontal * 1.25;
+      margin-top: $navbar-padding-vertical / 2;
+      margin-bottom: $navbar-padding-vertical / 2;
+      border-radius: 1000px;
+      font-weight: 500;
+    }
+
+    > li > .dropdown-menu {
+      margin-top: -5px;
+      border-radius: $border-radius-base;
+    }
+
+    &.nav-primary {
+      > li > a {
+        text-transform: uppercase;
+        color: $brand-primary;
+
+        &:hover {
+          color: darken($brand-primary, 10%);
+        }
+      }
+
+      > li.active > a,
+      > li.open > a {
+        color: white;
+      }
+    }
+  }
+
+  .navbar-search {
+    position: relative;
+
+    .form-control {
+      padding-right: 50px;
+      margin-right: -50px;
+    }
+
+    .btn {
+      border: none;
+      background: transparent;
+    }
+  }
+
+  .nav-user {
+    > li > a {
+      padding-left: $navbar-padding-horizontal * 0.75;
+      padding-right: $navbar-padding-horizontal * 0.75;
+
+      .glyphicon {
+        color: $brand-primary;
+        font-size: 1.5rem;
+        line-height: 20px;
+      }
+    }
+  }
 }
 
 .navbar .yamm-content {
@@ -12,6 +76,10 @@
     text-transform: uppercase;
     padding-bottom: 10px;
     border-bottom: dotted 1px $gray;
+
+    &:first-child {
+      margin-top: 0;
+    }
 
     @media (max-width: 767px) {
       font-size: 14px;
@@ -25,7 +93,7 @@
     li {
       list-style-type: none;
       border-bottom: solid 1px $gray-lighter;
-      text-transform: uppercase;
+      // text-transform: uppercase;
       padding: 4px 0;
     }
 
@@ -43,12 +111,5 @@
 
   .banner {
     margin-bottom: 10px;
-  }
-}
-
-.navbar ul.nav {
-  > li > a {
-    text-transform: uppercase;
-    font-weight: bold;
   }
 }
