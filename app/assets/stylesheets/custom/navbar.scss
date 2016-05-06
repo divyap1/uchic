@@ -46,16 +46,24 @@
 
     .form-control {
       padding-right: 50px;
-      margin-right: -50px;
     }
 
     .btn {
-      border: none;
+      position: absolute;
+      right: 10px;
+      border-color: transparent;
       background: transparent;
     }
   }
 
   .nav-user {
+    text-align: center;
+
+    > li {
+      display: inline-block;
+      text-align: left;
+    }
+
     > li > a {
       padding-left: $navbar-padding-horizontal * 0.75;
       padding-right: $navbar-padding-horizontal * 0.75;
