@@ -27,5 +27,9 @@
   <%= @product.seller_id %>
 </p>
 
+<p>
+  <%= image_tag @product.picture.url %>
+</p>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

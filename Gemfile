@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'faker'
 gem 'ancestry', '~> 2.1'
+gem "paperclip", "~> 5.0.0.beta1"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
