@@ -21,12 +21,12 @@
           addMessage({
             partnerId: messages[i].receiver_id,
             message: messages[i].message
-          });
+          }, "sent");
         } else {
           addMessage({
             partnerId: messages[i].sender_id,
             message: messages[i].message
-          });
+          }, "received");
         }
       }
     });
@@ -50,8 +50,12 @@
     });
   }
 
-  function buildMessageBubble(data) {
-    return $("<div class='message-bubble'>" + data.message + "</div>");
+  function buildMessageBubble(data, type) {
+    return $(
+      "<div class='message " + type + "'>" +
+        "<span class='content'>" + data.message + "</span>" +
+      "</div>"
+    );
   }
 
   function messageContainer(data) {
