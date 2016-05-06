@@ -12,15 +12,23 @@
  *
  */
 
+@import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
+
+@import "themes/default";
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-@import "theme/animate.min";
-@import "theme/custom";
-@import "theme/font-awesome";
-@import "theme/owl.carousel";
-@import "theme/owl.theme";
-@import "theme/owl.transitions";
-@import "theme/style.default";
+@import "owl/owl.carousel";
+@import "owl/owl.theme";
+@import "owl/owl.transitions";
 
-@import "devise";
+@import "custom/base";
+@import "custom/containers";
+@import "custom/content";
+@import "custom/footer";
+@import "custom/homepage";
+@import "custom/navbar";
+@import "custom/sidebar";
+@import "custom/style-switch";
+@import "custom/yamm";

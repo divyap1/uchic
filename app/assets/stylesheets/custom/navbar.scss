@@ -1,0 +1,54 @@
+.navbar-header .navbar-brand {
+  padding-top: 17px;
+  font-size: 3.5rem;
+  font-family: "Gochi Hand";
+  font-weight: normal;
+}
+
+.navbar .yamm-content {
+  h5 {
+    font-size: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    border-bottom: dotted 1px $gray;
+
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style-type: none;
+      border-bottom: solid 1px $gray-lighter;
+      text-transform: uppercase;
+      padding: 4px 0;
+    }
+
+    li a {
+      color: $gray-light;
+      font-size: 12px;
+      display: block;
+
+      &:hover {
+        color: $brand-primary;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .banner {
+    margin-bottom: 10px;
+  }
+}
+
+.navbar ul.nav {
+  > li > a {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}

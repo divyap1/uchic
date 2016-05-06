@@ -1,0 +1,74 @@
+#content .panel.sidebar-menu {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+#content .panel.sidebar-menu .panel-heading .btn.btn-danger {
+  color: #fff;
+}
+#content .panel.sidebar-menu .panel-body span.colour {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: solid 1px $gray;
+  vertical-align: top;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+#content .panel.sidebar-menu .panel-body span.colour.white {
+  background: #fff;
+}
+#content .panel.sidebar-menu .panel-body span.colour.red {
+  background: $brand-danger;
+}
+#content .panel.sidebar-menu .panel-body span.colour.green {
+  background: $brand-success;
+}
+#content .panel.sidebar-menu .panel-body span.colour.blue {
+  background: $brand-info;
+}
+#content .panel.sidebar-menu .panel-body span.colour.yellow {
+  background: $brand-warning;
+}
+#content .panel.sidebar-menu .panel-body label {
+  color: $gray-light;
+  font-size: 12px;
+}
+#content .panel.sidebar-menu .panel-body label:hover {
+  color: $gray;
+}
+#content .panel.sidebar-menu h3 {
+  padding: 5px 0;
+  margin: 0;
+}
+#content .panel.sidebar-menu ul.nav.category-menu {
+  margin-bottom: 20px;
+}
+#content .panel.sidebar-menu ul.nav.category-menu li a {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#content .panel.sidebar-menu ul.nav ul {
+  list-style: none;
+  padding-left: 0;
+}
+#content .panel.sidebar-menu ul.nav ul li {
+  display: block;
+}
+#content .panel.sidebar-menu ul.nav ul li a {
+  position: relative;
+  font-weight: normal;
+  text-transform: none !important;
+  display: block;
+  padding: 10px 15px;
+  padding-left: 30px;
+  font-size: 12px;
+  color: $gray-light;
+}
+#content .panel.sidebar-menu ul.nav ul li a:hover,
+#content .panel.sidebar-menu ul.nav ul li a:focus {
+  text-decoration: none;
+  background-color: $gray-lighter;
+}
