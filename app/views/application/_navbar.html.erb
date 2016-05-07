@@ -166,6 +166,7 @@
           <li>
             <a class="btn navbar-btn btn-link dropdown-toggle" type="button" id="settingsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               <%= current_user.name %>
+              <img src="<%= current_user.profile_picture.url %>" alt="Profile picture" />
             </a>
             <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
               <li>
@@ -175,7 +176,7 @@
                 <%= link_to "Profile page", user_profile_path(current_user) %>
               </li>
               <li>
-                <%= link_to "Account Settings", show_user_registration_path %>
+                <%= link_to "Account Settings", edit_user_registration_path %>
               </li>
               <li role="separator" class="divider"></li>
               <li>
