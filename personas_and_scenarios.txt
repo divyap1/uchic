@@ -1,0 +1,12 @@
+Persona 1:
+Persona 2:
+Persona 3:
+
+Scenario 1: Browse/Search Items
+Scenario 2: Buy Items
+Scenario 3: Sell Items
+Scenario 4: Commission Items
+Scenario 5: Message Users
+Scenario 6:
+Scenario 7:
+Scenario 8:  
