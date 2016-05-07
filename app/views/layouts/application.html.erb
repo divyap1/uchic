@@ -27,7 +27,10 @@
 
 <body>
   <%= render "application/navbar" %>
+
   <div id ="all">
+    <%= render partial: "application/alerts" %>
+
     <%= render "application/content" %>
     <%= render "application/footer" %>
   </div>

@@ -1,61 +1,86 @@
 #message_popups {
   position: fixed;
   bottom: 0;
-  left: $padding-large-horizontal;
   right: $padding-large-horizontal;
-  height: 40vh;
+  height: 40rem;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  align-items: flex-end;
   justify-content: flex-end;
   z-index: 1100;
 
   .message-popup {
     width: 30em;
+    max-height: 100%;
     padding: $padding-base-horizontal;
     background: white;
-    border: 1px solid $gray-lighter;
+    border: 1px solid $brand-primary;
+    border-bottom: none;
     border-top-left-radius: $border-radius-base;
     border-top-right-radius: $border-radius-base;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
     display: flex;
     flex-direction: column;
 
-    .messages {
-      overflow: auto;
-      flex: 1;
+    h4 {
+      margin-top: 0;
     }
 
-    .message {
-      margin-bottom: $padding-base-vertical;
+    .new-indicator {
+      display: none;
+      color: $brand-info;
+    }
 
-      .content {
-        display: inline-block;
-        padding: $padding-base-vertical;
-        border: 1px solid;
-        border-radius: $border-radius-large;
-      }
-
-      &.sent {
-        text-align: right;
-
-        .content {
-          background-color: $gray-lightest;
-          border-color: $gray-lighter;
-        }
-      }
-
-      &.received {
-        text-align: left;
-
-        .content {
-          background-color: lighten($brand-primary, 30%);
-          border-color: lighten($brand-primary, 20%);
-        }
-      }
+    &.new .new-indicator {
+      display: inline;
     }
 
     input {
       margin-top: $padding-small-vertical;
+      min-height: $input-height-base;
+    }
+
+    &.minimised .messages,
+    &.minimised input {
+      display: none;
+    }
+  }
+}
+
+.messages {
+  overflow: auto;
+  flex: 1;
+
+  &.message-container {
+    max-height: 60vh;
+  }
+
+  .message {
+    margin-bottom: $padding-base-vertical;
+
+    .content {
+      display: inline-block;
+      padding: $padding-base-vertical;
+      border: 1px solid;
+      border-radius: $border-radius-large;
+    }
+
+    &.sent {
+      text-align: right;
+
+      .content {
+        background-color: $gray-lightest;
+        border-color: $gray-lighter;
+      }
+    }
+
+    &.received {
+      text-align: left;
+
+      .content {
+        background-color: lighten($brand-primary, 30%);
+        border-color: lighten($brand-primary, 20%);
+      }
     }
   }
 }

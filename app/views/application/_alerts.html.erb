@@ -1,0 +1,18 @@
+<div class="container">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>
+      <span class="sr-only">Notice:</span>
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert %>
+    <div class="alert alert-danger" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      <%= error %>
+      You may need to <%= link_to "sign in", new_user_session_path %>
+    </div>
+  <% end %>
+</div>

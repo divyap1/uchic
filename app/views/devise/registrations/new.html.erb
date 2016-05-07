@@ -41,8 +41,11 @@
             <div class="form-group has-feedback">
               <%= f.label :address, class: "sr-only" %>
               <%= f.text_area :address, placeholder: "Address", rows: 3, class: "form-control" %>
-              <p class="help-block">We need this so that sellers know where to send the products you buy.</p>
               <i class="glyphicon glyphicon-map-marker form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <div class="form-group">
+              <%= f.label :profile_picture %>
+              <%= f.file_field :profile_picture %>
             </div>
           </div>
         </div>

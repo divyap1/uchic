@@ -1,16 +1,4 @@
-<%if notice %>
-  <%= render :partial => "notice",  :locals => {:notice => notice} %>
-<% end %>
-
 <h1>View Products</h1>
-
-<%if alert %>
-  <%= render :partial => "error",  :locals => {:error => alert, :link => "/users/sign_in"} %>
-<% end %>
-
-<%if notice %>
-  <%= render :partial => "notice",  :locals => {:notice => notice} %>
-<% end %>
 
 <table>
   <thead>

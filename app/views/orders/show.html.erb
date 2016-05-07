@@ -1,11 +1,6 @@
 <div class="row">
     <div class="col-md-12">
         <div class="box without-spacing">
-
-        	<%if notice %>
-			  <%= render :partial => "notice",  :locals => {:notice => notice} %>
-			<% end %>
-
             <h1>Order <%= @order.id %></h1>
 
             <% unless @order.errors.include?(:permission) %>

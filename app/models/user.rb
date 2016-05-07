@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
     allow_blank: true
   }
 
+  has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png"
+  validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   def first_name
     name.split(/\s+/).first
   end

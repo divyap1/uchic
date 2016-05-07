@@ -12,19 +12,19 @@
     }
   }
 
-  function fetchMessages(partnerId) {
-    var popup = ensureMessagePopup({ partnerId: partnerId });
-
+  function fetchMessages(popup, partnerId, partnerName) {
     $.get("/messages.json", { user_id: userId, partner_id: partnerId }, function(messages) {
       for (var i = 0; i < messages.length; i++) {
         if (messages[i].sender_id.toString() === userId.toString()) {
           addMessage({
             partnerId: messages[i].receiver_id,
+            partnerName: messages[i].receiver_name,
             message: messages[i].message
           }, "sent");
         } else {
           addMessage({
             partnerId: messages[i].sender_id,
+            partnerName: messages[i].sender_name,
             message: messages[i].message
           }, "received");
         }
@@ -59,7 +59,7 @@
   }
 
   function messageContainer(data) {
-    return $(".message-container[data-sender=" + data.partnerId + "]");
+    return $(".message-container[data-partner=" + data.partnerId + "]");
   }
 
   function ensureMessagePopup(data) {
@@ -69,21 +69,38 @@
 
     if (item) {
       return item.popup;
-    } else {
-      var popup = $(
-        "<div class='message-popup'>" +
-          "<div class='messages'></div>" +
-          "<input type='text' class='form-control' data-receiver='" + data.partnerId + "' />" +
-        "</div>"
-      );
-
-      $("#message_popups").append(popup);
-      popup.find("input").on("change", sendMessage);
-
-      messagePopups.push({ partnerId: data.partnerId, popup: popup });
-
-      return popup;
     }
+
+    var popup = $(
+      "<div class='message-popup'>" +
+        "<h4>" +
+          "<span class='new-indicator glyphicon glyphicon-asterisk' aria-hidden='true'></span> " +
+          data.partnerName +
+          "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
+          "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
+        "</h4>" +
+        "<div class='messages'></div>" +
+        "<input type='text' class='form-control' data-receiver='" + data.partnerId + "' placeholder='Type a message ...' />" +
+      "</div>"
+    );
+
+    $("#message_popups").append(popup);
+
+    var index = messagePopups.length;
+    messagePopups.push({ partnerId: data.partnerId, popup: popup });
+
+    popup.find("input").on("change", sendMessage);
+
+    popup.on("click", function() { popup.removeClass("new"); });
+    popup.find(".minimise").on("click", function() { popup.toggleClass("minimised"); });
+    popup.find(".delete").on("click", function() {
+      messagePopups.splice(index, 1);
+      popup.remove();
+    });
+
+    fetchMessages(popup, data.partnerId, data.partnerName);
+
+    return popup;
   }
 
   function addMessage(data, type) {
@@ -91,10 +108,17 @@
 
     if (container.length) {
       container.append(buildMessageBubble(data, type));
+      return;
     }
 
     var popup = ensureMessagePopup(data);
-    popup.find(".messages").append(buildMessageBubble(data, type));
+    if (data.highlight) {
+      popup.addClass("new");
+    }
+
+    var messagesContainer = popup.find(".messages");
+    messagesContainer.append(buildMessageBubble(data, type));
+    messagesContainer.scrollTop(messagesContainer.height() + 1000);
   }
 
   var client = new Faye.Client("/socket");
@@ -108,12 +132,23 @@
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
         partnerId: data.sender_id,
-        message: data.message
+        partnerName: data.sender_name,
+        message: data.message,
+        highlight: true
       }, "received");
     }
   });
 
   $(".start-message").on("click", function(e) {
-    fetchMessages($(e.target).data("receiver"));
+    ensureMessagePopup({
+      partnerId: $(e.target).data("receiver"),
+      partnerName: $(e.target).data("receiver-name")
+    });
+  });
+
+  $(".message-input").on("change", sendMessage);
+
+  $(".message-container").each(function() {
+    $(this).scrollTop($(this).height() + 1000);
   });
 })();

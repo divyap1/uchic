@@ -5,10 +5,19 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    user = User.find(params[:user_id])
-    partner = User.find(params[:partner_id])
+    if params[:user_id] && params[:partner_id]
+      @user = User.find(params[:user_id])
+      @partner = User.find(params[:partner_id])
 
-    @messages = Message.between(user, partner)
+      @messages = Message.between(@user, @partner)
+    else
+      @threads = Message.first_in_each_thread(current_user)
+
+      if @threads.any?
+        @partner = User.find(params[:selected]) || @threads.first.partner(current_user)
+        @messages = Message.between(current_user, @partner)
+      end
+    end
   end
 
   # GET /messages/1
@@ -32,7 +41,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        MessageBroadcastController.publish('/messages', @message.attributes)
+        MessageBroadcastController.publish('/messages', @message.detailed_attributes)
 
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
