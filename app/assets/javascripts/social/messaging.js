@@ -74,16 +74,30 @@
     } else {
       var popup = $(
         "<div class='message-popup'>" +
-          "<h4>" + data.partnerName + "</h4>" +
+          "<h4>" +
+            "<span class='new-indicator glyphicon glyphicon-asterisk' aria-hidden='true'></span> " +
+            data.partnerName +
+            "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
+            "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
+          "</h4>" +
           "<div class='messages'></div>" +
           "<input type='text' class='form-control' data-receiver='" + data.partnerId + "' placeholder='Type a message ...' />" +
         "</div>"
       );
 
       $("#message_popups").append(popup);
+
+      var index = messagePopups.length;
+      messagePopups.push({ partnerId: data.partnerId, popup: popup });
+
       popup.find("input").on("change", sendMessage);
 
-      messagePopups.push({ partnerId: data.partnerId, popup: popup });
+      popup.on("click", function() { popup.removeClass("new"); });
+      popup.find(".minimise").on("click", function() { popup.toggleClass("minimised"); });
+      popup.find(".delete").on("click", function() {
+        messagePopups.splice(index, 1);
+        popup.remove();
+      });
 
       return popup;
     }
@@ -97,6 +111,10 @@
     }
 
     var popup = ensureMessagePopup(data);
+    if (data.highlight) {
+      popup.addClass("new");
+    }
+
     var messagesContainer = popup.find(".messages");
     messagesContainer.append(buildMessageBubble(data, type));
     messagesContainer.scrollTop(messagesContainer.height() + 1000);
@@ -114,7 +132,8 @@
       addMessage({
         partnerId: data.sender_id,
         partnerName: data.sender_name,
-        message: data.message
+        message: data.message,
+        highlight: true
       }, "received");
     }
   });

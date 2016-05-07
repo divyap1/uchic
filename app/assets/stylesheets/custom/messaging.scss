@@ -2,15 +2,16 @@
   position: fixed;
   bottom: 0;
   right: $padding-large-horizontal;
-  height: 40vh;
+  height: 40rem;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  align-items: flex-end;
   justify-content: flex-end;
   z-index: 1100;
 
   .message-popup {
     width: 30em;
+    max-height: 100%;
     padding: $padding-base-horizontal;
     background: white;
     border: 1px solid $brand-primary;
@@ -28,6 +29,15 @@
 
     h4 {
       margin-top: 0;
+    }
+
+    .new-indicator {
+      display: none;
+      color: $brand-info;
+    }
+
+    &.new .new-indicator {
+      display: inline;
     }
 
     .message {
@@ -62,6 +72,11 @@
     input {
       margin-top: $padding-small-vertical;
       min-height: $input-height-base;
+    }
+
+    &.minimised .messages,
+    &.minimised input {
+      display: none;
     }
   }
 }
