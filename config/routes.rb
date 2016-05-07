@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get 'about/about_us' => 'pages#about_us'
+
+  get 'about/contact_us' => 'pages#contact_us'
+
+  get 'about/faq' => 'pages#faq'
+
   resources :messages
-  root to: "application#welcome"
+  root to: "pages#welcome"
 
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
