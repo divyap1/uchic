@@ -1,13 +1,19 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-def create_categories(category, parent_id, sub_categories = nil)
-  category = Category.create! :name => category, :parent_id => parent_id
+def create_categories(category_name, parent_id, sub_categories = nil)
+  category = Category.create! :name => category_name, :parent_id => parent_id
   return if sub_categories.nil?
   sub_categories.each do |sub|
     create_categories(sub, category.id)
   end
 end
+
+# Delete existing data
+Category.delete_all
+User.delete_all
+Product.delete_all
+Order.delete_all
 
 # Users
 
