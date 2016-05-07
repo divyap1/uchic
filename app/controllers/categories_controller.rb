@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @products = @category.products
+    @products = get_products(@category)
   end
 
   # GET /categories/new
@@ -72,5 +72,14 @@ class CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.fetch(:category, {})
+    end
+
+    def get_products(category)
+      return category.products if category.is_childless?
+      products = category.products
+      category.children.each do |sub_category|
+        products.append(get_products(sub_category))
+      end
+      return products
     end
 end

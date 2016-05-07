@@ -1,11 +1,14 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-def create_categories(category_name, parent_id, sub_categories = nil)
+def create_categories(category_name, parent_id, leaves, sub_categories = nil)
   category = Category.create! :name => category_name, :parent_id => parent_id
-  return if sub_categories.nil?
+  if sub_categories.nil?
+    leaves.push(category)
+    return
+  end
   sub_categories.each do |sub|
-    create_categories(sub, category.id)
+    create_categories(sub, category.id, leaves)
   end
 end
 
@@ -54,8 +57,9 @@ PRODUCT_TYPES = {
 
 # creates categories in system
 all_items = Category.create! :name => "All Items"
+leaves = []
 PRODUCT_TYPES.each_key do |category|
-  create_categories(category, all_items.id, PRODUCT_TYPES[category])
+  create_categories(category, all_items.id, leaves, PRODUCT_TYPES[category])
 end
 
 ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
@@ -71,7 +75,7 @@ PRODUCT_NAMES = [
 
 100.times do
   print "."
-  product_category = Category.all.sample
+  product_category = leaves.sample
   Product.create!(
     name: "#{PRODUCT_NAMES.sample.titleize} #{product_category.name}",
     description: Faker::Hipster.paragraph,

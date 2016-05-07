@@ -34,15 +34,15 @@
                 <div class="row">
                   <% Category.first.root.children.each do |category| %>
                   <div class="col-sm-4">
-                      <h5><%= link_to category.name, category_path(category) %></h5>
+                      <h5><%= link_to category.name.titleize, category_path(category) %></h5>
                       <ul>
                         <% category.children.each do |sub_category| %>
-                        <li><%= link_to sub_category.name, category_path(sub_category) %>
+                        <li><%= link_to sub_category.name.titleize, category_path(sub_category) %>
                         </li>
                         <% end %>
                       </ul>
                   </div>
-                  <% end %>               
+                  <% end %>
                 </div>
               </div>
               <!-- /.yamm-content -->
