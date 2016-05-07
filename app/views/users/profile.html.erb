@@ -30,14 +30,26 @@
     <div class="col-md-6">
       <div class="products panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Products</h3>
+          <h3 class="panel-title">Listings</h3>
         </div>
         <div class="panel-body">
-          <ul>
+
+          <ul class="media-list">
             <% @user.products.each do |product| %>
-              <li><%= product.name %></li>
+            <li class="media">
+              <div class="media-left">
+                <a href="#">
+                  <%= image_tag product.picture.url, size: "64x64", :class => "media-object"%>
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><%= link_to product.name, product %></h4>
+                
+              </div>
+            </li>
             <% end %>
           </ul>
+
         </div>
       </div>
     </div>

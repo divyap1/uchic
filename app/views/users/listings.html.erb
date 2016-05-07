@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="box without-spacing">
+
+      <h1>Items</h1>
+
+      <% if @products && @products.any? %>
+      
+        <table class="table table-striped">
+          <thead class="thead-default">
+            <tr>
+              <th>Name</th>
+              <th>Listed On</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @products.each do |product| %>
+              <tr>
+                <td><%= product.name %></td>
+                <td><%= product.created_at.strftime "%d %B %Y" %></td>
+                <td style="padding-left: 10px">
+                  <%= link_to product, class: "btn btn-primary" do %>
+                    View listing
+                  <% end %>
+                </td>
+                <td><%#= link_to 'Edit', edit_order_path(order)%></td>
+                <td><%#= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p>This seller has no current listings</p>
+      <% end %>
+
+    </div>
+  </div>
+</div>

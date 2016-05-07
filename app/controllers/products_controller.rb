@@ -15,20 +15,18 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
-    
-    #Must be signed in to add a product
     unless user_signed_in?
-        @product.errors.add(:permission, 'You must be logged in to perform this action.')
+       flash.now[:alert] = "Guests can not sell items"
     end
+    @product = Product.new
   end
 
   # GET /products/1/edit
   def edit
 
     #Can only edit products you added
-    unless user_signed_in? && @product.seller_id == current_user.id
-      @product.errors.add(:permission, 'You do not have permission to edit this product.')
+    unless user_signed_in? && @product.seller_id === current_user.id
+      flash.now[:alert] = "You do not have the permissions to edit this listing."
     end 
 
   end

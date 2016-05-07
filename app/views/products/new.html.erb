@@ -1,63 +1,61 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="box without-spacing">
+<div class="container">
+	<div class="row">
+	    <div class="col-md-12">
+	        <div class="box without-spacing">
 
-            <h1>Add Product</h1>
+	            <h1>Sell Item</h1>
 
-            <%unless @product.errors.include?(:permission) %>
+	            <%if user_signed_in?%>
 
-	            <%= form_for(@product) do |f| %>
-	            <%if @product.errors.any? %>
-		            <div id="error_explanation">
-		                <h2><%= pluralize(@product.errors.count, "error") %>
-		                prohibited this product from being saved:</h2>
-		                <ul>
-		                    <%@product.errors.full_messages.each do |message| %>
-		                    <li><%= message %></li><%end %>
-		                </ul>
+		            <%= form_for(@product) do |f| %>
+		            <%if @product.errors.any? %>
+			            <div id="error_explanation">
+			                <h2><%= pluralize(@product.errors.count, "error") %>
+			                prohibited this product from being saved:</h2>
+			                <ul>
+			                    <%@product.errors.full_messages.each do |message| %>
+			                    <li><%= message %></li><%end %>
+			                </ul>
+			            </div>
+		            <%end %>
+
+		            <div class="form-group">
+		                <%= f.label :name, class: "sr-only"%>
+		                <%= f.text_field :name, placeholder: "Product Name", required: true, class: "form-control" %>
 		            </div>
-	            <%end %>
+		            <div class="form-group">
+		                <%= f.label :description,class: "sr-only" %>
+		                <%= f.text_area :description, placeholder: "Product Description", class: "form-control"  %>
+		            </div>
+		            <div class="form-group">
+		                <%= f.label :price, class: "sr-only"%>
+		                <%= f.number_field :price, placeholder: "Price", required: true, :step => 0.01, class: "form-control" %>
+		            </div>
+		            <div class="form-group">
+		                <%= f.label :quantity, class: "sr-only"%>
+		                <%= f.number_field :quantity, placeholder: "Quantity", required: true, class: "form-control" %>
+		            </div>
 
-	            <div class="form-group">
-	                <%= f.label :name, class: "sr-only"%>
-	                <%= f.text_field :name, placeholder: "Product Name", required: true, class: "form-control" %>
-	            </div>
-	            <div class="form-group">
-	                <%= f.label :description,class: "sr-only" %>
-	                <%= f.text_area :description, placeholder: "Product Description", class: "form-control"  %>
-	            </div>
-	            <div class="form-group">
-	                <%= f.label :price, class: "sr-only"%>
-	                <%= f.number_field :price, placeholder: "Price", required: true, :step => 0.01, class: "form-control" %>
-	            </div>
-	            <div class="form-group">
-	                <%= f.label :quantity, class: "sr-only"%>
-	                <%= f.number_field :quantity, placeholder: "Quantity", required: true, class: "form-control" %>
-	            </div>
+		            <div class="form-group">
+		                <%= f.label :picture, class: "sr-only"%>
+		                <%= f.file_field :picture %>
+		            </div>
 
-	            <div class="form-group">
-	                <%= f.label :picture, class: "sr-only"%>
-	                <%= f.file_field :picture %>
-	            </div>
+		            <div class="form-group">
+		                <%= f.label :seller_id, class: "sr-only"%>
+		                <%= f.hidden_field :seller_id, value: current_user.id %>
+		            </div>
 
-	            <div class="form-group">
-	                <%= f.label :seller_id, class: "sr-only"%>
-	                <%= f.hidden_field :seller_id, value: current_user.id %>
-	            </div>
+		            <div>
+		                <%= f.submit class: "btn btn-primary" %>
+		            </div>
 
-	            <div>
-	                <%= f.submit class: "btn btn-primary" %>
-	            </div>
+	 			<% end %>
+	 			<% end %>
 
- 			<%end %>
-            <%else%>
-
-           		<%= render :partial => "error",  :locals => {:error => "You must be logged in to add a new product", :link => "/users/sign_in"} %>
- 				
-            <%end %>
-
-            <br>
-            <%= link_to 'Back', products_path, :class => 'btn btn-warning' %>
-        </div>
-    </div>
+	            <br>
+	            <%= link_to 'Back', products_path, :class => 'btn btn-warning' %>
+	        </div>
+	    </div>
+	</div>
 </div>
