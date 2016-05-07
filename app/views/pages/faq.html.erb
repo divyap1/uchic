@@ -1,2 +1,149 @@
-<h1>Pages#faq</h1>
-<p>Find me in app/views/pages/faq.html.erb</p>
+<div class="container">
+
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="#">Home</a>
+            </li>
+            <li>FAQ</li>
+        </ul>
+
+    </div>
+
+    <div class="col-md-12">
+
+
+        <div class="box" id="contact">
+            <h1>Frequently Asked Questions</h1>
+            <p class="lead">Here is a list of common questions and answers to help you. Want to know something more, feel free to
+             <%= link_to "contact us", about_contact_us_path %>!</p>
+            <hr>
+
+            <div class="panel-group" id="accordion">
+
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+
+<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+
+1. How can I buy or sell items here?
+
+</a>
+
+</h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse">
+                      <div class="panel-body">
+                          You can <%= link_to "register", new_user_registration_path %> with us. This will take you to a page that asks you to
+                          set up an account for the website. Every user of the site is allowed to buy and sell items.
+                      </div>
+                  </div>
+              </div>
+              <!-- /.panel -->
+
+
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h4 class="panel-title">
+
+<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+
+2. What benefits do members get?
+
+</a>
+
+</h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                      <div class="panel-body">
+                         Non-memebers can only browse listed items on the site. This is for
+                         security reasons, and to protect personal details and communciation channels for all our users. As a member though, you
+                         can browse items made by our users, and also commission works to get personalised
+                         products. Memebers can also start up their own businesses via our site, allowing them to sell to other members, and
+                         accept commissions. You can also chat directly with other sellers, and connections in our social marketplace to expand your business.
+                      </div>
+                  </div>
+              </div>
+              <!-- /.panel -->
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+
+3. How do commissions work?
+
+  </a>
+
+</h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <p>As a buyer: Once you have become a member of Uchic, you can browse through seller profiles. If a seller is accepting
+                            commissions, you can send a request to them directly.</p>
+                            <p>As a seller: Once you have become a member of Uchic, you can set up your "Seller Profile". You can specify what kind
+                              of commissions you will accept, to limit the scope of requests to only what you are able to offer. You will recieve commission
+                              requests that you can view on your dashboard, and then you can decide to accept or deny them. Once you have accepted commissions,
+                             details can then be directly discussed with the requester.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel -->
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+  <a data-toggle="collapse" data-parent="#accordion" href="#faq4">
+
+4. Are there any extra costs for sellers?
+
+  </a>
+
+</h4>
+                    </div>
+                    <div id="faq4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                            on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                            craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel -->
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+  <a data-toggle="collapse" data-parent="#accordion" href="#faq5">
+
+5. Can I advertise my products on the site?
+
+  </a>
+
+</h4>
+                    </div>
+                    <div id="faq5" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+                            on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat
+                            craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+                <!-- /.panel -->
+
+            </div>
+            <!-- /.panel-group -->
+
+
+        </div>
+
+
+    </div>
+    <!-- /.col-md-9 -->
+</div>
