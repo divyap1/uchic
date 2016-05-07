@@ -64,19 +64,6 @@
                       <% end %>
                     </ul>
                   </div>
-                  <% if user_signed_in? %>
-                  <div class="col-sm-6">
-                    <h5>My Items</h5>
-                    <ul>
-                      <li><a href="#">Update an Existing Item</a>
-                      </li>
-
-                      <li> <%= link_to "View Current Listings", user_listings_path(:id => current_user.id) %>
-                      </li>
-                    </ul>
-                  </div>
-                  <% end %>
-
                 </div>
               </div>
               <!-- /.yamm-content -->
