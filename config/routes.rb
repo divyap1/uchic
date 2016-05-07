@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  get 'about/about_us' => 'static_pages_controller#about'
+
+  get 'about/contact_us' => 'static_pages_controller#contact_us'
+
+  get 'about/faq' => 'static_pages_controller#faq'
+
   resources :messages
-  root to: "application#welcome"
+  root to: "static_pages_controller#welcome"
 
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
@@ -14,10 +20,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }
-
-  get 'about/contact_us' => 'application#contact_us'
-
-  get 'about/faq' => 'application#faq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
