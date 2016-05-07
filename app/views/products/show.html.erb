@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<%if notice %>
+  <%= render :partial => "notice",  :locals => {:notice => notice} %>
+<% end %>
 
 <p>
   <strong>Name:</strong>
@@ -23,6 +25,10 @@
 <p>
   <strong>Seller:</strong>
   <%= @product.seller_id %>
+</p>
+
+<p>
+  <%= image_tag @product.picture.url %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |

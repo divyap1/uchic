@@ -1,0 +1,19 @@
+body {
+  background: $gray-lighter;
+}
+
+a,
+button {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 40px;
+}
+
+p.lead {
+  font-weight: 300;
+}

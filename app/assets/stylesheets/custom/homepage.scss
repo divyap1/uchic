@@ -1,0 +1,98 @@
+#hot h2 {
+  text-transform: uppercase;
+  font-size: 36px;
+  color: $brand-primary;
+  font-weight: 100;
+  text-align: center;
+}
+#hot .product-slider {
+  margin-bottom: 20px;
+}
+#hot .product-slider:before,
+#hot .product-slider:after {
+  content: " ";
+  display: table;
+}
+#hot .product-slider:after {
+  clear: both;
+}
+#hot .product-slider .item {
+  margin: 0 25px;
+  visibility: hidden;
+}
+#hot .product-slider .owl-controls {
+  position: relative;
+  top: -30px;
+}
+#hot .product-slider .owl-controls .owl-buttons {
+  display: none;
+}
+#hot .product-slider .owl-controls .owl-page.active span,
+#hot .product-slider .owl-controls.clickable .owl-page:hover span {
+  background: $brand-primary;
+}
+
+#advantages {
+  text-align: center;
+}
+#advantages .box .icon {
+  position: absolute;
+  font-size: 120px;
+  width: 100%;
+  text-align: center;
+  top: -20px;
+  left: 0;
+  height: 100%;
+  float: left;
+  color: $gray-lighter;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  z-index: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#advantages .box h3 {
+  position: relative;
+  margin: 0 0 20px;
+  font-weight: 300;
+  text-transform: uppercase;
+  z-index: 2;
+}
+#advantages .box h3 a:hover {
+  text-decoration: none;
+}
+#advantages .box p {
+  position: relative;
+  color: $gray;
+  z-index: 2;
+}
+#main-slider {
+  margin-bottom: 30px;
+  border: solid 1px #fff;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.box.slideshow ul li div,
+#main-slider ul li div {
+  width: 100%;
+}
+.box.slideshow .owl-controls,
+#main-slider .owl-controls {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+.box.slideshow .owl-controls .owl-buttons,
+#main-slider .owl-controls .owl-buttons {
+  display: none;
+}
+.box.slideshow .owl-controls .owl-page.active span,
+#main-slider .owl-controls .owl-page.active span,
+.box.slideshow .owl-controls.clickable .owl-page:hover span,
+#main-slider .owl-controls.clickable .owl-page:hover span {
+  background: $brand-primary;
+}

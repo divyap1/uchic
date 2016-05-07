@@ -13,4 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require faye
+//
+//= require theme/jquery.cookie
+//= require theme/waypoints.min
+//= require theme/owl.carousel.min
+//
 //= require_tree .

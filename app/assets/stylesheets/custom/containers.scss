@@ -1,0 +1,110 @@
+.breadcrumb {
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+.box {
+  background: #fff;
+  margin: 0 0 30px;
+  border: solid 1px $gray-lighter;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+.box .box-header {
+  margin: -20px -20px 20px;
+  padding: $padding-large-vertical $padding-large-horizontal;
+  font-size: 2rem;
+}
+.box .box-header:before,
+.box .box-header:after {
+  content: " ";
+  display: table;
+}
+.box .box-header:after {
+  clear: both;
+}
+.box .box-footer {
+  background: $gray-lightest;
+  margin: 30px -20px -20px;
+  padding: 20px;
+  border-top: solid 1px $gray-lighter;
+}
+.box .box-footer:before,
+.box .box-footer:after {
+  content: " ";
+  display: table;
+}
+.box .box-footer:after {
+  clear: both;
+}
+@media (max-width: 991px) {
+  .box .box-footer .btn {
+    margin-bottom: 20px;
+  }
+}
+.box.slideshow {
+  padding: 20px 0 0 0;
+  text-align: center;
+}
+.box.slideshow h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.ribbon {
+  position: absolute;
+  top: 50px;
+  padding-left: 51px;
+  z-index: 20;
+}
+.ribbon .ribbon-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.ribbon .theribbon {
+  position: relative;
+  width: 80px;
+  padding: 6px 20px 6px 20px;
+  margin: 30px 10px 10px -71px;
+  color: #fff;
+  background-color: $brand-primary;
+  text-shadow: 0px 1px 2px #bbb;
+}
+.ribbon .theribbon:before,
+.ribbon .theribbon:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 0px;
+  top: 100%;
+  border-width: 5px 10px;
+  border-style: solid;
+  border-color: darken($brand-primary, 15%) darken($brand-primary, 15%) transparent transparent;
+}
+.ribbon.sale {
+  top: 0;
+}
+.ribbon.new {
+  top: 50px;
+}
+.ribbon.new .theribbon {
+  background-color: $brand-info;
+  text-shadow: 0px 1px 2px #bbb;
+}
+.ribbon.new .theribbon:after {
+  border-color: darken($brand-info, 15%) darken($brand-info, 15%) transparent transparent;
+}
+.ribbon.gift {
+  top: 100px;
+}
+.ribbon.gift .theribbon {
+  background-color: $brand-success;
+  text-shadow: 0px 1px 2px #bbb;
+}
+.ribbon.gift .theribbon:after {
+  border-color: darken($brand-success, 15%) darken($brand-success, 15%) transparent transparent;
+}

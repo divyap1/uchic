@@ -1,0 +1,61 @@
+#message_popups {
+  position: fixed;
+  bottom: 0;
+  left: $padding-large-horizontal;
+  right: $padding-large-horizontal;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  z-index: 1100;
+
+  .message-popup {
+    width: 30em;
+    padding: $padding-base-horizontal;
+    background: white;
+    border: 1px solid $gray-lighter;
+    border-top-left-radius: $border-radius-base;
+    border-top-right-radius: $border-radius-base;
+    display: flex;
+    flex-direction: column;
+
+    .messages {
+      overflow: auto;
+      flex: 1;
+    }
+
+    .message {
+      margin-bottom: $padding-base-vertical;
+
+      .content {
+        display: inline-block;
+        padding: $padding-base-vertical;
+        border: 1px solid;
+        border-radius: $border-radius-large;
+      }
+
+      &.sent {
+        text-align: right;
+
+        .content {
+          background-color: $gray-lightest;
+          border-color: $gray-lighter;
+        }
+      }
+
+      &.received {
+        text-align: left;
+
+        .content {
+          background-color: lighten($brand-primary, 30%);
+          border-color: lighten($brand-primary, 20%);
+        }
+      }
+    }
+
+    input {
+      margin-top: $padding-small-vertical;
+    }
+  }
+}

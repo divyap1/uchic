@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     less_than_or_equal_to: 5.0,
     allow_blank: true
   }
+
+  def first_name
+    name.split(/\s+/).first
+  end
 end
