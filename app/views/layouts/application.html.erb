@@ -20,7 +20,6 @@
     <%= stylesheet_link_tag "application", media: 'all' %>
     <% theme = cookies[:theme_csspath] || "/assets/theme/style.default.css" %>
     <link href="<%= theme %>" rel="stylesheet" id="theme-stylesheet">
-    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
 
     <link rel="shortcut icon" href="favicon.png">
