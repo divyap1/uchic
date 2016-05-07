@@ -22,11 +22,6 @@
     display: flex;
     flex-direction: column;
 
-    .messages {
-      overflow: auto;
-      flex: 1;
-    }
-
     h4 {
       margin-top: 0;
     }
@@ -40,35 +35,6 @@
       display: inline;
     }
 
-    .message {
-      margin-bottom: $padding-base-vertical;
-
-      .content {
-        display: inline-block;
-        padding: $padding-base-vertical;
-        border: 1px solid;
-        border-radius: $border-radius-large;
-      }
-
-      &.sent {
-        text-align: right;
-
-        .content {
-          background-color: $gray-lightest;
-          border-color: $gray-lighter;
-        }
-      }
-
-      &.received {
-        text-align: left;
-
-        .content {
-          background-color: lighten($brand-primary, 30%);
-          border-color: lighten($brand-primary, 20%);
-        }
-      }
-    }
-
     input {
       margin-top: $padding-small-vertical;
       min-height: $input-height-base;
@@ -77,6 +43,44 @@
     &.minimised .messages,
     &.minimised input {
       display: none;
+    }
+  }
+}
+
+.messages {
+  overflow: auto;
+  flex: 1;
+
+  &.message-container {
+    max-height: 60vh;
+  }
+
+  .message {
+    margin-bottom: $padding-base-vertical;
+
+    .content {
+      display: inline-block;
+      padding: $padding-base-vertical;
+      border: 1px solid;
+      border-radius: $border-radius-large;
+    }
+
+    &.sent {
+      text-align: right;
+
+      .content {
+        background-color: $gray-lightest;
+        border-color: $gray-lighter;
+      }
+    }
+
+    &.received {
+      text-align: left;
+
+      .content {
+        background-color: lighten($brand-primary, 30%);
+        border-color: lighten($brand-primary, 20%);
+      }
     }
   }
 }
