@@ -27,57 +27,22 @@
           <%= link_to "Home", root_url %>
         </li>
         <li class="dropdown yamm-fw">
-          <%= link_to "Browse", category_path(Category.first.root) %>          
+          <%= link_to "Browse", category_path(Category.first.root), class:"dropdown-toggle", :"data-toggle" => "dropdown", :"data-hover" => "dropdown",  :"data-delay" => "200" %>
           <ul class="dropdown-menu">
             <li>
               <div class="yamm-content">
                 <div class="row">
+                  <% Category.first.root.children.each do |category| %>
                   <div class="col-sm-4">
-                    <h5><%= link_to "Category 1", products_path %></h5>
-                    <ul>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                    </ul>
+                      <h5><%= link_to category.name, category_path(category) %></h5>
+                      <ul>
+                        <% category.children.each do |sub_category| %>
+                        <li><%= link_to sub_category.name, category_path(sub_category) %>
+                        </li>
+                        <% end %>
+                      </ul>
                   </div>
-                  <div class="col-sm-4">
-                    <h5><%= link_to "Category 2", products_path %></h5>
-                    <ul>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-sm-4">
-                    <h5><%= link_to "Category 3", products_path %></h5>
-                    <ul>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                    </ul>
-                    <h5><%= link_to "Category 5", products_path %></h5>
-                    <ul>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                      <li><%= link_to "Subcategory", products_path %>
-                      </li>
-                    </ul>
-                  </div>
+                  <% end %>               
                 </div>
               </div>
               <!-- /.yamm-content -->
