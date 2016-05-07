@@ -27,7 +27,7 @@
           <%= link_to "Home", root_url %>
         </li>
         <li class="dropdown yamm-fw">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Browse <b class="caret"></b></a>
+          <%= link_to "Browse", category_path(Category.first.root) %>          
           <ul class="dropdown-menu">
             <li>
               <div class="yamm-content">

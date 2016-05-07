@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :orders, except: [:edit, :update]
   resources :products
-  resources :categories
+  resources :categories, except: [:edit]
 
   devise_scope :user do
     get "/users/show" => "registrations#show", as: :show_user_registration
