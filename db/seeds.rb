@@ -14,6 +14,7 @@ Category.delete_all
 User.delete_all
 Product.delete_all
 Order.delete_all
+OrderItem.delete_all
 
 # Users
 
