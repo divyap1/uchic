@@ -13,15 +13,21 @@
     width: 30em;
     padding: $padding-base-horizontal;
     background: white;
-    border: 1px solid $gray-lighter;
+    border: 1px solid $brand-primary;
+    border-bottom: none;
     border-top-left-radius: $border-radius-base;
     border-top-right-radius: $border-radius-base;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
     display: flex;
     flex-direction: column;
 
     .messages {
       overflow: auto;
       flex: 1;
+    }
+
+    h4 {
+      margin-top: 0;
     }
 
     .message {
@@ -55,6 +61,7 @@
 
     input {
       margin-top: $padding-small-vertical;
+      min-height: $input-height-base;
     }
   }
 }

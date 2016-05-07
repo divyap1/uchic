@@ -16,10 +16,12 @@
     <div class="col-md-12">
       <div class="commissions panel panel-default">
         <span class="message not-accepting"><%= @user.first_name %> is not currently accepting commissions.</span>
-        <button class="btn btn-default start-message" data-receiver="<%= @user.id %>">
-          <span class="glyphicon glyphicon-comment"></span>
-          Send a message anyway
-        </button>
+        <% unless @user == current_user %>
+          <button class="btn btn-default start-message" data-receiver="<%= @user.id %>" data-receiver-name="<%= @user.name %>">
+            <span class="glyphicon glyphicon-comment"></span>
+            Send a message anyway
+          </button>
+        <% end %>
       </div>
     </div>
   </div>

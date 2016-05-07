@@ -12,19 +12,21 @@
     }
   }
 
-  function fetchMessages(partnerId) {
-    var popup = ensureMessagePopup({ partnerId: partnerId });
+  function fetchMessages(partnerId, partnerName) {
+    var popup = ensureMessagePopup({ partnerId: partnerId, partnerName: partnerName });
 
     $.get("/messages.json", { user_id: userId, partner_id: partnerId }, function(messages) {
       for (var i = 0; i < messages.length; i++) {
         if (messages[i].sender_id.toString() === userId.toString()) {
           addMessage({
             partnerId: messages[i].receiver_id,
+            partnerName: messages[i].receiver_name,
             message: messages[i].message
           }, "sent");
         } else {
           addMessage({
             partnerId: messages[i].sender_id,
+            partnerName: messages[i].sender_name,
             message: messages[i].message
           }, "received");
         }
@@ -72,8 +74,9 @@
     } else {
       var popup = $(
         "<div class='message-popup'>" +
+          "<h4>" + data.partnerName + "</h4>" +
           "<div class='messages'></div>" +
-          "<input type='text' class='form-control' data-receiver='" + data.partnerId + "' />" +
+          "<input type='text' class='form-control' data-receiver='" + data.partnerId + "' placeholder='Type a message ...' />" +
         "</div>"
       );
 
@@ -94,7 +97,9 @@
     }
 
     var popup = ensureMessagePopup(data);
-    popup.find(".messages").append(buildMessageBubble(data, type));
+    var messagesContainer = popup.find(".messages");
+    messagesContainer.append(buildMessageBubble(data, type));
+    messagesContainer.scrollTop(messagesContainer.height() + 1000);
   }
 
   var client = new Faye.Client("/socket");
@@ -108,12 +113,13 @@
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
         partnerId: data.sender_id,
+        partnerName: data.sender_name,
         message: data.message
       }, "received");
     }
   });
 
   $(".start-message").on("click", function(e) {
-    fetchMessages($(e.target).data("receiver"));
+    fetchMessages($(e.target).data("receiver"), $(e.target).data("receiver-name"));
   });
 })();
