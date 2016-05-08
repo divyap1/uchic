@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :products, foreign_key: :seller_id
   has_many :orders, foreign_key: :buyer_id
+  has_many :reviews
 
   validates :name, presence: true
   validates :address, presence: true

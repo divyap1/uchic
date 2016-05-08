@@ -3,6 +3,12 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    @reviews = @user.reviews
+
+    @num_reviews = @reviews.nil? ? 0 : @reviews.length
+    @average_review = @num_reviews == 0  ? 0 : @reviews.map(&:rating).inject(0, &:+) / @num_reviews
+
+    #@user.reviews.create(reviewer: current_user, user: @user, rating: 1, comment: "cool")
   end
 
   def listings
@@ -12,4 +18,14 @@ class UsersController < ApplicationController
   def dashboard
     @user = current_user
   end
+
+  private
+
+    def average_reviews
+      @user = User.find(params[:id])
+    end
+
+    def num_reviews
+      @user = User.find(params[:id])
+    end
 end
