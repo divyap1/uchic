@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
-  resources :orders, except: [:edit, :update]
+  resources :orders, except: [:edit, :update] do
+    get "categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 12}
+  end
   resources :products
   resources :categories, except: [:edit]
 

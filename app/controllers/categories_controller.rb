@@ -11,7 +11,9 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @products = get_products(@category)
+    @ancestry = @category.ancestors
+    all_products = get_products(@category)
+    @products = Kaminari.paginate_array(all_products).page(params[:page]).per(params[:display_size])
   end
 
   # GET /categories/new
@@ -78,7 +80,7 @@ class CategoriesController < ApplicationController
       return category.products if category.is_childless?
       products = category.products
       category.children.each do |sub_category|
-        products.append(get_products(sub_category))
+        products << get_products(sub_category)
       end
       return products
     end
