@@ -25,7 +25,9 @@
       <ul class="nav nav-primary navbar-nav navbar-left">
 
         <li class="dropdown yamm-fw">
-          <%= link_to "Browse", category_path(Category.first.root), class:"dropdown-toggle", :"data-toggle" => "dropdown", :"data-hover" => "dropdown",  :"data-delay" => "200" %>
+          <%= link_to category_path(Category.first.root), class:"dropdown-toggle", :"data-toggle" => "dropdown", :"data-hover" => "dropdown",  :"data-delay" => "200" do %>
+            Browse <b class="caret"></b>
+          <% end %>
           <ul class="dropdown-menu">
             <li>
               <div class="yamm-content">
@@ -48,6 +50,7 @@
           </ul>
         </li>
 
+        <% if user_signed_in? %>
         <li class="dropdown yamm-fw">
           <a href="/products/new" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Sell <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -71,7 +74,6 @@
           </ul>
         </li>
 
-        <% if user_signed_in? %>
         <li class="dropdown yamm-fw">
           <a href="/products/new" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">My Uchic <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -101,28 +103,6 @@
           </ul>
         </li>
         <% end %>
-
-        <li class="dropdown yamm-fw">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Extra <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="yamm-content">
-                <div class="row">
-                  <div class="col-sm-3">
-                    <h5>About</h5>
-                    <ul>
-                      <li><%= link_to "FAQ", about_faq_path %>
-                      </li>
-                      <li><%= link_to "Contact Us", about_contact_us_path %>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- /.yamm-content -->
-            </li>
-          </ul>
-        </li>
       </ul>
 
       <ul class="nav nav-user navbar-nav navbar-right">
