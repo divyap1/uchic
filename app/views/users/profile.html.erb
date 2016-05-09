@@ -33,17 +33,21 @@
           </div>
           <div class="panel-body">
             <ul class="media-list">
-              <% @user.products.each do |product| %>
-              <li class="media">
-                <div class="media-left">
-                  <a href="#">
-                  <%= image_tag product.picture.url, size: "64x64", :class => "media-object"%>
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading"><%= link_to product.name, product %></h4>
-                </div>
-              </li>
+              <% if @user.products.length > 0 %>
+                <% @user.products.each do |product| %>
+                <li class="media">
+                  <div class="media-left">
+                    <a href="#">
+                    <%= image_tag product.picture.url, size: "64x64", :class => "media-object"%>
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><%= link_to product.name, product %></h4>
+                  </div>
+                </li>
+                <% end %>
+              <% else %>
+                <p> <%=@user.first_name%> has no current listings</p>
               <% end %>
             </ul>
           </div>
@@ -67,23 +71,27 @@
           </div>
           <div class="panel-body">
             <ul class="media-list">
-              <% @user.reviews.each do |review| %>
-              <li class="media">
-                <div class="media-left">
-                  <a href="#">
-                  <%= image_tag review.reviewer.profile_picture.url, size: "64x64", :class => "media-object"%>
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">
-                    <%=review.reviewer.first_name%> 
-                    <% review.rating.times do %>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <% end %>
-                  </h4>
-                  <p> <%=review.comment%></p>
-                </div>
-              </li>
+              <% if @user.reviews.length > 0 %>
+                <% @user.reviews.each do |review| %>
+                <li class="media">
+                  <div class="media-left">
+                    <a href="#">
+                    <%= image_tag review.reviewer.profile_picture.url, size: "64x64", :class => "media-object"%>
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">
+                      <%=review.reviewer.first_name%> 
+                      <% review.rating.times do %>
+                      <span class="glyphicon glyphicon-star"></span>
+                      <% end %>
+                    </h4>
+                    <p> <%=review.comment%></p>
+                  </div>
+                </li>
+                <% end %>
+              <% else %>
+                <p> <%=@user.first_name%> has no reviews</p>
               <% end %>
             </ul>
           </div>

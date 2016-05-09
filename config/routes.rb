@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/show" => "registrations#show", as: :show_user_registration
     get "/users/:id/profile" => "users#profile", as: :user_profile
-    get "/users/:id/listings" => "users#listings", as: :user_listings
+    get "/listings" => "users#listings", as: :user_listings
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }

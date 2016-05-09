@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     @products = Product.all
-    @products = @products.starts_with(params[:search]) if params[:search].present?
+    @products = @products.contains(params[:search]) if params[:search].present?
   end
 
   # GET /products/1

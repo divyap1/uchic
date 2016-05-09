@@ -12,20 +12,11 @@ class UsersController < ApplicationController
   end
 
   def listings
-  	@products = Product.where(seller_id: params[:id])
+  	@products = Product.where(seller_id: current_user.id)
   end
 
   def dashboard
     @user = current_user
   end
 
-  private
-
-    def average_reviews
-      @user = User.find(params[:id])
-    end
-
-    def num_reviews
-      @user = User.find(params[:id])
-    end
 end

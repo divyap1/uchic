@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0, only_integer: true }
 
   #For searching by name
-  scope :starts_with, -> (name) { where("name like ?", "#{name}%")}
+  scope :contains, -> (name) { where("name like ?", "%#{name}%")}
 
   has_attached_file :picture, default_url: "/images/products/default.png"
   validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]  
