@@ -4,131 +4,40 @@
         <div id="content">
             <div class="container">
 
-                <div class="col-md-12">
-                    <ul class="breadcrumb">
-                        <% @ancestry.each do |category| %>
-                        <li><%= link_to category.name, category_path(category.id) %></li>
-                        <%end%>
-                        <li><%= @category.name %></li>
-                    </ul>
-                </div>
+                <%= render partial: 'breadcrumb' %>
 
                 <div class="col-md-3">
-                    <!-- *** MENUS AND FILTERS ***
- _________________________________________________________ -->
-                    <div class="panel panel-default sidebar-menu">
+                    <%= render partial: 'category_sidebar' %>
+                </div>
 
-                        <div class="panel-body">
-                            <ul class="nav nav-pills nav-stacked category-menu">
-                                <li>
-                                    <% Category.first.root.children.each do |category| %>
-                                    <%= link_to category_path(category.id) do %>
-                                    <%= category.name %>
-                                    <span class="badge pull-right">42</span>
-                                    <% end %>
-                                    <ul>
-                                        <% category.children.each do |sub_category| %>
-                                        <li>
-                                            <%= link_to sub_category.name, category_path(sub_category.id) %>
-                                        </li>
-                                        <% end %>
-                                    </ul>
-                                    <% end %>
-                                </li>
-                            </div>
-                        </div>
-
-                        <!-- *** MENUS AND FILTERS END *** -->
+                <div class="col-md-9">
+                    <div class="box">
+                        <h1><%= @category.name %></h1>
                     </div>
 
-                    <div class="col-md-9">
-                        <div class="box">
-                            <h1><%= @category.name %></h1>
-                        </div>
+                    <%= render partial: 'info_bar' %>
 
-                        <div class="box info-bar">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-4 products-showing">
-                                    <%= page_entries_info @products %>
-                                </div>
+                    <%= render partial: 'product_view' %>
 
-                                <div class="col-sm-12 col-md-8  products-number-sort">
-                                    <div class="row">
-                                        <form class="form-inline">
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="products-number">
-                                                    <strong>Show</strong>
-                                                    <a href="#" class="btn btn-default btn-sm btn-primary">12</a>
-                                                    <a href="#" class="btn btn-default btn-sm">24</a>
-                                                    <a href="#" class="btn btn-default btn-sm">All</a>
-                                                    products
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <div class="products-sort-by">
-                                                    <strong>Sort by</strong>
-                                                    <select name="sort-by" class="form-control">
-                                                        <option>Price</option>
-                                                        <option>Name</option>
-                                                        <option>Sales first</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  </div>
+                  <!-- /.col-md-9 -->
+                </div>
+                <!-- /.container -->
+              </div>
+              <!-- /#content -->
+            </div>
 
-                        <div class="row products">
-                            <% @products.each do |product| %>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="product">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front">
-                                                <a href="detail.html">
-                                                    <img src="img/product1.jpg" alt="" class="img-responsive">
-                                                </a>
-                                            </div>
-                                            <div class="back">
-                                                <a href="detail.html">
-                                                    <img src="img/product1_2.jpg" alt="" class="img-responsive">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="detail.html" class="invisible">
-                                        <img src="img/product1.jpg" alt="" class="img-responsive">
-                                    </a>
-                                    <div class="text">
-                                        <h3>
-                                            <%= link_to product.name, product_path(product.id) %>
-                                        </h3>
-                                        <p class="price"><%="$#{number_with_precision(product.price, :precision => 2)}"%></p>
-                                        <p class="buttons">
-                                            <%= link_to "View detail", product_path(product.id), class:"btn btn-default" %>
-                                            <a href="#" class="btn btn-primary">
-                                                <i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <% end %>
-                        </div>
-                        <%= paginate @products %>
-
-                        <!-- *** SCRIPTS TO INCLUDE ***
+                    <!-- *** SCRIPTS TO INCLUDE ***
  _________________________________________________________ -->
-                        <script src="js/jquery-1.11.0.min.js"></script>
-                        <script src="js/bootstrap.min.js"></script>
-                        <script src="js/jquery.cookie.js"></script>
-                        <script src="js/waypoints.min.js"></script>
-                        <script src="js/modernizr.js"></script>
-                        <script src="js/bootstrap-hover-dropdown.js"></script>
-                        <script src="js/owl.carousel.min.js"></script>
-                        <script src="js/front.js"></script>
+                    <script src="js/jquery-1.11.0.min.js"></script>
+                    <script src="js/bootstrap.min.js"></script>
+                    <script src="js/jquery.cookie.js"></script>
+                    <script src="js/waypoints.min.js"></script>
+                    <script src="js/modernizr.js"></script>
+                    <script src="js/bootstrap-hover-dropdown.js"></script>
+                    <script src="js/owl.carousel.min.js"></script>
+                    <script src="js/front.js"></script>
 
-                    </body>
+                </body>
 
-                </html>
+            </html>
