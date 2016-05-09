@@ -35,9 +35,8 @@
       display: inline;
     }
 
-    input {
+    textarea {
       margin-top: $padding-small-vertical;
-      min-height: $input-height-base;
     }
 
     &.minimised .messages,
@@ -52,7 +51,7 @@
   flex: 1;
 
   &.message-container {
-    max-height: 60vh;
+    height: 60vh;
   }
 
   .message {

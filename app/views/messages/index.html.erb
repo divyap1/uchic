@@ -6,26 +6,35 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-4">
-    <div class="list-group">
-      <% if @threads.any? %>
+  <% if @threads.any? %>
+    <div class="col-md-4">
+      <div class="list-group">
         <% @threads.each do |message| %>
           <% active_class = "active" if message.partner(current_user) == @partner %>
           <% path = messages_path(selected: message.partner(current_user).id) %>
           <%= link_to path, class: "list-group-item #{active_class}" do %>
             <h3 class="list-group-item-heading"><%= message.partner(current_user).name %></h3>
-            <p class="list-group-item-text"><%= message.message %></p>
+            <p class="list-group-item-text">
+              <em>No commission</em> &bull;
+              <%= truncate(message.message) %>
+            </p>
           <% end %>
         <% end %>
-      <% else %>
-        <p class="text-muted">No conversations.</p>
-      <% end %>
+      </div>
+      <div style="position:relative">
+        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Start another conversation <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <% @threads.each do |message| %>
+            <li><a href="#"><%= message.partner(current_user).name %></a></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <% if @messages %>
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
           <h2>Conversation with <%= link_to @partner.name, user_profile_path(@partner) %></h2>
           <div class="messages message-container" data-partner="<%= @partner.id %>">
             <% @messages.each do |message| %>
@@ -34,11 +43,15 @@
               </div>
             <% end %>
           </div>
-          <input type="text" class="message-input form-control" data-receiver="<%= @partner.id %>" />
-        <% else %>
-          <p class="text-muted">No messages.</p>
-        <% end %>
+          <textarea rows="2" class="message-input form-control" data-receiver="<%= @partner.id %>" placeholder="Type a message ..."></textarea>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="col-md-12">
+      <p class="text-center text-muted">
+        <em>Messages are a great way to arrange a commission or order a custom item. To start a conversation, go to any user's profile page.</em>
+      </p>
+    </div>
+  <% end %>
 </div>

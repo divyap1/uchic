@@ -32,7 +32,11 @@
     });
   }
 
-  function sendMessage(e) {
+  function maybeSendMessage(e) {
+    if (e.which !== 13) return;
+
+    e.preventDefault();
+
     var input = $(e.target);
 
     $.post("/messages.json", {
@@ -80,7 +84,7 @@
           "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</h4>" +
         "<div class='messages'></div>" +
-        "<input type='text' class='form-control' data-receiver='" + data.partnerId + "' placeholder='Type a message ...' />" +
+        "<textarea rows='2' class='form-control' data-receiver='" + data.partnerId + "' placeholder='Type a message ...'></textarea>" +
       "</div>"
     );
 
@@ -89,7 +93,7 @@
     var index = messagePopups.length;
     messagePopups.push({ partnerId: data.partnerId, popup: popup });
 
-    popup.find("input").on("change", sendMessage);
+    popup.find("textarea").on("keypress", maybeSendMessage);
 
     popup.on("click", function() { popup.removeClass("new"); });
     popup.find(".minimise").on("click", function() { popup.toggleClass("minimised"); });
@@ -146,7 +150,7 @@
     });
   });
 
-  $(".message-input").on("change", sendMessage);
+  $(".message-input").on("keypress", maybeSendMessage);
 
   $(".message-container").each(function() {
     $(this).scrollTop($(this).height() + 1000);

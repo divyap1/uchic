@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
       @threads = Message.first_in_each_thread(current_user)
 
       if @threads.any?
-        @partner = User.find(params[:selected]) || @threads.first.partner(current_user)
+        @partner = params[:selected] ? User.find(params[:selected]) : @threads.first.partner(current_user)
         @messages = Message.between(current_user, @partner)
       end
     end
