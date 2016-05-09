@@ -2,13 +2,13 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 def create_categories(category_name, parent_id, leaves, sub_categories = nil)
-  category = Category.create! :name => category_name.titleize, :parent_id => parent_id
+  category = Category.create! :name => category_name, :parent_id => parent_id
   if sub_categories.nil?
     leaves.push(category)
     return
   end
   sub_categories.each do |sub|
-    create_categories(sub, category.id, leaves)
+    create_categories(sub[:name], category.id, leaves)
   end
 end
 
@@ -49,11 +49,36 @@ print "Creating products "
 
 # category => product types (categories are not yet used)
 PRODUCT_TYPES = {
-  "Artworks" => ["painting", "sculpture", "print", "poster"],
-  "Clothing" => ["T-shirt", "jersey", "hoodie", "shirt", "trousers", "socks", "skirt", "dress"],
-  "Accessories" => ["scarf", "hat", "gloves"],
-  "Jewelry" => ["ring", "necklace", "earrings"],
-  "Miscellaneous" => ["loot box", "mystery gift"]
+  "Artworks" => [
+    { name: "Painting", price: 50..400 },
+    { name: "Sculpture", price: 80..500 },
+    { name: "Print", price: 15..150 },
+    { name: "Poster", price: 5..25 }
+  ],
+  "Clothing" => [
+    { name: "T-shirt", price: 15..50 },
+    { name: "Jersey", price: 30..90 },
+    { name: "Hoodie", price: 40..100 },
+    { name: "Shirt", price: 50..120 },
+    { name: "Trousers", price: 50..150 },
+    { name: "Socks", price: 10..50 },
+    { name: "Skirt", price: 30..120 },
+    { name: "Dress", price: 90..400 }
+  ],
+  "Accessories" => [
+    { name: "Scarf", price: 20..50 },
+    { name: "Hat", price: 25..80 },
+    { name: "Gloves", price: 20..70 }
+  ],
+  "Jewelry" => [
+    { name: "Ring", price: 60..600 },
+    { name: "Necklace", price: 80..800 },
+    { name: "Earrings", price: 70..500 }
+  ],
+  "Miscellaneous" => [
+    { name: "Loot Box", price: 10..80 },
+    { name: "Mystery Gift", price: 10..80 }
+  ]
 }
 
 # creates categories in system
@@ -68,7 +93,7 @@ ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
 PRODUCT_NAMES = [
   50.times.map { Faker::App.name },
   50.times.map { Faker::Team.creature.singularize },
-  50.times.map { Faker::Book.title },
+  100.times.map { Faker::Book.title },
   10.times.map { Faker::Book.genre },
   50.times.map { Faker::Hipster.word },
   50.times.map { Faker::StarWars.character }
@@ -77,10 +102,12 @@ PRODUCT_NAMES = [
 100.times do
   print "."
   product_category = leaves.sample
+  type_info = ALL_PRODUCT_TYPES.find { |type| type[:name] == product_category.name }
+
   Product.create!(
     name: "#{PRODUCT_NAMES.sample.titleize} #{product_category.name}",
     description: Faker::Hipster.paragraph,
-    price: rand(1..500) + [0, 0.50, 0.99].sample,
+    price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
     quantity: 1, # Will be updated later
     seller: User.all.sample,
     category_id: product_category.id
