@@ -14,6 +14,7 @@ class CategoriesController < ApplicationController
     @ancestry = @category.ancestors
     all_products = get_products(@category)
     @products = Kaminari.paginate_array(all_products).page(params[:page]).per(params[:display_size])
+    @section = @category.name
   end
 
   # GET /categories/new

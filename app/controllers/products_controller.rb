@@ -11,6 +11,12 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @product = Product.find(params[:id])
+    @category = Category.find(@product.category_id)
+    @ancestry = @category.ancestors << @category
+    @section = @product.name
+
+    @similar_items = @category.products.order("RANDOM()").limit(3)
   end
 
   # GET /products/new
@@ -27,7 +33,7 @@ class ProductsController < ApplicationController
     #Can only edit products you added
     unless user_signed_in? && @product.seller_id === current_user.id
       flash.now[:alert] = "You do not have the permissions to edit this listing."
-    end 
+    end
 
   end
 
@@ -76,7 +82,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to products_url, alert: 'You do not have permissions to delete this item.' }
         format.json { head :no_content }
       end
-    end 
+    end
   end
 
   private
