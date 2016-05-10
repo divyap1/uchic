@@ -7,28 +7,25 @@
           <h1>New Order</h1>
         </div>
         <hr>
-        <div class="col-md-6">
-          <img src="img/detailsquare.jpg" alt="White Blouse Armani">
+        <div class="col-md-3">
+          <%= image_tag @product.picture, alt: @product.name, class:"img-responsive"%>
         </div>
-          <div class="col-md-6">
+        <div class="col-md-9">
+          <h4><%= @product.name %></h4>
         <div class="table-responsive">
             <table class="table">
                 <tfoot>
                     <tr>
-                        <th colspan="5" class="text-right">Order subtotal</th>
-                        <th>$446.00</th>
+                        <th colspan="5" class="text-right">Subtotal  $NZD</th>
+                        <th class="text-right"><%= "#{number_with_precision(@subtotal, :precision => 2)}" %></th>
                     </tr>
                     <tr>
-                        <th colspan="5" class="text-right">Shipping and handling</th>
-                        <th>$10.00</th>
+                        <th colspan="5" class="text-right">Shipping and Handling  $NZD</th>
+                        <th class="text-right"><%= "#{number_with_precision(@shipping, :precision => 2)}"%></th>
                     </tr>
                     <tr>
-                        <th colspan="5" class="text-right">Tax</th>
-                        <th>$0.00</th>
-                    </tr>
-                    <tr>
-                        <th colspan="5" class="text-right">Total</th>
-                        <th>$456.00</th>
+                        <th colspan="5" class="text-right">Total  $NZD</th>
+                        <th class="text-right"><%= "#{number_with_precision(@shipping + @subtotal, :precision => 2)}" %></th>
                     </tr>
                 </tfoot>
             </table>
@@ -38,8 +35,8 @@
         <div class="row addresses">
             <div class="col-md-6">
               <h2>Shipping Address</h2>
-                <p><%= current_user.name %>
-                <%= simple_format(current_user.address) %></p>
+                <%= current_user.name %>
+                <%= simple_format(current_user.address) %>
             </div>
             <div class="col-md-6">
                 <h2>Payment Details</h2>
