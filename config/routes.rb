@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'about/about_us' => 'pages#about_us'
-
   get 'about/contact_us' => 'pages#contact_us'
 
   get 'about/faq' => 'pages#faq'

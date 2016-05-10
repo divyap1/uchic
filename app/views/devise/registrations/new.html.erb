@@ -29,8 +29,7 @@
               <%= f.label :password_confirmation, class: "sr-only" %>
               <%= f.password_field :password_confirmation, placeholder: "Confirm password", autocomplete: "off", class: "form-control" %>
             </div>
-          </div>
-          <div class="col-md-6">
+
             <h3><span class="circled-number">2</span> Personal details</h3>
 
             <div class="form-group has-feedback">
@@ -44,14 +43,43 @@
               <i class="glyphicon glyphicon-map-marker form-control-feedback" aria-hidden="true"></i>
             </div>
             <div class="form-group">
-              <%= f.label :profile_picture %>
+              <h3><span class="circled-number">3</span> Profile Picture</h3>
+              <!-- <%= f.label :profile_picture %> -->
               <%= f.file_field :profile_picture %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h3><span class="circled-number">4</span> Payment Details</h3>
+              <img src="/images/creditcards.png" alt="Credit Cards" style="width:50%; display:block;
+              margin-right:auto; margin-bottom: 20px">
+            <div class="form-group has-feedback">
+              <%= f.label :card_name, class: "sr-only" %>
+              <%= f.text_field :card_name, placeholder: "Credit Card Holder's Name", autocomplete: "off", class: "form-control" %>
+            </div>
+            <div class="form-group has-feedback">
+              <%= f.label :credit_card, class: "sr-only" %>
+              <%= f.text_field :card_number, placeholder: "Credit Card Number", class: "form-control", autofocus: true %>
+            </div>
+            <div class="form-group has-feedback">
+              <%= f.label :expiration_date %>
+              <div class="row">
+              <div class="col-md-3">
+                <%= f.date_select :expiration_month,  { :discard_day => true, :discard_year => true} %>
+              </div>
+              <div class="col-md-3">
+                <%= f.date_select :expiration_year,  { :discard_day => true, :discard_month => true, :start_year=>2016, :end_year=>2026} %>
+              </div>
+            </div>
+            </div>
+            <div class="form-group">
+              <%= f.label :security_code, class: "sr-only" %>
+              <%= f.text_field :security_code, placeholder: "Card Verification Code", autocomplete: "off", class: "form-control" %>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3><span class="circled-number">3</span> Go for it!</h3>
+            <h3><span class="circled-number">5</span> Go for it!</h3>
             <%= f.submit "Register", class: "btn btn-primary btn-lg" %>
           </div>
         </div>
