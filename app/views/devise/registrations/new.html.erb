@@ -42,13 +42,19 @@
               <%= f.text_area :address, placeholder: "Address", rows: 3, class: "form-control" %>
               <i class="glyphicon glyphicon-map-marker form-control-feedback" aria-hidden="true"></i>
             </div>
-            <div class="form-group">
-              <h3><span class="circled-number">3</span> Profile Picture</h3>
-              <!-- <%= f.label :profile_picture %> -->
-              <%= f.file_field :profile_picture %>
+            <div class="form-group has-feedback">
+              <%= f.label :country, class: "sr-only" %>
+              <%= f.country_select :country, ["New Zealand", "Australia"], {include_blank: 'Select Country'}, { :class => "form-control" }  %>
             </div>
           </div>
           <div class="col-md-6">
+
+            <div class="form-group">
+              <h3><span class="circled-number">3</span> Profile Picture</h3>
+              <%= f.label :profile_picture, class: "sr-only"%>
+              <%= f.file_field :profile_picture %>
+            </div>
+
             <h3><span class="circled-number">4</span> Payment Details</h3>
               <img src="/images/creditcards.png" alt="Credit Cards" style="width:50%; display:block;
               margin-right:auto; margin-bottom: 20px">
@@ -61,15 +67,9 @@
               <%= f.text_field :card_number, placeholder: "Credit Card Number", class: "form-control", autofocus: true %>
             </div>
             <div class="form-group has-feedback">
-              <label for="expiration_date">Expiration Date <small class="help-text">(MMYYYY)</small></label>
-              <div class="row">
-              <div class="col-md-3">
-                <%= f.date_select :expiration_month,  { :discard_day => true, :discard_year => true, :use_month_numbers => true} %>
-              </div>
-              <div class="col-md-3">
+              <label for="expiration_date">Expiration Date <small>(MM/YYYY)</small> :</label>
+                <%= f.date_select :expiration_month,  { :discard_day => true, :discard_year => true, :use_month_numbers => true} %> /
                 <%= f.date_select :expiration_year,  { :discard_day => true, :discard_month => true, :start_year=>2016, :end_year=>2026} %>
-              </div>
-            </div>
             </div>
             <div class="form-group">
               <%= f.label :security_code, class: "sr-only" %>
