@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'checkout/:id' => 'checkout#checkout', as: :product_checkout
+
   get 'about/contact_us' => 'pages#contact_us'
 
   get 'about/faq' => 'pages#faq'
