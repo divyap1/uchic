@@ -16,6 +16,15 @@ class CategoriesController < ApplicationController
 
     @category = Category.find(params[:id])
     all_products = get_products(@category)
+
+
+    @order_options = ["Price low to high", "Price high to low", "Name", "Recently added"]
+    @order = params[:order] || @order_options.first
+    all_products.order(price: :asc) if @order == "Price low to high"
+    all_products.order(price: :desc) if @order == "Price high to low"
+    all_products.order(:name) if @order == "Name"
+    all_products.order(timestamps: :desc) if @order == "Recently added"
+
     @products = Kaminari.paginate_array(all_products).page(params[:page]).per(@display_size)
 
     @section = @category.name
