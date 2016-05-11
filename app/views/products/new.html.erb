@@ -33,24 +33,29 @@
 		            </div>
 		            <div class="form-group">
 		                <%= f.label :quantity, class: "sr-only"%>
-		                <%= f.number_field :quantity, placeholder: "Quantity", required: true, class: "form-control" %>
+		                <%= f.number_field :quantity, placeholder: "Quantity", required: true, value: "", class: "form-control" %>
 		            </div>
-
+		            <div class="form-group">
+		            	<%= f.label :category_id, class: "sr-only"%>
+		            	<%= f.select(:category_id, @categories.collect {|c| [c.name, c.id]}, {},  :class => "form-control", :prompt => "Choose category") %>
+					</div>
+					<!--<div class="form-group">
+		            	<%= f.label :category_id, class: "sr-only"%>
+		            	<%= f.select(:category_id, Category.first.root.children.first.children.collect {|c| [c.name, c.id]}, {}, :class => "form-control", :id => "subcategory_select", :prompt => "Product subcategory") %>
+					</div>-->
 		            <div class="form-group">
 		                <%= f.label :picture, class: "sr-only"%>
-		                <%= f.file_field :picture %>
+		                <%= f.file_field :picture%>
 		            </div>
-
 		            <div class="form-group">
 		                <%= f.label :seller_id, class: "sr-only"%>
 		                <%= f.hidden_field :seller_id, value: current_user.id %>
 		            </div>
-
 		            <div>
 		                <%= f.submit class: "btn btn-primary" %>
 		            </div>
 
-	 			<% end %>
+	 				<% end %>
 	 			<% end %>
 
 	            <br>
@@ -59,3 +64,19 @@
 	    </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+	var newOptions = {"Option 1": "value1",
+	  "Option 2": "value2",
+	  "Option 3": "value3"
+	};
+
+	var $el = $("#subcategory_select");
+	$el.empty(); 
+
+	$.each(newOptions, function(value,key) {
+	  $el.append($("<option></option>").attr("value", value).text(key));
+	});
+
+</script>

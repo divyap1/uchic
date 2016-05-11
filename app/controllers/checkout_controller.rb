@@ -5,11 +5,4 @@ class CheckoutController < ApplicationController
     @quantity = 1;
     @subtotal = @product.price * @quantity;
   end
-
-  #PUT
-  def choose_quantity
-    respond_to do |format|
-
-    end
-  end
 end

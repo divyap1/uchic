@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @products = @products.contains(params[:search]) if params[:search].present?
+    @products = Kaminari.paginate_array(@products).page(params[:page]).per(params[:display_size])
   end
 
   # GET /products/1
@@ -25,6 +26,8 @@ class ProductsController < ApplicationController
     unless user_signed_in?
        flash.now[:alert] = "Guests can not sell items"
     end
+    
+    @categories = Category.all
     @product = Product.new
   end
 
@@ -94,6 +97,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :description, :price, :quantity, :seller_id, :picture)
+      params.require(:product).permit(:name, :description, :price, :quantity, :seller_id, :picture, :category_id)
     end
 end
