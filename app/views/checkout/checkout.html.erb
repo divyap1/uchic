@@ -12,6 +12,10 @@
         </div>
         <div class="col-md-9">
           <h4><%= @product.name %></h4>
+          <p> <%= @product.description %> </p>
+          <div class="well well-sm">
+              <h5 class=>Select Quantity: <%= select_tag(:select_quantity, options_for_select(1..@product.quantity)) %></h5>
+          </div>
         <div class="table-responsive">
             <table class="table">
                 <tfoot>
@@ -34,12 +38,12 @@
     </div>
         <div class="row addresses">
             <div class="col-md-6">
-              <h2>Shipping Address</h2>
+              <h2>Shipping Address <button class="btn btn-default btn-sm">Edit</button></h2>
                 <%= current_user.name %>
                 <%= simple_format(current_user.address) %>
             </div>
             <div class="col-md-6">
-                <h2>Payment Details</h2>
+                <h2>Payment Details <button class="btn btn-default btn-sm">Edit</button></h2>
                 <p>Card Holder's Name: <%= current_user.card_name %>
                 <br>Credit Card: <%= current_user.card_number %>
                 <br>Expiry Date (MM/YYYY): <%= current_user.expiration_month %>/<%= current_user.expiration_year %>
