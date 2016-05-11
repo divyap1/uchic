@@ -10,10 +10,13 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="products-number">
                             <strong>Show</strong>
-                            <a href="#" class="btn btn-default btn-sm btn-primary">12</a>
-                            <a href="#" class="btn btn-default btn-sm">24</a>
-                            <a href="#" class="btn btn-default btn-sm">All</a>
-                            products
+                            <% @display_sizes.each do |size| %>
+                              <% if @display_size == size %>
+                                <%= link_to size, category_path(@category.id, display_size: size), class:"btn btn-default btn-sm btn-primary" %>
+                              <% else %>
+                                <%= link_to size, category_path(@category.id, display_size: size), class:"btn btn-default btn-sm" %>
+                              <% end %>
+                            <% end %>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6">

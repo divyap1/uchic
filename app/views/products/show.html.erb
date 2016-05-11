@@ -1,5 +1,5 @@
+<div class="product">
 <div id="all">
-
     <div id="content">
         <div class="container">
             <%= render partial: 'categories/breadcrumb' %>
@@ -80,7 +80,7 @@
                               <h4>Seller details</h4>
                               <div class="row">
                                 <div class="col-md-6">
-                                <img class="profile-picture, img-responsive" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
+                                <img class="profile-picture img-responsive" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
                               </div>
                                 <div class="col-md-6", id= "seller-details">
                                   <h5><%= @seller.name %></h5>
@@ -133,3 +133,4 @@
       </div>
       <!-- /#content -->
     </div>
+  </div>
