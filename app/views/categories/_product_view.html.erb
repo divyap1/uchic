@@ -1,36 +1,38 @@
-<div class="row products">
-    <% @products.each do |product| %>
-    <div class="col-md-4 col-sm-6">
-        <div class="product">
-            <div class="flip-container">
-                <div class="flipper">
-                    <div class="front">
-                      <%= link_to product_path(product.id) do %>
+<div class="products">
+    <div class="row products">
+        <% @products.each do |product| %>
+        <div class="col-md-4 col-sm-6">
+            <div class="product">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front">
+                            <%= link_to product_path(product.id) do %>
                             <%= image_tag product.picture, alt: "", class:"img-responsive" %>
-                        <% end %>
-                    </div>
-                    <div class="back">
-                        <%= link_to product_path(product.id) do %>
+                            <% end %>
+                        </div>
+                        <div class="back">
+                            <%= link_to product_path(product.id) do %>
                             <%= image_tag product.picture, alt: "", class:"img-responsive" %>
-                        <% end %>
+                            <% end %>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <%= link_to product_path(product.id), class: "invisible" do %>
-                  <%= image_tag product.picture, alt: "", class:"img-responsive" %>
-            <% end %>
-            <div class="text">
-                <h3>
-                    <%= link_to product.name, product_path(product.id) %>
-                </h3>
-                <p class="price"><%="$#{number_with_precision(product.price, :precision => 2)}"%></p>
-                <p class="buttons">
-                    <%= link_to "View detail", product_path(product.id), class:"btn btn-default" %>
-                    <%= link_to "Buy Now", product_checkout_path(product.id), class:"btn btn-primary" %>
-                </p>
+                <%= link_to product_path(product.id), class: "invisible" do %>
+                <%= image_tag product.picture, alt: "", class:"img-responsive" %>
+                <% end %>
+                <div class="text">
+                    <h3>
+                        <%= link_to product.name, product_path(product.id) %>
+                    </h3>
+                    <p class="price"><%="$#{number_with_precision(product.price, :precision => 2)}"%></p>
+                    <p class="buttons">
+                        <%= link_to "View detail", product_path(product.id), class:"btn btn-default" %>
+                        <%= link_to "Buy Now", product_checkout_path(product.id), class:"btn btn-primary" %>
+                    </p>
+                </div>
             </div>
         </div>
+        <% end %>
     </div>
-    <% end %>
+    <%= paginate @products %>
 </div>
-<%= paginate @products %>
