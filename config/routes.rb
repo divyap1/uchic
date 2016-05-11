@@ -10,11 +10,11 @@ Rails.application.routes.draw do
 
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
-  resources :orders, except: [:edit, :update] do
-    get "categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 12}
-  end
+  resources :orders, except: [:edit, :update]
   resources :products
-  resources :categories, except: [:edit]
+  resources :categories, except: [:edit] do
+    get "/categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 6}
+  end
 
   devise_scope :user do
     get "/users/show" => "registrations#show", as: :show_user_registration

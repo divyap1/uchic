@@ -11,10 +11,13 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @ancestry = @category.ancestors
     all_products = get_products(@category)
     @products = Kaminari.paginate_array(all_products).page(params[:page]).per(params[:display_size])
+
     @section = @category.name
+    @ancestry = @category.ancestors
+    @display_sizes = [6, 12, 24]
+    @display_size = params[:display_size]
   end
 
   # GET /categories/new

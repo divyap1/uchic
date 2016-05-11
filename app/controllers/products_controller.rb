@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @category = Category.find(@product.category_id)
+    @seller = @product.seller
     @ancestry = @category.ancestors << @category
     @section = @product.name
 
