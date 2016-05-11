@@ -51,30 +51,9 @@
         </li>
 
         <% if user_signed_in? %>
-        <li class="dropdown yamm-fw">
-          <a href="/products/new" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Sell <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="yamm-content">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <h5>Sell an Item</h5>
-                    <ul>
-                      <% Category.first.root.children.each do |category| %>
-                      <li>
-                        <%= link_to category.name, new_product_path %>
-                      </li>
-                      <% end %>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- /.yamm-content -->
-            </li>
-          </ul>
-        </li>
 
-        <li><%= link_to "Dashboard", user_dashboard_path %></li>
+          <li><%= link_to "Sell", new_product_path, :"data-hover" => "dropdown" %></li>
+          <li><%= link_to "Dashboard", user_dashboard_path, :"data-hover" => "dropdown"%></li>
 
         <% end %>
       </ul>
