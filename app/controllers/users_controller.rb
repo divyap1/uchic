@@ -17,5 +17,9 @@ class UsersController < ApplicationController
 
   def dashboard
     @user = current_user
+    if user_signed_in?
+      @orders = Order.where(buyer_id: current_user.id)
+      @products = Product.where(seller_id: current_user.id)
+    end
   end
 end
