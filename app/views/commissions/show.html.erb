@@ -31,7 +31,7 @@
                                 <p class="price"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></p>
 
                                 <p class="text-center buttons">
-                                    <%= link_to "Buy Now", product_checkout_path(@commission.id), class:"btn btn-primary" %>
+                                    <%= link_to "Buy Now", commission_checkout_path(@commission.id), class:"btn btn-primary" %>
                                     <a href="basket.html" class="btn btn-default">
                                         <i class="fa fa-heart"></i>
                                         Add to wishlist</a>
@@ -99,7 +99,7 @@
                             </div>
                             <% @similar_items.each do |similar_item| %>
                             <div class="col-md-3 col-sm-6">
-                                <div class="product same-height">
+                                <div class="commission same-height">
                                     <div class="flip-container">
                                         <div class="flipper">
                                             <div class="front">
