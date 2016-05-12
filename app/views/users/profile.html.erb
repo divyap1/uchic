@@ -34,6 +34,7 @@
                <% end %>
             </div>
          </div>
+
       </div>
       <div class="row">
          <div class="col-md-6">
@@ -73,6 +74,7 @@
             </div>
          </div>
       </div>
+<<<<<<< HEAD
       <div class="row">
          <div class="col-md-6">
             <div class="products panel panel-default">
@@ -133,3 +135,42 @@
       </div>
    </div>
 </div>
+=======
+
+      <div class="col-md-6">
+        <div class="products panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Reviews</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="media-list">
+              <% if @user.reviews.length > 0 %>
+                <% @user.reviews.each do |review| %>
+                <li class="media">
+                  <div class="media-left">
+                    <a href="#">
+                    <%= image_tag review.reviewer.profile_picture.url, size: "64x64", :class => "media-object"%>
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">
+                      <%=review.reviewer.first_name%>
+                      <% review.rating.times do %>
+                      <span class="glyphicon glyphicon-star"></span>
+                      <% end %>
+                    </h4>
+                    <p> <%=review.comment%></p>
+                  </div>
+                </li>
+                <% end %>
+              <% else %>
+                <p> <%=@user.first_name%> has no reviews</p>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+>>>>>>> cc6258647a1a7fef1b3d3330691fb24dea4b92fa

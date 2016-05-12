@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
   has_many :order_items
   has_many :orders, through: :order_items
   has_many :buyers, through: :orders
+  has_many :pictures
 
   validates :seller, presence: true
   validates :name, presence: true
@@ -11,9 +12,6 @@ class Product < ActiveRecord::Base
   validates :quantity, numericality: { greater_than: 0, only_integer: true }
 
   #For searching by name
-  scope :contains, -> (name) { where("name like ?", "%#{name}%")}
-
-  has_attached_file :picture, default_url: "/images/products/default.png"
-  validates_attachment_content_type :picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]  
+  scope :contains, -> (name) { where("name like ?", "%#{name}%")}  
 
 end
