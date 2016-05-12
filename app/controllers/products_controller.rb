@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
     @products = Product.all
     @products = @products.contains(params[:search]) if params[:search].present?
     @products = Kaminari.paginate_array(@products).page(params[:page]).per(params[:display_size])
+    @users = User.all
+    @users = @users.contains(params[:search]) if params[:search].present?
   end
 
   # GET /products/1
