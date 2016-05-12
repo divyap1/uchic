@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'checkout/:id' => 'checkout#checkout', as: :product_checkout
+  get 'checkout/:id' => 'checkout#checkout', as: :commission_checkout
 
   get 'about/contact_us' => 'pages#contact_us'
 
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
   resources :orders, except: [:edit, :update]
-  resources :products
+  resources :commissions
   resources :categories, except: [:edit] do
     get "/categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 6}
   end
@@ -31,16 +31,16 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #   get 'commissions/:id' => 'catalog#view'
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  # Example of named route that can be invoked with purchase_url(id: commission.id)
+  #   get 'commissions/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  #   resources :commissions
 
   # Example resource route with options:
-  #   resources :products do
+  #   resources :commissions do
   #     member do
   #       get 'short'
   #       post 'toggle'
@@ -52,13 +52,13 @@ Rails.application.routes.draw do
   #   end
 
   # Example resource route with sub-resources:
-  #   resources :products do
+  #   resources :commissions do
   #     resources :comments, :sales
   #     resource :seller
   #   end
 
   # Example resource route with more complex sub-resources:
-  #   resources :products do
+  #   resources :commissions do
   #     resources :comments
   #     resources :sales do
   #       get 'recent', on: :collection
@@ -74,8 +74,8 @@ Rails.application.routes.draw do
 
   # Example resource route within a namespace:
   #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
+  #     # Directs /admin/commissions/* to Admin::CommissionsController
+  #     # (app/controllers/admin/commissions_controller.rb)
+  #     resources :commissions
   #   end
 end

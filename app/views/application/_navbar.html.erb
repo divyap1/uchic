@@ -52,7 +52,7 @@
 
         <% if user_signed_in? %>
 
-          <li><%= link_to "Sell", new_product_path, :"data-hover" => "dropdown" %></li>
+          <li><%= link_to "Sell", new_commission_path, :"data-hover" => "dropdown" %></li>
           <li><%= link_to "Dashboard", user_dashboard_path, :"data-hover" => "dropdown"%></li>
 
         <% end %>
@@ -103,7 +103,7 @@
         <% end %>
       </ul>
 
-      <%= form_tag products_path, method: "get", role: "search", class: "navbar-form navbar-search navbar-right" do %>
+      <%= form_tag commissions_path, method: "get", role: "search", class: "navbar-form navbar-search navbar-right" do %>
         <%= button_tag type: "submit", class: "btn btn-default", name: nil do %>
           <span class="sr-only">Search</span>
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span>

@@ -1,4 +1,4 @@
-<div class="product">
+<div class="commission">
     <div id="all">
         <div id="content">
             <div class="container">
@@ -13,9 +13,9 @@
                     <div class="row" id="productMain">
                         <div class="col-sm-6">
                             <div id="mainImage">
-                                <%= image_tag @product.pictures.first ? @product.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
+                                <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
                             </div>
-                            <% if @product.created_at > Time.now - 24.hours %>
+                            <% if @commission.created_at > Time.now - 24.hours %>
                             <div class="ribbon new">
                                 <div class="theribbon">NEW</div>
                                 <div class="ribbon-background"></div>
@@ -27,11 +27,11 @@
                         <div class="col-sm-6">
 
                             <div class="box">
-                                <h1 class="text-center"><%= @product.name %></h1>
-                                <p class="price"><%= "$#{number_with_precision(@product.price, :precision => 2)}" %></p>
+                                <h1 class="text-center"><%= @commission.name %></h1>
+                                <p class="price"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></p>
 
                                 <p class="text-center buttons">
-                                    <%= link_to "Buy Now", product_checkout_path(@product.id), class:"btn btn-primary" %>
+                                    <%= link_to "Buy Now", product_checkout_path(@commission.id), class:"btn btn-primary" %>
                                     <a href="basket.html" class="btn btn-default">
                                         <i class="fa fa-heart"></i>
                                         Add to wishlist</a>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="row" id="thumbs">
-                                <% @product.pictures.each do |photo| %>
+                                <% @commission.pictures.each do |photo| %>
                                 <div class="col-xs-4">
                                     <%= link_to photo.picture.url, class:"thumb"  do %>
                                     <%= image_tag photo.picture.url, alt: "", class: "img-responsive" %>
@@ -55,7 +55,7 @@
                             <div class="col-md-6">
                                 <p>
                                     <h4>Product details</h4>
-                                    <p><%= @product.description %></p>
+                                    <p><%= @commission.description %></p>
                                     <hr>
                                     <div class="social">
                                         <h4>Show it to your friends</h4>
@@ -103,18 +103,18 @@
                                     <div class="flip-container">
                                         <div class="flipper">
                                             <div class="front">
-                                                <%= link_to product_path(similar_item.id) do %>
+                                                <%= link_to commission_path(similar_item.id) do %>
                                                 <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
                                                 <% end %>
                                             </div>
                                             <div class="back">
-                                                <%= link_to product_path(similar_item.id) do %>
+                                                <%= link_to commission_path(similar_item.id) do %>
                                                 <%= image_tag similar_item.pictures.second ? similar_item.pictures.second.picture : similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
                                                 <% end %>
                                             </div>
                                         </div>
                                     </div>
-                                    <%= link_to product_path(similar_item.id), class: "invisible" do %>
+                                    <%= link_to commission_path(similar_item.id), class: "invisible" do %>
                                     <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
                                     <% end %>
                                     <div class="text">

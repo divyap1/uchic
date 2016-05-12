@@ -13,7 +13,7 @@ end
 # Delete existing data
 Category.delete_all
 User.delete_all
-Product.delete_all
+Commission.delete_all
 Order.delete_all
 OrderItem.delete_all
 
@@ -41,11 +41,11 @@ end
 
 puts
 
-# Products
+# Commissions
 
-print "Creating products "
+print "Creating commissions "
 
-# category => product types (categories are not yet used)
+# category => commission types (categories are not yet used)
 PRODUCT_TYPES = {
   "Artworks" => [
     { name: "Painting", price: 50..400 },
@@ -99,10 +99,10 @@ PRODUCT_NAMES = [
 100.times do
   print "."
   type_info = ALL_PRODUCT_TYPES.sample
-  product_category = Category.find_by(name: type_info[:name])
+  commission_category = Category.find_by(name: type_info[:name])
 
-  product_category.products.create!(
-    name: "#{PRODUCT_NAMES.sample.titleize} #{product_category.name}",
+  commission_category.commissions.create!(
+    name: "#{PRODUCT_NAMES.sample.titleize} #{commission_category.name}",
     description: Faker::Hipster.paragraph,
     price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
     quantity: 1, # Will be updated later
@@ -121,28 +121,28 @@ QUANTITIES = [1] * 10 + [2] * 5 + [3] * 3 + (4..20).to_a
 150.times do
   print "."
   buyer = User.all.sample
-  possible_products = Product.where.not(seller: buyer)
+  possible_commissions = Commission.where.not(seller: buyer)
 
   order = Order.create!(buyer: buyer)
   rand(1..5).times do
-    order.order_items.create!(product: possible_products.to_a.sample, quantity: QUANTITIES.sample)
+    order.order_items.create!(commission: possible_commissions.to_a.sample, quantity: QUANTITIES.sample)
   end
 end
 
 puts
 
-print "Updating product quantities "
+print "Updating commission quantities "
 
 REMAINING_QUANTITIES = [0] * 40 + (1..100).to_a
 
-Product.all.each do |product|
+Commission.all.each do |commission|
   print "."
-  ordered_quantity = OrderItem.where(product: product).sum(:quantity)
+  ordered_quantity = OrderItem.where(commission: commission).sum(:quantity)
 
   total_quantity = ordered_quantity + REMAINING_QUANTITIES.sample
   total_quantity += rand(1..10) if total_quantity.zero?
 
-  product.update_attributes!(quantity: total_quantity)
+  commission.update_attributes!(quantity: total_quantity)
 end
 
 puts

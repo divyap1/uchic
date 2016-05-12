@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class ProductsControllerTest < ActionController::TestCase
+class CommissionsControllerTest < ActionController::TestCase
   setup do
-    @product = products(:one)
+    @commission = commissions(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:products)
+    assert_not_nil assigns(:commissions)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create product" do
-    assert_difference('Product.count') do
-      post :create, product: { description: @product.description, name: @product.name, price: @product.price, quantity: @product.quantity, seller_id: @product.seller_id }
+  test "should create commission" do
+    assert_difference('Commission.count') do
+      post :create, commission: { description: @commission.description, name: @commission.name, price: @commission.price, quantity: @commission.quantity, seller_id: @commission.seller_id }
     end
 
-    assert_redirected_to product_path(assigns(:product))
+    assert_redirected_to commission_path(assigns(:commission))
   end
 
-  test "should show product" do
-    get :show, id: @product
+  test "should show commission" do
+    get :show, id: @commission
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @product
+    get :edit, id: @commission
     assert_response :success
   end
 
-  test "should update product" do
-    patch :update, id: @product, product: { description: @product.description, name: @product.name, price: @product.price, quantity: @product.quantity, seller_id: @product.seller_id }
-    assert_redirected_to product_path(assigns(:product))
+  test "should update commission" do
+    patch :update, id: @commission, commission: { description: @commission.description, name: @commission.name, price: @commission.price, quantity: @commission.quantity, seller_id: @commission.seller_id }
+    assert_redirected_to commission_path(assigns(:commission))
   end
 
-  test "should destroy product" do
-    assert_difference('Product.count', -1) do
-      delete :destroy, id: @product
+  test "should destroy commission" do
+    assert_difference('Commission.count', -1) do
+      delete :destroy, id: @commission
     end
 
-    assert_redirected_to products_path
+    assert_redirected_to commissions_path
   end
 end

@@ -28,22 +28,22 @@
     <div class="row">
 
       <div class="col-md-6">
-        <div class="products panel panel-default">
+        <div class="commissions panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Listings</h3>
           </div>
           <div class="panel-body">
             <ul class="media-list">
-              <% if @user.products.length > 0 %>
-                <% @user.products.each do |product| %>
+              <% if @user.commissions_as_seller.length > 0 %>
+                <% @user.commissions_as_seller.each do |commission| %>
                 <li class="media">
                   <div class="media-left">
                     <a href="#">
-                    <%= image_tag product.pictures.first ? product.pictures.first.picture.url : "products/default.png", size: "64x64", :class => "media-object"%>
+                    <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "64x64", :class => "media-object"%>
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><%= link_to product.name, product %></h4>
+                    <h4 class="media-heading"><%= link_to commission.name, commission %></h4>
                   </div>
                 </li>
                 <% end %>
@@ -56,7 +56,7 @@
       </div>
 
       <div class="col-md-6">
-        <div class="products panel panel-default">
+        <div class="commissions panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Leave A Review</h3>
           </div>
@@ -66,7 +66,7 @@
       </div>
 
       <div class="col-md-6">
-        <div class="products panel panel-default">
+        <div class="commissions panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Reviews</h3>
           </div>

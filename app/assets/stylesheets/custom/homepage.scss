@@ -5,30 +5,30 @@
   font-weight: 100;
   text-align: center;
 }
-#hot .product-slider {
+#hot .commission-slider {
   margin-bottom: 20px;
 }
-#hot .product-slider:before,
-#hot .product-slider:after {
+#hot .commission-slider:before,
+#hot .commission-slider:after {
   content: " ";
   display: table;
 }
-#hot .product-slider:after {
+#hot .commission-slider:after {
   clear: both;
 }
-#hot .product-slider .item {
+#hot .commission-slider .item {
   margin: 0 25px;
   visibility: hidden;
 }
-#hot .product-slider .owl-controls {
+#hot .commission-slider .owl-controls {
   position: relative;
   top: -30px;
 }
-#hot .product-slider .owl-controls .owl-buttons {
+#hot .commission-slider .owl-controls .owl-buttons {
   display: none;
 }
-#hot .product-slider .owl-controls .owl-page.active span,
-#hot .product-slider .owl-controls.clickable .owl-page:hover span {
+#hot .commission-slider .owl-controls .owl-page.active span,
+#hot .commission-slider .owl-controls.clickable .owl-page:hover span {
   background: $brand-primary;
 }
 
