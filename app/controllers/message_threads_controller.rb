@@ -16,7 +16,7 @@ class MessageThreadsController < ApplicationController
 
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: thread_with_messages }
+      format.json { render json: @message_thread.detailed_attributes }
     end
   end
 
@@ -36,7 +36,7 @@ class MessageThreadsController < ApplicationController
     respond_to do |format|
       if @message_thread.save
         format.html { redirect_to @message_thread, notice: 'Message thread was successfully created.' }
-        format.json { render json: thread_with_messages, status: :created, location: @message_thread }
+        format.json { render json: @message_thread.detailed_attributes, status: :created, location: @message_thread }
       else
         format.html { render :new }
         format.json { render json: @message_thread.errors, status: :unprocessable_entity }
@@ -61,13 +61,5 @@ class MessageThreadsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_thread_params
       params.require(:message_thread).permit(:seller_id, :buyer_id)
-    end
-
-    def thread_with_messages
-      {
-        id: @message_thread.id,
-        seller_name: @message_thread.seller.name,
-        messages: @message_thread.messages.map(&:detailed_attributes)
-      }
     end
 end

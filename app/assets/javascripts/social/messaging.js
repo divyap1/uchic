@@ -21,13 +21,15 @@
           addMessage({
             threadId: messages[i].message_thread_id,
             partnerName: messages[i].receiver_name,
-            message: messages[i].message
+            message: messages[i].message,
+            commission: messages[i].commission
           }, "sent");
         } else {
           addMessage({
             threadId: messages[i].message_thread_id,
             partnerName: messages[i].sender_name,
-            message: messages[i].message
+            message: messages[i].message,
+            commission: messages[i].commission
           }, "received");
         }
       }
@@ -64,11 +66,20 @@
     );
   }
 
-  function messageContainer(data) {
-    return $(".message-container[data-thread=" + data.threadId + "]");
+  function buildCommissionStatus(commission) {
+    return $(
+      "<span>" +
+        "Commissioning " +
+        "<strong>" + commission.name + "</strong>" +
+      "</span>"
+    );
   }
 
-  function ensureMessagePopup(data) {
+  function messageContainer(threadId) {
+    return $(".message-container[data-thread=" + threadId + "]");
+  }
+
+  function findMessagePopup(data) {
     var item = find(messagePopups, function(item) {
       return item.threadId.toString() === data.threadId.toString();
     });
@@ -76,7 +87,9 @@
     if (item) {
       return item.popup;
     }
+  }
 
+  function createMessagePopup(data) {
     var popup = $(
       "<div class='message-popup'>" +
         "<h4>" +
@@ -85,12 +98,17 @@
           "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
           "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</h4>" +
+        "<div class='commission'></div>" +
         "<div class='messages'></div>" +
         "<textarea rows='2' class='form-control' data-thread='" + data.threadId + "' placeholder='Type a message ...'></textarea>" +
       "</div>"
     );
 
     $("#message_popups").append(popup);
+
+    if (data.commission) {
+      popup.find(".commission").html(buildCommissionStatus(data.commission));
+    }
 
     var index = messagePopups.length;
     messagePopups.push({ threadId: data.threadId, popup: popup });
@@ -109,15 +127,29 @@
     return popup;
   }
 
+  function ensureMessagePopup(data) {
+    var popup = findMessagePopup(data);
+
+    if (popup) {
+      return popup;
+    }
+
+    return createMessagePopup(data);
+  }
+
   function addMessage(data, type) {
-    var container = messageContainer(data);
+    var container = messageContainer(data.threadId);
 
     if (container.length) {
       container.append(buildMessageBubble(data, type));
       return;
     }
 
-    var popup = ensureMessagePopup(data);
+    var popup = findMessagePopup(data);
+    if (!popup) {
+      return createMessagePopup(data);
+    }
+
     if (data.highlight) {
       popup.addClass("new");
     }
@@ -132,16 +164,37 @@
   // This makes sure that there's only ever one subscription (so messages aren't received twice)
   try {
     client.unsubscribe("/messages");
+    client.unsubscribe("/commissions");
   } catch(e) { }
 
   client.subscribe("/messages", function(data) {
+    console.log("GOT MESSAGE", data);
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
         threadId: data.message_thread_id,
         partnerName: data.sender_name,
         message: data.message,
+        commission: data.commission,
         highlight: true
       }, "received");
+    }
+  });
+
+  client.subscribe("/commissions", function(data) {
+    if (data.seller_id.toString() === userId.toString() ||
+        (data.buyer_id && data.buyer_id.toString() === userId.toString())) {
+      var container = messageContainer(data.message_thread.id);
+
+      if (container.length) {
+        return $(".commission-updated").removeClass("hidden");
+      }
+
+      var popup = ensureMessagePopup({
+        threadId: data.message_thread.id,
+        partnerName: data.message_thread.seller_name
+      });
+
+      popup.find(".commission").html(buildCommissionStatus(data));
     }
   });
 

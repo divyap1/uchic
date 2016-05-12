@@ -4,7 +4,7 @@ class CommissionsController < ApplicationController
   # GET /commissions
   # GET /commissions.json
   def index
-    @commissions = commission.all
+    @commissions = Commission.all
     @commissions = @commissions.contains(params[:search]) if params[:search].present?
     @commissions = Kaminari.paginate_array(@commissions).page(params[:page]).per(params[:display_size])
   end
@@ -12,7 +12,7 @@ class CommissionsController < ApplicationController
   # GET /commissions/1
   # GET /commissions/1.json
   def show
-    @commission = commission.find(params[:id])
+    @commission = Commission.find(params[:id])
     @category = Category.find(@commission.category_id)
     @seller = @commission.seller
     @ancestry = @category.ancestors << @category
@@ -46,13 +46,24 @@ class CommissionsController < ApplicationController
   # POST /commissions
   # POST /commissions.json
   def create
-    @commission = commission.new(commission_params)
+    if params[:message_thread_id]
+      @message_thread = MessageThread.find(params[:message_thread_id])
+      @commission = @message_thread.commission = Commission.new(commission_params)
+      @commission.buyer = @message_thread.buyer
+    else
+      @commission = Commission.new(commission_params)
+    end
 
     respond_to do |format|
       if @commission.save
         pictures = params[:commission][:pictures]
         pictures.each do |picture|
           @commission.pictures.create!(picture: picture)
+        end
+
+        if @message_thread
+          @message_thread.save!
+          MessageBroadcastController.publish('/commissions', @commission.detailed_attributes)
         end
 
         format.html { redirect_to @commission, notice: 'commission was successfully created.' }
@@ -69,6 +80,10 @@ class CommissionsController < ApplicationController
   def update
     respond_to do |format|
       if @commission.update(commission_params)
+        if @commission.message_thread
+          MessageBroadcastController.publish('/commissions', @commission.detailed_attributes)
+        end
+
         format.html { redirect_to @commission, notice: 'commission was successfully updated.' }
         format.json { render :show, status: :ok, location: @commission }
       else
@@ -99,7 +114,7 @@ class CommissionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_commission
-      @commission = commission.find(params[:id])
+      @commission = Commission.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

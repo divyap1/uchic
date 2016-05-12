@@ -22,7 +22,11 @@ class Message < ActiveRecord::Base
   end
 
   def detailed_attributes
-    attributes.merge(sender_name: sender.name, receiver_name: receiver.name)
+    attributes.merge(
+      sender_name: sender.name,
+      receiver_name: receiver.name,
+      commission: message_thread.commission.try!(:attributes)
+    )
   end
 
   def partner(user)

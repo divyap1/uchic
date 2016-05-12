@@ -36,7 +36,22 @@
         <div class="panel-body">
           <% partner = @message_thread.partner(current_user) %>
           <h2>Conversation with <%= link_to partner.name, user_profile_path(partner) %></h2>
+          <% if @message_thread.commission %>
+            <h3>Commission: <%= @message_thread.commission.name %></h3>
+          <% end %>
+          <div class="alert alert-warning hidden commission-updated">
+            This message thread's commission has been updated. Please reload the page to see it.
+          </div>
           <p class="text-right">
+            <% if @message_thread.seller == current_user && !@message_thread.commission %>
+              <%= link_to new_commission_path(message_thread_id: @message_thread.id), class: "btn btn-primary pull-left" do %>
+                <span class="glyphicon glyphicon-plus"></span> Setup commission
+              <% end %>
+            <% elsif @message_thread.seller == current_user && @message_thread.commission.editable? %>
+              <%= link_to edit_commission_path(@message_thread.commission, message_thread_id: @message_thread.id), class: "btn btn-primary pull-left" do %>
+                <span class="glyphicon glyphicon-pencil"></span> Edit commission
+              <% end %>
+            <% end %>
             <%= link_to message_thread_path(@message_thread), method: "delete", class: "btn btn-danger" do %>
               <span class="glyphicon glyphicon-trash"></span> Delete this thread
             <% end %>
