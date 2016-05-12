@@ -1,8 +1,9 @@
 class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
+  belongs_to :message_thread
 
-  validates :sender, :receiver, :message, presence: true
+  validates :sender, :receiver, :message, :message_thread, presence: true
 
   scope(:between, lambda do |user, partner|
     where(

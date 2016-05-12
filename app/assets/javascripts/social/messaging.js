@@ -12,18 +12,20 @@
     }
   }
 
-  function fetchMessages(popup, partnerId, partnerName) {
-    $.get("/messages.json", { user_id: userId, partner_id: partnerId }, function(messages) {
+  function fetchMessages(popup, threadId) {
+    $.get("/message_threads/" + threadId + ".json", function(thread) {
+      var messages = thread.messages;
+
       for (var i = 0; i < messages.length; i++) {
         if (messages[i].sender_id.toString() === userId.toString()) {
           addMessage({
-            partnerId: messages[i].receiver_id,
+            threadId: messages[i].message_thread_id,
             partnerName: messages[i].receiver_name,
             message: messages[i].message
           }, "sent");
         } else {
           addMessage({
-            partnerId: messages[i].sender_id,
+            threadId: messages[i].message_thread_id,
             partnerName: messages[i].sender_name,
             message: messages[i].message
           }, "received");
@@ -33,7 +35,7 @@
   }
 
   function maybeSendMessage(e) {
-    if (e.which !== 13) return;
+    if (e.which !== 13 || !$(e.target).val()) return;
 
     e.preventDefault();
 
@@ -41,13 +43,13 @@
 
     $.post("/messages.json", {
       message: {
+        message_thread_id: input.data("thread"),
         sender_id: userId,
-        receiver_id: input.data("receiver"),
         message: input.val()
       }
     }, function() {
       addMessage({
-        partnerId: input.data("receiver"),
+        threadId: input.data("thread"),
         message: input.val()
       }, "sent");
       input.val("");
@@ -63,12 +65,12 @@
   }
 
   function messageContainer(data) {
-    return $(".message-container[data-partner=" + data.partnerId + "]");
+    return $(".message-container[data-thread=" + data.threadId + "]");
   }
 
   function ensureMessagePopup(data) {
     var item = find(messagePopups, function(item) {
-      return item.partnerId.toString() === data.partnerId.toString();
+      return item.threadId.toString() === data.threadId.toString();
     });
 
     if (item) {
@@ -84,14 +86,14 @@
           "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</h4>" +
         "<div class='messages'></div>" +
-        "<textarea rows='2' class='form-control' data-receiver='" + data.partnerId + "' placeholder='Type a message ...'></textarea>" +
+        "<textarea rows='2' class='form-control' data-thread='" + data.threadId + "' placeholder='Type a message ...'></textarea>" +
       "</div>"
     );
 
     $("#message_popups").append(popup);
 
     var index = messagePopups.length;
-    messagePopups.push({ partnerId: data.partnerId, popup: popup });
+    messagePopups.push({ threadId: data.threadId, popup: popup });
 
     popup.find("textarea").on("keypress", maybeSendMessage);
 
@@ -102,7 +104,7 @@
       popup.remove();
     });
 
-    fetchMessages(popup, data.partnerId, data.partnerName);
+    fetchMessages(popup, data.threadId);
 
     return popup;
   }
@@ -135,7 +137,7 @@
   client.subscribe("/messages", function(data) {
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
-        partnerId: data.sender_id,
+        threadId: data.message_thread_id,
         partnerName: data.sender_name,
         message: data.message,
         highlight: true
@@ -144,9 +146,13 @@
   });
 
   $(".start-message").on("click", function(e) {
-    ensureMessagePopup({
-      partnerId: $(e.target).data("receiver"),
-      partnerName: $(e.target).data("receiver-name")
+    $.post("/message_threads.json", {
+      message_thread: { seller_id: $(e.target).data("seller") }
+    }, function(thread) {
+      ensureMessagePopup({
+        threadId: thread.id,
+        partnerName: thread.seller_name
+      });
     });
   });
 

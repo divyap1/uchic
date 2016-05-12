@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
-  resources :message_threads
-  get 'checkout/:id' => 'checkout#checkout', as: :commission_checkout
-
-  get 'about/contact_us' => 'pages#contact_us'
-
-  get 'about/faq' => 'pages#faq'
-
-  resources :messages
   root to: "pages#welcome"
 
+  get 'checkout/:id' => 'checkout#checkout', as: :commission_checkout
+  get 'about/contact_us' => 'pages#contact_us'
+  get 'about/faq' => 'pages#faq'
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
+  resources :message_threads, only: [:index, :show, :create, :destroy]
+  resources :messages, only: [:create]
   resources :orders, except: [:edit, :update]
   resources :commissions
   resources :categories, except: [:edit] do
