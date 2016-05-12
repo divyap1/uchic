@@ -1,14 +1,12 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-def create_categories(category_name, parent_id, leaves, sub_categories = nil)
+def create_categories(category_name, parent_id, sub_categories = nil)
   category = Category.create! :name => category_name, :parent_id => parent_id
-  if sub_categories.nil?
-    leaves.push(category)
-    return
-  end
+  return if sub_categories.nil?
+
   sub_categories.each do |sub|
-    create_categories(sub[:name], category.id, leaves)
+    create_categories(sub[:name], category.id)
   end
 end
 
@@ -83,9 +81,8 @@ PRODUCT_TYPES = {
 
 # creates categories in system
 all_items = Category.create! :name => "All Items"
-leaves = []
 PRODUCT_TYPES.each_key do |category|
-  create_categories(category, all_items.id, leaves, PRODUCT_TYPES[category])
+  create_categories(category, all_items.id, PRODUCT_TYPES[category])
 end
 
 ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
@@ -101,16 +98,15 @@ PRODUCT_NAMES = [
 
 100.times do
   print "."
-  product_category = leaves.sample
-  type_info = ALL_PRODUCT_TYPES.find { |type| type[:name] == product_category.name }
+  type_info = ALL_PRODUCT_TYPES.sample
+  product_category = Category.find_by(name: type_info[:name])
 
-  Product.create!(
+  product_category.products.create!(
     name: "#{PRODUCT_NAMES.sample.titleize} #{product_category.name}",
     description: Faker::Hipster.paragraph,
     price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
     quantity: 1, # Will be updated later
-    seller: User.all.sample,
-    category_id: product_category.id
+    seller: User.all.sample
   )
 end
 
