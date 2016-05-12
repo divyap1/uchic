@@ -34,6 +34,8 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
 
+    @categories = Category.all
+
     #Can only edit products you added
     unless user_signed_in? && @product.seller_id === current_user.id
       flash.now[:alert] = "You do not have the permissions to edit this listing."
