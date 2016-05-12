@@ -8,8 +8,8 @@
 
 
           <div class="pull-right"</div>
-          	 <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-primary"%>
-          	 <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-primary"%>
+          	 <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-default"%>
+          	 <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-default"%>
           </div>
 
         </div>
@@ -43,7 +43,7 @@
 	                        <td><%= order.id %></td>
 	                        <td><%= order.created_at.strftime "%d %B %Y" %></td>
 	                        <td style="padding-left: 10px">
-	                          <%= link_to order, class: "btn btn-primary" do %>
+	                          <%= link_to order, class: "btn btn-default" do %>
 	                            View order
 	                          <% end %>
 	                        </td>
@@ -56,7 +56,7 @@
 	        <p>No recent orders</p>
 	        <%end %>
 
-	        <%= link_to "View all orders", orders_path, class: "btn btn-primary" %>
+	        <%= link_to "View all orders", orders_path, class: "btn btn-default" %>
 
           </div>
         </div>
@@ -102,9 +102,9 @@
 	          	</div>
         	<% end %>
 
-        	<%= link_to "View all products", user_listings_path, class: "btn btn-primary" %>
+        	<%= link_to "View all products", user_listings_path, class: "btn btn-default" %>
 
-	        <%= link_to "List another product", new_product_path, class: "btn btn-primary" %>
+	        <%= link_to "List another product", new_product_path, class: "btn btn-default" %>
 
          </div>
 

@@ -15,15 +15,20 @@ class CategoriesController < ApplicationController
     @display_size.to_i
 
     @category = Category.find(params[:id])
-    all_products = get_products(@category)
-
+    all_products = @category.products + @category.children.flat_map(&:products)
 
     @order_options = ["Price low to high", "Price high to low", "Name", "Recently added"]
     @order = params[:order] || @order_options.first
-    all_products.order(price: :asc) if @order == "Price low to high"
-    all_products.order(price: :desc) if @order == "Price high to low"
-    all_products.order(:name) if @order == "Name"
-    all_products.order(timestamps: :desc) if @order == "Recently added"
+
+    if @order == "Price low to high"
+      all_products.sort_by!(&:price)
+    elsif @order == "Price high to low"
+      all_products.sort_by!(&:price).reverse!
+    elsif @order == "Name"
+      all_products.sort_by!(&:name)
+    elsif @order == "Recently added"
+      all_products.sort_by!(&:created_at).reverse!
+    end
 
     @products = Kaminari.paginate_array(all_products).page(params[:page]).per(@display_size)
 
@@ -89,14 +94,5 @@ class CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.fetch(:category, {})
-    end
-
-    def get_products(category)
-      return category.products if category.is_childless?
-      products = category.products
-      category.children.each do |sub_category|
-        products << get_products(sub_category)
-      end
-      return products
     end
 end
