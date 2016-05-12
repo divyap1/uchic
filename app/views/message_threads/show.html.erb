@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Commission:</strong>
+  <%= @message_thread.commission_id %>
+</p>
+
+<p>
+  <strong>Seller:</strong>
+  <%= @message_thread.seller_id %>
+</p>
+
+<p>
+  <strong>Buyer:</strong>
+  <%= @message_thread.buyer_id %>
+</p>
+
+<%= link_to 'Edit', edit_message_thread_path(@message_thread) %> |
+<%= link_to 'Back', message_threads_path %>

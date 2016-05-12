@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :message_threads
   get 'checkout/:id' => 'checkout#checkout', as: :commission_checkout
 
   get 'about/contact_us' => 'pages#contact_us'
