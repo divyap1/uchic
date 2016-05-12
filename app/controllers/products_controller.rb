@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     unless user_signed_in?
        flash.now[:alert] = "Guests can not sell items"
     end
-    
+
     @categories = Category.all
     @product = Product.new
   end
@@ -50,6 +50,10 @@ class ProductsController < ApplicationController
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
+        pictures = params[:product][:pictures]
+        pictures.each do |picture|
+          @product.pictures.create(picture: picture)
+        end
       else
         format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }

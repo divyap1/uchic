@@ -2,7 +2,7 @@
   <div class="user-profile">
     <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
     <h1 class="name"><%= @user.name %></h1>
-    
+
     <div class="info">
       Wellington, NZ
       <span class="divider" aria-hidden="true">&bull;</span>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="row">
-      
+
       <div class="col-md-6">
         <div class="products panel panel-default">
           <div class="panel-heading">
@@ -39,7 +39,7 @@
                 <li class="media">
                   <div class="media-left">
                     <a href="#">
-                    <%= image_tag product.picture.url, size: "64x64", :class => "media-object"%>
+                    <%= image_tag product.pictures.first ? product.pictures.first.picture.url : "products/default.png", size: "64x64", :class => "media-object"%>
                     </a>
                   </div>
                   <div class="media-body">
@@ -82,7 +82,7 @@
                   </div>
                   <div class="media-body">
                     <h4 class="media-heading">
-                      <%=review.reviewer.first_name%> 
+                      <%=review.reviewer.first_name%>
                       <% review.rating.times do %>
                       <span class="glyphicon glyphicon-star"></span>
                       <% end %>

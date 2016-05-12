@@ -7,18 +7,18 @@
                     <div class="flipper">
                         <div class="front">
                             <%= link_to product_path(product.id) do %>
-                            <%= image_tag product.picture, alt: "", class:"img-responsive" %>
+                            <%= image_tag product.pictures.first ? product.pictures.first.picture.url : "products/default.png", alt: "", class:"img-responsive" %>
                             <% end %>
                         </div>
                         <div class="back">
                             <%= link_to product_path(product.id) do %>
-                            <%= image_tag product.picture, alt: "", class:"img-responsive" %>
+                            <% image_tag product.pictures.second ? product.pictures.second.picture.url : product.pictures.first ? product.pictures.first.picture.url : "products/default.png", alt: "", class:"img-responsive" %>                            
                             <% end %>
                         </div>
                     </div>
                 </div>
                 <%= link_to product_path(product.id), class: "invisible" do %>
-                <%= image_tag product.picture, alt: "", class:"img-responsive" %>
+                <%= image_tag product.pictures.first ? product.pictures.first.picture.url : "products/default.png", alt: "", class:"img-responsive" %>
                 <% end %>
                 <div class="text">
                     <h3>
