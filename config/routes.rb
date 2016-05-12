@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :friendships, only:[:create, :destroy]
+
   get 'checkout/:id' => 'checkout#checkout', as: :product_checkout
 
   get 'about/contact_us' => 'pages#contact_us'

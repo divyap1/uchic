@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   has_many :products, foreign_key: :seller_id
   has_many :orders, foreign_key: :buyer_id
   has_many :reviews
+  
+  has_many :friendships
+  has_many :friends, :through => :friendships
 
   validates :name, presence: true
   validates :address, presence: true

@@ -1,103 +1,135 @@
 <div class="container">
-  <div class="user-profile">
-    <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
-    <h1 class="name"><%= @user.name %></h1>
-    
-    <div class="info">
-      Wellington, NZ
-      <span class="divider" aria-hidden="true">&bull;</span>
-      <span class="rating">
-      <% @average_review.times do %>
-      <span class="glyphicon glyphicon-star"></span>
-      <% end %>
-      (<%= @num_reviews %> ratings)
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="commissions panel panel-default">
-          <span class="message not-accepting"><%= @user.first_name %> is not currently accepting commissions.</span>
-          <% unless @user == current_user %>
-          <button class="btn btn-default start-message" data-receiver="<%= @user.id %>" data-receiver-name="<%= @user.name %>">
-          <span class="glyphicon glyphicon-comment"></span>
-          Send a message anyway
-          </button>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      
-      <div class="col-md-6">
-        <div class="products panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Listings</h3>
-          </div>
-          <div class="panel-body">
-            <ul class="media-list">
-              <% if @user.products.length > 0 %>
-                <% @user.products.each do |product| %>
-                <li class="media">
-                  <div class="media-left">
-                    <a href="#">
-                    <%= image_tag product.picture.url, size: "64x64", :class => "media-object"%>
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading"><%= link_to product.name, product %></h4>
-                  </div>
-                </li>
-                <% end %>
-              <% else %>
-                <p> <%=@user.first_name%> has no current listings</p>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
+   <div class="user-profile">
+      <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
+      <h1 class="name"><%= @user.name %></h1>
+      <div class="info">
+         Wellington, NZ
+         <span class="divider" aria-hidden="true">&bull;</span>
+         <span class="rating">
+         <% @average_review.times do %>
+            <span class="glyphicon glyphicon-star"></span>
+         <% end %>
+         (<%= @num_reviews %> ratings)
+         <br>
+         <% if user_signed_in? && @user != current_user %>
 
-      <div class="col-md-6">
-        <div class="products panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Leave A Review</h3>
-          </div>
-          <div class="panel-body">
-          </div>
-        </div>
-      </div>
+            <% if current_user.friends.any? { |friend| friend.id == @user.id } %>
+               <%= link_to "Remove Friend", friendship_path(:friend_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+            <%else%>
+               <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary"%>
+            <%end%>
 
-      <div class="col-md-6">
-        <div class="products panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Reviews</h3>
-          </div>
-          <div class="panel-body">
-            <ul class="media-list">
-              <% if @user.reviews.length > 0 %>
-                <% @user.reviews.each do |review| %>
-                <li class="media">
-                  <div class="media-left">
-                    <a href="#">
-                    <%= image_tag review.reviewer.profile_picture.url, size: "64x64", :class => "media-object"%>
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading">
-                      <%=review.reviewer.first_name%> 
-                      <% review.rating.times do %>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <% end %>
-                    </h4>
-                    <p> <%=review.comment%></p>
-                  </div>
-                </li>
-                <% end %>
-              <% else %>
-                <p> <%=@user.first_name%> has no reviews</p>
-              <% end %>
-            </ul>
-          </div>
-        </div>
+         <%end%>
+
       </div>
-    </div>
-  </div>
+      <div class="row">
+         <div class="col-md-12">
+            <div class="commissions panel panel-default">
+               <span class="message not-accepting"><%= @user.first_name %> is not currently accepting commissions.</span>
+               <% unless @user == current_user %>
+                  <button class="btn btn-default start-message" data-receiver="<%= @user.id %>" data-receiver-name="<%= @user.name %>">
+                  <span class="glyphicon glyphicon-comment"></span>
+                  Send a message anyway
+                  </button>
+               <% end %>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6">
+            <div class="products panel panel-default">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Listings</h3>
+               </div>
+               <div class="panel-body">
+                  <ul class="media-list">
+                     <% if @user.products.length > 0 %>
+                        <% @user.products.each do |product| %>
+                           <li class="media">
+                              <div class="media-left">
+                                 <a href="#">
+                                 <%= image_tag product.picture.url, size: "64x64", :class => "media-object"%>
+                                 </a>
+                              </div>
+                              <div class="media-body">
+                                 <h4 class="media-heading"><%= link_to product.name, product %></h4>
+                              </div>
+                           </li>
+                        <% end %>
+                     <% else %>
+                        <p> <%=@user.first_name%> has no current listings</p>
+                     <% end %>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="products panel panel-default">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Leave A Review</h3>
+               </div>
+               <div class="panel-body">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6">
+            <div class="products panel panel-default">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Reviews</h3>
+               </div>
+               <div class="panel-body">
+                  <ul class="media-list">
+                     <% if @user.reviews.length > 0 %>
+                        <% @user.reviews.each do |review| %>
+                        <li class="media">
+                           <div class="media-left">
+                              <a href="#">
+                              <%= image_tag review.reviewer.profile_picture.url, size: "64x64", :class => "media-object"%>
+                              </a>
+                           </div>
+                           <div class="media-body">
+                              <h4 class="media-heading">
+                                 <%=review.reviewer.first_name%> 
+                                 <% review.rating.times do %>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                 <% end %>
+                              </h4>
+                              <p> <%=review.comment%></p>
+                           </div>
+                        </li>
+                        <% end %>
+                     <% else %>
+                        <p> <%=@user.first_name%> has no reviews</p>
+                     <% end %>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="products panel panel-default">
+               <div class="panel-heading">
+                  <h3 class="panel-title">Friends</h3>
+               </div>
+               <div class="panel-body">
+                  <ul>
+                     <% @user.friends.each do |friend| %>
+                        <li class="media">
+                           <div class="media-left">
+                              <a href="#">
+                              <%= image_tag friend.profile_picture.url, size: "64x64", :class => "media-object"%>
+                              </a>
+                           </div>
+                           <div class="media-body">
+                              <h4 class="media-heading"><%= link_to friend.name, user_profile_path(friend) %></h4>
+                           </div>
+                        </li>
+                     <% end %>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
