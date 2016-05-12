@@ -105,7 +105,6 @@ PRODUCT_NAMES = [
     name: "#{PRODUCT_NAMES.sample.titleize} #{commission_category.name}",
     description: Faker::Hipster.paragraph,
     price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
-    quantity: 1, # Will be updated later
     seller: User.all.sample
   )
 end
@@ -113,6 +112,8 @@ end
 puts
 
 # Orders
+
+#TODO needs to be reworked to make sense with commissions
 
 print "Creating orders "
 
@@ -127,22 +128,6 @@ QUANTITIES = [1] * 10 + [2] * 5 + [3] * 3 + (4..20).to_a
   rand(1..5).times do
     order.order_items.create!(commission: possible_commissions.to_a.sample, quantity: QUANTITIES.sample)
   end
-end
-
-puts
-
-print "Updating commission quantities "
-
-REMAINING_QUANTITIES = [0] * 40 + (1..100).to_a
-
-Commission.all.each do |commission|
-  print "."
-  ordered_quantity = OrderItem.where(commission: commission).sum(:quantity)
-
-  total_quantity = ordered_quantity + REMAINING_QUANTITIES.sample
-  total_quantity += rand(1..10) if total_quantity.zero?
-
-  commission.update_attributes!(quantity: total_quantity)
 end
 
 puts
