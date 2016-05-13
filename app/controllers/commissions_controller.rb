@@ -28,7 +28,7 @@ class CommissionsController < ApplicationController
     unless user_signed_in?
        flash.now[:alert] = "Guests can not sell items"
     end
-    
+
     @categories = Category.all
     @commission = Commission.new
   end
@@ -58,7 +58,7 @@ class CommissionsController < ApplicationController
 
     respond_to do |format|
       if @commission.save
-        pictures = params[:commission][:pictures]
+        pictures = [*params[:commission][:pictures]] || []
         pictures.each do |picture|
           @commission.pictures.create!(picture: picture)
         end
