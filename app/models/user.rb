@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :products, foreign_key: :seller_id
+  has_many :commissions_as_seller, foreign_key: :seller_id, class_name: "Commission"
+  has_many :commissions_as_buyer, foreign_key: :buyer_id, class_name: "Commission"
   has_many :orders, foreign_key: :buyer_id
   has_many :reviews
   

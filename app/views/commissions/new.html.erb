@@ -2,18 +2,27 @@
 	<div class="row">
 	    <div class="col-md-12">
 	        <div class="box without-spacing">
+							<% if params[:message_thread_id] %>
+									<%= link_to message_thread_path(params[:message_thread_id]), class: "btn btn-default" do %>
+										<span class="glyphicon glyphicon-chevron-left"></span> Return to messages
+									<% end %>
+							<% end %>
 
 	            <h1>Sell Item</h1>
 
 	            <%if user_signed_in?%>
 
-		            <%= form_for(@product) do |f| %>
-		            <%if @product.errors.any? %>
+		            <%= form_for(@commission) do |f| %>
+								<% if params[:message_thread_id] %>
+									<%= hidden_field_tag :message_thread_id, params[:message_thread_id] %>
+								<% end %>
+
+		            <%if @commission.errors.any? %>
 			            <div id="error_explanation">
-			                <h2><%= pluralize(@product.errors.count, "error") %>
-			                prohibited this product from being saved:</h2>
+			                <h2><%= pluralize(@commission.errors.count, "error") %>
+			                prohibited this commission from being saved:</h2>
 			                <ul>
-			                    <%@product.errors.full_messages.each do |message| %>
+			                    <%@commission.errors.full_messages.each do |message| %>
 			                    <li><%= message %></li><%end %>
 			                </ul>
 			            </div>
@@ -21,19 +30,15 @@
 
 		            <div class="form-group">
 		                <%= f.label :name, class: "sr-only"%>
-		                <%= f.text_field :name, placeholder: "Product Name", required: true, class: "form-control" %>
+		                <%= f.text_field :name, placeholder: "Commission Name", required: true, class: "form-control" %>
 		            </div>
 		            <div class="form-group">
 		                <%= f.label :description,class: "sr-only" %>
-		                <%= f.text_area :description, placeholder: "Product Description", class: "form-control"  %>
+		                <%= f.text_area :description, placeholder: "Commission Description", class: "form-control"  %>
 		            </div>
 		            <div class="form-group">
 		                <%= f.label :price, class: "sr-only"%>
 		                <%= f.number_field :price, placeholder: "Price", required: true, :step => 0.01, class: "form-control" %>
-		            </div>
-		            <div class="form-group">
-		                <%= f.label :quantity, class: "sr-only"%>
-		                <%= f.number_field :quantity, placeholder: "Quantity", required: true, value: "", class: "form-control" %>
 		            </div>
 		            <div class="form-group">
 		            	<%= f.label :category_id, class: "sr-only"%>
@@ -55,7 +60,7 @@
 	 			<% end %>
 
 	            <br>
-	            <%= link_to 'Back', products_path, :class => 'btn btn-warning' %>
+	            <%= link_to 'Back', commissions_path, :class => 'btn btn-warning' %>
 	        </div>
 	    </div>
 	</div>

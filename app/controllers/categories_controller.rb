@@ -15,22 +15,22 @@ class CategoriesController < ApplicationController
     @display_size.to_i
 
     @category = Category.find(params[:id])
-    all_products = @category.products + @category.children.flat_map(&:products)
+    all_items = @category.commissions + @category.children.flat_map(&:commissions)
 
     @order_options = ["Price low to high", "Price high to low", "Name", "Recently added"]
     @order = params[:order] || @order_options.first
 
     if @order == "Price low to high"
-      all_products.sort_by!(&:price)
+      all_items.sort_by!(&:price)
     elsif @order == "Price high to low"
-      all_products.sort_by!(&:price).reverse!
+      all_items.sort_by!(&:price).reverse!
     elsif @order == "Name"
-      all_products.sort_by!(&:name)
+      all_items.sort_by!(&:name)
     elsif @order == "Recently added"
-      all_products.sort_by!(&:created_at).reverse!
+      all_items.sort_by!(&:created_at).reverse!
     end
 
-    @products = Kaminari.paginate_array(all_products).page(params[:page]).per(@display_size)
+    @commissions = Kaminari.paginate_array(all_items).page(params[:page]).per(@display_size)
 
     @section = @category.name
     @ancestry = @category.ancestors
