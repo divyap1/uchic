@@ -12,19 +12,16 @@
          (<%= @num_reviews %> ratings)
          <br>
          <% if user_signed_in? && @user != current_user %>
-
             <% if current_user.friends.any? { |friend| friend.id == @user.id } %>
                <%= link_to "Remove Friend", friendship_path(:friend_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
             <%else%>
                <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary"%>
             <%end%>
-
          <%end%>
-
       </div>
       <div class="row">
          <div class="col-md-12">
-            <div class="commissions panel panel-default">
+            <div class="panel panel-default">
                <span class="message not-accepting"><%= @user.first_name %> is not currently accepting commissions.</span>
                <% unless @user == current_user %>
                   <button class="btn btn-default start-message" data-receiver="<%= @user.id %>" data-receiver-name="<%= @user.name %>">
@@ -34,19 +31,19 @@
                <% end %>
             </div>
          </div>
-
       </div>
       <div class="row">
          <!----Left panel---->
          <div class="col-md-6">
-            <div class="products panel panel-default">
+            <div class="panel panel-default">
                <div class="panel-heading">
                   <h3 class="panel-title">Listings</h3>
                </div>
+
                <div class="panel-body">
                   <ul class="media-list">
-                     <% if @user.products.length > 0 %>
-                        <% @user.products.each do |product| %>
+                     <% if @user.commissions_as_seller.length > 0 %>
+                        <% @user.commissions_as_seller.each do |product| %>
                            <li class="media">
                               <div class="media-left">
                                  <a href="#">
@@ -65,7 +62,7 @@
                </div>
             </div>
 
-            <div class="products panel panel-default">
+            <div class="panel panel-default">
                <div class="panel-heading">
                   <h3 class="panel-title">Friends</h3>
                </div>
@@ -90,7 +87,7 @@
          </div>
          <!----Right panel---->
          <div class="col-md-6">
-            <div class="products panel panel-default">
+            <div class="panel panel-default">
                <div class="panel-heading">
                   <h3 class="panel-title">Leave A Review</h3>
                </div>
@@ -98,7 +95,7 @@
                </div>
             </div>
 
-            <div class="products panel panel-default">
+            <div class="panel panel-default">
                <div class="panel-heading">
                   <h3 class="panel-title">Reviews</h3>
                </div>

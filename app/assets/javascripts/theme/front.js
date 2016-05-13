@@ -1,6 +1,6 @@
-/* product detail gallery */
+/* commission detail gallery */
 
-function productDetailGallery(confDetailSwitch) {
+function commissionDetailGallery(confDetailSwitch) {
     $('.thumb:first').addClass('active');
     timer = setInterval(autoSwitch, confDetailSwitch);
     $(".thumb").click(function(e) {
@@ -97,12 +97,12 @@ function carousels() {
 	afterInit: ''
     });
 
-    $('.product-slider').owlCarousel({
+    $('.commission-slider').owlCarousel({
 	navigation: true, // Show next and prev buttons
 	slideSpeed: 300,
 	paginationSpeed: 400,
 	afterInit: function() {
-	    $('.product-slider .item').css('visibility', 'visible');
+	    $('.commission-slider .item').css('visibility', 'visible');
 	}
     });
 
@@ -202,6 +202,6 @@ $(window).resize(function() {
 });
 
 animations();
-productDetailGallery(4000);
+commissionDetailGallery(4000);
 carousels();
 utils();

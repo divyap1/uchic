@@ -9,11 +9,11 @@
 		<ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="active"><a href="#products" aria-controls="home" role="tab" data-toggle="tab">Products</a></li>
 		    <li role="presentation"><a href="#users" aria-controls="profile" role="tab" data-toggle="tab">Users</a></li>
-	  	</ul>
+  	</ul>
 
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="products">
-	    	<%= render partial: 'categories/product_view' %>
+	    	<%= render partial: 'categories/commission_view' %>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="users">
 	    	<% if @users.length == 0 %>
@@ -25,7 +25,7 @@
 				          <tr>
 				              <th></th>
 				              <th>Name</th>
-				              <th>Email</th>
+				              <th>Username</th>
 				              <th></th>
 				          </tr>
 				      </thead>
@@ -34,7 +34,7 @@
 				          <tr>
 				          	<td><%= image_tag user.profile_picture.url, size: "64x64", :class => "media-object"%></td>
 				            <td><%= user.name %></td>
-				            <td><%= user.email %></td>
+				            <td><%= user.username %></td>
 				            <td style="padding-left: 10px">
 				              <%= link_to "View user", user_profile_path(user), class: "btn btn-default"%>	
 				            </td>

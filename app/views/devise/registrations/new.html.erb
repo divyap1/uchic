@@ -19,6 +19,11 @@
               <i class="glyphicon glyphicon-globe form-control-feedback" aria-hidden="true"></i>
             </div>
             <div class="form-group has-feedback">
+              <%= f.label :username, class: "sr-only" %>
+              <%= f.text_field :username, placeholder: "Username", class: "form-control", autofocus: true %>
+              <i class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <div class="form-group has-feedback">
               <%= f.label :password, class: "sr-only" do %>
                 Password (<%= @minimum_password_length %> characters or more)
               <% end %>

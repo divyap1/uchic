@@ -10,12 +10,19 @@ def create_categories(category_name, parent_id, sub_categories = nil)
   end
 end
 
+def probably_true
+  ([true] * 10 + [false] * 3).sample
+end
+
+def probably_false
+  !probably_true
+end
+
 # Delete existing data
 Category.delete_all
 User.delete_all
-Product.delete_all
-Order.delete_all
-OrderItem.delete_all
+Commission.delete_all
+MessageThread.delete_all
 
 # Users
 
@@ -34,6 +41,7 @@ print "Creating users "
     name: name,
     address: "#{Faker::Address.street_address}\n#{CITIES.sample}",
     email: Faker::Internet.free_email(name),
+    username: Faker::Internet.user_name(name),
     password: "0hsosecret",
     password_confirmation: "0hsosecret"
   )
@@ -41,11 +49,9 @@ end
 
 puts
 
-# Products
+# Commissions
 
-print "Creating products "
-
-# category => product types (categories are not yet used)
+# category => commission types (categories are not yet used)
 PRODUCT_TYPES = {
   "Artworks" => [
     { name: "Painting", price: 50..400 },
@@ -85,6 +91,9 @@ PRODUCT_TYPES.each_key do |category|
   create_categories(category, all_items.id, PRODUCT_TYPES[category])
 end
 
+sellers = User.all.sample(25)
+buyers = User.all - sellers.sample(15)
+
 ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
 
 PRODUCT_NAMES = [
@@ -93,56 +102,73 @@ PRODUCT_NAMES = [
   100.times.map { Faker::Book.title },
   10.times.map { Faker::Book.genre },
   50.times.map { Faker::Hipster.word },
-  50.times.map { Faker::StarWars.character }
+  50.times.map { Faker::StarWars.character },
+  50.times.map { "Any" }
 ].flatten
+
+# Suggested commissions
+
+print "Creating suggested commissions "
 
 100.times do
   print "."
   type_info = ALL_PRODUCT_TYPES.sample
-  product_category = Category.find_by(name: type_info[:name])
+  commission_category = Category.find_by(name: type_info[:name])
 
-  product_category.products.create!(
-    name: "#{PRODUCT_NAMES.sample.titleize} #{product_category.name}",
+  commission_category.commissions.create!(
+    name: "#{PRODUCT_NAMES.sample.titleize} #{commission_category.name}",
     description: Faker::Hipster.paragraph,
     price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
-    quantity: 1, # Will be updated later
-    seller: User.all.sample
+    seller: sellers.sample,
+    state: "shipped",
+    public: true,
+    allow_copies: probably_true,
+    allow_similar: probably_true
   )
 end
 
 puts
 
-# Orders
+# Ongoing commissions
 
-print "Creating orders "
+print "Creating ongoing commissions "
 
-QUANTITIES = [1] * 10 + [2] * 5 + [3] * 3 + (4..20).to_a
-
-150.times do
+75.times do
   print "."
-  buyer = User.all.sample
-  possible_products = Product.where.not(seller: buyer)
 
-  order = Order.create!(buyer: buyer)
-  rand(1..5).times do
-    order.order_items.create!(product: possible_products.to_a.sample, quantity: QUANTITIES.sample)
+  type_info = ALL_PRODUCT_TYPES.sample
+  commission_category = Category.find_by(name: type_info[:name])
+
+  seller = sellers.sample
+  buyer = buyers.shuffle.find { |buyer| buyer.id != seller.id }
+
+  commission = commission_category.commissions.create!(
+    name: "#{PRODUCT_NAMES.sample.titleize} #{commission_category.name}",
+    description: Faker::Hipster.paragraph,
+    price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
+    seller: seller,
+    buyer: buyer,
+    state: Commission::STATES.sample,
+    public: [true, false].sample,
+    allow_copies: probably_false,
+    allow_similar: probably_false
+  )
+
+  MessageThread.create!(
+    commission: commission,
+    buyer: buyer,
+    seller: seller,
+  )
+
+  if commission.accepted?
+    commission.update_attributes!(accepted_by_buyer: true, accepted_by_seller: true)
+  else
+    commission.update_attributes!([
+      { accepted_by_buyer: true },
+      { accepted_by_seller: true },
+      {}
+    ].sample)
   end
-end
-
-puts
-
-print "Updating product quantities "
-
-REMAINING_QUANTITIES = [0] * 40 + (1..100).to_a
-
-Product.all.each do |product|
-  print "."
-  ordered_quantity = OrderItem.where(product: product).sum(:quantity)
-
-  total_quantity = ordered_quantity + REMAINING_QUANTITIES.sample
-  total_quantity += rand(1..10) if total_quantity.zero?
-
-  product.update_attributes!(quantity: total_quantity)
 end
 
 puts

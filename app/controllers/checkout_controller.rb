@@ -1,8 +1,7 @@
 class CheckoutController < ApplicationController
   def checkout
-    @product = Product.find(params[:id])
+    @commission = Commission.find(params[:id])
     @shipping = 4.99;
-    @quantity = 1;
-    @subtotal = @product.price * @quantity;
+    @subtotal = @commission.price;
   end
 end

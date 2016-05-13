@@ -8,14 +8,11 @@
         </div>
         <hr>
         <div class="col-md-3">
-          <%= image_tag @product.pictures.first ? @product.pictures.first.picture.url : "products/default.png", alt: @product.name, class:"img-responsive"%>
+          <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt: @commission.name, class:"img-responsive"%>
         </div>
         <div class="col-md-9">
-          <h4><%= @product.name %></h4>
-          <p> <%= @product.description %> </p>
-          <div class="well well-sm">
-              <h5 class=>Select Quantity: <%= select_tag(:select_quantity, options_for_select(1..@product.quantity)) %></h5>
-          </div>
+          <h4><%= @commission.name %></h4>
+          <p> <%= @commission.description %> </p>
         <div class="table-responsive">
             <table class="table">
                 <tfoot>
