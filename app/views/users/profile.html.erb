@@ -12,10 +12,10 @@
          (<%= @num_reviews %> ratings)
          <br>
          <% if user_signed_in? && @user != current_user %>
-            <% if current_user.followers.any? { |follower| follower.id == @user.id } %>
-               <%= link_to "Unfollow", friendship_path(:friend_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+            <% if current_user.followings.any? { |following| following.id == @user.id } %>
+               <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
             <%else%>
-               <%= link_to "Follow", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary"%>
+               <%= link_to "Follow", friendships_path(:following_id => @user), :method => :post, class: "btn btn-primary"%>
             <%end%>
          <%end%>
       </div>
@@ -68,7 +68,7 @@
                </div>
                <div class="panel-body">
                      <% if @user.followings.length > 0 %>
-                        <ul>
+                        <ul class="media-list">
                         <% @user.followings.each do |follower| %>
                            <li class="media">
                               <div class="media-left">
@@ -78,10 +78,11 @@
                               </div>
                               <div class="media-body">
                                  <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+                                 <p><%=follower.username%></p>
                               </div>
                            </li>
-                           </ul>
                         <% end %>
+                        </ul>
                      <% else %>
                      <p> <%=@user.name%> is not currently following any users<p>
                      <% end %>
