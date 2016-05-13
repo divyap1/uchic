@@ -16,10 +16,7 @@ class Commission < ActiveRecord::Base
   #For searching by name
   scope :contains, -> (name) { where("name like ?", "%#{name}%")}
 
-  scope :public, -> { where(public: true) }
-
-  alias_method :accepted_by_buyer?, :accepted_by_buyer
-  alias_method :accepted_by_seller?, :accepted_by_seller
+  scope :publicly_visible, -> { where(public: true) }
 
   STATES.each.with_index do |state, index|
     matching_states = STATES[index..-1]

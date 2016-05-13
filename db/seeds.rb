@@ -10,11 +10,19 @@ def create_categories(category_name, parent_id, sub_categories = nil)
   end
 end
 
+def probably_true
+  ([true] * 10 + [false] * 3).sample
+end
+
+def probably_false
+  !probably_true
+end
+
 # Delete existing data
 Category.delete_all
 User.delete_all
 Commission.delete_all
-Order.delete_all
+MessageThread.delete_all
 
 # Users
 
@@ -41,8 +49,6 @@ end
 puts
 
 # Commissions
-
-print "Creating commissions "
 
 # category => commission types (categories are not yet used)
 PRODUCT_TYPES = {
@@ -84,6 +90,9 @@ PRODUCT_TYPES.each_key do |category|
   create_categories(category, all_items.id, PRODUCT_TYPES[category])
 end
 
+sellers = User.all.sample(25)
+buyers = User.all - sellers.sample(15)
+
 ALL_PRODUCT_TYPES = PRODUCT_TYPES.values.flatten
 
 PRODUCT_NAMES = [
@@ -92,8 +101,13 @@ PRODUCT_NAMES = [
   100.times.map { Faker::Book.title },
   10.times.map { Faker::Book.genre },
   50.times.map { Faker::Hipster.word },
-  50.times.map { Faker::StarWars.character }
+  50.times.map { Faker::StarWars.character },
+  50.times.map { "Any" }
 ].flatten
+
+# Suggested commissions
+
+print "Creating suggested commissions "
 
 100.times do
   print "."
@@ -104,21 +118,56 @@ PRODUCT_NAMES = [
     name: "#{PRODUCT_NAMES.sample.titleize} #{commission_category.name}",
     description: Faker::Hipster.paragraph,
     price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
-    seller: User.all.sample
+    seller: sellers.sample,
+    state: "shipped",
+    public: true,
+    allow_copies: probably_true,
+    allow_similar: probably_true
   )
 end
 
 puts
 
-# Orders
+# Ongoing commissions
 
-print "Creating orders "
+print "Creating ongoing commissions "
 
-Commission.all.sample(50).each do |commission|
+75.times do
   print "."
-  commission.buyer = User.where.not(id: commission.seller.id).sample
-  commission.save!
-  Order.create!(commission: commission)
+
+  type_info = ALL_PRODUCT_TYPES.sample
+  commission_category = Category.find_by(name: type_info[:name])
+
+  seller = sellers.sample
+  buyer = buyers.shuffle.find { |buyer| buyer.id != seller.id }
+
+  commission = commission_category.commissions.create!(
+    name: "#{PRODUCT_NAMES.sample.titleize} #{commission_category.name}",
+    description: Faker::Hipster.paragraph,
+    price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
+    seller: seller,
+    buyer: buyer,
+    state: Commission::STATES.sample,
+    public: [true, false].sample,
+    allow_copies: probably_false,
+    allow_similar: probably_false
+  )
+
+  MessageThread.create!(
+    commission: commission,
+    buyer: buyer,
+    seller: seller,
+  )
+
+  if commission.accepted?
+    commission.update_attributes!(accepted_by_buyer: true, accepted_by_seller: true)
+  else
+    commission.update_attributes!([
+      { accepted_by_buyer: true },
+      { accepted_by_seller: true },
+      {}
+    ].sample)
+  end
 end
 
 puts
