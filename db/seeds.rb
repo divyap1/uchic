@@ -171,4 +171,26 @@ print "Creating ongoing commissions "
   end
 end
 
+# Add reviews
+
+users = User.all.sample(25)
+reviewers = User.all - users.sample(15)
+
+print "Creating reviews "
+
+100.times do
+  print "."
+
+  user = users.sample
+  reviewer = reviewers.shuffle.find { |reviewer| reviewer.id != user.id }
+
+  user.reviews.create(
+    reviewer: reviewer,
+    user: user, 
+    rating: 1 + rand(5),
+    comment: Faker::Hacker.say_something_smart
+  )
+
+end
+
 puts
