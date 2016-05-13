@@ -19,51 +19,35 @@
     <div class="row">
 
       <div class="col-md-6">
-        <div class="commissions panel panel-default">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Buying</h3>
+            <h3 class="panel-title">Followers (<%=@user.followers.length%>)</h3>
           </div>
           <div class="panel-body">
+            <% if @user.followers.length > 0 %>
+              <% @user.followers.each do |follower| %>
+                <li class="media">
+                   <div class="media-left">
+                      <a href="#">
+                      <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
+                      </a>
+                   </div>
+                   <div class="media-body">
+                      <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+                   </div>
+                </li>
+              <% end %>
+            <% else %>
+              <p>You do not currently have any followers</p>
+            <% end %>
 
-          	<h4>Recent Purchases</h3>
-
-          	<% if @orders && @orders.length > 0  %>
-	          <div class="table-responsive">
-	              <table class="table table-hover">
-	                  <thead>
-	                      <tr>
-	                          <th>Order</th>
-	                          <th>Date</th>
-	                          <th>View</th>
-	                      </tr>
-	                  </thead>
-	                  <tbody>
-	                    <% @orders.each do |order| %>
-	                      <tr>
-	                        <td><%= order.id %></td>
-	                        <td><%= order.created_at.strftime "%d %B %Y" %></td>
-	                        <td style="padding-left: 10px">
-	                          <%= link_to order, class: "btn btn-default" do %>
-	                            View order
-	                          <% end %>
-	                        </td>
-	                      </tr>
-	                    <% end %>
-	                  </tbody>
-	              </table>
-	          </div>
-	        <%else %>
-	        <p>No recent orders</p>
-	        <%end %>
-
-	        <%= link_to "View all orders", orders_path, class: "btn btn-default" %>
 
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
-        <div class="commissions panel panel-default">
+        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Selling</h3>
           </div>

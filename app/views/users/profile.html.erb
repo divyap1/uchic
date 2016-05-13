@@ -12,16 +12,16 @@
          (<%= @num_reviews %> ratings)
          <br>
          <% if user_signed_in? && @user != current_user %>
-            <% if current_user.friends.any? { |friend| friend.id == @user.id } %>
-               <%= link_to "Remove Friend", friendship_path(:friend_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+            <% if current_user.followers.any? { |follower| follower.id == @user.id } %>
+               <%= link_to "Unfollow", friendship_path(:friend_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
             <%else%>
-               <%= link_to "Add Friend", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary"%>
+               <%= link_to "Follow", friendships_path(:friend_id => @user), :method => :post, class: "btn btn-primary"%>
             <%end%>
          <%end%>
       </div>
       <div class="row">
          <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="commissions panel panel-default">
                <span class="message not-accepting"><%= @user.first_name %> is not currently accepting commissions.</span>
                <% unless @user == current_user %>
                   <button class="btn btn-default start-message" data-receiver="<%= @user.id %>" data-receiver-name="<%= @user.name %>">
@@ -64,23 +64,27 @@
 
             <div class="panel panel-default">
                <div class="panel-heading">
-                  <h3 class="panel-title">Friends</h3>
+                  <h3 class="panel-title">Following</h3>
                </div>
                <div class="panel-body">
-                  <ul>
-                     <% @user.friends.each do |friend| %>
-                        <li class="media">
-                           <div class="media-left">
-                              <a href="#">
-                              <%= image_tag friend.profile_picture.url, size: "64x64", :class => "media-object"%>
-                              </a>
-                           </div>
-                           <div class="media-body">
-                              <h4 class="media-heading"><%= link_to friend.name, user_profile_path(friend) %></h4>
-                           </div>
-                        </li>
+                     <% if @user.followings.length > 0 %>
+                        <ul>
+                        <% @user.followings.each do |follower| %>
+                           <li class="media">
+                              <div class="media-left">
+                                 <a href="#">
+                                 <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
+                                 </a>
+                              </div>
+                              <div class="media-body">
+                                 <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+                              </div>
+                           </li>
+                           </ul>
+                        <% end %>
+                     <% else %>
+                     <p> <%=@user.name%> is not currently following any users<p>
                      <% end %>
-                  </ul>
                </div>
             </div>
 

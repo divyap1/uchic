@@ -10,7 +10,11 @@ class User < ActiveRecord::Base
   has_many :reviews
   
   has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :followings, :through => :friendships
+
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "following_id"
+  has_many :followers, :through => :inverse_friendships, :source => :user
+
 
   validates :name, presence: true
   validates :username, presence: true
