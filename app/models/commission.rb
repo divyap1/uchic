@@ -5,7 +5,6 @@ class Commission < ActiveRecord::Base
   belongs_to :buyer, class_name: 'User'
   belongs_to :category
 
-  has_one :order_item
   has_one :message_thread
   has_many :pictures
 
@@ -17,26 +16,23 @@ class Commission < ActiveRecord::Base
   #For searching by name
   scope :contains, -> (name) { where("name like ?", "%#{name}%")}
 
-  STATES.each do |state|
+  scope :public, -> { where(public: true) }
+
+  alias_method :accepted_by_buyer?, :accepted_by_buyer
+  alias_method :accepted_by_seller?, :accepted_by_seller
+
+  STATES.each.with_index do |state, index|
+    matching_states = STATES[index..-1]
+
+    scope state, -> { where(state: matching_states) }
+
     define_method(state + "?") do
-      self.state == state
+      self.state.in?(matching_states)
     end
   end
 
   def editable?
     discussion? && !accepted_by_seller? && !accepted_by_buyer?
-  end
-
-  def accepted_by_seller?
-    false
-  end
-
-  def accepted_by_buyer?
-    false
-  end
-
-  def order
-    order_item.order
   end
 
   def detailed_attributes

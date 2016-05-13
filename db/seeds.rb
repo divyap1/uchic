@@ -15,7 +15,6 @@ Category.delete_all
 User.delete_all
 Commission.delete_all
 Order.delete_all
-OrderItem.delete_all
 
 # Users
 
@@ -113,21 +112,13 @@ puts
 
 # Orders
 
-#TODO needs to be reworked to make sense with commissions
-
 print "Creating orders "
 
-QUANTITIES = [1] * 10 + [2] * 5 + [3] * 3 + (4..20).to_a
-
-150.times do
+Commission.all.sample(50).each do |commission|
   print "."
-  buyer = User.all.sample
-  possible_commissions = Commission.where.not(seller: buyer)
-
-  order = Order.create!(buyer: buyer)
-  rand(1..5).times do
-    order.order_items.create!(commission: possible_commissions.to_a.sample, quantity: QUANTITIES.sample)
-  end
+  commission.buyer = User.where.not(id: commission.seller.id).sample
+  commission.save!
+  Order.create!(commission: commission)
 end
 
 puts
