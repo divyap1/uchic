@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   has_many :commissions_as_buyer, foreign_key: :buyer_id, class_name: "Commission"
   has_many :orders, foreign_key: :buyer_id
   has_many :reviews
-  
+  has_many :notifications
+
   has_many :friendships
   has_many :followings, :through => :friendships
 
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
   has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png"
   validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  scope :contains, -> (search) { where("name like ? OR username like ?", "%#{search}%", "%#{search}%")}  
+  scope :contains, -> (search) { where("name like ? OR username like ?", "%#{search}%", "%#{search}%")}
 
   def first_name
     name.split(/\s+/).first

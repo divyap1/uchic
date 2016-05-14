@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, only: [:dashboard]
+  before_filter :authenticate_user!, only: [:dashboard, :activity_feed]
 
   def profile
     @user = User.find(params[:id])
@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     @average_review = @num_reviews == 0  ? 0 : @reviews.map(&:rating).inject(0, &:+) / @num_reviews
 
     #@user.reviews.create(reviewer: current_user, user: @user, rating: 1, comment: "cool")
+  end
+
+  def activity_feed
+    @user = current_user
+    @notifications = @user.notifications.order(created_at: :desc)
   end
 
   def listings

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/show" => "registrations#show", as: :show_user_registration
     get "/users/:id/profile" => "users#profile", as: :user_profile
+    get "/activity_feed" => "users#activity_feed", as: :user_activity_feed    
     get "/listings" => "users#listings", as: :user_listings
   end
 
