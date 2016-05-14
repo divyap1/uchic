@@ -1,0 +1,64 @@
+<div class="row">
+  <%= render partial: 'orders/breadcrumbs' %>
+    <div class="col-md-12">
+      <div class="box">
+        <div class="text-center">
+          <h1>Commission Contract: Request A Copy</h1>
+        </div>
+        <hr>
+        <%= form_for(@new_commission) do |f| %>
+          <%if @new_commission.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@new_commission.errors.count, "error") %>
+              prohibited this order from being sent:</h2>
+              <ul>
+                <%@new_commission.errors.full_messages.each do |message| %>
+                <li><%= message %></li><%end %>
+              </ul>
+            </div>
+            <%end %>
+          <%if user_signed_in?%>
+            <div class="col-md-3">
+              <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
+            </div>
+            <div class="col-md-9">
+              <h4><%= @commission.name %></h4>
+              <p> <%= @commission.description %> </p>
+              <div class="form-group">
+                <%= f.label :buyer_id, class: "sr-only"%>
+                <%= f.hidden_field :buyer_id, value: current_user.id %>
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <tfoot>
+                    <tr>
+                        <th colspan="5" class="text-right">Price <small>($NZD/per copy)</small></th>
+                        <th class="text-right"><%= "#{number_with_precision(@commission.price, :precision => 2)}" %></th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+          <div class="row">
+            <div class="col-md-12">
+              <hr>
+            <div class="col-md-6">
+              <div class="text-left">
+                <%= link_to 'Back', commission_path(@commission.id), :class => 'btn btn-warning btn-lg' %>
+              </div>
+            </div>
+            <% if user_signed_in? %>
+            <div class="col-md-6">
+            <div class="text-right">
+              <%= f.submit :value => "Confirm Order", class: "btn btn-success btn-lg" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>

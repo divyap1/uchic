@@ -1,136 +1,130 @@
-<div class="commission">
-    <div id="all">
-        <div id="content">
-            <div class="container">
-                <%= render partial: 'categories/breadcrumb' %>
+<div class="row">
+  <%= render partial: 'categories/breadcrumb' %>
+</div>
+<div class="row">
+  <div class="col-md-3">
+    <%= render partial: 'categories/category_sidebar' %>
+  </div>
 
-                <div class="col-md-3">
-                    <%= render partial: 'categories/category_sidebar' %>
-                </div>
+  <div class="col-md-9">
 
-                <div class="col-md-9">
-
-                    <div class="row" id="productMain">
-                        <div class="col-sm-6">
-                            <div id="mainImage">
-                                <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
-                            </div>
-                            <% if @commission.created_at > Time.now - 24.hours %>
-                            <div class="ribbon new">
-                                <div class="theribbon">NEW</div>
-                                <div class="ribbon-background"></div>
-                            </div>
-                            <!-- /.ribbon -->
-                            <% end %>
-                        </div>
-
-                        <div class="col-sm-6">
-
-                            <div class="box">
-                                <h1 class="text-center"><%= @commission.name %></h1>
-                                <p class="price"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></p>
-
-                                <p class="text-center buttons">
-                                    <%= link_to "Buy Now", commission_checkout_path(@commission.id), class:"btn btn-primary" %>
-                                    <a href="basket.html" class="btn btn-default">
-                                        <i class="fa fa-heart"></i>
-                                        Add to wishlist</a>
-                                </p>
-                            </div>
-
-                            <div class="row" id="thumbs">
-                                <% @commission.pictures.each do |photo| %>
-                                <div class="col-xs-4">
-                                    <%= link_to photo.picture.url, class:"thumb"  do %>
-                                    <%= image_tag photo.picture.url, alt: "", class: "img-responsive" %>
-                                    <% end %>
-                                </div>
-                                <% end %>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="box" id="details">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>
-                                    <h4>Product details</h4>
-                                    <p><%= @commission.description %></p>
-                                    <hr>
-                                    <div class="social">
-                                        <h4>Show it to your friends</h4>
-                                        <p>
-                                            <a href="#" class="external facebook" data-animate-hover="pulse">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                            <a href="#" class="external gplus" data-animate-hover="pulse">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
-                                            <a href="#" class="external twitter" data-animate-hover="pulse">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                            <a href="#" class="email" data-animate-hover="pulse">
-                                                <i class="fa fa-envelope"></i>
-                                            </a>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <h4>Seller details</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <img class="profile-picture img-responsive" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
-                                        </div>
-                                        <div class="col-md-6" , id="seller-details">
-                                            <h5><%= @seller.name %></h5>
-                                            <%= link_to "Visit their page", user_profile_path(@seller.id), class:"btn btn-primary" %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row same-height-row">
-                            <div class="col-md-3 col-sm-6">
-                                <div class="box same-height">
-                                    <h3>You may also like these products</h3>
-                                </div>
-                            </div>
-                            <% @similar_items.each do |similar_item| %>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="commission same-height">
-                                    <div class="flip-container">
-                                        <div class="flipper">
-                                            <div class="front">
-                                                <%= link_to commission_path(similar_item.id) do %>
-                                                <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
-                                                <% end %>
-                                            </div>
-                                            <div class="back">
-                                                <%= link_to commission_path(similar_item.id) do %>
-                                                <%= image_tag similar_item.pictures.second ? similar_item.pictures.second.picture : similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
-                                                <% end %>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <%= link_to commission_path(similar_item.id), class: "invisible" do %>
-                                    <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
-                                    <% end %>
-                                    <div class="text">
-                                        <h3><%= similar_item.name %></h3>
-                                        <p class="price"><%= "$#{number_with_precision(similar_item.price, :precision => 2)}" %></p>
-                                    </div>
-                                </div>
-                                <!-- /.product -->
-                            </div>
-                            <% end %>
-                        </div>
-                    </div>
-                    <!-- /.col-md-9 -->
-                </div>
-                <!-- /.container -->
-            </div>
-            <!-- /#content -->
+    <div class="row" id="productMain">
+      <div class="col-sm-6">
+        <div id="mainImage">
+          <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
         </div>
+        <% if @commission.created_at > Time.now - 24.hours %>
+        <div class="ribbon new">
+          <div class="theribbon">NEW</div>
+          <div class="ribbon-background"></div>
+        </div>
+        <!-- /.ribbon -->
+        <% end %>
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="box">
+          <h1 class="text-center"><%= @commission.name %></h1>
+          <p class="price"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></p>
+
+          <p class="text-center buttons">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestCopy">Request A Copy</button>
+            <%= render partial: 'orders/copy_modal' %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestSimilar">Request Similar</button>
+            <%= render partial: 'orders/similar_modal' %>
+          </p>
+        </div>
+
+        <div class="row" id="thumbs">
+          <% @commission.pictures.each do |photo| %>
+          <div class="col-xs-4">
+            <%= link_to photo.picture.url, class:"thumb"  do %>
+            <%= image_tag photo.picture.url, alt: "", class: "img-responsive" %>
+            <% end %>
+          </div>
+          <% end %>
+        </div>
+      </div>
     </div>
+
+    <div class="box" id="details">
+      <div class="row">
+        <div class="col-md-6">
+          <p>
+            <h4>Product details</h4>
+            <p><%= @commission.description %></p>
+            <hr>
+            <div class="social">
+              <h4>Show it to your friends</h4>
+              <p>
+                <a href="#" class="external facebook" data-animate-hover="pulse">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                <a href="#" class="external gplus" data-animate-hover="pulse">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+                <a href="#" class="external twitter" data-animate-hover="pulse">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#" class="email" data-animate-hover="pulse">
+                  <i class="fa fa-envelope"></i>
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h4>Seller details</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <img class="profile-picture img-responsive" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
+              </div>
+              <div class="col-md-6" , id="seller-details">
+                <h5><%= @seller.name %></h5>
+                <%= link_to "Visit their page", user_profile_path(@seller.id), class:"btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row same-height-row">
+        <div class="col-md-3 col-sm-6">
+          <div class="box same-height">
+            <h3>You may also like these products</h3>
+          </div>
+        </div>
+        <% @similar_items.each do |similar_item| %>
+        <div class="col-md-3 col-sm-6">
+          <div class="commission same-height">
+            <div class="flip-container">
+              <div class="flipper">
+                <div class="front">
+                  <%= link_to commission_path(similar_item.id) do %>
+                  <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
+                  <% end %>
+                </div>
+                <div class="back">
+                  <%= link_to commission_path(similar_item.id) do %>
+                  <%= image_tag similar_item.pictures.second ? similar_item.pictures.second.picture : similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <%= link_to commission_path(similar_item.id), class: "invisible" do %>
+            <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
+            <% end %>
+            <div class="text">
+              <h3><%= similar_item.name %></h3>
+              <p class="price"><%= "$#{number_with_precision(similar_item.price, :precision => 2)}" %></p>
+            </div>
+          </div>
+          <!-- /.product -->
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <!-- /.col-md-9 -->
+  </div>
+</div>
