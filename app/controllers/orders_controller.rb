@@ -23,10 +23,10 @@ class OrdersController < ApplicationController
        flash.now[:alert] = "Guests can not order products."
     end
 
-    @product = Product.find(params[:id])
-    @category = Category.find(@product.category_id)
+    @commission = Commission.find(params[:id])
+    @category = Category.find(@commission.category_id)
     @ancestry = @category.ancestors << @category
-    @order = Order.new
+    @new_commission = Commission.new
   end
 
   # GET /orders/1/edit

@@ -3,87 +3,62 @@
     <div class="col-md-12">
       <div class="box">
         <div class="text-center">
-          <h1>New Order</h1>
+          <h1>Commission Contract: Request A Copy</h1>
         </div>
         <hr>
-        <%= form_for(@order) do |f| %>
-          <%if @order.errors.any? %>
+        <%= form_for(@new_commission) do |f| %>
+          <%if @new_commission.errors.any? %>
             <div id="error_explanation">
-              <h2><%= pluralize(@order.errors.count, "error") %>
+              <h2><%= pluralize(@new_commission.errors.count, "error") %>
               prohibited this order from being sent:</h2>
               <ul>
-                <%@order.errors.full_messages.each do |message| %>
+                <%@new_commission.errors.full_messages.each do |message| %>
                 <li><%= message %></li><%end %>
               </ul>
             </div>
             <%end %>
           <%if user_signed_in?%>
-            <div class="row">
-              <div class="col-md-3">
-          <%= image_tag @product.picture, alt: @product.name, class:"img-responsive"%>
-        </div>
-        <div class="col-md-9">
-          <h4><%= @product.name %></h4>
-          <p> <%= @product.description %> </p>
-
-          <div class="well well-sm">
-              <h5 class=>Select Quantity: <%= select_tag(:select_quantity, options_for_select(1..@product.quantity)) %></h5>
+            <div class="col-md-3">
+              <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
+            </div>
+            <div class="col-md-9">
+              <h4><%= @commission.name %></h4>
+              <p> <%= @commission.description %> </p>
+              <div class="form-group">
+                <%= f.label :buyer_id, class: "sr-only"%>
+                <%= f.hidden_field :buyer_id, value: current_user.id %>
+              </div>
+              <div class="table-responsive">
+                <table class="table">
+                  <tfoot>
+                    <tr>
+                        <th colspan="5" class="text-right">Price <small>($NZD/per copy)</small></th>
+                        <th class="text-right"><%= "#{number_with_precision(@commission.price, :precision => 2)}" %></th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+          <div class="row">
+            <div class="col-md-12">
+              <hr>
+            <div class="col-md-6">
+              <div class="text-left">
+                <%= link_to 'Back', commission_path(@commission.id), :class => 'btn btn-warning btn-lg' %>
+              </div>
+            </div>
+            <% if user_signed_in? %>
+            <div class="col-md-6">
+            <div class="text-right">
+              <%= f.submit :value => "Confirm Order", class: "btn btn-success btn-lg" %>
+            </div>
           </div>
-        <div class="table-responsive">
-            <table class="table">
-                <tfoot>
-                    <tr>
-                        <th colspan="5" class="text-right">Subtotal  $NZD</th>
-                        <th class="text-right"><%= "#{number_with_precision(@product.price, :precision => 2)}" %></th>
-                    </tr>
-                    <tr>
-                        <th colspan="5" class="text-right">Shipping and Handling  $NZD</th>
-                        <th class="text-right"><%= "#{number_with_precision(4.99, :precision => 2)}"%></th>
-                    </tr>
-                    <tr>
-                        <th colspan="5" class="text-right">Total  $NZD</th>
-                        <th class="text-right"><%= "#{number_with_precision(4.99 + @product.price, :precision => 2)}" %></th>
-                    </tr>
-                </tfoot>
-            </table>
+          <% end %>
         </div>
-      </div>
-    </div>
-        <div class="row addresses">
-            <div class="col-md-6">
-              <h2>Shipping Address <button class="btn btn-default btn-sm">Edit</button></h2>
-                <%= current_user.name %>
-                <%= simple_format(current_user.address) %>
-            </div>
-            <div class="col-md-6">
-                <h2>Payment Details <button class="btn btn-default btn-sm">Edit</button></h2>
-                <p>Card Holder's Name: <%= current_user.card_name %>
-                <br>Credit Card: <%= current_user.card_number %>
-                <br>Expiry Date (MM/YYYY): <%= current_user.expiration_month %>/<%= current_user.expiration_year %>
-                <br>CVC: <%= current_user.security_code %></p>
-            </div>
         </div>
-        <hr>
         <% end %>
-        <div class="row">
-        <div class="col-md-6">
-          <div class="text-left">
-            <%= link_to 'Back', products_path(@product.id), :class => 'btn btn-warning btn-lg' %>
-          </div>
-        </div>
-        <% if user_signed_in? %>
-        <div class="col-md-6">
-        <div class="form-group">
-            <%= f.label :buyer_id, class: "sr-only"%>
-            <%= f.hidden_field :buyer_id, value: current_user.id %>
-        </div>
-        <div class="text-right">
-          <%= f.submit :value => "Confirm Order", class: "btn btn-success btn-lg" %>
-        </div>
-      </div>
-      <% end %>
-</div>
-<% end %>
     </div>
   </div>
 </div>
