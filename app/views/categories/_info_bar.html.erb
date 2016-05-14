@@ -12,9 +12,9 @@
                             <strong>Show</strong>
                             <% @display_sizes.each do |size| %>
                               <% if @display_size == size %>
-                                <%= link_to size, category_path(@category.id, display_size: size), class:"btn btn-default btn-sm btn-primary" %>
+                                <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm btn-primary" %>
                               <% else %>
-                                <%= link_to size, category_path(@category.id, display_size: size), class:"btn btn-default btn-sm" %>
+                                <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm" %>
                               <% end %>
                             <% end %>
                         </div>
@@ -22,11 +22,9 @@
                     <div class="col-md-6 col-sm-6">
                         <div class="commissions-sort-by">
                             <strong>Sort by</strong>
-                            <select name="sort-by" class="form-control">
-                                <option>Price</option>
-                                <option>Name</option>
-                                <option>Sales first</option>
-                            </select>
+                            <% @order_options.each do |order| %>
+                                <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
+                            <% end %>
                         </div>
                     </div>
                 </form>
