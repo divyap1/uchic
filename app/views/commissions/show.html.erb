@@ -31,10 +31,10 @@
                                 <p class="price"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></p>
 
                                 <p class="text-center buttons">
-                                    <%= link_to "Buy Now", commission_checkout_path(@commission.id), class:"btn btn-primary" %>
+                                    <%= link_to "Make me a copy", commission_checkout_path(@commission.id), class:"btn btn-primary" %>
                                     <a href="basket.html" class="btn btn-default">
                                         <i class="fa fa-heart"></i>
-                                        Add to wishlist</a>
+                                        Make me something similar</a>
                                 </p>
                             </div>
 
