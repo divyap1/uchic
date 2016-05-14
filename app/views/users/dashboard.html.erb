@@ -8,8 +8,8 @@
 
 
           <div class="pull-right"</div>
-          	 <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-primary"%>
-          	 <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-primary"%>
+          	 <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-default"%>
+          	 <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-default"%>
           </div>
 
         </div>
@@ -17,53 +17,37 @@
     </div>
 
     <div class="row">
-      
+
       <div class="col-md-6">
-        <div class="products panel panel-default">
+        <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Buying</h3>
+            <h3 class="panel-title">Followers (<%=@user.followers.length%>)</h3>
           </div>
           <div class="panel-body">
+            <% if @user.followers.length > 0 %>
+              <% @user.followers.each do |follower| %>
+                <li class="media">
+                   <div class="media-left">
+                      <a href="#">
+                      <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
+                      </a>
+                   </div>
+                   <div class="media-body">
+                      <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+                   </div>
+                </li>
+              <% end %>
+            <% else %>
+              <p>You do not currently have any followers</p>
+            <% end %>
 
-          	<h4>Recent Purchases</h3>
-
-          	<% if @orders && @orders.length > 0  %>
-	          <div class="table-responsive">
-	              <table class="table table-hover">
-	                  <thead>
-	                      <tr>
-	                          <th>Order</th>
-	                          <th>Date</th>
-	                          <th>View</th>
-	                      </tr>
-	                  </thead>
-	                  <tbody>
-	                    <% @orders.each do |order| %>
-	                      <tr>
-	                        <td><%= order.id %></td>
-	                        <td><%= order.created_at.strftime "%d %B %Y" %></td>
-	                        <td style="padding-left: 10px">
-	                          <%= link_to order, class: "btn btn-primary" do %>
-	                            View order
-	                          <% end %>
-	                        </td>
-	                      </tr>
-	                    <% end %>
-	                  </tbody>
-	              </table>
-	          </div>
-	        <%else %>
-	        <p>No recent orders</p>
-	        <%end %>
-
-	        <%= link_to "View all orders", orders_path, class: "btn btn-primary" %>
 
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
-        <div class="products panel panel-default">
+        <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Selling</h3>
           </div>
@@ -84,17 +68,17 @@
 		    </div>
 		    <% end %>
 
-          	<% if @products && @products.any? %>
-	          	<h4> <%=@products.length%> Recent Products</h4>
+          	<% if @commissions && @commissions.any? %>
+	          	<h4> <%=@commissions.length%> Recent Commissions</h4>
 
 	          	<div class="table-responsive">
 	              <table class="table table-hover">
 	                  <tbody>
-	                    <% @products.each do |product| %>
+	                    <% @commissions.each do |commission| %>
 	                      <tr>
-	                      	<td><%= image_tag product.picture, size: "32" %></td>
-	                        <td><%= product.name %></td>
-	                        <td>$<%= product.price %></td>
+	                      	<td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
+	                        <td><%= commission.name %></td>
+	                        <td>$<%= commission.price %></td>
 	                      </tr>
 	                    <% end %>
 	                  </tbody>
@@ -102,9 +86,9 @@
 	          	</div>
         	<% end %>
 
-        	<%= link_to "View all products", user_listings_path, class: "btn btn-primary" %>
+        	<%= link_to "View all commissions", user_listings_path, class: "btn btn-default" %>
 
-	        <%= link_to "List another product", new_product_path, class: "btn btn-primary" %>
+	        <%= link_to "List another commission", new_commission_path, class: "btn btn-default" %>
 
          </div>
 

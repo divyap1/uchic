@@ -1,8 +1,9 @@
 class Message < ActiveRecord::Base
   belongs_to :sender, class_name: "User"
   belongs_to :receiver, class_name: "User"
+  belongs_to :message_thread
 
-  validates :sender, :receiver, :message, presence: true
+  validates :sender, :receiver, :message, :message_thread, presence: true
 
   scope(:between, lambda do |user, partner|
     where(
@@ -21,7 +22,11 @@ class Message < ActiveRecord::Base
   end
 
   def detailed_attributes
-    attributes.merge(sender_name: sender.name, receiver_name: receiver.name)
+    attributes.merge(
+      sender_name: sender.name,
+      receiver_name: receiver.name,
+      commission: message_thread.commission.try!(:attributes)
+    )
   end
 
   def partner(user)

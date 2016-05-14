@@ -10,11 +10,32 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @display_sizes = [6, 12, 24]
+    @display_size = params[:display_size] || @display_sizes.first
+    @display_size.to_i
+
     @category = Category.find(params[:id])
-    @ancestry = @category.ancestors
-    all_products = get_products(@category)
-    @products = Kaminari.paginate_array(all_products).page(params[:page]).per(params[:display_size])
+    all_items = @category.commissions + @category.children.flat_map(&:commissions)
+
+    @order_options = ["Price low to high", "Price high to low", "Name", "Recently added"]
+    @order = params[:order] || @order_options.first
+
+    if @order == "Price low to high"
+      all_items.sort_by!(&:price)
+    elsif @order == "Price high to low"
+      all_items.sort_by!(&:price).reverse!
+    elsif @order == "Name"
+      all_items.sort_by!(&:name)
+    elsif @order == "Recently added"
+      all_items.sort_by!(&:created_at).reverse!
+    end
+
+    @commissions = Kaminari.paginate_array(all_items).page(params[:page]).per(@display_size)
+
     @section = @category.name
+    @ancestry = @category.ancestors
+
+    @top_sellers = all_items.map(&:seller).first(3);
   end
 
   # GET /categories/new
@@ -75,14 +96,5 @@ class CategoriesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.fetch(:category, {})
-    end
-
-    def get_products(category)
-      return category.products if category.is_childless?
-      products = category.products
-      category.children.each do |sub_category|
-        products << get_products(sub_category)
-      end
-      return products
     end
 end

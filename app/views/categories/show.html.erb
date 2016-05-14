@@ -1,6 +1,5 @@
 <body>
     <div id="all">
-
         <div id="content">
             <div class="container">
 
@@ -11,13 +10,15 @@
                 </div>
 
                 <div class="col-md-9">
-                    <div class="box">
+                    <div class="box category-title">
                         <h1><%= @category.name %></h1>
                     </div>
 
+                    <%= render partial: 'top_seller_bar' %>
+
                     <%= render partial: 'info_bar' %>
 
-                    <%= render partial: 'product_view' %>
+                    <%= render partial: 'commission_view' %>
 
                   </div>
                   <!-- /.col-md-9 -->

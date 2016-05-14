@@ -12,14 +12,13 @@ class UsersController < ApplicationController
   end
 
   def listings
-  	@products = Product.where(seller_id: current_user.id)
+  	@commissions = Commission.where(seller_id: current_user.id)
   end
 
   def dashboard
     @user = current_user
     if user_signed_in?
-      @orders = Order.where(buyer_id: current_user.id)
-      @products = Product.where(seller_id: current_user.id)
+      @commissions = Commission.where(seller_id: current_user.id)
     end
   end
 end

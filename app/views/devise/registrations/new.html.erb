@@ -19,6 +19,11 @@
               <i class="glyphicon glyphicon-globe form-control-feedback" aria-hidden="true"></i>
             </div>
             <div class="form-group has-feedback">
+              <%= f.label :username, class: "sr-only" %>
+              <%= f.text_field :username, placeholder: "Username", class: "form-control", autofocus: true %>
+              <i class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></i>
+            </div>
+            <div class="form-group has-feedback">
               <%= f.label :password, class: "sr-only" do %>
                 Password (<%= @minimum_password_length %> characters or more)
               <% end %>
@@ -47,33 +52,35 @@
               <%= f.country_select :country, ["New Zealand", "Australia"], {include_blank: 'Select Country'}, { :class => "form-control" }  %>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 ">
+            <div class="optional">
+              <h4>The following fields are optional</h4>
+              <div class="form-group">
+                <h3><span class="circled-number">3</span> Profile Picture</h3>
+                <%= f.label :profile_picture, class: "sr-only"%>
+                <%= f.file_field :profile_picture %>
+              </div>
 
-            <div class="form-group">
-              <h3><span class="circled-number">3</span> Profile Picture</h3>
-              <%= f.label :profile_picture, class: "sr-only"%>
-              <%= f.file_field :profile_picture %>
-            </div>
-
-            <h3><span class="circled-number">4</span> Payment Details</h3>
-              <img src="/images/creditcards.png" alt="Credit Cards" style="width:50%; display:block;
-              margin-right:auto; margin-bottom: 20px">
-            <div class="form-group has-feedback">
-              <%= f.label :card_name, class: "sr-only" %>
-              <%= f.text_field :card_name, placeholder: "Credit Card Holder's Name", autocomplete: "off", class: "form-control" %>
-            </div>
-            <div class="form-group has-feedback">
-              <%= f.label :credit_card, class: "sr-only" %>
-              <%= f.text_field :card_number, placeholder: "Credit Card Number", class: "form-control", autofocus: true %>
-            </div>
-            <div class="form-group has-feedback">
-              <label for="expiration_date">Expiration Date <small>(MM/YYYY)</small> :</label>
-                <%= f.date_select :expiration_month,  { :discard_day => true, :discard_year => true, :use_month_numbers => true} %> /
-                <%= f.date_select :expiration_year,  { :discard_day => true, :discard_month => true, :start_year=>2016, :end_year=>2026} %>
-            </div>
-            <div class="form-group">
-              <%= f.label :security_code, class: "sr-only" %>
-              <%= f.text_field :security_code, placeholder: "Card Verification Code", autocomplete: "off", class: "form-control" %>
+              <h3><span class="circled-number">4</span> Payment Details</h3>
+                <img src="/images/creditcards.png" alt="Credit Cards" style="width:50%; display:block;
+                margin-right:auto; margin-bottom: 20px">
+              <div class="form-group has-feedback">
+                <%= f.label :card_name, class: "sr-only" %>
+                <%= f.text_field :card_name, placeholder: "Credit Card Holder's Name", autocomplete: "off", class: "form-control" %>
+              </div>
+              <div class="form-group has-feedback">
+                <%= f.label :credit_card, class: "sr-only" %>
+                <%= f.text_field :card_number, placeholder: "Credit Card Number", class: "form-control", autofocus: true %>
+              </div>
+              <div class="form-group has-feedback">
+                <label for="expiration_date">Expiration Date <small>(MM/YYYY)</small> :</label>
+                  <%= f.date_select :expiration_month,  { :discard_day => true, :discard_year => true, :use_month_numbers => true} %> /
+                  <%= f.date_select :expiration_year,  { :discard_day => true, :discard_month => true, :start_year=>2016, :end_year=>2026} %>
+              </div>
+              <div class="form-group">
+                <%= f.label :security_code, class: "sr-only" %>
+                <%= f.text_field :security_code, placeholder: "Card Verification Code", autocomplete: "off", class: "form-control" %>
+              </div>
             </div>
           </div>
         </div>
