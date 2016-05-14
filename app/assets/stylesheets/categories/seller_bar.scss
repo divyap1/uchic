@@ -1,0 +1,12 @@
+.seller-bar {
+    #seller-details {
+        text-align: center;
+    }
+    > .profile-picture {
+        display: block;
+        width: 15rem;
+        height: 15rem;
+        margin: 0 auto;
+        border-radius: 8rem;
+    }
+}
