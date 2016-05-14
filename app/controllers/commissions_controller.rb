@@ -21,6 +21,8 @@ class CommissionsController < ApplicationController
     @section = @commission.name
 
     @similar_items = @category.commissions.order("RANDOM()").limit(3)
+
+    @new_commission = Commission.new
   end
 
   # GET /commissions/new
@@ -111,6 +113,14 @@ class CommissionsController < ApplicationController
         format.json { head :no_content }
       end
     end
+  end
+
+  def make_copy
+
+  end
+
+  def make_similar
+    
   end
 
   private
