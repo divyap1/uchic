@@ -9,15 +9,15 @@
         <h3 class="modal-title">Commission Request: Request Something Similar</h3>
       </div>
       <div class="modal-body">
-        <%= form_for(@new_commission) do |f| %>
+        <%= form_tag(make_similar_commissions_path) do %>
         <h4>Are you sure you want to request a copy of <%= @commission.name %>?</h4>
         <p>If you pick yes, a request will be sent to the seller</p>
         <h4>Details:</h4>
         <p> Price: TBC </p>
         <p> <%= @commission.description %> </p>
         <div class="form-group has-feedback">
-          <%= f.label :custom_info, class: "sr-only" %>
-          <%= f.text_field :custom_info, placeholder: "Add any extra details you have here:", class: "form-control", autofocus: true %>
+          <%= label_tag :custom_info, class: "sr-only" %>
+          <%= text_field_tag :custom_info, "", placeholder: "Add any extra details you have here:", class: "form-control", autofocus: true %>
           <i class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></i>
         </div>
       </div>
@@ -26,12 +26,12 @@
           <div class="col-md-12">
           <div class="col-md-6">
             <div class="text-left">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
             </div>
           </div>
           <div class="col-md-6">
           <div class="text-right">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Send Request</button>
           </div>
         </div>
         <% end %>

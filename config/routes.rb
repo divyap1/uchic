@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   resources :message_threads, only: [:index, :show, :create, :destroy]
   resources :messages, only: [:create]
   resources :orders, except: [:edit, :update]
-  resources :commissions
+  resources :commissions do
+    post :make_similar, on: :collection
+  end
   resources :categories, except: [:edit] do
     get "/categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 6}
   end

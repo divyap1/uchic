@@ -3,7 +3,7 @@ _________________________________________________________ -->
 <div id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 text-left">
                 <h4>User Section</h4>
 
                 <ul>
@@ -31,9 +31,8 @@ _________________________________________________________ -->
 
             </div>
 
-            <div class="col-md-4">
-
-                <h4>Browse</h4> 
+            <div class="col-md-4 text-left">
+                <h4>Browse</h4>
                 <ul>
                 <% Category.first.root.children.each do |category| %>
                 <li><%= link_to category.name.titleize, category %></li>
@@ -43,9 +42,9 @@ _________________________________________________________ -->
 
                 <hr class="hidden-md hidden-lg">
 
-            </div>
+          </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 text-left">
 
                 <h4>About</h4>
 
@@ -65,11 +64,11 @@ _________________________________________________________ -->
 _________________________________________________________ -->
 <div id="copyright">
     <div class="container">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <p class="pull-left">© 2016 SWEN303</p>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
             <p class="pull-right">Template by <a href="http://bootstrapious.com/e-commerce-templates">Bootstrap Ecommerce Templates</a> with support from <a href="http://kakusei.cz">Designové předměty</a>
                 <!-- Not removing these links is part of the licence conditions of the template. Thanks for understanding :) -->
             </p>
