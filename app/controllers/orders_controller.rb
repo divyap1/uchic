@@ -14,12 +14,19 @@ class OrdersController < ApplicationController
   def show
     unless user_signed_in? && @order.buyer_id == current_user.id
       @order.errors.add(:permission, 'You do not have permission to view this order.')
-    end 
+    end
   end
 
-  # GET /orders/new
+  # GET /orders/new/1
   def new
-    @order = Order.new
+    unless user_signed_in?
+       flash.now[:alert] = "Guests can not order products."
+    end
+
+    @commission = Commission.find(params[:id])
+    @category = Category.find(@commission.category_id)
+    @ancestry = @category.ancestors << @category
+    @new_commission = Commission.new
   end
 
   # GET /orders/1/edit

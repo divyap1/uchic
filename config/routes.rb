@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: "pages#welcome"
 
-  get 'checkout/:id' => 'checkout#checkout', as: :commission_checkout
+  get 'checkout/:id' => 'orders#new', as: :commission_checkout
   get 'about/contact_us' => 'pages#contact_us'
   get 'about/faq' => 'pages#faq'
   get "/dashboard" => "users#dashboard", as: :user_dashboard
