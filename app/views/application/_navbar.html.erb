@@ -79,6 +79,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
               <li>
+                <%= link_to "Activity Feed", user_activity_feed_path(current_user) %>
+              </li>
+              <li>
                 <%= link_to "Dashboard", user_dashboard_path %>
               </li>
               <li>
