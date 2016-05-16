@@ -70,6 +70,12 @@ class CommissionsController < ApplicationController
           MessageBroadcastController.publish('/commissions', @commission.detailed_attributes)
         end
 
+        if params[:commission][:public]
+          params[:commision][:seller].followers.each do |follower|
+            follower.notifications.create(image: params[:commission][:pictures].first, about_user: current_user, state: "product listed");
+          end
+        end
+
         format.html { redirect_to @commission, notice: 'commission was successfully created.' }
         format.json { render :show, status: :created, location: @commission }
       else
@@ -120,7 +126,7 @@ class CommissionsController < ApplicationController
   end
 
   def make_similar
-    
+
   end
 
   private
