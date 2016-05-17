@@ -73,9 +73,7 @@ class CommissionsController < ApplicationController
         end
 
         if @commission.public
-          byebug
           @commission.seller.followers.each do |follower|
-            byebug
             follower.notifications.create(image: @commission.pictures.first, about_user: current_user, state: "product listed");
           end
         end

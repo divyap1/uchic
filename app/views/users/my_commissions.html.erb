@@ -24,6 +24,7 @@
             <tr>
               <th>Product Name</th>
               <th>Commission Date</th>
+              <th>State</th>
               <th></th>
             </tr>
           </thead>
@@ -32,9 +33,10 @@
             <tr>
               <td><%= commission.name %></td>
               <td><%= commission.created_at.strftime "%d %B %Y" %></td>
+              <td><%= commission.state %></td>
               <td style="padding-left: 10px">
-                <%= link_to "View Commission", commission, class: "btn btn-primary" %>
-                <%= link_to "Edit Commission", edit_commission_path(commission), class: "btn btn-default" %>
+                <%= link_to "View Details", private_commission_path(commission.id), class: "btn btn-primary" %>
+                <%= link_to "Edit Commission", edit_private_commission_path(commission.id), class: "btn btn-default" %>
               </td>
             </tr>
             <% end %>
