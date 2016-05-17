@@ -34,9 +34,11 @@
 @import "custom/sidebar";
 @import "custom/style-switch";
 @import "custom/yamm";
+@import "custom/util";
 
 @import "pages/profile";
 @import "pages/activity_feed";
+@import "pages/message-threads";
 
 @import "commissions/commission_view";
 @import "categories/category_view";

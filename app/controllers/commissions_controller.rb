@@ -1,4 +1,6 @@
 class CommissionsController < ApplicationController
+  include CommissionsHelper
+
   before_action :set_commission, only: [:show, :edit, :update, :destroy]
 
   # GET /commissions
@@ -67,7 +69,7 @@ class CommissionsController < ApplicationController
 
         if @message_thread
           @message_thread.save!
-          MessageBroadcastController.publish('/commissions', @commission.detailed_attributes)
+          MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
         if params[:commission][:public]
@@ -91,7 +93,7 @@ class CommissionsController < ApplicationController
     respond_to do |format|
       if @commission.update(commission_params)
         if @commission.message_thread
-          MessageBroadcastController.publish('/commissions', @commission.detailed_attributes)
+          MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
         format.html { redirect_to @commission, notice: 'commission was successfully updated.' }

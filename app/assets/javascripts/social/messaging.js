@@ -66,15 +66,6 @@
     );
   }
 
-  function buildCommissionStatus(commission) {
-    return $(
-      "<span>" +
-        "Commissioning " +
-        "<strong>" + commission.name + "</strong>" +
-      "</span>"
-    );
-  }
-
   function messageContainer(threadId) {
     return $(".message-container[data-thread=" + threadId + "]");
   }
@@ -106,8 +97,8 @@
 
     $("#message_popups").append(popup);
 
-    if (data.commission) {
-      popup.find(".commission").html(buildCommissionStatus(data.commission));
+    if (data.commission.mini_view) {
+      popup.find(".commission").replaceWith(data.commission.mini_view);
     }
 
     var index = messagePopups.length;
@@ -141,7 +132,7 @@
     var container = messageContainer(data.threadId);
 
     if (container.length) {
-      container.append(buildMessageBubble(data, type));
+      container.find(".messages").append(buildMessageBubble(data, type));
       return;
     }
 
@@ -159,6 +150,11 @@
     messagesContainer.scrollTop(messagesContainer.height() + 1000);
   }
 
+  function updateCommission(container, newHtml) {
+    container.find(".thread-commission").replaceWith(newHtml);
+    container.find(".thread-commission").addClass("modified");
+  }
+
   var client = new Faye.Client("/socket");
 
   // This makes sure that there's only ever one subscription (so messages aren't received twice)
@@ -168,7 +164,6 @@
   } catch(e) { }
 
   client.subscribe("/messages", function(data) {
-    console.log("GOT MESSAGE", data);
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
         threadId: data.message_thread_id,
@@ -186,7 +181,7 @@
       var container = messageContainer(data.message_thread.id);
 
       if (container.length) {
-        return $(".commission-updated").removeClass("hidden");
+        return updateCommission(container, data.full_view);
       }
 
       var popup = ensureMessagePopup({
@@ -194,14 +189,14 @@
         partnerName: data.message_thread.seller_name
       });
 
-      popup.find(".commission").html(buildCommissionStatus(data));
+      updateCommission(popup, data.mini_view);
     }
   });
 
   $(".start-message").on("click", function(e) {
-    $.post("/message_threads.json", {
+    $.post("/message_threads.json?" + $.param({
       message_thread: { seller_id: $(e.target).data("seller") }
-    }, function(thread) {
+    }), function(thread) {
       ensureMessagePopup({
         threadId: thread.id,
         partnerName: thread.seller_name

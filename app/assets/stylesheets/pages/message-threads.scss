@@ -1,0 +1,44 @@
+.message-threads {
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.message-container {
+  h2 {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+  }
+
+  .thread-commission {
+    position: relative;
+    margin: 1.5rem (-$padding-base-horizontal);
+    padding: 1rem $padding-base-horizontal;
+    border-top: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+    background: $gray-lightest;
+
+    &.modified:after {
+      content: "★ Modified";
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.25rem 0.5rem;
+      background: $brand-primary;
+      border-radius: $border-radius-base;
+      color: white;
+    }
+
+    h3 {
+      margin: 0 0 1rem 0;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .messages {
+    height: 60vh;
+  }
+}

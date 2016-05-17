@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0;
   right: $padding-large-horizontal;
-  height: 40rem;
+  max-height: 40rem;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -49,10 +49,6 @@
 .messages {
   overflow: auto;
   flex: 1;
-
-  &.message-container {
-    height: 60vh;
-  }
 
   .message {
     margin-bottom: $padding-base-vertical;
