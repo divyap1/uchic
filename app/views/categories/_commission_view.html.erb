@@ -1,7 +1,7 @@
 <div class="commissions">
     <div class="row commissions">
         <% @commissions.each do |commission| %>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4">
             <div class="commission">
                 <div class="flip-container">
                     <div class="flipper">
@@ -26,8 +26,7 @@
                     </h3>
                     <p class="price"><%="$#{number_with_precision(commission.price, :precision => 2)}"%></p>
                     <p class="buttons">
-                        <%= link_to "View detail", commission_path(commission.id), class:"btn btn-default" %>
-                        <%= link_to "Buy Now", commission_copy_checkout_path(commission.id), class:"btn btn-primary" %>
+                        <%= link_to "View details", commission_path(commission.id), class:"btn btn-default" %>
                     </p>
                 </div>
             </div>

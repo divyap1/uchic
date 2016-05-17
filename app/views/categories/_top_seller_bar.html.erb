@@ -1,14 +1,14 @@
 <div class="box seller-bar">
-    <div class="row">
+  <div class="row">
       <% @top_sellers.each do |seller| %>
       <div class="col-md-4 commissions-showing">
         <div class="row">
             <div class="col-md-6">
                 <img class="profile-picture img-responsive" alt="Profile picture" src="<%= seller.profile_picture.url %>">
             </div>
-            <div class="col-md-6" , id="seller-details">
+            <div class="col-md-6" , id="seller-details" style="padding:0px">
                 <h5><%= seller.name %></h5>
-                <%= link_to "Visit their page", user_profile_path(seller.id), class:"btn btn-primary" %>
+                <%= link_to "Visit Page", user_profile_path(seller.id), class:"btn btn-primary btn-sm" %>
             </div>
           </div>
       </div>

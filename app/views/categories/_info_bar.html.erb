@@ -1,34 +1,33 @@
-<div class="box info-bar">
-    <div class="row">
-        <div class="col-sm-12 col-md-4 commissions-showing">
-            <%= page_entries_info @commissions %>
-        </div>
+<div class="box">
+  <div class="row">
+  <div class="col-md-4 commissions-showing">
+    <%= page_entries_info @commissions %>
+  </div>
 
-        <div class="col-sm-12 col-md-8  commissions-number-sort">
-            <div class="row">
-                <form class="form-inline">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="commissions-number">
-                            <strong>Show</strong>
-                            <% @display_sizes.each do |size| %>
-                              <% if @display_size == size %>
-                                <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm btn-primary" %>
-                              <% else %>
-                                <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm" %>
-                              <% end %>
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="commissions-sort-by">
-                            <strong>Sort by</strong>
-                            <% @order_options.each do |order| %>
-                                <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
-                            <% end %>
-                        </div>
-                    </div>
-                </form>
-            </div>
+  <div class="col-md-8  commissions-number-sort">
+    <!-- <div class="row"> -->
+      <form class="form-inline">
+        <div class="col-md-6">
+          <div class="commissions-number">
+            <strong>Show</strong>
+            <% @display_sizes.each do |size| %>
+            <% if @display_size == size %>
+            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm btn-primary" %>
+            <% else %>
+            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm" %>
+            <% end %>
+            <% end %>
+          </div>
         </div>
-    </div>
+        <div class="col-md-6">
+          <div class="commissions-sort-by">
+            <strong>Sort by</strong>
+            <% @order_options.each do |order| %>
+            <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
+            <% end %>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
 </div>

@@ -1,42 +1,20 @@
-<body>
-    <div id="all">
-        <div id="content">
-            <div class="container">
+<div class="row">
 
-                <%= render partial: 'breadcrumb' %>
+  <%= render partial: 'breadcrumb' %>
 
-                <div class="col-md-3">
-                    <%= render partial: 'category_sidebar' %>
-                </div>
+  <div class="col-md-3">
+    <%= render partial: 'category_sidebar' %>
+  </div>
 
-                <div class="col-md-9">
-                    <div class="box category-title">
-                        <h1><%= @category.name %></h1>
-                    </div>
+  <div class="col-md-9">
+    <div class="box category-title">
+      <h1><%= @category.name %></h1>
+    </div>
+    <%= render partial: 'top_seller_bar' %>
 
-                    <%= render partial: 'top_seller_bar' %>
+    <%= render partial: 'info_bar' %>
 
-                    <%= render partial: 'info_bar' %>
+    <%= render partial: 'commission_view' %>
 
-                    <%= render partial: 'commission_view' %>
-
-                  </div>
-                  <!-- /.col-md-9 -->
-                </div>
-                <!-- /.container -->
-              </div>
-              <!-- /#content -->
-            </div>
-
-                    <!-- *** SCRIPTS TO INCLUDE ***
- _________________________________________________________ -->
-                    <script src="js/jquery-1.11.0.min.js"></script>
-                    <script src="js/bootstrap.min.js"></script>
-                    <script src="js/jquery.cookie.js"></script>
-                    <script src="js/waypoints.min.js"></script>
-                    <script src="js/modernizr.js"></script>
-                    <script src="js/bootstrap-hover-dropdown.js"></script>
-                    <script src="js/owl.carousel.min.js"></script>
-                    <script src="js/front.js"></script>
-
-                </body>
+  </div>
+</div>
