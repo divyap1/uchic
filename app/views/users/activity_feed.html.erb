@@ -1,89 +1,81 @@
-<body>
-    <div id="all">
-        <div id="content">
-            <div class="container">
-              <div class="activity-feed">
-                <div class="col-md-3">
-                    <div class="panel panel-default sidebar-menu">
+<div class="activity-feed">
+    <div class="col-md-3">
+        <div class="panel panel-default sidebar-menu">
 
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Colours
-                                <a class="btn btn-xs btn-danger pull-right" href="#">
-                                    <i class="fa fa-times-circle"></i>
-                                    Clear</a>
-                            </h3>
-                        </div>
-
-                        <div class="panel-body">
-
-                            <form>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="colour white"></span>
-                                            White (14)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="colour blue"></span>
-                                            Blue (10)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="colour green"></span>
-                                            Green (20)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="colour yellow"></span>
-                                            Yellow (13)
-                                        </label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox">
-                                            <span class="colour red"></span>
-                                            Red (10)
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <button class="btn btn-default btn-sm btn-primary">
-                                    <i class="fa fa-pencil"></i>
-                                    Apply</button>
-
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-md-3 -->
-
-                <div class="col-md-9">
-                    <% @notifications.each do |notification| %>
-                    <div class="box">
-                        <div class="row notification">
-                            <div class="image">
-                                <%= image_tag notification.image, class: "img-responsive" %>
-                            </div>
-                            <%= notification.state %>
-                        </div>
-                    </div>
-                    <% end %>
-                </div>
-                <!-- /.col-md-9 -->
-              </div>
-              <!-- /.activity-feed -->
+            <div class="panel-heading">
+                <h3 class="panel-title">Colours
+                    <a class="btn btn-xs btn-danger pull-right" href="#">
+                        <i class="fa fa-times-circle"></i>
+                        Clear</a>
+                </h3>
             </div>
-            <!-- /.container -->
+
+            <div class="panel-body">
+
+                <form>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                <span class="colour white"></span>
+                                White (14)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                <span class="colour blue"></span>
+                                Blue (10)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                <span class="colour green"></span>
+                                Green (20)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                <span class="colour yellow"></span>
+                                Yellow (13)
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                <span class="colour red"></span>
+                                Red (10)
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-default btn-sm btn-primary">
+                        <i class="fa fa-pencil"></i>
+                        Apply</button>
+
+                </form>
+
+            </div>
         </div>
-        <!-- /#content -->
     </div>
-</body>
+    <!-- /.col-md-3 -->
+
+    <div class="col-md-9">
+        <% @notifications.each do |notification| %>
+        <div class="box">
+            <div class="row">
+                <div class="col-md-3">
+                    <%= image_tag notification.image, class: "img img-responsive" %>
+                </div>
+                <div class="col-md-9">
+                    <%= render partial: "notifications/new_follower_notification", locals: {notification: notification} if notification.state == "new follower" %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+    <!-- /.col-md-9 -->
+</div>
+<!-- /.activity-feed -->
