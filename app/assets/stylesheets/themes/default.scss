@@ -151,7 +151,7 @@ $table-border-color:            #ddd !default;
 $btn-font-weight:                normal !default;
 
 $btn-default-color:              $brand-primary !default;
-$btn-default-bg:                 #fff !default;
+$btn-default-bg:                 transparent !default;
 $btn-default-border:             $brand-primary !default;
 
 $btn-primary-color:              #fff !default;
@@ -796,7 +796,7 @@ $badge-border-radius:         10px !default;
 $breadcrumb-padding-vertical:   8px !default;
 $breadcrumb-padding-horizontal: 15px !default;
 //** Breadcrumb background color
-$breadcrumb-bg:                 #f5f5f5 !default;
+$breadcrumb-bg:                 transparent !default;
 //** Breadcrumb text color
 $breadcrumb-color:              #ccc !default;
 //** Text color of current page in the breadcrumb

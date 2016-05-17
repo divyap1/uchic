@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reviews
+  resources :reviews
   root to: "pages#welcome"
 
   get 'request_commission/new/:id' => 'orders#new', as: :commission_new
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   resources :commissions do
     post :make_similar, on: :collection
     post :make_copy, on: :collection
+    post :approve, on: :member
   end
   resources :categories, except: [:edit] do
     get "/categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 6}

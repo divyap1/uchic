@@ -109,7 +109,7 @@ class CommissionsController < ApplicationController
   # DELETE /commissions/1.json
   def destroy
     #Check the current user posted the commission
-    if user_signed_in? && @commission.seller_id == current_user.id
+    if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
       @commission.destroy
       respond_to do |format|
         format.html { redirect_to commissions_url, notice: 'commission was successfully destroyed.'}
@@ -137,6 +137,14 @@ class CommissionsController < ApplicationController
 
   def make_similar
 
+  end
+
+  def approve
+    @commission = Commission.find(params[:id])
+
+    @commission.accept!(current_user)
+
+    redirect_to @commission
   end
 
   private

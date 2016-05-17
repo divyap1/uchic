@@ -12,6 +12,11 @@
   padding: 20px;
   -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  border-radius: $border-radius-base;
+
+  &.box-muted {
+    background: $gray-lightest;
+  }
 }
 .box .box-header {
   margin: -20px -20px 20px;
