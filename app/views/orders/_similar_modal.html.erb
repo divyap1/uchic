@@ -12,22 +12,19 @@
       <div class="modal-body">
         <p> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
         <p> Current Description: <%= @commission.description %> </p>
+        <p> Price: <strong>To Be Determined</strong></p>
         <%= hidden_field_tag "seller_id", @seller.id %>
         <%= hidden_field_tag "buyer_id", current_user.id %>
         <%= hidden_field_tag "commission_id", @commission.id %>
-
-
-        <div class="table-responsive">
-          <table class="table">
-            <tfoot>
-              <tr>
-                <th class="text-right">Price <small>(NZD)</small></th>
-                <th class="text-right">To Be Determined</th>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
+      <div class="row">
+      <div class="col-md-12">
+      <%= label_tag "custom-info", "Extra Requirements:" %>
+      <%= text_area_tag "custom-info", nil,
+        placeholder: "Specify your requirements here (e.g. quantity, colour etc...)",
+        class: "form-control", rows:3 %>
       </div>
+    </div>
+    </div>
       <div class="modal-footer">
         <div class="row">
           <div class="col-md-12">
