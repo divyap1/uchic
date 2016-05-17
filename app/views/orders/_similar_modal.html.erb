@@ -11,15 +11,15 @@
       <%= form_tag(make_similar_commissions_path) do %>
       <div class="modal-body">
         <p> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
-        <p> Current Description: <%= @commission.description %> </p>
         <p> Price: <strong>To Be Determined</strong></p>
+        <p> Current Description: <%= @commission.description %> </p>
         <%= hidden_field_tag "seller_id", @seller.id %>
         <%= hidden_field_tag "buyer_id", current_user.id %>
         <%= hidden_field_tag "commission_id", @commission.id %>
       <div class="row">
       <div class="col-md-12">
-      <%= label_tag "custom-info", "Extra Requirements:" %>
-      <%= text_area_tag "custom-info", nil,
+      <%= label_tag "custom_info", "Extra Requirements:" %>
+      <%= text_area_tag "custom_info", nil,
         placeholder: "Specify your requirements here (e.g. quantity, colour etc...)",
         class: "form-control", rows:3 %>
       </div>

@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     get "/activity_feed" => "users#activity_feed", as: :user_activity_feed
     get "/listings" => "users#listings", as: :user_listings
     get "/my_commissions" => "users#my_commissions", as: :user_commissions
+    get '/my_commissions/:id' => 'users#private_commission', as: :private_commission
+    get '/my_commissions/:id/edit' => 'users#edit_private_commission', as: :edit_private_commission
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }

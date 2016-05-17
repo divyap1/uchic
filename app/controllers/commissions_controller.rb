@@ -72,9 +72,9 @@ class CommissionsController < ApplicationController
           MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
-        if params[:commission][:public]
-          params[:commision][:seller].followers.each do |follower|
-            follower.notifications.create(image: params[:commission][:pictures].first, about_user: current_user, state: "product listed");
+        if @commission.public
+          @commission.seller.followers.each do |follower|
+            follower.notifications.create(image: @commission.pictures.first, about_user: current_user, state: "product listed", commission: @commission);
           end
         end
 
@@ -128,7 +128,7 @@ class CommissionsController < ApplicationController
     @buyer = User.find(params[:buyer_id])
     @seller = User.find(params[:seller_id])
 
-    
+
     respond_to do |format|
       format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
       format.json { render :show, status: :created, location: @commission }

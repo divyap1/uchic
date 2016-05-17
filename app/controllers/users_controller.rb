@@ -25,6 +25,13 @@ class UsersController < ApplicationController
     @commissions = Commission.where(buyer_id: current_user.id)
   end
 
+  def private_commission
+    @commission = Commissin.find(params[:id])
+  end
+
+  def edit_private_commission
+  end
+
   def dashboard
     @user = current_user
     if user_signed_in?
