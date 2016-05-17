@@ -148,7 +148,7 @@ print "Creating ongoing commissions "
     price: type_info[:price].to_a.sample + [0, 0.50, 0.99].sample,
     seller: seller,
     buyer: buyer,
-    state: Commission::STATES.sample,
+    state: Commission::STATES.keys.sample,
     public: [true, false].sample,
     allow_copies: probably_false,
     allow_similar: probably_false

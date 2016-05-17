@@ -40,7 +40,7 @@
               <%= link_to new_commission_path, class: "btn btn-link" do %>
                 <span class="glyphicon glyphicon-plus"></span> Propose commission
               <% end %>
-            <% elsif @message_thread.commission.editable? %>
+            <% elsif @message_thread.commission.discussion? %>
               <%= link_to edit_commission_path(@message_thread.commission), class: "btn btn-link" do %>
                 <span class="glyphicon glyphicon-pencil"></span> Edit proposal
               <% end %>
