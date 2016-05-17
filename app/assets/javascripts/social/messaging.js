@@ -33,6 +33,10 @@
           }, "received");
         }
       }
+
+      if (thread.commission && thread.commission.mini_view) {
+        popup.find(".thread-commission").replaceWith(thread.commission.mini_view);
+      }
     });
   }
 
@@ -89,17 +93,13 @@
           "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
           "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</h4>" +
-        "<div class='commission'></div>" +
+        "<div class='thread-commission'></div>" +
         "<div class='messages'></div>" +
         "<textarea rows='2' class='form-control' data-thread='" + data.threadId + "' placeholder='Type a message ...'></textarea>" +
       "</div>"
     );
 
     $("#message_popups").append(popup);
-
-    if (data.commission.mini_view) {
-      popup.find(".commission").replaceWith(data.commission.mini_view);
-    }
 
     var index = messagePopups.length;
     messagePopups.push({ threadId: data.threadId, popup: popup });

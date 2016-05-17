@@ -16,11 +16,4 @@ class MessageThread < ActiveRecord::Base
   def partner(user)
     seller == user ? buyer : seller
   end
-
-  def detailed_attributes
-    attributes.merge(
-      seller_name: seller.name,
-      messages: messages.map(&:detailed_attributes)
-    )
-  end
 end
