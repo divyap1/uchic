@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get "/users/:id/profile" => "users#profile", as: :user_profile
     get "/activity_feed" => "users#activity_feed", as: :user_activity_feed
     get "/listings" => "users#listings", as: :user_listings
+    get "/my_commissions" => "users#my_commissions", as: :user_commissions
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }
