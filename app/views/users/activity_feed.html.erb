@@ -71,6 +71,7 @@
                 </div>
                 <div class="col-md-9">
                     <%= render partial: "notifications/new_follower_notification", locals: {notification: notification} if notification.state == "new follower" %>
+                    <%= render partial: "notifications/product_listed_notification", locals: {notification: notification} if notification.state == "product listed" %>
                 </div>
             </div>
         </div>

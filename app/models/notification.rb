@@ -4,6 +4,7 @@ class Notification < ActiveRecord::Base
            "item delivered", "new follower"]
 
   belongs_to :user
+  belongs_to :commission
   belongs_to :about_user, class_name: 'User'
 
   validates :state, inclusion: { in: STATES }
