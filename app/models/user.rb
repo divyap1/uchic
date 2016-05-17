@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png"
   validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
-  scope :contains, -> (search) { where("name like ? OR username like ?", "%#{search}%", "%#{search}%")}
+  scope :contains, -> (search) { where("name like ? OR username like ?", "#{search}%", "#{search}%")}
 
   def first_name
     name.split(/\s+/).first

@@ -8,8 +8,6 @@ class UsersController < ApplicationController
 
     @num_reviews = @reviews.nil? ? 0 : @reviews.length
     @average_review = @num_reviews == 0  ? 0 : @reviews.map(&:rating).inject(0, &:+) / @num_reviews
-
-    #@user.reviews.create(reviewer: current_user, user: @user, rating: 1, comment: "cool")
   end
 
   def activity_feed
