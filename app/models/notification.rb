@@ -11,6 +11,6 @@ class Notification < ActiveRecord::Base
   validates :user, presence: true
   validates :about_user, presence: true
 
-  has_attached_file :image, default_url: "/images/products/default.png"
+  has_attached_file :image
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 end

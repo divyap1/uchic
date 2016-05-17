@@ -1,0 +1,10 @@
+<div class="col-md-3">
+    <%= image_tag "copy.png", class: "img img-responsive" %>
+</div>
+<div class="col-md-9">
+    <h2>Someone wants to buy a copy of one of your items!</h2>
+    <h3>
+        <%= "#{notification.about_user.name} wants #{notification.commission.name}" %></h3>
+    <%= link_to "Accept" %>
+    <%= link_to "Decline" %>
+</div>

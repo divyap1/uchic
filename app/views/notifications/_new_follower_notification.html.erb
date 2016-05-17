@@ -1,2 +1,14 @@
-<h2> You have a new follower </h2>
-<%= link_to "Follow #{notification.about_user.name}" %>
+<div class="col-md-3">
+    <%= image_tag notification.image || "no-profile-picture.png", class: "img img-responsive" %>
+</div>
+<div class="col-md-9">
+    <h2>
+        You have a new follower
+    </h2>
+    <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
+       <%#= link_to "Unfollow", friendship_path(:following_id => notification.about_user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+    <%else%>
+       <%= link_to "Follow", friendships_path(:following_id => notification.about_user.id), :method => :post, class: "btn btn-primary"%>
+    <%end%>
+    <%= link_to "View their page", user_profile_path(notification.about_user), class: "btn btn-default btn-small"  %>
+</div>

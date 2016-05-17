@@ -66,13 +66,9 @@
         <% @notifications.each do |notification| %>
         <div class="box">
             <div class="row">
-                <div class="col-md-3">
-                    <%= image_tag notification.image || "default.png", class: "img img-responsive" %>
-                </div>
-                <div class="col-md-9">
                     <%= render partial: "notifications/new_follower_notification", locals: {notification: notification} if notification.state == "new follower" %>
                     <%= render partial: "notifications/product_listed_notification", locals: {notification: notification} if notification.state == "product listed" %>
-                </div>
+                    <%= render partial: "notifications/copy_requested_notification", locals: {notification: notification} if notification.state == "copy requested" %>                
             </div>
         </div>
         <% end %>

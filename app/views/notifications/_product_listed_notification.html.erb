@@ -1,5 +1,16 @@
-<h2> <%= "#{notification.about_user.name} just listed a new product" %> </h2>
-<h3> <%= "#{notification.commission.name}  $#{number_with_precision(notification.commission.price, :precision => 2)}" %> </h3>
-<p> <%= notification.commission.description %> </p>
-<%= link_to "View this item", commission_path(notification.commission) %>
-<%= link_to "View their profile", user_profile_path(notification.about_user) %>
+<div class="col-md-3">
+    <%= image_tag notification.image || "default.png", class: "img img-responsive" %>
+</div>
+<div class="col-md-9">
+    <h2>
+        <%= "#{notification.about_user.name} just listed a new product" %>
+    </h2>
+    <h3>
+        <%= "#{notification.commission.name}  $#{number_with_precision(notification.commission.price, :precision => 2)}" %>
+    </h3>
+    <p>
+        <%= notification.commission.description %>
+    </p>
+    <%= link_to "View this item", commission_path(notification.commission) %>
+    <%= link_to "View their profile", user_profile_path(notification.about_user) %>
+</div>
