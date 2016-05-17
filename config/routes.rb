@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reviews
+  resources :reviews
   root to: "pages#welcome"
 
   get 'request_commission/new/:id' => 'orders#new', as: :commission_new

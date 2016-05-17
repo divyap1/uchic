@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    @review = Review.new
     @reviews = @user.reviews
 
     @num_reviews = @reviews.nil? ? 0 : @reviews.length
