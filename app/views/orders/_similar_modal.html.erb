@@ -1,43 +1,56 @@
 <!-- Modal -->
 <div id="requestSimilar" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
+  <div class="modal-dialog modal-lg">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Commission Request: Request Something Similar</h3>
+        <h3 class="modal-title">Request Something Similar To <%= @commission.name %>?</h3>
       </div>
+      <% if user_signed_in? %>
+      <%= form_tag(make_similar_commissions_path) do %>
       <div class="modal-body">
-        <%= form_tag(make_similar_commissions_path) do %>
-        <h4>Are you sure you want to request a copy of <%= @commission.name %>?</h4>
-        <p>If you pick yes, a request will be sent to the seller</p>
-        <h4>Details:</h4>
-        <p> Price: TBC </p>
-        <p> <%= @commission.description %> </p>
-        <div class="form-group has-feedback">
-          <%= label_tag :custom_info, class: "sr-only" %>
-          <%= text_field_tag :custom_info, "", placeholder: "Add any extra details you have here:", class: "form-control", autofocus: true %>
-          <i class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></i>
+        <p> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
+        <p> Current Description: <%= @commission.description %> </p>
+        <%= hidden_field_tag "seller_id", @seller.id %>
+        <%= hidden_field_tag "buyer_id", current_user.id %>
+        <%= hidden_field_tag "commission_id", @commission.id %>
+
+
+        <div class="table-responsive">
+          <table class="table">
+            <tfoot>
+              <tr>
+                <th class="text-right">Price <small>(NZD)</small></th>
+                <th class="text-right">To Be Determined</th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
       <div class="modal-footer">
         <div class="row">
           <div class="col-md-12">
-          <div class="col-md-6">
-            <div class="text-left">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+            <div class="col-md-6">
+              <div class="text-left">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="text-right">
+                <%= submit_tag "Send Request", class: "btn btn-primary" %>
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
-          <div class="text-right">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Send Request</button>
-          </div>
         </div>
-        <% end %>
       </div>
+      <% end %>
+      <% else %>
+      <div class="modal-body">
+      <h5> You need to <%= link_to "Login", new_user_session_path %> to be able to request a commission.
+        If you do not have an account, you can register <%= link_to "here", new_user_registration_path %></h5>
       </div>
-      </div>
+      <% end %>
     </div>
 
   </div>

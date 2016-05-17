@@ -1,7 +1,6 @@
 <!-- Modal -->
 <div id="requestCopy" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
-    <!-- TODO: deal with user not signed in -->
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -11,14 +10,17 @@
       <% if user_signed_in? %>
       <%= form_tag(make_copy_commissions_path) do %>
       <div class="modal-body">
-        <h4>Details:</h4>
-        <p> <%= @commission.description %> </p>
+        <p> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
+        <p> Description: <%= @commission.description %> </p>
+        <%= hidden_field_tag "seller_id", @seller.id %>
+        <%= hidden_field_tag "buyer_id", current_user.id %>
+        <%= hidden_field_tag "commission_id", @commission.id %>
         <div class="table-responsive">
           <table class="table">
             <tfoot>
               <tr>
-                <th colspan="5" class="text-right">Price <small>($NZD)</small></th>
-                <th class="text-right"><%= "#{number_with_precision(@commission.price, :precision => 2)}" %></th>
+                <th class="text-right">Price <small>(NZD)</small></th>
+                <th class="text-right"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></th>
               </tr>
             </tfoot>
           </table>
@@ -29,12 +31,12 @@
           <div class="col-md-12">
             <div class="col-md-6">
               <div class="text-left">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
               </div>
             </div>
             <div class="col-md-6">
               <div class="text-right">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Send Request</button>
+                <%= submit_tag "Send Request", class: "btn btn-primary" %>
               </div>
             </div>
           </div>

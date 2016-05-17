@@ -122,7 +122,15 @@ class CommissionsController < ApplicationController
   end
 
   def make_copy
+    @commission = Commission.find(params[:commission_id])
+    @buyer = User.find(params[:buyer_id])
+    @seller = User.find(params[:seller_id])
 
+    
+    respond_to do |format|
+      format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
+      format.json { render :show, status: :created, location: @commission }
+    end
   end
 
   def make_similar
