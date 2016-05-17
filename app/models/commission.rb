@@ -1,6 +1,8 @@
 class Commission < ActiveRecord::Base
   STATES = ["discussion", "accepted", "paid", "in_progress", "shipped"]
 
+  delegate :partner, to: :message_thread
+
   belongs_to :seller, class_name: 'User'
   belongs_to :buyer, class_name: 'User'
   belongs_to :category
@@ -30,5 +32,9 @@ class Commission < ActiveRecord::Base
 
   def editable?
     discussion? && !accepted_by_seller? && !accepted_by_buyer?
+  end
+
+  def private?
+    !public?
   end
 end

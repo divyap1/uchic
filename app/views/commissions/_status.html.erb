@@ -1,0 +1,123 @@
+<div class="box box-muted">
+  <p><span class="label label-default"><%= commission.state.humanize.upcase %></span></p>
+
+  <p>
+    <strong>
+      <% if current_user == commission.buyer %>
+        You are asking <%= link_to commission.seller.name, user_profile_path(commission.seller) %>
+        to make this item for you.
+      <% else %>
+        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %> is asking you to
+        make this item for them.
+      <% end %>
+    </strong>
+  </p>
+
+  <% if commission.discussion? %>
+    <p>
+      At this point you can both edit the terms of the commission, and approve it when you come
+      to a consensus. Once it is approved <%= user_type(commission, :buyer) %> will pay for the
+      item and <%= user_type(commission, :seller) %> will begin work on it.
+    </p>
+
+    <%
+      actions = [
+        link_to("Accept current terms", "#", class: "btn btn-success"),
+        link_to("Reject and delete", "#", class: "btn btn-danger")
+      ]
+    %>
+  <% elsif commission.accepted? %>
+    <% if current_user == commission.buyer %>
+      <p>
+        <strong>
+          Both of you have now accepted the terms of this commission. You now need to pay for
+          the item you have requested.
+        </strong>
+      </p>
+
+      <p>
+        You can discuss with <%= commission.seller.first_name %> whether or not they need payment
+        in advance.
+      </p>
+
+      <% actions = [link_to("Checkout", "#", class: "btn btn-success")] %>
+    <% else %>
+      <p>
+        <strong>
+          Both of you have now accepted the terms of this commission. You may now begin work on the
+          item <%= commission.buyer.first_name %> has requested.
+        </strong>
+      </p>
+
+      <p>
+        You can discuss with <%= commission.buyer.first_name %> whether or not they need to pay in
+        advance.
+      </p>
+
+      <% actions = [] %>
+    <% end %>
+  <% elsif commission.paid? || commission.in_progress? %>
+    <% if current_user == commission.buyer %>
+      <p>
+        <strong>
+          You have paid for this commission and <%= commission.seller.first_name %> should have begun
+          work on the item.
+        </strong>
+      </p>
+
+      <p>
+        You can continue messaging <%= commission.seller.first_name %> to check the progress of your item.
+        If they are unresponsive, please <%= link_to "contact us", about_contact_us_path %>.
+      </p>
+
+      <% actions = [] %>
+    <% else %>
+      <p>
+        <strong>
+          <%= commission.buyer.first_name %> has paid for the item they have commissioned. Good luck,
+          and make sure you keep in touch with them!
+        </strong>
+      </p>
+
+      <p>
+        You can continue messaging <%= commission.buyer.first_name %> to let them know your progress.
+      </p>
+
+      <% actions = [link_to("Item has been shipped", "#", class: "btn btn-success")] %>
+    <% end %>
+  <% elsif commission.shipped? %>
+    <% if current_user == commission.buyer %>
+      <p>
+        <strong>
+          <%= commission.seller.first_name %> has shipped this item, so you should receive it shortly!
+        </strong>
+      </p>
+
+      <p>
+        Please make sure you rate the seller when the item arrives, and please feel free to
+        <%= link_to "contact us", about_contact_us_path %> if it does not arrive on time.
+      </p>
+
+      <% actions = [link_to("<Rating widget>", "#")] %>
+    <% else %>
+      <p>
+        <strong>
+          You've shipped this item, so you have nothing more to do here!
+        </strong>
+      </p>
+
+      <p>
+        Please keep in touch with <%= commission.buyer.first_name %> to ensure the item arrives safely.
+      </p>
+    <% end %>
+  <% end %>
+
+  <div class="text-right">
+    <%= link_to message_thread_path(commission.message_thread), class: "btn btn-default pull-left" do %>
+      <span class="glyphicon glyphicon-comment"></span>
+      Go to messages
+    <% end %>
+
+    <%= actions.join(" ").html_safe %>
+  </div>
+</div>
