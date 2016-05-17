@@ -1,4 +1,6 @@
 class MessageThreadsController < ApplicationController
+  include MessageThreadsHelper
+
   before_action :authenticate_user!
 
   # GET /message_threads
@@ -16,7 +18,7 @@ class MessageThreadsController < ApplicationController
 
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @message_thread.detailed_attributes }
+      format.json { render json: thread_data(@message_thread) }
     end
   end
 
@@ -36,7 +38,7 @@ class MessageThreadsController < ApplicationController
     respond_to do |format|
       if @message_thread.save
         format.html { redirect_to @message_thread, notice: 'Message thread was successfully created.' }
-        format.json { render json: @message_thread.detailed_attributes, status: :created, location: @message_thread }
+        format.json { render json: thread_data(@message_thread), status: :created, location: @message_thread }
       else
         format.html { render :new }
         format.json { render json: @message_thread.errors, status: :unprocessable_entity }

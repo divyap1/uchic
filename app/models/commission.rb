@@ -31,10 +31,4 @@ class Commission < ActiveRecord::Base
   def editable?
     discussion? && !accepted_by_seller? && !accepted_by_buyer?
   end
-
-  def detailed_attributes
-    attributes.merge(
-      message_thread: message_thread.try!(:detailed_attributes)
-    )
-  end
 end

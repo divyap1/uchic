@@ -24,8 +24,7 @@ class Message < ActiveRecord::Base
   def detailed_attributes
     attributes.merge(
       sender_name: sender.name,
-      receiver_name: receiver.name,
-      commission: message_thread.commission.try!(:attributes)
+      receiver_name: receiver.name
     )
   end
 

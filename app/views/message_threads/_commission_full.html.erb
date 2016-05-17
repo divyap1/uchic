@@ -1,0 +1,6 @@
+<% if commission %>
+  <div class="thread-commission">
+    <h3>Commissioning <%= link_to commission.name, commission_path(commission) %></h3>
+    <p>Price: $<%= number_with_precision(commission.price, precision: 2) %></p>
+  </div>
+<% end %>

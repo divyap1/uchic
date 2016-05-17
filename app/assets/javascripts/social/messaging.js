@@ -33,6 +33,10 @@
           }, "received");
         }
       }
+
+      if (thread.commission && thread.commission.mini_view) {
+        popup.find(".thread-commission").replaceWith(thread.commission.mini_view);
+      }
     });
   }
 
@@ -66,15 +70,6 @@
     );
   }
 
-  function buildCommissionStatus(commission) {
-    return $(
-      "<span>" +
-        "Commissioning " +
-        "<strong>" + commission.name + "</strong>" +
-      "</span>"
-    );
-  }
-
   function messageContainer(threadId) {
     return $(".message-container[data-thread=" + threadId + "]");
   }
@@ -98,17 +93,13 @@
           "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
           "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</h4>" +
-        "<div class='commission'></div>" +
+        "<div class='thread-commission'></div>" +
         "<div class='messages'></div>" +
         "<textarea rows='2' class='form-control' data-thread='" + data.threadId + "' placeholder='Type a message ...'></textarea>" +
       "</div>"
     );
 
     $("#message_popups").append(popup);
-
-    if (data.commission) {
-      popup.find(".commission").html(buildCommissionStatus(data.commission));
-    }
 
     var index = messagePopups.length;
     messagePopups.push({ threadId: data.threadId, popup: popup });
@@ -141,7 +132,7 @@
     var container = messageContainer(data.threadId);
 
     if (container.length) {
-      container.append(buildMessageBubble(data, type));
+      container.find(".messages").append(buildMessageBubble(data, type));
       return;
     }
 
@@ -159,6 +150,11 @@
     messagesContainer.scrollTop(messagesContainer.height() + 1000);
   }
 
+  function updateCommission(container, newHtml) {
+    container.find(".thread-commission").replaceWith(newHtml);
+    container.find(".thread-commission").addClass("modified");
+  }
+
   var client = new Faye.Client("/socket");
 
   // This makes sure that there's only ever one subscription (so messages aren't received twice)
@@ -168,7 +164,6 @@
   } catch(e) { }
 
   client.subscribe("/messages", function(data) {
-    console.log("GOT MESSAGE", data);
     if (data.receiver_id.toString() === userId.toString()) {
       addMessage({
         threadId: data.message_thread_id,
@@ -186,7 +181,7 @@
       var container = messageContainer(data.message_thread.id);
 
       if (container.length) {
-        return $(".commission-updated").removeClass("hidden");
+        return updateCommission(container, data.full_view);
       }
 
       var popup = ensureMessagePopup({
@@ -194,14 +189,14 @@
         partnerName: data.message_thread.seller_name
       });
 
-      popup.find(".commission").html(buildCommissionStatus(data));
+      updateCommission(popup, data.mini_view);
     }
   });
 
   $(".start-message").on("click", function(e) {
-    $.post("/message_threads.json", {
+    $.post("/message_threads.json?" + $.param({
       message_thread: { seller_id: $(e.target).data("seller") }
-    }, function(thread) {
+    }), function(thread) {
       ensureMessagePopup({
         threadId: thread.id,
         partnerName: thread.seller_name
