@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   root to: "pages#welcome"
 
-  get 'checkout/copy/:id' => 'orders#copy', as: :commission_copy_checkout
-  get 'checkout/similar/:id' => 'orders#similar', as: :commission_similar_checkout
-  get 'checkout/new/:id' => 'orders#new', as: :commission_new_checkout
+  get 'request_commission/new/:id' => 'orders#new', as: :commission_new
   get 'about/contact_us' => 'pages#contact_us'
   get 'about/faq' => 'pages#faq'
   get "/dashboard" => "users#dashboard", as: :user_dashboard
@@ -14,6 +12,7 @@ Rails.application.routes.draw do
   resources :orders, except: [:edit, :update]
   resources :commissions do
     post :make_similar, on: :collection
+    post :make_copy, on: :collection
   end
   resources :categories, except: [:edit] do
     get "/categories/:id", :action => :show, :defaults => {:page => 1, :display_size => 6}
@@ -22,7 +21,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "/users/show" => "registrations#show", as: :show_user_registration
     get "/users/:id/profile" => "users#profile", as: :user_profile
-    get "/activity_feed" => "users#activity_feed", as: :user_activity_feed    
+    get "/activity_feed" => "users#activity_feed", as: :user_activity_feed
     get "/listings" => "users#listings", as: :user_listings
   end
 

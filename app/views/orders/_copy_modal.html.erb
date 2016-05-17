@@ -6,33 +6,47 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Commission Request: Request A Copy</h3>
+        <h3 class="modal-title">Request A Copy of <%= @commission.name %>?</h3>
       </div>
+      <% if user_signed_in? %>
+      <%= form_tag(make_copy_commissions_path) do %>
       <div class="modal-body">
-        <h4>Are you sure you want to request a copy of <%= @commission.name %>?</h4>
-        <p>If you pick yes, a request will be sent to the seller</p>
         <h4>Details:</h4>
-        <p> Price: <%= @commission.price %> </p>
         <p> <%= @commission.description %> </p>
+        <div class="table-responsive">
+          <table class="table">
+            <tfoot>
+              <tr>
+                <th colspan="5" class="text-right">Price <small>($NZD)</small></th>
+                <th class="text-right"><%= "#{number_with_precision(@commission.price, :precision => 2)}" %></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
         <div class="row">
           <div class="col-md-12">
-          <div class="col-md-6">
-            <div class="text-left">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">No</button>
+            <div class="col-md-6">
+              <div class="text-left">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="text-right">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Send Request</button>
+              </div>
             </div>
           </div>
-          <% if user_signed_in? %>
-          <div class="col-md-6">
-          <div class="text-right">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
-          </div>
         </div>
-        <% end %>
       </div>
+      <% end %>
+      <% else %>
+      <div class="modal-body">
+      <h5> You need to <%= link_to "Login", new_user_session_path %> to be able to request a commission.
+        If you do not have an account, you can register <%= link_to "here", new_user_registration_path %></h5>
       </div>
-      </div>
+      <% end %>
     </div>
 
   </div>
