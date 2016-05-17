@@ -1,101 +1,130 @@
-<div class="container">
+<div class="row">
   <div class="user-profile">
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="commissions panel panel-default">
-          <span class="message not-accepting">Hi <%= @user.first_name %>, Welcome Back!</span>
+    <div class="col-md-12">
+      <div class="commissions panel panel-default">
+        <span class="message not-accepting">Hi <%= @user.first_name %>, Welcome Back!</span>
 
 
-          <div class="pull-right"</div>
-          	 <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-default"%>
-          	 <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-default"%>
-          </div>
-
+        <div class="pull-right"</div>
+          <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-default"%>
+          <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-default"%>
         </div>
+
       </div>
     </div>
 
-    <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Buying</h3>
+        </div>
+        <div class="panel-body">
 
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Followers (<%=@user.followers.length%>)</h3>
+          <h4>Current Commission Requests</h4>
+
+          <% if @req_commissions && @req_commissions.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <% @req_commissions.each do |commission| %>
+                <!-- Add if condition so that only non-shipped commissions are displayed -->
+                <tr>
+                  <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
+                  <td><%= commission.name %></td>
+                  <td>$<%= commission.price %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
           </div>
-          <div class="panel-body">
-            <% if @user.followers.length > 0 %>
-              <% @user.followers.each do |follower| %>
-                <li class="media">
-                   <div class="media-left">
-                      <a href="#">
-                      <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
-                      </a>
-                   </div>
-                   <div class="media-body">
-                      <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
-                   </div>
-                </li>
-              <% end %>
-            <% else %>
-              <p>You do not currently have any followers</p>
-            <% end %>
+          <% else %>
+          <p>You have not currently commissioned any products</p>
+          <% end %>
+
+          <%= link_to "View all requested commissions", user_commissions_path, class: "btn btn-default" %>
+        </div>
+
+      </div>
+    </div>
 
 
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Selling</h3>
+        </div>
+        <div class="panel-body">
+
+          <h4>Current Commissions</h4>
+
+          <!--Change condition once commisions have been setup-->
+          <% if 1==2 %>
+          <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true"></span>
+            Accepting commissions for:
           </div>
+          <% else %>
+          <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true"></span>
+            Not currently accepting commissions
+          </div>
+          <% end %>
+
+          <% if @commissions && @commissions.any? %>
+          <h4> <%=@commissions.length%> Recent Commissions</h4>
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <tbody>
+                <% @commissions.each do |commission| %>
+                <tr>
+                  <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
+                  <td><%= commission.name %></td>
+                  <td>$<%= commission.price %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% end %>
+
+          <%= link_to "View all listed commissions", user_listings_path, class: "btn btn-default" %>
+
+          <%= link_to "List another commission", new_commission_path, class: "btn btn-default" %>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Followers (<%=@user.followers.length%>)</h3>
+        </div>
+        <div class="panel-body">
+          <% if @user.followers.length > 0 %>
+          <% @user.followers.each do |follower| %>
+          <div class="col-md-3">
+            <li class="media">
+              <div class="media-left">
+                <a href="#">
+                  <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
+                </a>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+              </div>
+            </li>
+          </div>
+          <% end %>
+          <% else %>
+          <p>You do not currently have any followers</p>
+          <% end %>
+
+
         </div>
       </div>
-
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Selling</h3>
-          </div>
-          <div class="panel-body">
-
-          	<h4>Current commisions</h4>
-
-          	<!--Change condition once commisions have been setup-->
- 			<% if 1==2 %>
-          	<div class="alert alert-success" role="alert">
-		      <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true"></span>
-		      Accepting commisions for:
-		    </div>
-			<% else %>
-		    <div class="alert alert-danger" role="alert">
-		      <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true"></span>
-		      Not currently accepting commisions
-		    </div>
-		    <% end %>
-
-          	<% if @commissions && @commissions.any? %>
-	          	<h4> <%=@commissions.length%> Recent Commissions</h4>
-
-	          	<div class="table-responsive">
-	              <table class="table table-hover">
-	                  <tbody>
-	                    <% @commissions.each do |commission| %>
-	                      <tr>
-	                      	<td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
-	                        <td><%= commission.name %></td>
-	                        <td>$<%= commission.price %></td>
-	                      </tr>
-	                    <% end %>
-	                  </tbody>
-	              </table>
-	          	</div>
-        	<% end %>
-
-        	<%= link_to "View all commissions", user_listings_path, class: "btn btn-default" %>
-
-	        <%= link_to "List another commission", new_commission_path, class: "btn btn-default" %>
-
-         </div>
-
-        </div>
-      </div>
-
-
     </div>
   </div>
 </div>

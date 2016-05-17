@@ -12,19 +12,10 @@
       <div class="modal-body">
         <p> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
         <p> Description: <%= @commission.description %> </p>
+        <p> Price <small>(NZD)</small>: <%= "$#{number_with_precision(@commission.price, :precision => 2)}" %> </p>
         <%= hidden_field_tag "seller_id", @seller.id %>
         <%= hidden_field_tag "buyer_id", current_user.id %>
         <%= hidden_field_tag "commission_id", @commission.id %>
-        <div class="table-responsive">
-          <table class="table">
-            <tfoot>
-              <tr>
-                <th class="text-right">Price <small>(NZD)</small></th>
-                <th class="text-right"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></th>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
       </div>
       <div class="modal-footer">
         <div class="row">

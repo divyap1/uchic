@@ -20,10 +20,15 @@ class UsersController < ApplicationController
   	@commissions = Commission.where(seller_id: current_user.id)
   end
 
+  def my_commissions
+    @commissions = Commission.where(buyer_id: current_user.id)
+  end
+
   def dashboard
     @user = current_user
     if user_signed_in?
       @commissions = Commission.where(seller_id: current_user.id)
+      @req_commissions = Commission.where(buyer_id: current_user.id)
     end
   end
 end
