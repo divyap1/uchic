@@ -1,6 +1,14 @@
 .activity-feed {
-    > .row.notification {
-        color:red;
-        height:10%vh;
+    .box {
+        height: 30vh;
+        .row {
+            height: 100%;
+            .col-md-3 {
+              height: 100%;
+            }
+        }
+    }
+    .img {
+        height: 100%;
     }
 }
