@@ -1,5 +1,16 @@
 <div class="row">
   <div class="col-md-12">
+
+    <ul class="breadcrumb">
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/my_commissions">My Commissions</a></li>
+      <li><%= @commission.name %></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
     <%= render partial: "commissions/status", locals: { commission: @commission } %>
   </div>
 </div>
