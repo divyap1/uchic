@@ -27,6 +27,7 @@ gem 'devise'
 gem 'faker'
 gem 'ancestry', '~> 2.1'
 gem "paperclip", "~> 5.0.0.beta1"
+gem "papercrop"
 
 gem 'faye-rails'
 gem 'thin'
