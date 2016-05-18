@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "following_id"
   has_many :followers, :through => :inverse_friendships, :source => :user
 
-
   validates :name, presence: true
   validates :username, presence: true
   validates :address, presence: true

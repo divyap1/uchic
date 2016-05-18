@@ -97,7 +97,7 @@
                   <h3 class="panel-title">Leave A Review</h3>
                </div>
                <div class="panel-body">
-                  <% if user_signed_in?# && current_user.commissions_as_buyer.where(:seller => @user).exists? %>
+                  <% if user_signed_in? && @user.reviews.where(:reviewer => current_user).length < current_user.commissions_as_buyer.where(:seller => @user).length %>
                      <%= form_for(@review) do |f| %>
                        <% if @review.errors.any? %>
                          <div id="error_explanation">

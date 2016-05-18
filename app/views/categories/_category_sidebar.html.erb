@@ -6,7 +6,7 @@
                 <% Category.first.root.children.each do |category| %>
                 <%= link_to category_path(category.id) do %>
                 <%= category.name %>
-                <span class="badge pull-right">42</span>
+                <span class="badge pull-right"><%=category.children.flat_map(&:commissions).length%></span>
                 <% end %>
                 <ul>
                     <% category.children.each do |sub_category| %>
