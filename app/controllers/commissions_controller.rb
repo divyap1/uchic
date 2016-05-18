@@ -20,10 +20,10 @@ class CommissionsController < ApplicationController
 
     if @commission.buyer
       if @commission.related_to?(current_user)
-        return redirect_to private_commission_path(@commission)
+        return redirect_to private_commission_url(@commission)
       else
-        flash.alert = "Sorry, you don't have permission to view that commission."
-        return redirect_to commissions_path
+        flash[:alert] = "Sorry, you don't have permission to view that commission."
+        return redirect_to categories_url
       end
     end
 
@@ -77,6 +77,8 @@ class CommissionsController < ApplicationController
           @commission.pictures.create!(picture: picture)
         end
 
+        @commission.accept!(current_user)
+
         if @message_thread
           @message_thread.save!
           MessageBroadcastController.publish('/commissions', commission_data(@commission))
@@ -107,7 +109,18 @@ class CommissionsController < ApplicationController
           MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
-        format.html { redirect_to @commission, notice: 'commission was successfully updated.' }
+        pictures = [*params[:commission][:pictures]] || []
+        unless pictures.empty?
+          @commission.pictures.destroy_all
+
+          pictures.each do |picture|
+            @commission.pictures.create!(picture: picture)
+          end
+        end
+
+        @commission.accept!(current_user)
+
+        format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
         format.json { render :show, status: :ok, location: @commission }
       else
         format.html { render :edit }
@@ -121,14 +134,14 @@ class CommissionsController < ApplicationController
   def destroy
     #Check the current user posted the commission
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
-      @commission.destroy
+      @commission.destroy!
       respond_to do |format|
-        format.html { redirect_to commissions_url, notice: 'commission was successfully destroyed.'}
+        format.html { redirect_to user_dashboard_url, notice: 'Commission was successfully destroyed.'}
         format.json { head :no_content }
       end
     else
       respond_to do |format|
-        format.html { redirect_to commissions_url, alert: 'You do not have permissions to delete this item.' }
+        format.html { redirect_to user_dashboard_url, alert: 'You do not have permissions to delete this item.' }
         format.json { head :no_content }
       end
     end
@@ -213,6 +226,6 @@ class CommissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def commission_params
-      params.require(:commission).permit(:name, :description, :price, :quantity, :seller_id, :picture, :category_id)
+      params.require(:commission).permit(:name, :description, :price, :quantity, :seller_id, :picture, :category_id, :public)
     end
 end

@@ -4,28 +4,29 @@
   <p>
     <strong>
       <% if current_user == commission.buyer %>
-        You are asking <%= link_to commission.seller.name, user_profile_path(commission.seller) %>
+        <%= link_to commission.seller.name, user_profile_path(commission.seller) %> is offering
         to make this item for you.
       <% else %>
-        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %> is asking you to
-        make this item for them.
+        You are offering to make this item for
+        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %>.
       <% end %>
     </strong>
   </p>
 
   <% if commission.discussion? %>
-    <% partner_name = commission.partner(current_user).name %>
+    <% partner_name = commission.partner(current_user).first_name %>
 
     <p>
-      At this point you can both edit the terms of the commission, and approve it when you come
-      to a consensus. Once it is approved <%= user_type(commission, :buyer) %> will pay for the
-      item and <%= user_type(commission, :seller) %> will begin work on it.
+      At this point you and <%= partner_name %> can discuss what you want from this commission, and
+      <%= user_type(commission, :seller) %> can edit the official terms. Once you come to a
+      consensus and both approve the commission, <%= user_type(commission, :buyer) %> will pay
+      for the item and <%= user_type(commission, :seller) %> will begin work on it.
     </p>
 
     <% if commission.accepted_by?(current_user) %>
       <p class="text-success">
-        You have accepted the current terms, but you'll need to wait for <%= partner_name %> to
-        accept them as well.
+        You've indicated you are happy with the current terms, but you'll need to wait for
+        <%= partner_name %> to accept them as well.
       </p>
     <% end %>
 
@@ -34,6 +35,10 @@
         link_to("Accept current terms", approve_commission_path(commission), class: "btn btn-success", method: "post"),
         link_to("Reject and delete", commission_path(commission), class: "btn btn-danger", method: "delete")
       ]
+
+      if current_user == commission.seller
+        actions << link_to("Edit commission", edit_commission_path(commission), class: "btn btn-default")
+      end
     %>
   <% elsif commission.accepted? %>
     <% if current_user == commission.buyer %>

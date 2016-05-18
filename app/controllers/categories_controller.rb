@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    redirect_to category_path(Category.first.root)
   end
 
   # GET /categories/1
