@@ -136,6 +136,7 @@ class CommissionsController < ApplicationController
                            :pictures => @commission.pictures,
                            :public => false)
     if @copy.save
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "copy requested", commission: @copy)
       pictures = @copy.pictures
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture.picture)
