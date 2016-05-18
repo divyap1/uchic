@@ -22,7 +22,7 @@ class CommissionsController < ApplicationController
       if @commission.related_to?(current_user)
         return redirect_to private_commission_path(@commission)
       else
-        flash.error = "Sorry, you don't have permission to view that commission."
+        flash.alert = "Sorry, you don't have permission to view that commission."
         return redirect_to commissions_path
       end
     end

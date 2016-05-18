@@ -31,19 +31,22 @@
 
     <p class="desc"><%=@commission.description%></p>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestCopy">Request Copy</button>
-    <%= render partial: 'orders/copy_modal' %>
+    <% if @commission.seller == current_user %>
+      <%=link_to "Edit Commission",  edit_commission_path(@commission), class: "btn btn-primary" %>
+    <% else %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestCopy">Request Copy</button>
+      <%= render partial: 'orders/copy_modal' %>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestSimilar">Request Similar</button>
-    <%= render partial: 'orders/similar_modal' %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestSimilar">Request Similar</button>
+      <%= render partial: 'orders/similar_modal' %>
 
-    <a class="btn navbar-btn btn-link dropdown-toggle" type="button" href='<%=user_profile_path(@seller)%>'>
+      <a class="btn navbar-btn btn-link dropdown-toggle" type="button" href='<%=user_profile_path(@seller)%>'>
 
-      <img class="img-responsive center-block seller-image" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
+        <img class="img-responsive center-block seller-image" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
 
-      <h5><%= @seller.name %></h5>
-
-    </a>
+        <h5><%= @seller.name %></h5>
+      </a>
+    <%end%>
 
   </div>
 
