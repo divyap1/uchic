@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def activity_feed
     @user = current_user
     @notifications = @user.notifications.order(created_at: :desc)
+    byebug
   end
 
   def listings

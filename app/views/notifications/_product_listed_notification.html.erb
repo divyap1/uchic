@@ -1,5 +1,5 @@
 <li class="media">
-    <%= image_tag notification.image? ? notification.image.url(:thumb) : "default.png", class: "img img-responsive" %>
+    <%= image_tag notification.image? ? notification.image.url : "default.png", class: "img img-responsive" %>
 <div class="media-body">
     <h2 class = "media heading">
         <%= "#{notification.about_user.name} just listed a new product" %>

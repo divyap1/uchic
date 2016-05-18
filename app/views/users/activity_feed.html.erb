@@ -54,15 +54,14 @@
                     <button class="btn btn-default btn-sm btn-primary">
                         <i class="fa fa-pencil"></i>
                         Apply</button>
-
                 </form>
 
             </div>
         </div>
     </div>
     <!-- /.col-md-3 -->
-
     <div class="col-md-9">
+      <div class="box">
         <ul class="media-list">
             <% @notifications.each do |notification| %>
             <%= render partial: "notifications/new_follower_notification", locals: {notification: notification} if notification.state == "new follower" %>
@@ -71,6 +70,7 @@
             <%= render partial: "notifications/similar_requested_notification", locals: {notification: notification} if notification.state == "similar requested" %>
             <% end %>
         </ul>
+      </div>
     </div>
     <!-- /.col-md-9 -->
 </div>
