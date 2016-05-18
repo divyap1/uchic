@@ -22,16 +22,20 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-6">
+              <%= form_tag(edit_shipping_path) do %>
               <h2>Shipping Address <button class="btn btn-default btn-sm">Edit</button></h2>
                 <%= current_user.name %>
                 <%= simple_format(current_user.address) %>
+              <% end %>
             </div>
             <div class="col-md-6">
+              <%= form_tag(edit_payment_path) do %>
                 <h2>Payment Details <button class="btn btn-default btn-sm">Edit</button></h2>
                 <p>Card Holder's Name: <%= current_user.card_name %>
                 <br>Credit Card: <%= current_user.card_number %>
                 <br>Expiry Date (MM/YYYY): <%= current_user.expiration_month %>/<%= current_user.expiration_year %>
                 <br>CVC: <%= current_user.security_code %></p>
+                <% end %>
             </div>
         </div>
       </div>
@@ -49,7 +53,7 @@
         <hr>
         <div class="row">
         <div class="col-md-12">
-          <%= form_tag(pay_now_users_path) do %>
+          <%= form_tag(submit_pay_now_path) do %>
           <%= hidden_field_tag "seller_id", @commission.seller_id %>
           <%= hidden_field_tag "buyer_id", current_user.id %>
           <%= hidden_field_tag "commission_id", @commission.id %>

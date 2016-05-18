@@ -30,12 +30,9 @@ Rails.application.routes.draw do
     get '/my_commissions/:id' => 'users#private_commission', as: :private_commission
     get '/my_commissions/:id/edit' => 'users#edit_private_commission', as: :edit_private_commission
     get '/pay/:id' => 'users#pay', as: :pay_now
-  end
-
-  resources :users do
-    post :pay_now, on: :collection
-    post :edit_shipping, on: :collection
-    post :edit_payment, on: :collection
+    post '/pay_now' => 'users#pay_now', as: :submit_pay_now
+    post '/edit_shipping' => 'users#edit_shipping', as: :edit_shipping
+    post '/edit_payment' => 'users#edit_payment', as: :edit_payment
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }

@@ -33,10 +33,21 @@ class UsersController < ApplicationController
 
   def pay_now
     @commission = Commission.find(params[:commission_id])
+    @user = User.find(params[:buyer_id])
 
-    respond_to do |format|
-      format.html { redirect_to @commission, notice: 'Your payment was successfully processed'}
-      format.json { head :no_content }
+    if @user.address && @user.card_name && @user.card_number && @user.expiration_year && @user.expiration_month && @user.security_code
+      @commission.update!(:state => 'paid')
+
+      respond_to do |format|
+        format.html { redirect_to @commission, notice: 'Your payment was successfully processed'}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, alert: 'Your payment could not be processed. Make sure that you
+           have provided a shipping address and your payment details'}
+        format.json { head :no_content }
+      end
     end
   end
 
