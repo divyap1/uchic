@@ -31,7 +31,7 @@
                 <tr>
                   <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
                   <td><%= commission.name %></td>
-                  <td>State: <%= commission.state %></td>
+                  <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
                 </tr>
                 <% end %>
               </tbody>
