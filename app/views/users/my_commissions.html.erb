@@ -37,6 +37,7 @@
               <td style="padding-left: 10px">
                 <%= link_to "View Details", private_commission_path(commission.id), class: "btn btn-primary" %>
                 <%= link_to "Edit Commission", edit_private_commission_path(commission.id), class: "btn btn-default" %>
+                <%= link_to "Pay Now", pay_now_path(commission.id), class: "btn btn-success" %>
               </td>
             </tr>
             <% end %>

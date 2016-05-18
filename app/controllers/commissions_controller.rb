@@ -134,11 +134,16 @@ class CommissionsController < ApplicationController
                            :category_id => @commission.category_id,
                            :pictures => @commission.pictures,
                            :public => false)
-    if @copy.save
+
+     if @copy.save
       pictures = @copy.pictures
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture)
       end
+
+      MessageThread.create!(:buyer_id => params[:buyer_id],
+                            :seller_id => params[:seller_id],
+                            :commission => @copy)
 
       respond_to do |format|
         format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
@@ -166,6 +171,7 @@ class CommissionsController < ApplicationController
                            :category_id => @commission.category_id,
                            :pictures => @commission.pictures,
                            :public => false)
+
     if @copy.save
       @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission)
 
@@ -173,6 +179,10 @@ class CommissionsController < ApplicationController
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture)
       end
+
+      MessageThread.create!(:buyer_id => params[:buyer_id],
+                            :seller_id => params[:seller_id],
+                            :commission => @copy)
 
       respond_to do |format|
         format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }

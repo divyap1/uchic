@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get "/my_commissions" => "users#my_commissions", as: :user_commissions
     get '/my_commissions/:id' => 'users#private_commission', as: :private_commission
     get '/my_commissions/:id/edit' => 'users#edit_private_commission', as: :edit_private_commission
+    get '/pay/:id' => 'users#pay', as: :pay_now
   end
 
   devise_for :users, controllers: { registrations: 'registrations' }
