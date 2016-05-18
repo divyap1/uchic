@@ -89,7 +89,7 @@ class CommissionsController < ApplicationController
           end
         end
 
-        format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
+        format.html { redirect_to @commission, notice: 'commission was successfully created.' }
         format.json { render :show, status: :created, location: @commission }
       else
         format.html { render :new }
@@ -107,7 +107,7 @@ class CommissionsController < ApplicationController
           MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
-        format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
+        format.html { redirect_to @commission, notice: 'commission was successfully updated.' }
         format.json { render :show, status: :ok, location: @commission }
       else
         format.html { render :edit }
@@ -123,7 +123,7 @@ class CommissionsController < ApplicationController
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
       @commission.destroy
       respond_to do |format|
-        format.html { redirect_to commissions_url, notice: 'Commission was successfully destroyed.'}
+        format.html { redirect_to commissions_url, notice: 'commission was successfully destroyed.'}
         format.json { head :no_content }
       end
     else
@@ -143,18 +143,14 @@ class CommissionsController < ApplicationController
                            :buyer_id => params[:buyer_id],
                            :state => 'discussion',
                            :category_id => @commission.category_id,
+                           :pictures => @commission.pictures,
                            :public => false)
-
     if @copy.save
       @copy.seller.notifications.create(about_user: @copy.buyer, state: "copy requested", commission: @copy)
       pictures = @copy.pictures
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture.picture)
       end
-
-      MessageThread.create!(:buyer_id => params[:buyer_id],
-                            :seller_id => params[:seller_id],
-                            :commission => @copy)
 
       respond_to do |format|
         format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
@@ -182,18 +178,13 @@ class CommissionsController < ApplicationController
                            :category_id => @commission.category_id,
                            :pictures => @commission.pictures,
                            :public => false)
-
     if @copy.save
-      @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission)
+        @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
 
       pictures = @copy.pictures
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture.picture)
       end
-
-      MessageThread.create!(:buyer_id => params[:buyer_id],
-                            :seller_id => params[:seller_id],
-                            :commission => @copy)
 
       respond_to do |format|
         format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
