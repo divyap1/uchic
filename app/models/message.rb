@@ -12,6 +12,8 @@ class Message < ActiveRecord::Base
     ).order(:created_at)
   end)
 
+  scope :unread_count, ->(user) { where(receiver: user, read: false).count }
+
   def self.first_in_each_thread(user)
     sender_messages = where(sender: user).group(:receiver_id).having('created_at = MAX(created_at)')
     receiver_messages = where(receiver: user).group(:sender_id).having('created_at = MAX(created_at)')

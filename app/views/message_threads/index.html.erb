@@ -14,7 +14,7 @@
           <%= link_to message_thread_path(thread), class: "list-group-item #{active_class}" do %>
             <h3 class="list-group-item-heading"><%= thread.partner(current_user).name %></h3>
             <p class="list-group-item-text">
-              <em>No commission</em> &bull;
+              <em><%= thread.commission.try!(:name) || "No commission" %></em> &bull;
               <%= truncate(thread.messages.last.try!(:message)) %>
             </p>
           <% end %>

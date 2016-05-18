@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <ul class="breadcrumb">
+      <li><a href="/dashboard">Dashboard</a></li>
+      <li><a href="/my_commissions">My Commissions</a></li>
+      <li><%= link_to @commission.name, private_commission_path(@commission.id) %></li>
+      <li>Pay Now</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <%= form_tag(submit_pay_now_path) do %>
+      <div class="row">
+        <div class="text-center">
+          <h1>Pay for <%= @commission.name %></h1>
+        </div>
+        <hr>
+        <div class="col-md-12">
+        <p class="lead">If you need to make any changes to your address or payment details, you can do so below.</p>
+        <p>Note: Any changes made here will not be saved to your account details. If you would like to change your
+          saved details, <%= link_to "edit your account here",  edit_user_registration_path %>.</p>
+        </div>   
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-6">
+            <h2>Shipping Address</h2>
+            <div class="form-group has-feedback">
+              <%= label_tag "name", "Name" %>
+              <%= text_field_tag "name", current_user.name, autocomplete: "off", class: "form-control" %>
+            </div>
+            <div class="form-group has-feedback">
+              <%= label_tag "address", "Address" %>
+              <%= text_area_tag "address", current_user.address, autocomplete: "off", class: "form-control", rows: 4 %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h2>Payment Details</h2>
+            <div class="form-group has-feedback">
+              <%= label_tag "card_name", "Card Holder's Name" %>
+              <%= text_field_tag "card_name", current_user.card_name, autocomplete: "off", class: "form-control" %>
+            </div>
+            <div class="form-group has-feedback">
+              <%= label_tag "card_number", "Card Number" %>
+              <%= text_field_tag "card_number", current_user.card_number, autocomplete: "off", class: "form-control" %>
+            </div>
+            <div class="form-group has-feedback">
+              <%= label_tag "expiration_date", "Expiration Date (MM/YYYY): " %>
+              <%= label_tag "month", nil, class: "sr-only" %>
+              <%= select_tag "month", options_for_select([ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], current_user.expiration_month) %> /
+              <%= label_tag "year", nil, class: "sr-only" %>
+              <%= select_tag "year", options_for_select([ 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026], current_user.expiration_year) %>
+            </div>
+            <div class="form-group has-feedback">
+              <%= label_tag "code", "Security Code (CVC)" %>
+              <%= text_field_tag "code", current_user.security_code, autocomplete: "off", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-10">
+            <h3 class="text-right">Total:</h3>
+          </div>
+          <div class="col-md-2">
+            <h3 class="text-right"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></h3>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <%= hidden_field_tag "seller_id", @commission.seller_id %>
+          <%= hidden_field_tag "buyer_id", current_user.id %>
+          <%= hidden_field_tag "commission_id", @commission.id %>
+          <div class="col-md-6">
+            <div class="text-left">
+              <%= link_to "Cancel", private_commission_path(@commission.id), class: "btn btn-warning" %>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="text-right">
+              <%= submit_tag "Pay Now", class: "btn btn-success" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

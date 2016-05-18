@@ -16,4 +16,8 @@ class MessageThread < ActiveRecord::Base
   def partner(user)
     seller == user ? buyer : seller
   end
+
+  def mark_read!(user)
+    messages.where(receiver: user).update_all(read: true)
+  end
 end

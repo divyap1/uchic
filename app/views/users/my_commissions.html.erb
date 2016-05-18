@@ -2,7 +2,6 @@
   <div class="col-md-12">
 
     <ul class="breadcrumb">
-      <li><a href="/">Home</a></li>
       <li><a href="/dashboard">Dashboard</a></li>
       <li>My Commissions</li>
     </ul>
@@ -36,7 +35,6 @@
               <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
               <td style="padding-left: 10px">
                 <%= link_to "View Details", private_commission_path(commission.id), class: "btn btn-primary" %>
-                <%= link_to "Edit Commission", edit_private_commission_path(commission.id), class: "btn btn-default" %>
               </td>
             </tr>
             <% end %>

@@ -2,7 +2,6 @@ class Commission < ActiveRecord::Base
   STATES = {
     "discussion" => "Discussion",
     "accepted" => "Accepted; awaiting payment",
-    "paid" => "Paid",
     "in_progress" => "Payment received; in progress",
     "shipped" => "Shipped"
   }

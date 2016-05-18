@@ -17,6 +17,16 @@ class CommissionsController < ApplicationController
   # GET /commissions/1.json
   def show
     @commission = Commission.find(params[:id])
+
+    if @commission.buyer
+      if @commission.related_to?(current_user)
+        return redirect_to private_commission_path(@commission)
+      else
+        flash.error = "Sorry, you don't have permission to view that commission."
+        return redirect_to commissions_path
+      end
+    end
+
     @category = Category.find(@commission.category_id)
     @seller = @commission.seller
     @ancestry = @category.ancestors << @category
@@ -136,6 +146,7 @@ class CommissionsController < ApplicationController
                            :pictures => @commission.pictures,
                            :public => false)
     if @copy.save
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "copy requested", commission: @copy)
       pictures = @copy.pictures
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture.picture)
@@ -168,7 +179,7 @@ class CommissionsController < ApplicationController
                            :pictures => @commission.pictures,
                            :public => false)
     if @copy.save
-      @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission)
+        @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
 
       pictures = @copy.pictures
       pictures.each do |picture|
