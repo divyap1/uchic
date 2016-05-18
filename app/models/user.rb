@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "following_id"
   has_many :followers, :through => :inverse_friendships, :source => :user
 
-
   validates :name, presence: true
   validates :username, presence: true
   validates :address, presence: true
@@ -26,7 +25,7 @@ class User < ActiveRecord::Base
     allow_blank: true
   }
 
-  has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png"
+  has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png", styles: { thumb:'128x128#' }
   validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   scope :contains, -> (search) { where("name like ? OR username like ?", "#{search}%", "#{search}%")}

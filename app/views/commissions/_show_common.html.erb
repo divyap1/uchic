@@ -1,0 +1,54 @@
+<div class="col-sm-6">
+  <div id="mainImage">
+    <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/default.png", alt:"", class:"img-responsive" %> 
+  </div>
+  <% if @commission.created_at > Time.now - 24.hours %>
+    <div class="ribbon new">
+      <div class="theribbon">NEW</div>
+      <div class="ribbon-background"></div>
+    </div>
+  <% end %>
+  <% if @commission.pictures.length > 1 %>
+    <div class="row" id="thumbs">
+        <% @commission.pictures.each do |photo| %>
+        <div class="col-xs-3">
+          <%= link_to photo.picture.url(:medium), class:"thumb"  do %>
+          <%= image_tag photo.picture.url(:medium), alt: "", class: "img-responsive" %>
+          <% end %>
+        </div>
+        <% end %>
+    </div>
+  <%end%>
+</div>
+
+<div class="col-sm-6 text-center">
+
+  <div class="box">
+
+    <h1 class="text-center"><%= @commission.name %></h1>
+
+    <p class="price"><%= "$#{number_with_precision(@commission.price, :precision => 2)}" %></p>
+
+    <p class="desc"><%=@commission.description%></p>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestCopy">Request Copy</button>
+    <%= render partial: 'orders/copy_modal' %>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestSimilar">Request Similar</button>
+    <%= render partial: 'orders/similar_modal' %>
+
+    <a class="btn navbar-btn btn-link dropdown-toggle" type="button" href='<%=user_profile_path(@seller)%>'>
+
+      <img class="img-responsive center-block seller-image" alt="Profile picture" src="<%= @seller.profile_picture.url %>">
+
+      <h5><%= @seller.name %></h5>
+
+    </a>
+
+  </div>
+
+
+</div>
+
+</div>
+

@@ -74,7 +74,8 @@ class CommissionsController < ApplicationController
 
         if @commission.public
           @commission.seller.followers.each do |follower|
-            follower.notifications.create(image: @commission.pictures.first, about_user: current_user, state: "product listed", commission: @commission);
+            notification = follower.notifications.new(about_user: current_user, state: "product listed", commission: @commission)
+            notification.save!
           end
         end
 

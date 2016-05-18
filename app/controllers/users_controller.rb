@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def edit_payment
-
+    @seller = @commission.seller
   end
 
   def edit_private_commission
