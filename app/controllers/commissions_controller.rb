@@ -128,7 +128,7 @@ class CommissionsController < ApplicationController
     @buyer = User.find(params[:buyer_id])
     @seller = User.find(params[:seller_id])
 
-    @seller.notifications.create(about_user: @buyer, state: "copy requested", commission: @commission); # need to add image
+    @seller.notifications.create(about_user: @buyer, state: "copy requested", commission: @commission);
     respond_to do |format|
       format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
       format.json { render :show, status: :created, location: @commission }
@@ -136,7 +136,7 @@ class CommissionsController < ApplicationController
   end
 
   def make_similar
-
+    @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission); 
   end
 
   def approve
