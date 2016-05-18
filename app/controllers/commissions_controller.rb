@@ -138,7 +138,7 @@ class CommissionsController < ApplicationController
     if @copy.save
       pictures = @copy.pictures
       pictures.each do |picture|
-        @copy.pictures.create!(picture: picture)
+        @copy.pictures.create!(picture: picture.picture)
       end
 
       respond_to do |format|
@@ -172,7 +172,7 @@ class CommissionsController < ApplicationController
 
       pictures = @copy.pictures
       pictures.each do |picture|
-        @copy.pictures.create!(picture: picture)
+        @copy.pictures.create!(picture: picture.picture)
       end
 
       respond_to do |format|
@@ -189,9 +189,8 @@ class CommissionsController < ApplicationController
 
   def approve
     @commission = Commission.find(params[:id])
-
     @commission.accept!(current_user)
-
+    @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request accepted");
     redirect_to @commission
   end
 
