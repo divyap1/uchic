@@ -65,7 +65,7 @@
 
       <% actions = [] %>
     <% end %>
-  <% elsif commission.paid? || commission.in_progress? %>
+  <% elsif commission.in_progress? %>
     <% if current_user == commission.buyer %>
       <p>
         <strong>

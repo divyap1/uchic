@@ -35,10 +35,18 @@ class UsersController < ApplicationController
 
   def pay_now
     @commission = Commission.find(params[:commission_id])
-    @user = User.find(params[:buyer_id])
 
-    if @user.address && @user.card_name && @user.card_number && @user.expiration_year && @user.expiration_month && @user.security_code
-      @commission.update!(:state => 'paid')
+    min_num = 0
+    name = params[:name].length > min_num
+    address = params[:address].length > min_num
+    card_name = params[:card_name].length > min_num
+    card_number = params[:card_number].length >= 12
+    expiration_year = params[:year].length > min_num
+    expiration_month = params[:month].length > min_num
+    security_code = params[:code].length > min_num
+
+    if name && address && card_name && card_number && expiration_year && expiration_month && security_code
+      @commission.update!(:state => 'in_progress')
 
       respond_to do |format|
         format.html { redirect_to private_commission_path(@commission.id), notice: 'Your payment was successfully processed'}
@@ -47,18 +55,10 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to :back, alert: 'Your payment could not be processed. Make sure that you
-           have provided a shipping address and your payment details'}
+           have provided a shipping address and your payment details are valid.'}
         format.json { head :no_content }
       end
     end
-  end
-
-  def edit_shipping
-
-  end
-
-  def edit_payment
-    @seller = @commission.seller
   end
 
   def edit_private_commission
