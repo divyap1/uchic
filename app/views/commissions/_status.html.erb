@@ -7,8 +7,8 @@
         <%= link_to commission.seller.name, user_profile_path(commission.seller) %> is offering
         to make this item for you.
       <% else %>
-        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %> is asking you to
-        make this item for them.
+        You are offering to make this item for
+        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %>.
       <% end %>
     </strong>
   </p>

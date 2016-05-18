@@ -185,12 +185,13 @@
         return updateCommission(container, data.full_view);
       }
 
-      var popup = ensureMessagePopup({
-        threadId: data.message_thread.id,
-        partnerName: data.message_thread.seller_name
+      var popup = findMessagePopup({
+        threadId: data.message_thread.id
       });
 
-      updateCommission(popup, data.mini_view);
+      if (popup) {
+        updateCommission(popup, data.mini_view);
+      }
     }
   });
 

@@ -2,16 +2,14 @@
 	<div class="row">
 	    <div class="col-md-12">
 	        <div class="box without-spacing">
-							<% if params[:message_thread_id] %>
-									<%= link_to message_thread_path(params[:message_thread_id]), class: "btn btn-default" do %>
-										<span class="glyphicon glyphicon-chevron-left"></span> Return to messages
-									<% end %>
+							<% if @commission.buyer %>
+	            	<h1>Edit commission for <%= @commission.buyer.name %></h1>
+							<% else %>
+								<h1>Edit sample commission</h1>
 							<% end %>
 
-	            <h1>Edit Commission</h1>
-
 	            <%if user_signed_in? && @commission.seller_id == current_user.id %>
-								<%= render partial: "edit" %>
+								<%= render partial: "form" %>
             	<%end %>
 	        </div>
 	    </div>

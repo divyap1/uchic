@@ -109,6 +109,15 @@ class CommissionsController < ApplicationController
           MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
+        pictures = [*params[:commission][:pictures]] || []
+        unless pictures.empty?
+          @commission.pictures.destroy_all
+
+          pictures.each do |picture|
+            @commission.pictures.create!(picture: picture)
+          end
+        end
+
         @commission.accept!(current_user)
 
         format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
