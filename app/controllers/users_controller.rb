@@ -31,6 +31,23 @@ class UsersController < ApplicationController
     @commission = Commission.find(params[:id])
   end
 
+  def pay_now
+    @commission = Commission.find(params[:commission_id])
+
+    respond_to do |format|
+      format.html { redirect_to @commission, notice: 'Your payment was successfully processed'}
+      format.json { head :no_content }
+    end
+  end
+
+  def edit_shipping
+
+  end
+
+  def edit_payment
+
+  end
+
   def edit_private_commission
   end
 

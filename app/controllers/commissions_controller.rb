@@ -78,7 +78,7 @@ class CommissionsController < ApplicationController
           end
         end
 
-        format.html { redirect_to @commission, notice: 'commission was successfully created.' }
+        format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
         format.json { render :show, status: :created, location: @commission }
       else
         format.html { render :new }
@@ -96,7 +96,7 @@ class CommissionsController < ApplicationController
           MessageBroadcastController.publish('/commissions', commission_data(@commission))
         end
 
-        format.html { redirect_to @commission, notice: 'commission was successfully updated.' }
+        format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
         format.json { render :show, status: :ok, location: @commission }
       else
         format.html { render :edit }
@@ -112,7 +112,7 @@ class CommissionsController < ApplicationController
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
       @commission.destroy
       respond_to do |format|
-        format.html { redirect_to commissions_url, notice: 'commission was successfully destroyed.'}
+        format.html { redirect_to commissions_url, notice: 'Commission was successfully destroyed.'}
         format.json { head :no_content }
       end
     else

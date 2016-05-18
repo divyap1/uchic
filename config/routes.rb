@@ -32,6 +32,12 @@ Rails.application.routes.draw do
     get '/pay/:id' => 'users#pay', as: :pay_now
   end
 
+  resources :users do
+    post :pay_now, on: :collection
+    post :edit_shipping, on: :collection
+    post :edit_payment, on: :collection
+  end
+
   devise_for :users, controllers: { registrations: 'registrations' }
 
   # The priority is based upon order of creation: first created -> highest priority.
