@@ -128,18 +128,65 @@ class CommissionsController < ApplicationController
 
   def make_copy
     @commission = Commission.find(params[:commission_id])
-    @buyer = User.find(params[:buyer_id])
-    @seller = User.find(params[:seller_id])
+    @copy = Commission.new(:name => @commission.name,
+                           :description => @commission.description,
+                           :price => @commission.price,
+                           :seller_id => params[:seller_id],
+                           :buyer_id => params[:buyer_id],
+                           :state => 'discussion',
+                           :category_id => @commission.category_id,
+                           :pictures => @commission.pictures,
+                           :public => false)
+    if @copy.save
+      pictures = @copy.pictures
+      pictures.each do |picture|
+        @copy.pictures.create!(picture: picture)
+      end
 
-    @seller.notifications.create(about_user: @buyer, state: "copy requested", commission: @commission);
-    respond_to do |format|
-      format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
-      format.json { render :show, status: :created, location: @commission }
+      respond_to do |format|
+        format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
+        format.json { render :show, status: :created, location: @commission }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @commission, alert: 'There was an error sending your request. Please try again.' }
+        format.json { render json: @commission.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def make_similar
-    @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission);
+    @commission = Commission.find(params[:commission_id])
+    desc = @commission.description + "Additional Details: " + params[:custom_info]
+
+
+    @copy = Commission.new(:name => @commission.name,
+                           :description => desc,
+                           :price => @commission.price,
+                           :seller_id => params[:seller_id],
+                           :buyer_id => params[:buyer_id],
+                           :state => 'discussion',
+                           :category_id => @commission.category_id,
+                           :pictures => @commission.pictures,
+                           :public => false)
+    if @copy.save
+      @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission)
+
+      pictures = @copy.pictures
+      pictures.each do |picture|
+        @copy.pictures.create!(picture: picture)
+      end
+
+      respond_to do |format|
+        format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
+        format.json { render :show, status: :created, location: @commission }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @commission, alert: 'There was an error sending your request. Please try again.' }
+        format.json { render json: @commission.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def approve
