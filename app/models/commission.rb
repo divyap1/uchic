@@ -38,6 +38,10 @@ class Commission < ActiveRecord::Base
     !public?
   end
 
+  def related_to?(user)
+    user == buyer || user == seller
+  end
+
   def accepted_by?(user)
     user == buyer ? accepted_by_buyer? : accepted_by_seller?
   end

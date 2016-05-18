@@ -17,6 +17,16 @@ class CommissionsController < ApplicationController
   # GET /commissions/1.json
   def show
     @commission = Commission.find(params[:id])
+
+    if @commission.private?
+      if @commission.related_to?(current_user)
+        return redirect_to private_commission_path(@commission)
+      else
+        flash.error = "Sorry, you don't have permission to view that commission."
+        return redirect_to commissions_path
+      end
+    end
+
     @category = Category.find(@commission.category_id)
     @seller = @commission.seller
     @ancestry = @category.ancestors << @category
