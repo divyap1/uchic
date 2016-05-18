@@ -1,8 +1,8 @@
-<div class="col-md-3">
-    <%= image_tag notification.image || "no-profile-picture.png", class: "img img-responsive" %>
-</div>
-<div class="col-md-9">
-    <h2>
+<li class="media">
+    <%= image_tag notification.image? ? notification.image : "no-profile-picture.png", class: "pull-left img-responsive"%>
+
+<div class="media-body">
+    <h2 class = "media heading">
         You have a new follower
     </h2>
     <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
@@ -12,3 +12,4 @@
     <%end%>
     <%= link_to "View their page", user_profile_path(notification.about_user), class: "btn btn-default btn-small"  %>
 </div>
+</li>

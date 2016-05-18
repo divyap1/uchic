@@ -1,11 +1,12 @@
-<div class="col-md-3">
+<li class="media">
     <%= image_tag "copy.png", class: "img img-responsive" %>
-</div>
-<div class="col-md-9">
-    <h2>Someone wants to buy a variation of one of your items!</h2>
+    <div class="media-body">
+        <h2 class = "media heading">
+    Someone wants to buy a variation of one of your items!</h2>
     <h3>
         <%= "#{notification.about_user.name} wants #{notification.commission.name}" %></h3>
     <%= link_to "Accept", class: "btn btn-primary" %>
     <%= link_to "Decline", class: "btn btn-danger" %>
     <%= link_to "View proposal", "btn btn-default" %>
 </div>
+</li>

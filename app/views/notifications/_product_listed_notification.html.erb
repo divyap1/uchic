@@ -1,8 +1,7 @@
-<div class="col-md-3">
-    <%= image_tag notification.image || "default.png", class: "img img-responsive" %>
-</div>
-<div class="col-md-9">
-    <h2>
+<li class="media">
+    <%= image_tag notification.image? ? notification.image : "default.png", class: "img img-responsive" %>
+<div class="media-body">
+    <h2 class = "media heading">
         <%= "#{notification.about_user.name} just listed a new product" %>
     </h2>
     <h3>
@@ -14,3 +13,4 @@
     <%= link_to "View this item", commission_path(notification.commission) %>
     <%= link_to "View their profile", user_profile_path(notification.about_user) %>
 </div>
+</li>
