@@ -74,7 +74,10 @@ class CommissionsController < ApplicationController
 
         if @commission.public
           @commission.seller.followers.each do |follower|
-            follower.notifications.create(image: @commission.pictures.first, about_user: current_user, state: "product listed", commission: @commission);
+            byebug
+            notification = follower.notifications.new(about_user: current_user, state: "product listed", commission: @commission)
+            notification.image = @commission.pictures.first.try!(:picture)
+            notification.save!
           end
         end
 
@@ -136,7 +139,7 @@ class CommissionsController < ApplicationController
   end
 
   def make_similar
-    @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission); 
+    @seller.notifications.create(about_user: @buyer, state: "similar requested", commission: @commission);
   end
 
   def approve
