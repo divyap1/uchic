@@ -9,7 +9,7 @@ class FriendshipsController < ApplicationController
       if @friendship.save
         format.html { redirect_to user_profile_path(params[:following_id]), notice: 'Added successfully' }
         format.json { render :show, status: :created, location: @friendship }
-        User.find_by_id(params[:following_id]).notifications.create(about_user_id: current_user.id, image: current_user.profile_picture, state: "new follower");
+        User.find_by_id(params[:following_id]).notifications.create(about_user_id: current_user.id, state: "new follower");
       else
         format.html { redirect_to user_profile_path(params[:following_id]), alert: 'Unable to add user' }
         format.json { render :show, status: :created, status: :unprocessable_entity }

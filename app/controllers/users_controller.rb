@@ -25,6 +25,7 @@ class UsersController < ApplicationController
 
   def private_commission
     @commission = Commission.find(params[:id])
+    @seller = @commission.seller
   end
 
   def edit_private_commission

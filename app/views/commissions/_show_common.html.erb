@@ -1,6 +1,6 @@
 <div class="col-sm-6">
   <div id="mainImage">
-    <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png", alt:"", class:"img-responsive" %>
+    <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/default.png", alt:"", class:"img-responsive" %> 
   </div>
   <% if @commission.created_at > Time.now - 24.hours %>
     <div class="ribbon new">
@@ -12,13 +12,13 @@
     <div class="row" id="thumbs">
         <% @commission.pictures.each do |photo| %>
         <div class="col-xs-3">
-          <%= link_to photo.picture.url, class:"thumb"  do %>
-          <%= image_tag photo.picture.url, alt: "", class: "img-responsive" %>
+          <%= link_to photo.picture.url(:medium), class:"thumb"  do %>
+          <%= image_tag photo.picture.url(:medium), alt: "", class: "img-responsive" %>
           <% end %>
         </div>
         <% end %>
     </div>
-<%end%>
+  <%end%>
 </div>
 
 <div class="col-sm-6 text-center">
