@@ -37,7 +37,7 @@
         <div class="panel-heading divided">
           <div class="pull-right">
             <% if !@message_thread.commission %>
-              <%= link_to new_commission_path, class: "btn btn-link" do %>
+              <%= link_to new_commission_path(message_thread_id: @message_thread.id), class: "btn btn-link" do %>
                 <span class="glyphicon glyphicon-plus"></span> Propose commission
               <% end %>
             <% elsif @message_thread.commission.discussion? %>
