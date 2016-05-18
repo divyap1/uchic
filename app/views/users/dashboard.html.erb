@@ -7,7 +7,7 @@
 
         <div class="pull-right"</div>
           <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-default"%>
-          <%= link_to "Edit profile",  edit_user_registration_path, class: "btn btn-default"%>
+          <%= link_to "Edit account",  edit_user_registration_path, class: "btn btn-default"%>
         </div>
 
       </div>
@@ -56,20 +56,6 @@
         <div class="panel-body">
 
           <h4>Current Commissions</h4>
-
-          <!--Change condition once commisions have been setup-->
-          <% if 1==2 %>
-          <div class="alert alert-success" role="alert">
-            <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true"></span>
-            Accepting commissions for:
-          </div>
-          <% else %>
-          <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-cog pull-right" aria-hidden="true"></span>
-            Not currently accepting commissions
-          </div>
-          <% end %>
-
           <% if @commissions && @commissions.any? %>
           <h4> <%=@commissions.length%> Recent Commissions</h4>
 

@@ -17,15 +17,13 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     all_items = @category.commissions + @category.children.flat_map(&:commissions)
 
-    @order_options = ["Price low to high", "Price high to low", "Name", "Recently added"]
+    @order_options = ["Price low to high", "Price high to low", "Recently added"]
     @order = params[:order] || @order_options.first
 
     if @order == "Price low to high"
       all_items.sort_by!(&:price)
     elsif @order == "Price high to low"
       all_items.sort_by!(&:price).reverse!
-    elsif @order == "Name"
-      all_items.sort_by!(&:name)
     elsif @order == "Recently added"
       all_items.sort_by!(&:created_at).reverse!
     end

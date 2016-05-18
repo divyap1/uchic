@@ -10,20 +10,23 @@
         <div class="col-md-6">
           <div class="commissions-number">
             <strong>Show</strong>
+            <br>
             <% @display_sizes.each do |size| %>
-            <% if @display_size == size %>
-            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm btn-primary" %>
-            <% else %>
-            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm" %>
-            <% end %>
+              <% if @display_size == size %>
+              <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm btn-primary" %>
+              <% else %>
+              <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm" %>
+              <% end %>
             <% end %>
           </div>
         </div>
         <div class="col-md-6">
           <div class="commissions-sort-by">
+
             <strong>Sort by</strong>
+            <br>
             <% @order_options.each do |order| %>
-            <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
+              <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
             <% end %>
           </div>
         </div>
