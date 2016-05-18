@@ -1,8 +1,10 @@
 <li class="media">
-    <%= image_tag notification.image? ? notification.image.url : "no-profile-picture.png", class: "pull-left img-responsive"%>
+  <div class="media-left">
+    <%= image_tag notification.about_user.profile_picture.url(:thumb)%>
+  </div>
 
 <div class="media-body">
-    <h2 class = "media heading">
+    <h2 class = "media-heading">
         You have a new follower
     </h2>
     <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
