@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = Message.new(message_params.merge(read: false))
 
     if @message.sender == @message.message_thread.seller
       @message.receiver = @message.message_thread.buyer

@@ -35,12 +35,17 @@
       display: inline;
     }
 
+    .messages {
+      max-height: 50vh;
+    }
+
     textarea {
       margin-top: $padding-small-vertical;
     }
 
     &.minimised .messages,
-    &.minimised input {
+    &.minimised .thread-commission,
+    &.minimised textarea {
       display: none;
     }
   }

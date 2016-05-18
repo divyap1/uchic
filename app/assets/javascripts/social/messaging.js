@@ -133,6 +133,7 @@
 
     if (container.length) {
       container.find(".messages").append(buildMessageBubble(data, type));
+      container.find(".messages").scrollTop(container.find(".messages").height() + 1000);
       return;
     }
 
@@ -206,7 +207,7 @@
 
   $(".message-input").on("keypress", maybeSendMessage);
 
-  $(".message-container").each(function() {
+  $(".messages").each(function() {
     $(this).scrollTop($(this).height() + 1000);
   });
 })();
