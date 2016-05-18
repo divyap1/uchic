@@ -36,13 +36,9 @@
         <% partner = @message_thread.partner(current_user) %>
         <div class="panel-heading divided">
           <div class="pull-right">
-            <% if !@message_thread.commission %>
+            <% if !@message_thread.commission && current_user == @message_thread.seller %>
               <%= link_to new_commission_path(message_thread_id: @message_thread.id), class: "btn btn-link" do %>
-                <span class="glyphicon glyphicon-plus"></span> Propose commission
-              <% end %>
-            <% elsif @message_thread.commission.discussion? %>
-              <%= link_to edit_commission_path(@message_thread.commission), class: "btn btn-link" do %>
-                <span class="glyphicon glyphicon-pencil"></span> Edit proposal
+                <span class="glyphicon glyphicon-plus"></span> Create commission
               <% end %>
             <% end %>
             <%= link_to message_thread_path(@message_thread), method: "delete", class: "btn btn-link" do %>
@@ -50,7 +46,10 @@
               <span class="sr-only">Delete this thread</span>
             <% end %>
           </div>
-          <h2>Conversation with <%= link_to partner.name, user_profile_path(partner) %></h2>
+          <h2>
+            Conversation as <%= current_user == @message_thread.buyer ? "buyer" : "seller" %> with
+            <%= link_to partner.name, user_profile_path(partner) %>
+          </h2>
           <%= render partial: "commission_full", locals: { commission: @message_thread.commission } %>
         </div>
         <div class="panel-body">
