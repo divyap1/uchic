@@ -135,10 +135,11 @@ class CommissionsController < ApplicationController
                            :category_id => @commission.category_id,
                            :public => false)
 
-     if @copy.save
+    if @copy.save
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "copy requested", commission: @copy)
       pictures = @copy.pictures
       pictures.each do |picture|
-        @copy.pictures.create!(picture: picture)
+        @copy.pictures.create!(picture: picture.picture)
       end
 
       MessageThread.create!(:buyer_id => params[:buyer_id],
@@ -177,7 +178,7 @@ class CommissionsController < ApplicationController
 
       pictures = @copy.pictures
       pictures.each do |picture|
-        @copy.pictures.create!(picture: picture)
+        @copy.pictures.create!(picture: picture.picture)
       end
 
       MessageThread.create!(:buyer_id => params[:buyer_id],
@@ -198,9 +199,8 @@ class CommissionsController < ApplicationController
 
   def approve
     @commission = Commission.find(params[:id])
-
     @commission.accept!(current_user)
-
+    @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request accepted");
     redirect_to @commission
   end
 

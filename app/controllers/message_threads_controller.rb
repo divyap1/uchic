@@ -8,12 +8,14 @@ class MessageThreadsController < ApplicationController
   def index
     @message_threads = MessageThread.related_to(current_user)
     @message_thread = @message_threads.first
+    @message_thread.mark_read!(current_user)
   end
 
   # GET /message_threads/1
   # GET /message_threads/1.json
   def show
     @message_thread = MessageThread.find(params[:id])
+    @message_thread.mark_read!(current_user)
     @message_threads = MessageThread.related_to(current_user)
 
     respond_to do |format|

@@ -60,8 +60,8 @@
             <a href="<%= message_threads_path %>">
               <span class="sr-only">Messages</span>
               <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-              <%if MessageThread.related_to(current_user).length > 0 %>
-              <span class="badge badge-notify"><%=MessageThread.related_to(current_user).length%></span>
+              <%if Message.unread_count(current_user) > 0 %>
+              <span class="badge badge-notify">✱</span>
               <% end %>
             </a>
           </li>
