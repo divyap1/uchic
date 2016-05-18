@@ -49,7 +49,7 @@
         in advance.
       </p>
 
-      <% actions = [link_to("Checkout", "#", class: "btn btn-success")] %>
+      <% actions = [link_to("Pay Now", pay_now_path(commission.id), class: "btn btn-success")] %>
     <% else %>
       <p>
         <strong>

@@ -133,7 +133,6 @@ class CommissionsController < ApplicationController
                            :buyer_id => params[:buyer_id],
                            :state => 'discussion',
                            :category_id => @commission.category_id,
-                           :pictures => @commission.pictures,
                            :public => false)
 
      if @copy.save

@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 
   def private_commission
     @commission = Commission.find(params[:id])
+    @seller = User.find(@commission.seller_id)
+    @seller = User.find(@commission.buyer_id)
   end
 
   def pay
@@ -39,7 +41,7 @@ class UsersController < ApplicationController
       @commission.update!(:state => 'paid')
 
       respond_to do |format|
-        format.html { redirect_to @commission, notice: 'Your payment was successfully processed'}
+        format.html { redirect_to private_commission_path(@commission.id), notice: 'Your payment was successfully processed'}
         format.json { head :no_content }
       end
     else
