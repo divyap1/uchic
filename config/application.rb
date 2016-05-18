@@ -25,5 +25,6 @@ module SolidFiesta
 
     config.middleware.delete Rack::Lock
     config.middleware.use FayeRails::Middleware, mount: '/socket', timeout: 25
+    Paperclip.options[:command_path] = "/usr/local/bin/identify"
   end
 end

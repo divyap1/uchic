@@ -11,6 +11,6 @@ class Notification < ActiveRecord::Base
   validates :user, presence: true
   validates :about_user, presence: true
 
-  has_attached_file :image
+  has_attached_file :image, styles: {thumb: "100x100#"}
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 end

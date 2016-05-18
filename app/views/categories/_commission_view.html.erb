@@ -7,18 +7,18 @@
                     <div class="flipper">
                         <div class="front">
                             <%= link_to commission_path(commission.id) do %>
-                            <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", alt: "", class:"img-responsive" %>
+                            <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
                             <% end %>
                         </div>
                         <div class="back">
                             <%= link_to commission_path(commission.id) do %>
-                            <% image_tag commission.pictures.second ? commission.pictures.second.picture.url : commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", alt: "", class:"img-responsive" %>
+                            <% image_tag commission.pictures.second ? commission.pictures.second.picture.url(:medium) : commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
                             <% end %>
                         </div>
                     </div>
                 </div>
                 <%= link_to commission_path(commission.id), class: "invisible" do %>
-                    <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", alt: "", class:"img-responsive" %>
+                    <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
                 <% end %>
                 <div class="text">
                     <h3>
