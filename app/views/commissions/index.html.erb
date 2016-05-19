@@ -7,15 +7,19 @@
         </div>
 
 		<ul class="nav nav-tabs" role="tablist">
-		    <li role="presentation" class="active"><a href="#products" aria-controls="home" role="tab" data-toggle="tab">Products</a></li>
-		    <li role="presentation"><a href="#users" aria-controls="profile" role="tab" data-toggle="tab">Users</a></li>
-  	</ul>
+		    <li role="presentation" class="<%= 'active' if @commissions.length > 0 || @users.length == 0 %>"><a href="#products" aria-controls="home" role="tab" data-toggle="tab">Commissions</a></li>
+		    <li role="presentation" class="<%= 'active' if @commissions.length == 0 && @users.length >0 %>""><a href="#users" aria-controls="profile" role="tab" data-toggle="tab">Users</a></li>
+  		</ul>
 
 	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="products">
+	    <div role="tabpanel" class="tab-pane <%= 'active' if @commissions.length > 0 || @users.length == 0 %>" id="products">
+	    	<% if @commissions.length == 0 %>
+	    		<h3>No commisions found</h3>
+			<% else %>
 	    	<%= render partial: 'categories/commission_view' %>
+	    	<% end %>
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="users">
+	    <div role="tabpanel" class="tab-pane <%= 'active' if @commissions.length == 0&& @users.length > 0 %>" id="users">
 	    	<% if @users.length == 0 %>
 	    		<h3>No users found</h3>
 			<%else%>

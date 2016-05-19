@@ -6,7 +6,7 @@ class CommissionsController < ApplicationController
   # GET /commissions
   # GET /commissions.json
   def index
-    @commissions = Commission.all
+    @commissions = Commission.publicly_visible
     @commissions = @commissions.contains(params[:search]) if params[:search].present?
     @commissions = Kaminari.paginate_array(@commissions).page(params[:page]).per(params[:display_size])
     @users = User.all
@@ -91,7 +91,7 @@ class CommissionsController < ApplicationController
           end
         end
 
-        format.html { redirect_to @commission, notice: 'commission was successfully created.' }
+        format.html { redirect_to @commission, notice: 'Commission was successfully added.' }
         format.json { render :show, status: :created, location: @commission }
       else
         format.html { render :new }
