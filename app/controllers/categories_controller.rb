@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
   def show
     @display_sizes = [6, 12, 24]
     @display_size = params[:display_size] || @display_sizes.first
-    @display_size.to_i
+    @display_size = @display_size.to_i
 
     @category = Category.find(params[:id])
     all_items = @category.commissions + @category.children.flat_map(&:commissions)

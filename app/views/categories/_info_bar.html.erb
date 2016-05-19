@@ -26,7 +26,11 @@
             <strong>Sort by</strong>
             <br>
             <% @order_options.each do |order| %>
+              <% if @order == order %>
+                <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-primary btn-sm" %>
+              <% else %>
               <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
+              <% end %>
             <% end %>
           </div>
         </div>
