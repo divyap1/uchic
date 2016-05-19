@@ -1,38 +1,62 @@
 <%= form_for(@commission) do |f| %>
-  <% if @commission.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@commission.errors.count, "error") %> prohibited this commission from being saved:</h2>
-
+<%if @commission.errors.any? %>
+  <div id="error_explanation">
+      <h2><%= pluralize(@commission.errors.count, "error") %>
+      prohibited this commission from being saved:</h2>
       <ul>
-      <% @commission.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+          <%@commission.errors.full_messages.each do |message| %>
+          <li><%= message %></li><%end %>
       </ul>
-    </div>
-  <% end %>
+  </div>
+<%end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, required: true%>
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="form-group has-feedback">
+        <%= f.label :name, class: "sr-only"%>
+        <%= f.text_field :name, placeholder: "Commission Name", required: true, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= f.label :description,class: "sr-only" %>
+        <%= f.text_area :description, placeholder: "Commission Description", class: "form-control", rows: 12 %>
+    </div>
+    <div class="form-group">
+        <%= f.label :price, class: "sr-only"%>
+        <%= f.number_field :price, placeholder: "Price", required: true, :step => 0.01, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :category_id, class: "sr-only"%>
+      <%= f.select(:category_id, @categories.collect {|c| [c.name, c.id]}, {},  :class => "form-control", :prompt => "Choose category") %>
+    </div>
+
+    <% if @commission.buyer %>
+      <%= f.hidden_field :public %>
+    <% else %>
+      <div class="form-group">
+          <%= f.label :public, "Make public" %>
+          <%= f.check_box :public %>
+      </div>
+    <% end %>
+
+    <%= f.hidden_field :seller_id, value: current_user.id %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url : "products/default.png" %>
+      <%= f.label :picture, class: "sr-only"%>
+      <%= f.file_field :pictures, {accept: 'image/png,image/jpeg', multiple: true} %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :price%><br>
-    <%= f.number_field :price, required: true, :step => 0.01 %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity%><br>
-    <%= f.number_field :quantity, required: true %>
-  </div>
-  <div class="field">
-    <!--This will be hidden once login is setup, as user shouldnt be able to set seller-->
-    <%= f.label :seller_id %><br>
-    <%= f.text_field :seller_id, :value => user_signed_in? ? current_user.id : -1 %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<div class="row">
+ <div class="col-md-4 col-md-offset-4">
+<%= f.submit class: "btn btn-primary" %>
+<%= link_to 'Back', commissions_path, :class => 'btn btn-warning' %>
+ </div>
+</div>
+
+<%end %>

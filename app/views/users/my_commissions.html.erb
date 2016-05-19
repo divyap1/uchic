@@ -32,7 +32,7 @@
             <tr>
               <td><%= commission.name %></td>
               <td><%= commission.created_at.strftime "%d %B %Y" %></td>
-              <td><%= commission.state %></td>
+              <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
               <td style="padding-left: 10px">
                 <%= link_to "View Details", private_commission_path(commission.id), class: "btn btn-primary" %>
               </td>

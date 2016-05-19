@@ -31,7 +31,7 @@
 				      </thead>
 				      <tbody>
 				        <% @users.each do |user| %>
-				          <tr>
+				          <tr data-link="<%= user_profile_path(user) %>">
 				          	<td><%= image_tag user.profile_picture.url, size: "64x64", :class => "media-object"%></td>
 				            <td><%= user.name %></td>
 				            <td><%= user.username %></td>
