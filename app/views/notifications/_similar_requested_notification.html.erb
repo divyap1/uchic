@@ -7,8 +7,8 @@
     Someone wants to buy a variation of one of your items!</h2>
     <h3>
         <%= "#{notification.about_user.name} wants #{notification.commission.name}" %></h3>
-        <%= link_to "View proposal", private_commission_path(notification.commission), class: "btn btn-primary" %>
-        <%= link_to "Accept", approve_commission_path(notification.commission), class: "btn btn-success", method: "post" %>
-        <%= link_to "Decline", commission_path(notification.commission), class: "btn btn-danger", method: "delete" %>
+    <%= link_to "Accept", class: "btn btn-primary" %>
+    <%= link_to "Decline", class: "btn btn-danger" %>
+    <%= link_to "View proposal", "btn btn-default" %>
 </div>
 </li>

@@ -135,6 +135,9 @@ class CommissionsController < ApplicationController
     #Check the current user posted the commission
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
       @commission.destroy!
+      if @commission.buyer
+        @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request denied")
+      end
       respond_to do |format|
         format.html { redirect_to user_dashboard_url, notice: 'Commission was successfully destroyed.'}
         format.json { head :no_content }
