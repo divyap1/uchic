@@ -168,6 +168,10 @@ class CommissionsController < ApplicationController
         @copy.pictures.create!(picture: picture.picture)
       end
 
+      MessageThread.create!(:buyer_id => params[:buyer_id],
+                            :seller_id => params[:seller_id],
+                            :commission => @copy)
+
       respond_to do |format|
         format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
         format.json { render :show, status: :created, location: @commission }
@@ -201,6 +205,10 @@ class CommissionsController < ApplicationController
       pictures.each do |picture|
         @copy.pictures.create!(picture: picture.picture)
       end
+
+      MessageThread.create!(:buyer_id => params[:buyer_id],
+                            :seller_id => params[:seller_id],
+                            :commission => @copy)
 
       respond_to do |format|
         format.html { redirect_to @commission, notice: 'Your request was successfully sent.' }
