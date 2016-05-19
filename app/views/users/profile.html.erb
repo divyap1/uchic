@@ -42,8 +42,8 @@
 
                <div class="panel-body">
                   <ul class="media-list">
-                     <% if @user.commissions_as_seller.length > 0 %>
-                        <% @user.commissions_as_seller.each do |product| %>
+                     <% if @user.commissions_as_seller.publicly_visible.length > 0 %>
+                        <% @user.commissions_as_seller.publicly_visible.each do |product| %>
                            <li class="media">
                               <div class="media-left">
                                  <a href="#">

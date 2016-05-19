@@ -16,6 +16,7 @@ class CategoriesController < ApplicationController
 
     @category = Category.find(params[:id])
     all_items = @category.commissions + @category.children.flat_map(&:commissions)
+    all_items = all_items.select { |commission| commission.public }
 
     @order_options = ["Price low to high", "Price high to low", "Recently added"]
     @order = params[:order] || @order_options.first

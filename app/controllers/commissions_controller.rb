@@ -18,7 +18,7 @@ class CommissionsController < ApplicationController
   def show
     @commission = Commission.find(params[:id])
 
-    if @commission.buyer
+    if @commission.private? && @commission.buyer
       if @commission.related_to?(current_user)
         return redirect_to private_commission_url(@commission)
       else
@@ -32,7 +32,9 @@ class CommissionsController < ApplicationController
     @ancestry = @category.ancestors << @category
     @section = @commission.name
 
-    @similar_items = @category.commissions.order("RANDOM()").limit(3)
+    @similar_items = @category.commissions.select{|commission| commission.public && commission!=@commission}
+    @similar_items = @similar_items.sample(3)
+
 
     @new_commission = Commission.new
   end
