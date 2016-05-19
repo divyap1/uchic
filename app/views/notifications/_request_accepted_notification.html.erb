@@ -1,9 +1,9 @@
 <li class="media">
     <div class="media-left">
-      <%= image_tag "copy.png" %>
+      <%= image_tag "notification/pay.png" %>
     </div>
     <div class="media-body">
         <h2 class = "media-heading"><%= "#{notification.about_user.name} accepted your offer on #{notification.commission.name}" %></h2>
-    <%= link_to "Pay Now"  %>
+    <%= link_to "Pay Now", class: "btn btn-success" %>
 </div>
 </li>

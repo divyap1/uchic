@@ -12,7 +12,7 @@
     <p>
         <%= notification.commission.description %>
     </p>
-    <%= link_to "View this item", commission_path(notification.commission) %>
-    <%= link_to "View their profile", user_profile_path(notification.about_user) %>
+    <%= link_to "View this item", commission_path(notification.commission), class: "btn btn-primary" %>
+    <%= link_to "View their profile", user_profile_path(notification.about_user), class: "btn btn-default" %>
 </div>
 </li>
