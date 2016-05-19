@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
   STATES = ["product listed", "copy requested", "similar requested", "new requested",
           "request accepted", "counter offer", "payment received", "request denied",
-           "item delivered", "new follower"]
+           "item delivered", "new follower", "new review"]
 
   belongs_to :user
   belongs_to :commission

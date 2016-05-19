@@ -6,7 +6,7 @@ class CommissionsController < ApplicationController
   # GET /commissions
   # GET /commissions.json
   def index
-    @commissions = Commission.all
+    @commissions = Commission.publicly_visible
     @commissions = @commissions.contains(params[:search]) if params[:search].present?
     @commissions = Kaminari.paginate_array(@commissions).page(params[:page]).per(params[:display_size])
     @users = User.all
@@ -91,7 +91,7 @@ class CommissionsController < ApplicationController
           end
         end
 
-        format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
+        format.html { redirect_to @commission, notice: 'Commission was successfully added.' }
         format.json { render :show, status: :created, location: @commission }
       else
         format.html { render :new }
@@ -135,6 +135,9 @@ class CommissionsController < ApplicationController
     #Check the current user posted the commission
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
       @commission.destroy!
+      if @commission.buyer
+        @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request denied")
+      end
       respond_to do |format|
         format.html { redirect_to user_dashboard_url, notice: 'Commission was successfully destroyed.'}
         format.json { head :no_content }
