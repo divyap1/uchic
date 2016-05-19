@@ -91,7 +91,7 @@ class CommissionsController < ApplicationController
           end
         end
 
-        format.html { redirect_to @commission, notice: 'commission was successfully created.' }
+        format.html { redirect_to @commission, notice: 'Commission was successfully created.' }
         format.json { render :show, status: :created, location: @commission }
       else
         format.html { render :new }
