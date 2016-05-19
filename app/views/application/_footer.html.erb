@@ -7,11 +7,17 @@ _________________________________________________________ -->
 
                 <ul>
                     <% if user_signed_in? %>
+                    <li>
+                      <%= link_to "Activity Feed", user_activity_feed_path(current_user) %>
+                    </li>
                       <li>
-                        <%= link_to "Account settings", show_user_registration_path %>
+                        <%= link_to "Dashboard", user_dashboard_path %>
                       </li>
                       <li>
-                        <%= link_to "Order History", orders_path %>
+                        <%= link_to "Profile Page", user_profile_path(current_user) %>
+                      </li>
+                      <li>
+                        <%= link_to "Acount Settings", edit_user_registration_path %>
                       </li>
                       <li>
                         <%= link_to "Logout", destroy_user_session_path, method: "delete" %>
