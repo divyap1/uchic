@@ -17,17 +17,17 @@ class UsersController < ApplicationController
 
   def listings
     @open_commissions = Commission.where(seller_id: current_user.id, buyer_id: nil)
-    @commissions = Commission.where(seller_id: current_user.id).where.not(buyer_id: nil)
+    @commissions = Commission.where(seller_id: current_user.id, active: true).where.not(buyer_id: nil)
   end
 
   def my_commissions
-    @commissions = Commission.where(buyer_id: current_user.id)
+    @commissions = Commission.where(buyer_id: current_user.id, active: true)
   end
 
   def private_commission
     @commission = Commission.find(params[:id])
     @seller = User.find(@commission.seller_id)
-    @seller = User.find(@commission.buyer_id)
+    @buyers = User.find(@commission.buyer_id)
   end
 
   def pay
@@ -70,10 +70,10 @@ class UsersController < ApplicationController
     if user_signed_in?
       # get most recently opened commissions by seller
       @open_commissions = Commission.where(seller_id: current_user.id, buyer_id: nil).last(8)
-      @commissions = Commission.where(seller_id: current_user.id).where.not(buyer_id: nil).last(8)
+      @commissions = Commission.where(seller_id: current_user.id, active: true).where.not(buyer_id: nil).last(8)
 
       # only show most recent commissions that are currently active
-      @req_commissions = Commission.where(buyer_id: current_user.id, state:
+      @req_commissions = Commission.where(buyer_id: current_user.id, active: true, state:
                           ['discussion', 'accepted', 'in_progress', 'shipped']).last(8)
 
     end

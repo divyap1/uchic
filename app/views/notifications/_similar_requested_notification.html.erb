@@ -1,14 +1,14 @@
 <li class="media">
   <div class="media-left">
-    <%= image_tag "copy.png" %>
+    <%= image_tag "notification/similar.png" %>
   </div>
     <div class="media-body">
         <h2 class = "media-heading">
     Someone wants to buy a variation of one of your items!</h2>
     <h3>
         <%= "#{notification.about_user.name} wants #{notification.commission.name}" %></h3>
+        <%= link_to "View proposal", "btn btn-default" %>
     <%= link_to "Accept", class: "btn btn-primary" %>
     <%= link_to "Decline", class: "btn btn-danger" %>
-    <%= link_to "View proposal", "btn btn-default" %>
 </div>
 </li>

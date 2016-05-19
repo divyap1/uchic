@@ -9,7 +9,7 @@
 
   <div class="col-md-9">
     <div class="row" id="productMain">
-      
+
       <%= render partial: "show_common" %>
 
       <div class="row">
@@ -21,18 +21,18 @@
               <div class="flipper">
                 <div class="front">
                   <%= link_to commission_path(similar_item.id) do %>
-                  <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
+                  <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture.url(:small) : "products/default.png", alt: "", class:"img-responsive" %>
                   <% end %>
                 </div>
                 <div class="back">
                   <%= link_to commission_path(similar_item.id) do %>
-                  <%= image_tag similar_item.pictures.second ? similar_item.pictures.second.picture : similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
+                  <%= image_tag similar_item.pictures.second ? similar_item.pictures.second.picture.url(:small) : similar_item.pictures.first ? similar_item.pictures.first.picture.url(:small) : "products/default.png", alt: "", class:"img-responsive" %>
                   <% end %>
                 </div>
               </div>
             </div>
             <%= link_to commission_path(similar_item.id), class: "invisible" do %>
-            <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture : "products/default.png", alt: "", class:"img-responsive" %>
+            <%= image_tag similar_item.pictures.first ? similar_item.pictures.first.picture.url(:small) : "products/default.png", alt: "", class:"img-responsive" %>
             <% end %>
             <div class="text">
               <h3><%= similar_item.name %></h3>
