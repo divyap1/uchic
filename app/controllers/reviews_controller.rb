@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        @review.user.notifications.create(about_user: @review.reveiwer, state: "new review")
+        @review.user.notifications.create(about_user: @review.reviewer, state: "new review")
         format.html { redirect_to user_profile_path(review_params[:user_id]), notice: 'Review was added.' }
         format.json { render :show, status: :created, location: @review }
       else
