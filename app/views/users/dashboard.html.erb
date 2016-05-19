@@ -88,7 +88,7 @@
                     <tr data-link="<%=commission_path(commission)%>">
                       <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
                       <td><%= commission.name %></td>
-                      <td>$<%= commission.price %></td>
+                      <td><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
                     </tr>
                     <% end %>
                   </tbody>

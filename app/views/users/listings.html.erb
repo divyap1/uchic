@@ -32,7 +32,7 @@
                 <% @open_commissions.each do |commission| %>
                 <tr data-link="<%=commission_path(commission)%>">
                   <td><%= commission.name %></td>
-                  <td>$<%= commission.created_at.strftime "%d %B %Y" %></td>
+                  <td><%= commission.created_at.strftime "%d %B %Y" %></td>
                   <td style="padding-left: 10px">
                     <%= link_to "View Commission", commission, class: "btn btn-primary" %>
                     <%= link_to "Edit Commission", edit_commission_path(commission), class: "btn btn-default" %>
