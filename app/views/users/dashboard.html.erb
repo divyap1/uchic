@@ -54,8 +54,8 @@
           <h3 class="panel-title">Selling</h3>
         </div>
         <div class="panel-body">
-          <% if @commissions && @commissions.any? %>
           <h4> Open Commissions</h4>
+          <% if @commissions && @commissions.any? %>
 
           <div class="table-responsive">
             <table class="table table-hover">
@@ -70,6 +70,8 @@
               </tbody>
             </table>
           </div>
+          <% else %>
+          <p>You have not opened any commissions yet</p>
           <% end %>
 
           <%= link_to "View all listed commissions", user_listings_path, class: "btn btn-default" %>

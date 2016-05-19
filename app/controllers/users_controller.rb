@@ -67,8 +67,13 @@ class UsersController < ApplicationController
   def dashboard
     @user = current_user
     if user_signed_in?
-      @commissions = Commission.where(seller_id: current_user.id)
-      @req_commissions = Commission.where(buyer_id: current_user.id)
+      # get most recently opened commissions by seller
+      @commissions = Commission.where(seller_id: current_user.id).last(8)
+
+      # only show most recent commissions that are currently active
+      @req_commissions = Commission.where(buyer_id: current_user.id, state:
+                          ['discussion', 'accepted', 'in_progress', 'shipped']).last(8)
+
     end
   end
 end
