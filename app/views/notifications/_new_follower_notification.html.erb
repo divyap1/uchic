@@ -13,7 +13,8 @@
        <%= link_to "Follow", friendships_path(:following_id => notification.about_user.id), :method => :post, class: "btn btn-primary"%>
     <%end%>
     <%= link_to "View their page", user_profile_path(notification.about_user), class: "btn btn-default btn-small"  %>
-    <%= link_to user_activity_feed_path(current_user), class: "btn btn-default pull-right", method: 'destroy' do %>
+
+    <%= link_to notification_path(notification), class: "btn btn-default pull-right", method: 'delete' do %>
     <i class="glyphicon glyphicon-trash"></i>
     <% end %>
 </div>

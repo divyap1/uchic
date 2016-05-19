@@ -161,13 +161,15 @@ class CommissionsController < ApplicationController
                            :buyer_id => params[:buyer_id],
                            :state => 'discussion',
                            :category_id => @commission.category_id,
-                           :pictures => @commission.pictures,
+                           :pictures => @commission.pictures.dup,
                            :public => false)
-    if @copy.save
+
+    if @copy.save      
       @copy.seller.notifications.create(about_user: @copy.buyer, state: "copy requested", commission: @copy)
+
       pictures = @copy.pictures
       pictures.each do |picture|
-        @copy.pictures.create!(picture: picture.picture)
+        @commission.pictures.create!(picture: picture.picture)
       end
 
       MessageThread.create!(:buyer_id => params[:buyer_id],
@@ -190,7 +192,6 @@ class CommissionsController < ApplicationController
     @commission = Commission.find(params[:commission_id])
     desc = @commission.description + "Additional Details: " + params[:custom_info]
 
-
     @copy = Commission.new(:name => @commission.name,
                            :description => desc,
                            :price => @commission.price,
@@ -198,14 +199,14 @@ class CommissionsController < ApplicationController
                            :buyer_id => params[:buyer_id],
                            :state => 'discussion',
                            :category_id => @commission.category_id,
-                           :pictures => @commission.pictures,
+                           :pictures => @commission.pictures.dup,
                            :public => false)
     if @copy.save
-        @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
 
       pictures = @copy.pictures
       pictures.each do |picture|
-        @copy.pictures.create!(picture: picture.picture)
+        @commission.pictures.create!(picture: picture.picture)
       end
 
       MessageThread.create!(:buyer_id => params[:buyer_id],
