@@ -14,5 +14,9 @@
     </p>
     <%= link_to "View this item", commission_path(notification.commission), class: "btn btn-primary" %>
     <%= link_to "View their profile", user_profile_path(notification.about_user), class: "btn btn-default" %>
+
+    <%= link_to notification_path(notification), class: "btn btn-default pull-right", method: 'delete' do %>
+    <i class="glyphicon glyphicon-trash"></i>
+    <% end %>
 </div>
 </li>

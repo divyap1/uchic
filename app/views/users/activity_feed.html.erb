@@ -61,22 +61,21 @@
     </div>
     <!-- /.col-md-3 -->
     <div class="col-md-9">
-      <div class="box">
-        <ul class="media-list">
-            <% @notifications.each do |notification| %>
-            <%= render partial: "notifications/new_follower_notification", locals: {notification: notification} if notification.state == "new follower" %>
-            <%= render partial: "notifications/product_listed_notification", locals: {notification: notification} if notification.state == "product listed" %>
-            <%= render partial: "notifications/copy_requested_notification", locals: {notification: notification} if notification.state == "copy requested" %>
-            <%= render partial: "notifications/similar_requested_notification", locals: {notification: notification} if notification.state == "similar requested" %>
-            <%= render partial: "notifications/request_accepted_notification", locals: {notification: notification} if notification.state == "request accepted" %>
-            <%= render partial: "notifications/request_denied_notification", locals: {notification: notification} if notification.state == "request denied" %>
-            <%= render partial: "notifications/new_review_notification", locals: {notification: notification} if notification.state == "new review" %>
-            <%= render partial: "notifications/payment_received_notification", locals: {notification: notification} if notification.state == "payment received" %>
+        <div class="box">
+            <ul class="media-list">
+                <% @notifications.each do |notification| %>
+                <%= render partial: "notifications/new_follower_notification", locals: {notification: notification} if notification.state == "new follower" %>
+                <%= render partial: "notifications/product_listed_notification", locals: {notification: notification} if notification.state == "product listed" %>
+                <%= render partial: "notifications/copy_requested_notification", locals: {notification: notification} if notification.state == "copy requested" %>
+                <%= render partial: "notifications/similar_requested_notification", locals: {notification: notification} if notification.state == "similar requested" %>
+                <%= render partial: "notifications/request_accepted_notification", locals: {notification: notification} if notification.state == "request accepted" %>
+                <%= render partial: "notifications/request_denied_notification", locals: {notification: notification} if notification.state == "request denied" %>
+                <%= render partial: "notifications/new_review_notification", locals: {notification: notification} if notification.state == "new review" %>
+                <%= render partial: "notifications/payment_received_notification", locals: {notification: notification} if notification.state == "payment received" %>
 
-
-           <% end %>
-        </ul>
-      </div>
+                <% end %>
+            </ul>
+        </div>
     </div>
     <!-- /.col-md-9 -->
 </div>

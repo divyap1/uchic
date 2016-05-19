@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/dashboard" => "users#dashboard", as: :user_dashboard
 
   resources :friendships, only:[:create, :destroy]
+  resources :notifications, only:[:create, :destroy]
   resources :message_threads, only: [:index, :show, :create, :destroy]
   resources :messages, only: [:create]
   resources :orders, except: [:edit, :update]
