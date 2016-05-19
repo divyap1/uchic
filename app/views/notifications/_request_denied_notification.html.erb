@@ -4,7 +4,8 @@
     </div>
     <div class="media-body">
         <h2 class = "media-heading"><%= "#{notification.about_user.name} rejected your request for #{notification.commission.name}" %></h2>
-        <%= link_to user_activity_feed_path(current_user), class: "btn btn-default pull-right", method: 'delete' do %>
+
+        <%= link_to notification_path(notification), class: "btn btn-default pull-right", method: 'delete' do %>
         <i class="glyphicon glyphicon-trash"></i>
         <% end %>
     </div>
