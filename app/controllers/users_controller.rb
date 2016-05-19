@@ -68,7 +68,8 @@ class UsersController < ApplicationController
     @user = current_user
     if user_signed_in?
       # get most recently opened commissions by seller
-      @commissions = Commission.where(seller_id: current_user.id).last(8)
+      @open_commissions = Commission.where(seller_id: current_user.id).last(8)
+      @commissions = Commission.where(seller_id: current_user.id).last(4)
 
       # only show most recent commissions that are currently active
       @req_commissions = Commission.where(buyer_id: current_user.id, state:

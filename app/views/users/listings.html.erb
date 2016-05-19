@@ -12,34 +12,80 @@
     <div class="box">
       <h1>My Listings</h1>
       <p class="lead">Commissions you are offering in one place.</p>
-      <hr>
-      <% if @commissions && @commissions.any? %>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Listed On</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @commissions.each do |commission| %>
-            <tr>
-              <td><%= commission.name %></td>
-              <td><%= commission.created_at.strftime "%d %B %Y" %></td>
-              <td style="padding-left: 10px">
-                <%= link_to "View Commission", commission, class: "btn btn-primary" %>
-                <%= link_to "Edit Commission", edit_commission_path(commission), class: "btn btn-default" %>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#open">Open Commissions</a></li>
+        <li><a data-toggle="tab" href="#requested">Requested Commissions</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="open" class="tab-pane fade in active">
+          <% if @open_commissions && @open_commissions.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Listed On</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @open_commissions.each do |commission| %>
+                <tr data-link="<%=commission_path(commission)%>">
+                  <td><%= commission.name %></td>
+                  <td>$<%= commission.created_at.strftime "%d %B %Y" %></td>
+                  <td style="padding-left: 10px">
+                    <%= link_to "View Commission", commission, class: "btn btn-primary" %>
+                    <%= link_to "Edit Commission", edit_commission_path(commission), class: "btn btn-default" %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% else %>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>You have not opened any commissions yet</h5>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div id="requested" class="tab-pane fade">
+          <% if @commissions && @commissions.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @commissions.each do |commission| %>
+                <tr data-link="<%=commission_path(commission)%>">
+                  <td><%= commission.name %></td>
+                  <td><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+                  <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
+                  <td style="padding-left: 10px">
+                    <%= link_to "View Details", private_commission_path(commission.id), class: "btn btn-primary" %>
+                    <%= link_to "Edit Commission", edit_commission_path(commission), class: "btn btn-default" %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% else %>
+          <div class="row">
+            <div class="col-md-12">
+              <h5>You have not received any commission requests yet</h5>
+            </div>
+          </div>
+          <% end %>
+        </div>
       </div>
-      <% else %>
-      <p>You have not listed any past commissions yet</p>
-      <% end %>
     </div>
   </div>
 </div>

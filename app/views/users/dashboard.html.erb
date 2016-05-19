@@ -47,37 +47,61 @@
       </div>
     </div>
 
-
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Selling</h3>
         </div>
         <div class="panel-body">
-          <h4> Open Commissions</h4>
-          <% if @commissions && @commissions.any? %>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#open">Open Commissions</a></li>
+            <li><a data-toggle="tab" href="#requested">Requested Commissions</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="open" class="tab-pane fade in active">
+              <% if @open_commissions && @open_commissions.any? %>
 
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <tbody>
-                <% @commissions.each do |commission| %>
-                <tr data-link="<%=commission_path(commission)%>">
-                  <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
-                  <td><%= commission.name %></td>
-                  <td>$<%= commission.price %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <tbody>
+                    <% @open_commissions.each do |commission| %>
+                    <tr data-link="<%=commission_path(commission)%>">
+                      <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
+                      <td><%= commission.name %></td>
+                      <td><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <% else %>
+              <p>You have not opened any commissions yet</p>
+              <% end %>
+            </div>
+            <div id="requested" class="tab-pane fade">
+              <% if @commissions && @commissions.any? %>
+
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <tbody>
+                    <% @commissions.each do |commission| %>
+                    <tr data-link="<%=commission_path(commission)%>">
+                      <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
+                      <td><%= commission.name %></td>
+                      <td>$<%= commission.price %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <% else %>
+              <p>You have not opened any commissions yet</p>
+              <% end %>
+            </div>
           </div>
-          <% else %>
-          <p>You have not opened any commissions yet</p>
-          <% end %>
-
           <%= link_to "View all listed commissions", user_listings_path, class: "btn btn-default" %>
 
           <%= link_to "List another commission", new_commission_path, class: "btn btn-default" %>
-
         </div>
 
       </div>
@@ -107,8 +131,6 @@
           <% else %>
           <p>You do not currently have any followers</p>
           <% end %>
-
-
         </div>
       </div>
     </div>
