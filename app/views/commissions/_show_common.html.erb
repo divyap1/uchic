@@ -1,6 +1,6 @@
 <div class="col-sm-6">
   <div id="mainImage">
-    <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/default.png", alt:"", class:"img-responsive" %> 
+    <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/default.png", alt:"", class:"img-responsive" %>
   </div>
   <% if @commission.created_at > Time.now - 24.hours %>
     <div class="ribbon new">
@@ -35,10 +35,10 @@
       <%=link_to "Edit Commission",  edit_commission_path(@commission), class: "btn btn-primary" %>
     <% else %>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestCopy">Request Copy</button>
-      <%= render partial: 'orders/copy_modal' %>
+      <%= render partial: 'commissions/copy_modal' %>
 
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#requestSimilar">Request Similar</button>
-      <%= render partial: 'orders/similar_modal' %>
+      <%= render partial: 'commissions/similar_modal' %>
 
       <a class="btn navbar-btn btn-link dropdown-toggle" type="button" href='<%=user_profile_path(@seller)%>'>
 
@@ -54,4 +54,3 @@
 </div>
 
 </div>
-

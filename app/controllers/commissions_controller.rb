@@ -137,7 +137,7 @@ class CommissionsController < ApplicationController
   def destroy
     #Check the current user posted the commission
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
-      @commission.active = false # makes commission inactive      
+      @commission.active = false # makes commission inactive
       if @commission.buyer
         @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request denied")
       end
@@ -226,6 +226,12 @@ class CommissionsController < ApplicationController
         format.json { render json: @commission.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def custom
+    @seller = User.find(params[:id])
+    @commission = Commission.new
+    @categories = Category.all
   end
 
   def approve

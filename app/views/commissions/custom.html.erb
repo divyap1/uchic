@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="row">
+	    <div class="col-md-12">
+	        <div class="box without-spacing">
+							<% if params[:message_thread_id] %>
+									<%= link_to message_thread_path(params[:message_thread_id]), class: "btn btn-default" do %>
+										<span class="glyphicon glyphicon-chevron-left"></span> Return to messages
+									<% end %>
+
+									<h1>Create commission for <%= message_thread.buyer.name %></h1>
+							<% else %>
+									<h1>Custom Commission Request for <%= @seller.name %></h1>
+							<% end %>
+
+	            <%if user_signed_in?%>
+								<%= render partial: "form" %>
+	 						<% end %>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var newOptions = {"Option 1": "value1",
+	  "Option 2": "value2",
+	  "Option 3": "value3"
+	};
+
+	var $el = $("#subcategory_select");
+	$el.empty();
+
+	$.each(newOptions, function(value,key) {
+	  $el.append($("<option></option>").attr("value", value).text(key));
+	});
+
+</script>

@@ -22,11 +22,11 @@
       <div class="row">
          <div class="col-md-12">
             <div class="commissions panel panel-default">
-               <span class="message not-accepting"><%= @user.first_name %> is not currently accepting commissions.</span>
                <% unless @user == current_user %>
+                  <%= link_to "Request custom commission", custom_commission_path(@user.id), class: "btn btn-primary"%>
                   <button class="btn btn-default start-message" data-seller="<%= @user.id %>">
                   <span class="glyphicon glyphicon-comment"></span>
-                  Send a message anyway
+                  Send <%= @user.name %> a message
                   </button>
                <% end %>
             </div>
@@ -154,7 +154,7 @@
                            </div>
                            <div class="media-body">
                               <h4 class="media-heading">
-                                 <%=review.reviewer.first_name%> 
+                                 <%=review.reviewer.first_name%>
                                  <% review.rating.times do %>
                                     <span class="glyphicon glyphicon-star"></span>
                                  <% end %>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :reviews
   root to: "pages#welcome"
 
-  get 'request_commission/new/:id' => 'orders#new', as: :commission_new
+  get 'request_commission/:id' => 'commissions#custom', as: :custom_commission
   get 'about/contact_us' => 'pages#contact_us'
   get 'about/faq' => 'pages#faq'
   get "/dashboard" => "users#dashboard", as: :user_dashboard
