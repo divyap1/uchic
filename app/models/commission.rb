@@ -6,10 +6,6 @@ class Commission < ActiveRecord::Base
     "shipped" => "Shipped"
   }
 
-  delegate :partner, to: :message_thread
-
-  before_save :reset_acceptance
-
   belongs_to :seller, class_name: 'User'
   belongs_to :buyer, class_name: 'User'
   belongs_to :category
@@ -37,6 +33,10 @@ class Commission < ActiveRecord::Base
     !public?
   end
 
+  def partner(user)
+    user == buyer ? seller : buyer
+  end
+
   def related_to?(user)
     user == buyer || user == seller
   end
@@ -57,12 +57,11 @@ class Commission < ActiveRecord::Base
     end
   end
 
-  def reset_acceptance
-    unless changed.all? { |a| a == "accepted_by_buyer" || a == "accepted_by_seller" }
-      self.accepted_by_buyer = false
-      self.accepted_by_seller = false
-
-      true # Returning false makes save fail
+  def unaccept!(user)
+    if user == buyer
+      update_attributes!(accepted_by_buyer: false)
+    else
+      update_attributes!(accepted_by_seller: false)
     end
   end
 end

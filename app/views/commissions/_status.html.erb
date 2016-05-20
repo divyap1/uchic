@@ -7,8 +7,8 @@
         <%= link_to commission.seller.name, user_profile_path(commission.seller) %> is offering
         to make this item for you.
       <% else %>
-        You are offering to make this item for
-        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %>.
+        <%= link_to commission.buyer.name, user_profile_path(commission.buyer) %> is commissioning
+        this item from you.
       <% end %>
     </strong>
   </p>
@@ -97,7 +97,7 @@
         You can continue messaging <%= commission.buyer.first_name %> to let them know your progress.
       </p>
 
-      <% actions = [link_to("Item has been shipped", "#", class: "btn btn-success")] %>
+      <% actions = [link_to("Item has been shipped", mark_shipped_commission_path(commission), class: "btn btn-success", method: "post")] %>
     <% end %>
   <% elsif commission.shipped? %>
     <% if current_user == commission.buyer %>
@@ -112,7 +112,7 @@
         <%= link_to "contact us", about_contact_us_path %> if it does not arrive on time.
       </p>
 
-      <% actions = [link_to("<Rating widget>", "#")] %>
+      <% actions = [link_to("Rate this seller", user_profile_path(commission.seller), class: "btn btn-default")] %>
     <% else %>
       <p>
         <strong>
@@ -123,6 +123,8 @@
       <p>
         Please keep in touch with <%= commission.buyer.first_name %> to ensure the item arrives safely.
       </p>
+
+      <% actions = [] %>
     <% end %>
   <% end %>
 

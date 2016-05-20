@@ -120,6 +120,7 @@ class CommissionsController < ApplicationController
           end
         end
 
+        @commission.unaccept!(@commission.partner(current_user))
         @commission.accept!(current_user)
 
         format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
@@ -162,9 +163,10 @@ class CommissionsController < ApplicationController
                            :state => 'discussion',
                            :category_id => @commission.category_id,
                            :pictures => @commission.pictures.dup,
+                           :accepted_by_buyer => true,
                            :public => false)
 
-    if @copy.save      
+    if @copy.save
       @copy.seller.notifications.create(about_user: @copy.buyer, state: "copy requested", commission: @copy)
 
       pictures = @copy.pictures
@@ -200,6 +202,7 @@ class CommissionsController < ApplicationController
                            :state => 'discussion',
                            :category_id => @commission.category_id,
                            :pictures => @commission.pictures.dup,
+                           :accepted_by_buyer => true,
                            :public => false)
     if @copy.save
       @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
@@ -229,6 +232,13 @@ class CommissionsController < ApplicationController
     @commission = Commission.find(params[:id])
     @commission.accept!(current_user)
     @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request accepted");
+    redirect_to @commission
+  end
+
+  def mark_shipped
+    @commission = Commission.find(params[:id])
+    @commission.update_attributes!(state: "shipped")
+
     redirect_to @commission
   end
 
