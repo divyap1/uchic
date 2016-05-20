@@ -229,8 +229,31 @@ class CommissionsController < ApplicationController
   end
 
   def make_custom
-    respond_to do |format|
-      format.html { redirect_to user_dashboard_url, alert: 'There was an error sending your request. Please try again.' }
+    @copy = Commission.new(:name => params[:name],
+                           :description => params[:description],
+                           :price => params[:price],
+                           :seller_id => params[:seller_id],
+                           :buyer_id => params[:buyer_id],
+                           :state => 'discussion',
+                           :category_id => params[:category_id],
+                           :accepted_by_buyer => true,
+                           :public => false)
+    if @copy.save
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
+
+      MessageThread.create!(:buyer_id => params[:buyer_id],
+                            :seller_id => params[:seller_id],
+                            :commission => @copy)
+
+      respond_to do |format|
+        format.html { redirect_to user_profile_path(params[:seller_id]), notice: 'Your request was successfully sent.' }
+        format.json { render :show, status: :created }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to custom_commission_path(params[:seller_id]), alert: 'There was an error sending your request. Please try again.' }
+        format.json { render json: @commission.errors, status: :unprocessable_entity }
+      end
     end
   end
 
