@@ -84,7 +84,24 @@
     }
   }
 
+  function unsaveMessagePopup(threadId) {
+    var savedPopups = JSON.parse(localStorage.getItem("message_popups")) || [];
+    for (var i = 0; i < savedPopups.length; i++) {
+      if (savedPopups[i].threadId.toString() === threadId.toString()) {
+        savedPopups.splice(i, 1);
+        break;
+      }
+    }
+    localStorage.setItem("message_popups", JSON.stringify(savedPopups));
+
+    return savedPopups;
+  }
+
   function createMessagePopup(data) {
+    var savedPopups = unsaveMessagePopup(data.threadId);
+    savedPopups.push(data);
+    localStorage.setItem("message_popups", JSON.stringify(savedPopups));
+
     var popup = $(
       "<div class='message-popup'>" +
         "<h4>" +
@@ -112,6 +129,7 @@
     popup.find(".minimise").on("click", function() { popup.toggleClass("minimised"); });
     popup.find(".delete").on("click", function() {
       messagePopups.splice(index, 1);
+      unsaveMessagePopup(data.threadId);
       popup.remove();
     });
 
@@ -212,5 +230,11 @@
 
   $(".messages").each(function() {
     $(this).scrollTop($(this).height() + 1000);
+  });
+
+  var savedPopups = JSON.parse(localStorage.getItem("message_popups")) || [];
+
+  savedPopups.forEach(function(thread) {
+    ensureMessagePopup(thread);
   });
 })();
