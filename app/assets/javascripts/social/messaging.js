@@ -88,8 +88,10 @@
     var popup = $(
       "<div class='message-popup'>" +
         "<h4>" +
-          "<span class='new-indicator glyphicon glyphicon-asterisk' aria-hidden='true'></span> " +
-          data.partnerName +
+          "<a href='/message_threads/" + data.threadId + "'>" +
+            "<span class='new-indicator glyphicon glyphicon-asterisk' aria-hidden='true'></span> " +
+            data.partnerName +
+          "</a>" +
           "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
           "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
         "</h4>" +
