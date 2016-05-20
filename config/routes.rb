@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :commissions do
     post :make_similar, on: :collection
     post :make_copy, on: :collection
+    post :make_custom, on: :collection
     post :approve, :mark_shipped, on: :member
   end
   resources :categories, except: [:edit] do

@@ -228,6 +228,12 @@ class CommissionsController < ApplicationController
     end
   end
 
+  def make_custom
+    respond_to do |format|
+      format.html { redirect_to user_dashboard_url, alert: 'There was an error sending your request. Please try again.' }
+    end
+  end
+
   def custom
     @seller = User.find(params[:id])
     @commission = Commission.new

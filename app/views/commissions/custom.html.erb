@@ -2,18 +2,74 @@
 	<div class="row">
 	    <div class="col-md-12">
 	        <div class="box without-spacing">
-							<% if params[:message_thread_id] %>
-									<%= link_to message_thread_path(params[:message_thread_id]), class: "btn btn-default" do %>
-										<span class="glyphicon glyphicon-chevron-left"></span> Return to messages
-									<% end %>
-
-									<h1>Create commission for <%= message_thread.buyer.name %></h1>
-							<% else %>
-									<h1>Custom Commission Request for <%= @seller.name %></h1>
-							<% end %>
+							<h1>Custom Commission Request</h1>
+              <h4>This request will be sent to <%= link_to @seller.name, user_profile_path(@seller.id) %></h4>
 
 	            <%if user_signed_in?%>
-								<%= render partial: "form" %>
+              <%= form_for(@commission, url: {action: "make_custom"}) do |f| %>
+              <%if @commission.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@commission.errors.count, "error") %>
+                    prohibited this commission from being saved:</h2>
+                    <ul>
+                        <%@commission.errors.full_messages.each do |message| %>
+                        <li><%= message %></li><%end %>
+                    </ul>
+                </div>
+              <%end %>
+
+              <div class="row">
+                <div class="col-md-6">
+
+                  <div class="form-group has-feedback">
+                      <%= f.label :name, class: "sr-only"%>
+                      <%= f.text_field :name, placeholder: "Commission Name", required: true, class: "form-control" %>
+                  </div>
+                  <div class="form-group">
+                      <%= f.label :description,class: "sr-only" %>
+                      <%= f.text_area :description, placeholder: "Commission Description", class: "form-control", rows: 12 %>
+                  </div>
+                  <div class="form-group">
+                      <%= f.label :price, class: "sr-only"%>
+                      <%= f.number_field :price, placeholder: "Estimated Price", required: true, :step => 0.01, class: "form-control" %>
+                  </div>
+
+                  <div class="form-group">
+                    <%= f.label :category_id, class: "sr-only"%>
+                    <%= f.select(:category_id, @categories.collect {|c| [c.name, c.id]}, {},  :class => "form-control", :prompt => "Choose category") %>
+                  </div>
+
+                  <%= f.hidden_field :buyer_id, value: current_user.id %>
+                  <%= f.hidden_field :seller_id, value: @seller.id %>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/add_default.png" %>
+                    <%= f.label :picture, class: "sr-only"%>
+                    <%= f.file_field :pictures, {accept: 'image/png,image/jpeg', multiple: true} %>
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="col-md-6">
+                    <div class="text-left">
+                      <%= link_to 'Cancel', user_profile_path(@seller.id), :class => 'btn btn-warning' %>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="text-right">
+                      <%=f.submit :value => "Send Request", class: "btn btn-success" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <%end %>
+
 	 						<% end %>
 	        </div>
 	    </div>
