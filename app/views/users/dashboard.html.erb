@@ -1,13 +1,12 @@
 <div class="row">
-  <div class="user-profile">
+  <div class="user-profile col-md-12">
     <div class="col-md-12">
-      <div class="commissions panel panel-default">
-        <span class="message not-accepting">Hi <%= @user.first_name %>, Welcome Back!</span>
+      <div class="profile-buttons panel panel-default text-right">
 
-        <div class="pull-right"</div>
+        <span class="message not-accepting pull-left">Hi <%= @user.first_name %>, Welcome Back!</span>
+
           <%= link_to "View profile", user_profile_path(current_user), class: "btn btn-default"%>
           <%= link_to "Edit account",  edit_user_registration_path, class: "btn btn-default"%>
-        </div>
 
       </div>
     </div>

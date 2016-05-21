@@ -7,11 +7,11 @@ class FriendshipsController < ApplicationController
 
     respond_to do |format|
       if @friendship.save
-        format.html { redirect_to user_profile_path(params[:following_id]), notice: 'Added successfully' }
+        format.html { redirect_to user_profile_path(params[:following_id]), notice: 'You are now following this user' }
         format.json { render :show, status: :created, location: @friendship }
         User.find_by_id(params[:following_id]).notifications.create(about_user_id: current_user.id, state: "new follower");
       else
-        format.html { redirect_to user_profile_path(params[:following_id]), alert: 'Unable to add user' }
+        format.html { redirect_to user_profile_path(params[:following_id]), alert: 'Unable to follow user' }
         format.json { render :show, status: :created, status: :unprocessable_entity }
       end
     end
@@ -25,7 +25,7 @@ class FriendshipsController < ApplicationController
     @friendship.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_profile_path(params[:following_id]), notice: 'Removed friend.' }
+      format.html { redirect_to user_profile_path(params[:following_id]), notice: 'You no longer follow this user.' }
       format.json { head :no_content }
     end
   end

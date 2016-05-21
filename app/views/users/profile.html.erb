@@ -1,5 +1,5 @@
-<div class="container">
-   <div class="user-profile">
+<div class="row">
+   <div class="user-profile col-md-12">
       <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
       <h1 class="name"><%= @user.name %></h1>
       <div class="info">
@@ -11,25 +11,26 @@
          <% end %>
          (<%= @num_reviews %> ratings)
          <br>
-         <% if user_signed_in? && @user != current_user %>
-            <% if current_user.followings.any? { |following| following.id == @user.id } %>
-               <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
-            <%else%>
-               <%= link_to "Follow", friendships_path(:following_id => @user), :method => :post, class: "btn btn-primary"%>
-            <%end%>
-         <%end%>
+        
       </div>
       <div class="row">
          <div class="col-md-12">
-            <div class="commissions panel panel-default">
-               <% unless @user == current_user %>
-                  <%= link_to "Request custom commission", custom_commission_path(@user.id), class: "btn btn-primary"%>
-                  <button class="btn btn-default start-message" data-seller="<%= @user.id %>">
-                  <span class="glyphicon glyphicon-comment"></span>
-                  Send <%= @user.name %> a message
-                  </button>
-               <% end %>
+            <% unless @user == current_user %>
+            <div class="profile-buttons panel panel-default text-right">
+               <% if user_signed_in? && @user != current_user %>
+                  <% if current_user.followings.any? { |following| following.id == @user.id } %>
+                    <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+                 <%else%>
+                  <%= link_to "Follow", friendships_path(:following_id => @user), :method => :post, class: "btn btn-success pull-left"%>
+                 <%end%>
+              <%end%>
+                <%= link_to "Request custom commission", custom_commission_path(@user.id), class: "btn btn-primary"%>
+                <button class="btn btn-default start-message" data-seller="<%= @user.id %>">
+                <span class="glyphicon glyphicon-comment"></span>
+                Send <%= @user.name %> a message
+                </button>
             </div>
+            <% end %>
          </div>
       </div>
       <div class="row">
