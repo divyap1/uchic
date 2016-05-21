@@ -7,6 +7,6 @@
     </div>
     <div class="media-body">
         <h2 class = "media-heading"><%= "#{notification.about_user.name} just paid for #{notification.commission.name}" %></h2>
-        <%= link_to "Ship It", class: "btn btn-primary" %>
+        <%= link_to "Ship It", mark_shipped_commission_path(notification.commission), class: "btn btn-primary", method: 'post' %>
 </div>
 </li>
