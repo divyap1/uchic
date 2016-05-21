@@ -74,6 +74,7 @@
                 <%= render partial: "notifications/request_denied_notification", locals: {notification: notification} if notification.state == "request denied" %>
                 <%= render partial: "notifications/new_review_notification", locals: {notification: notification} if notification.state == "new review" %>
                 <%= render partial: "notifications/payment_received_notification", locals: {notification: notification} if notification.state == "payment received" %>
+                <%= render partial: "notifications/item_delivered_notification", locals: {notification: notification} if notification.state == "item delivered" %>
                 <% end %>
             </ul>
         </div>

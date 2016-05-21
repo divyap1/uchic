@@ -275,7 +275,8 @@ class CommissionsController < ApplicationController
   def mark_shipped
     @commission = Commission.find(params[:id])
     @commission.update_attributes!(state: "shipped")
-
+    @commission.seller.notifications.find_by(commission: @commission).destroy
+    @commission.buyer.notifications.create(about_user: @commission.seller, commission: @commission, state: "item delivered")
     redirect_to @commission
   end
 
