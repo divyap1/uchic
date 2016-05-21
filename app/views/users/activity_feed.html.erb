@@ -1,3 +1,4 @@
+<div class="row">
 <div class="activity-feed">
     <div class="col-md-3">
         <div class="panel panel-default sidebar-menu">
@@ -53,7 +54,7 @@
 
                     <button class="btn btn-default btn-sm btn-primary">
                         <i class="fa fa-pencil"></i>
-                        Apply</button>\
+                        Apply</button>
                 </form>
 
             </div>
@@ -68,15 +69,17 @@
                 <%= render partial: "notifications/product_listed_notification", locals: {notification: notification} if notification.state == "product listed" %>
                 <%= render partial: "notifications/copy_requested_notification", locals: {notification: notification} if notification.state == "copy requested" %>
                 <%= render partial: "notifications/similar_requested_notification", locals: {notification: notification} if notification.state == "similar requested" %>
+                <%= render partial: "notifications/new_requested_notification", locals: {notification: notification} if notification.state == "new requested" %>
                 <%= render partial: "notifications/request_accepted_notification", locals: {notification: notification} if notification.state == "request accepted" %>
                 <%= render partial: "notifications/request_denied_notification", locals: {notification: notification} if notification.state == "request denied" %>
                 <%= render partial: "notifications/new_review_notification", locals: {notification: notification} if notification.state == "new review" %>
                 <%= render partial: "notifications/payment_received_notification", locals: {notification: notification} if notification.state == "payment received" %>
-
+                <%= render partial: "notifications/item_delivered_notification", locals: {notification: notification} if notification.state == "item delivered" %>
                 <% end %>
             </ul>
         </div>
     </div>
     <!-- /.col-md-9 -->
+</div>
 </div>
 <!-- /.activity-feed -->

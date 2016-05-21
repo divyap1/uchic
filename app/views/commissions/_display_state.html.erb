@@ -1,9 +1,9 @@
 <% if state == "discussion"%>
-	<span class="label label-default"><%=state%></span>
+	<span class="label label-default"><%=state.humanize%></span>
 <% elsif state == "accepted"%>
-	<span class="label label-primary"><%=state%></span>
+	<span class="label label-primary"><%=state.humanize%></span>
 <% elsif state == "in_progress"%>
-	<span class="label label-info"><%=state%></span>
+	<span class="label label-info"><%=state.humanize%></span>
 <% elsif state == "shipped"%>
-	<span class="label label-success"><%=state%></span>
+	<span class="label label-success"><%=state.humanize%></span>
 <% end %>

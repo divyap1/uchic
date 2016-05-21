@@ -240,7 +240,7 @@ class CommissionsController < ApplicationController
                            :accepted_by_buyer => true,
                            :public => false)
     if @copy.save
-      @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "new requested", commission: @copy)
 
       MessageThread.create!(:buyer_id => params[:buyer_id],
                             :seller_id => params[:seller_id],
@@ -275,7 +275,8 @@ class CommissionsController < ApplicationController
   def mark_shipped
     @commission = Commission.find(params[:id])
     @commission.update_attributes!(state: "shipped")
-
+    @commission.seller.notifications.find_by(commission: @commission).destroy
+    @commission.buyer.notifications.create(about_user: @commission.seller, commission: @commission, state: "item delivered")
     redirect_to @commission
   end
 

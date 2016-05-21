@@ -3,7 +3,7 @@
       <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
       <h1 class="name"><%= @user.name %></h1>
       <div class="info">
-         Wellington, NZ
+         <%=  @user.country_name %>
          <span class="divider" aria-hidden="true">&bull;</span>
          <span class="rating">
          <% @average_review.times do %>
@@ -11,7 +11,7 @@
          <% end %>
          (<%= @num_reviews %> ratings)
          <br>
-        
+
       </div>
       <div class="row">
          <div class="col-md-12">
