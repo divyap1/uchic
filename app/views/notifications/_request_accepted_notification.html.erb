@@ -6,8 +6,9 @@
       <%= image_tag "notification/pay.png" %>
     </div>
     <div class="media-body">
-        <h2 class = "media-heading"><%= "#{notification.about_user.name} accepted your offer on #{notification.commission.name}" %>
-        </h2>
+      <h3 class = "media-heading">Someone accepted your offer on a commission!</h3>
+        <h4><%= "#{notification.about_user.name} accepted your offer on #{notification.commission.name}" %>
+        </h4>
     <%= link_to "Pay now", pay_now_path(notification.commission), class: "btn btn-success" %>
 </div>
 </li>

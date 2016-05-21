@@ -6,7 +6,8 @@
       <%= image_tag "notification/review.png" %>
     </div>
     <div class="media-body">
-        <h2 class = "media-heading"><%= "#{notification.about_user.name} just reviewed you!" %></h2>
+        <h3 class = "media-heading"><%= "Someone just reviewed you!" %></h3>
+        <h4> <%= "#{notification.about_user.name} gave you #{notification.review.rating} stars" %> </h4>
         <%= link_to "See your reviews", user_profile_path(notification.user), class: "btn btn-primary" %>
 </div>
 </li>

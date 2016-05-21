@@ -6,6 +6,7 @@ class Notification < ActiveRecord::Base
   belongs_to :user
   belongs_to :commission
   belongs_to :about_user, class_name: 'User'
+  belongs_to :review
 
   validates :state, inclusion: { in: STATES }
   validates :user, presence: true

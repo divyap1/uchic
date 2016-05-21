@@ -8,16 +8,21 @@
   </div>
 
 <div class="media-body">
-    <h2 class = "media-heading">
+    <h3 class = "media-heading">
       <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
-        <%= "#{notification.about_user.name} followed you back" %>
+        <%= "Someone followed you back" %>
       <% else %>
-        <%= "#{notification.about_user.name} followed you" %>
+        <%= "Someone followed you" %>
       <% end %>
-    </h2>
-    <% if %>
+    </h3>
+
+    <h4> <%= "#{notification.about_user.name}, #{notification.about_user.country_name}" %> </h4>
+
+    <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
        <%= link_to "Follow back", friendships_path(:following_id => notification.about_user.id), :method => :post, class: "btn btn-primary"%>
+       <%= link_to "View profile", user_profile_path(notification.about_user), class: "btn btn-default"  %>
+       <% else %>
+       <%= link_to "View profile", user_profile_path(notification.about_user), class: "btn btn-primary"  %>
     <% end %>
-    <%= link_to "View profile", user_profile_path(notification.about_user), class: "btn btn-default btn-small"  %>
 </div>
 </li>

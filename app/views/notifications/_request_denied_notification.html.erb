@@ -6,6 +6,7 @@
       <%= image_tag "notification/denied.png" %>
     </div>
     <div class="media-body">
-        <h2 class = "media-heading"><%= "#{notification.about_user.name} rejected your request for #{notification.commission.name}" %></h2>
+      <h3 class = "media-heading">Someone declined your request for a commission</h3>
+        <h4><%= "#{notification.about_user.name} rejected your request for #{notification.commission.name}" %></h4>
     </div>
 </li>
