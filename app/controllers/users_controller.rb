@@ -50,6 +50,8 @@ class UsersController < ApplicationController
       @commission.update!(:state => 'in_progress')
 
       respond_to do |format|
+        current_user.notifications.find_by(commission: @commission).destroy
+        @commission.seller.notifications.create(about_user: current_user, commission: @commission, state: "payment received")
         format.html { redirect_to private_commission_path(@commission.id), notice: 'Your payment was successfully processed'}
         format.json { head :no_content }
       end
