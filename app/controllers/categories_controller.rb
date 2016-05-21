@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
     @section = @category.name
     @ancestry = @category.ancestors
 
-    @top_sellers = all_items.map(&:seller).first(3);
+    @top_sellers = all_items.map(&:seller).uniq.first(3);
   end
 
   # GET /categories/new
