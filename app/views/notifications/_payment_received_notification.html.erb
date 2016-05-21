@@ -6,7 +6,8 @@
       <%= image_tag "notification/paid.png" %>
     </div>
     <div class="media-body">
-        <h2 class = "media-heading"><%= "#{notification.about_user.name} just paid for #{notification.commission.name}" %></h2>
-        <%= link_to "Ship It", mark_shipped_commission_path(notification.commission), class: "btn btn-primary", method: 'post' %>
+      <h3 class = "media-heading">Someone just paid for an item</h3>
+        <h4><%= "#{notification.about_user.name} paid for #{notification.commission.name}" %></h4>
+        <%= link_to "Shipped it", mark_shipped_commission_path(notification.commission), class: "btn btn-primary", method: 'post' %>
 </div>
 </li>

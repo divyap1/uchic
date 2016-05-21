@@ -6,12 +6,12 @@
     <%= image_tag notification.commission.pictures.first ? notification.commission.pictures.first.picture.url(:thumb) : "products/default-thumb.png" %>
   </div>
 <div class="media-body">
-    <h2 class = "media-heading">
+    <h3 class = "media-heading">
         <%= "#{notification.about_user.name} just listed a new product" %>
-    </h2>
-    <h3>
-        <%= "#{notification.commission.name}  $#{number_with_precision(notification.commission.price, :precision => 2)}" %>
     </h3>
+    <h4>
+        <%= "#{notification.commission.name}  $#{number_with_precision(notification.commission.price, :precision => 2)}" %>
+    </h4>
     <p>
         <%= notification.commission.description %>
     </p>

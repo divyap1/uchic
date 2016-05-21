@@ -6,9 +6,9 @@
     <%= image_tag "notification/sent.png" %>
   </div>
     <div class="media-body">
-        <h2 class = "media-heading"> An order is on its way!</h2>
-    <h3>
-        <%= "#{notification.about_user.name} shipped #{notification.commission.name}" %></h3>
+        <h3 class = "media-heading"> An order is on its way!</h3>
+    <h2>
+        <%= "#{notification.about_user.name} shipped #{notification.commission.name}" %></h2>
     <%= link_to "View details", commission_path(notification.commission), class: "btn btn-primary" %>
     <%= link_to "Review Seller", user_profile_path(notification.about_user), class: "btn btn-default" %>
 </div>

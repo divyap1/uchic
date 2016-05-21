@@ -83,6 +83,16 @@
         line-height: 20px;
       }
     }
+
+    > li > a:hover {
+      background: #323282;
+      color: #FFFFFF;
+
+      .glyphicon {
+        color: #FFFFFF;
+      }
+
+    }
   }
 }
 
