@@ -123,7 +123,7 @@ class CommissionsController < ApplicationController
         @commission.unaccept!(@commission.partner(current_user))
         @commission.accept!(current_user)
 
-        format.html { redirect_to @commission, notice: 'Commission was successfully updated.' }
+        format.html { redirect_to @commission, notice: 'Commission was successfully updated' }
         format.json { render :show, status: :ok, location: @commission }
       else
         format.html { render :edit }
@@ -137,18 +137,23 @@ class CommissionsController < ApplicationController
   def destroy
     #Check the current user posted the commission
     if user_signed_in? && (@commission.seller == current_user || @commission.buyer == current_user)
-      @commission.active = false # makes commission inactive
+      @commission.update_attributes!(active: false)
       if @commission.buyer
         @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request denied")
         Notification.find_by(commission: @commission).destroy
-      end
-      respond_to do |format|
-        format.html { redirect_to user_dashboard_url, notice: 'Commission was successfully destroyed.'}
-        format.json { head :no_content }
+        respond_to do |format|
+          format.html { redirect_to :back, notice: 'Commission was successfully declined'}
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to user_dashboard_url, notice: 'Commission was successfully deleted'}
+          format.json { head :no_content }
+        end
       end
     else
       respond_to do |format|
-        format.html { redirect_to user_dashboard_url, alert: 'You do not have permissions to delete this item.' }
+        format.html { redirect_to :back, alert: 'You do not have permissions to delete this item.' }
         format.json { head :no_content }
       end
     end
