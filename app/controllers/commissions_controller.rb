@@ -140,6 +140,7 @@ class CommissionsController < ApplicationController
       @commission.active = false # makes commission inactive
       if @commission.buyer
         @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request denied")
+        Notification.find_by(commission: @commission).destroy
       end
       respond_to do |format|
         format.html { redirect_to user_dashboard_url, notice: 'Commission was successfully destroyed.'}
@@ -266,6 +267,7 @@ class CommissionsController < ApplicationController
   def approve
     @commission = Commission.find(params[:id])
     @commission.accept!(current_user)
+    Notification.find_by(commission: @commission).destroy
     @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request accepted");
     redirect_to @commission
   end

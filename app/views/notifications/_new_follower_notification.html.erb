@@ -1,21 +1,23 @@
 <li class="media">
+    <%= link_to notification_path(notification), class: "btn btn-link pull-right", method: 'delete' do %>
+    <i class="glyphicon glyphicon-remove"></i>
+    <% end %>
+
   <div class="media-left">
     <%= image_tag notification.about_user.profile_picture.url(:thumb), class: "profile-picture" %>
   </div>
 
 <div class="media-body">
     <h2 class = "media-heading">
-        You have a new follower
+      <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
+        <%= "#{notification.about_user.name} followed you back" %>
+      <% else %>
+        <%= "#{notification.about_user.name} followed you" %>
+      <% end %>
     </h2>
-    <% if notification.user.followings.any? { |following| following.id == notification.about_user.id } %>
-       <%#= link_to "Unfollow", friendship_path(:following_id => notification.about_user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
-    <%else%>
-       <%= link_to "Follow", friendships_path(:following_id => notification.about_user.id), :method => :post, class: "btn btn-primary"%>
-    <%end%>
-    <%= link_to "View their page", user_profile_path(notification.about_user), class: "btn btn-default btn-small"  %>
-
-    <%= link_to notification_path(notification), class: "btn btn-default pull-right", method: 'delete' do %>
-    <i class="glyphicon glyphicon-trash"></i>
+    <% if %>
+       <%= link_to "Follow back", friendships_path(:following_id => notification.about_user.id), :method => :post, class: "btn btn-primary"%>
     <% end %>
+    <%= link_to "View profile", user_profile_path(notification.about_user), class: "btn btn-default btn-small"  %>
 </div>
 </li>

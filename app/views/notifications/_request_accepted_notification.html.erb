@@ -1,13 +1,13 @@
 <li class="media">
+  <%= link_to notification_path(notification), class: "btn btn-link pull-right", method: 'delete' do %>
+  <i class="glyphicon glyphicon-remove"></i>
+  <% end %>
     <div class="media-left">
       <%= image_tag "notification/pay.png" %>
     </div>
     <div class="media-body">
-        <h2 class = "media-heading"><%= "#{notification.about_user.name} accepted your offer on #{notification.commission.name}" %></h2>
-    <%= link_to "Pay Now", class: "btn btn-success" %>
-
-    <%= link_to notification_path(notification), class: "btn btn-default pull-right", method: 'delete' do %>
-    <i class="glyphicon glyphicon-trash"></i>
-    <% end %>
+        <h2 class = "media-heading"><%= "#{notification.about_user.name} accepted your offer on #{notification.commission.name}" %>
+        </h2>
+    <%= link_to "Pay now", pay_now_path(notification.commission), class: "btn btn-success" %>
 </div>
 </li>

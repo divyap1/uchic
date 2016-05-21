@@ -10,7 +10,7 @@ class Commission < ActiveRecord::Base
   belongs_to :buyer, class_name: 'User'
   belongs_to :category
 
-  has_one :message_thread
+  has_one :message_thread, dependent: :destroy
   has_many :pictures
 
   validates :state, inclusion: { in: STATES.keys }

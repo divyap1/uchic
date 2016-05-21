@@ -1,4 +1,7 @@
 <li class="media">
+    <%= link_to notification_path(notification), class: "btn btn-link pull-right", method: 'delete' do %>
+    <i class="glyphicon glyphicon-remove"></i>
+    <% end %>
   <div class="media-left">
     <%= image_tag "notification/sent.png" %>
   </div>
@@ -8,9 +11,5 @@
         <%= "#{notification.about_user.name} shipped #{notification.commission.name}" %></h3>
     <%= link_to "View details", commission_path(notification.commission), class: "btn btn-primary" %>
     <%= link_to "Review Seller", user_profile_path(notification.about_user), class: "btn btn-default" %>
-
-    <%= link_to notification_path(notification), class: "btn btn-default pull-right", method: 'delete' do %>
-    <i class="glyphicon glyphicon-trash"></i>
-    <% end %>
 </div>
 </li>
