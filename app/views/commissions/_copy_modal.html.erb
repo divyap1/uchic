@@ -10,8 +10,8 @@
       <% if user_signed_in? %>
       <%= form_tag(make_copy_commissions_path) do %>
       <div class="modal-body">
-        <p> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
-        <p> Price: <strong>
+        <p class="text-left"> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
+        <p class="text-left"> Price: <strong>
           <%= "$#{number_with_precision(@commission.price, :precision => 2)} NZD" %> </strong></p>
         <%= hidden_field_tag "seller_id", @seller.id %>
         <%= hidden_field_tag "buyer_id", current_user.id %>

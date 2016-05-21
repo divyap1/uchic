@@ -239,7 +239,7 @@ class CommissionsController < ApplicationController
                            :accepted_by_buyer => true,
                            :public => false)
     if @copy.save
-      @copy.seller.notifications.create(about_user: @copy.buyer, state: "similar requested", commission: @copy)
+      @copy.seller.notifications.create(about_user: @copy.buyer, state: "new requested", commission: @copy)
 
       MessageThread.create!(:buyer_id => params[:buyer_id],
                             :seller_id => params[:seller_id],

@@ -18,29 +18,33 @@
           <h3 class="panel-title">Buying</h3>
         </div>
         <div class="panel-body">
-
-          <h4>Awaiting Commissions</h4>
-
-          <% if @req_commissions && @req_commissions.any? %>
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <tbody>
-                <% @req_commissions.each do |commission| %>
-                <!-- Add if condition so that only non-shipped commissions are displayed -->
-                <tr data-link="<%= commission_path(commission) %>">
-                  <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
-                  <td><%= commission.name %></td>
-                  <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#orders">My orders</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="orders" class="tab-pane fade in active">
+              <% if @req_commissions && @req_commissions.any? %>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <tbody>
+                    <% @req_commissions.each do |commission| %>
+                    <!-- Add if condition so that only non-shipped commissions are displayed -->
+                    <tr data-link="<%= commission_path(commission) %>">
+                      <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %></td>
+                      <td><%= commission.name %></td>
+                      <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              <% else %>
+              <p>You currently have no pending orders</p>
+              <% end %>
+            </div>
           </div>
-          <% else %>
-          <p>You have not currently commissioned any products</p>
-          <% end %>
 
-          <%= link_to "View all requested commissions", user_commissions_path, class: "btn btn-default" %>
+          <%= link_to "View my orders", user_commissions_path, class: "btn btn-default" %>
         </div>
 
       </div>
@@ -53,8 +57,8 @@
         </div>
         <div class="panel-body">
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#open">Open Commissions</a></li>
-            <li><a data-toggle="tab" href="#requested">Requested Commissions</a></li>
+            <li class="active"><a data-toggle="tab" href="#open">My listings</a></li>
+            <li><a data-toggle="tab" href="#requested">My commissions</a></li>
           </ul>
           <div class="tab-content">
             <div id="open" class="tab-pane fade in active">
@@ -74,7 +78,7 @@
                 </table>
               </div>
               <% else %>
-              <p>You have not opened any commissions yet</p>
+              <p>You have not listed any commissions yet</p>
               <% end %>
             </div>
             <div id="requested" class="tab-pane fade">
@@ -94,13 +98,13 @@
                 </table>
               </div>
               <% else %>
-              <p>You have not opened any commissions yet</p>
+              <p>You have not recieved any commission requests yet</p>
               <% end %>
             </div>
           </div>
-          <%= link_to "View all listed commissions", user_listings_path, class: "btn btn-default" %>
+          <%= link_to "View all commissions", user_listings_path, class: "btn btn-default" %>
 
-          <%= link_to "List another commission", new_commission_path, class: "btn btn-default" %>
+          <%= link_to "New listing", new_commission_path, class: "btn btn-default" %>
         </div>
 
       </div>
@@ -109,7 +113,7 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Followers (<%=@user.followers.length%>)</h3>
+          <h3 class="panel-title">Your followers (<%=@user.followers.length%>)</h3>
         </div>
         <div class="panel-body">
           <% if @user.followers.length > 0 %>

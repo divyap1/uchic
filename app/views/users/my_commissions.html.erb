@@ -3,7 +3,7 @@
 
     <ul class="breadcrumb">
       <li><a href="/dashboard">Dashboard</a></li>
-      <li>My Commissions</li>
+      <li>My Orders</li>
     </ul>
   </div>
 </div>
@@ -11,9 +11,9 @@
 <div class="row">
   <div class="col-md-12" id="customer-orders">
     <div class="box">
-      <h1>My Commissions</h1>
+      <h1>My Orders</h1>
 
-      <p class="lead">All the products you have commissioned in one place.</p>
+      <p class="lead">All the commissions you have ordered in one place.</p>
 
       <hr>
       <% if @commissions && @commissions.any? %>
@@ -21,21 +21,19 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Product Name</th>
-              <th>Commission Date</th>
+              <th>Product</th>
+
+              <th>Last Updated</th>
               <th>State</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
             <% @commissions.each do |commission| %>
-            <tr>
-              <td><%= commission.name %></td>
-              <td><%= commission.created_at.strftime "%d %B %Y" %></td>
-              <td> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
-              <td style="padding-left: 10px">
-                <%= link_to "View Details", private_commission_path(commission.id), class: "btn btn-primary" %>
-              </td>
+            <tr data-link="<%=commission_path(commission)%>">
+              <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %>
+              &nbsp;&nbsp;&nbsp;<%= link_to commission.name, commission_path(commission) %></td>
+              <td><%= commission.updated_at.strftime "%d %B %Y" %></td>
+              <td><%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
             </tr>
             <% end %>
           </tbody>
