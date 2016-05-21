@@ -19,7 +19,7 @@
             <div class="profile-buttons panel panel-default text-right">
                <% if user_signed_in? && @user != current_user %>
                   <% if current_user.followings.any? { |following| following.id == @user.id } %>
-                    <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"%>
+                    <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger pull-left"%>
                  <%else%>
                   <%= link_to "Follow", friendships_path(:following_id => @user), :method => :post, class: "btn btn-success pull-left"%>
                  <%end%>
