@@ -48,7 +48,7 @@
 
         <% if user_signed_in? %>
 
-          <li><%= link_to "Sell", new_commission_path, :"data-hover" => "dropdown" %></li>
+          <li><%= link_to "List Commision", new_commission_path, :"data-hover" => "dropdown" %></li>
           <li><%= link_to "Dashboard", user_dashboard_path, :"data-hover" => "dropdown"%></li>
 
         <% end %>
@@ -80,9 +80,6 @@
               <img src="<%= current_user.profile_picture.url %>" alt="Profile picture" />
             </a>
             <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
-              <li>
-                <%= link_to "Activity Feed", user_activity_feed_path(current_user) %>
-              </li>
               <li>
                 <%= link_to "Dashboard", user_dashboard_path %>
               </li>

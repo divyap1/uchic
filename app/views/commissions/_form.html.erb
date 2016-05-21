@@ -31,7 +31,7 @@
       <%= f.select(:category_id, @categories.collect {|c| [c.name, c.id]}, {},  :class => "form-control", :prompt => "Choose category") %>
     </div>
 
-    <% if @commission.buyer %>
+    <% if @commission.buyer || !edit %>
       <%= f.hidden_field :public %>
     <% else %>
       <div class="form-group">
