@@ -2,12 +2,13 @@
     <%= link_to notification_path(notification), class: "btn btn-link pull-right", method: 'delete' do %>
     <i class="glyphicon glyphicon-remove"></i>
     <% end %>
+
   <div class="media-left">
-    <%= image_tag "notification/similar.png" %>
+    <%= image_tag "notification/custom.png" %>
   </div>
     <div class="media-body">
         <h2 class = "media-heading">
-    Someone wants to buy a variation of one of your items!</h2>
+    Someone wants a custom items</h2>
     <h3>
         <%= "#{notification.about_user.name} wants #{notification.commission.name}" %></h3>
         <%= link_to "View proposal", "btn btn-default" %>

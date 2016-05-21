@@ -23,10 +23,7 @@
     }
   }
 
-  .commissions {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  .profile-buttons {
     padding: $padding-large-vertical $padding-base-horizontal;
 
     .message {

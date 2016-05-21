@@ -2,4 +2,22 @@
     .img {
         height: 100%;
     }
+
+    .profile-picture{
+      max-width: 128px;
+      max-height: 128px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      .media-left{
+        display: block;
+        text-align: center;
+      }
+
+      .media-body{
+        display: block;
+        text-align: center;
+        width: 100%
+      }
+    }
 }
