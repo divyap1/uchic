@@ -110,7 +110,10 @@
             data.partnerName +
           "</a>" +
           "<button class='close delete'><span class='glyphicon glyphicon-remove'></span></button>" +
-          "<button class='close minimise'><span class='glyphicon glyphicon-minus'></span></button>" +
+          "<button class='close minimise'>" +
+            "<span class='glyphicon glyphicon-triangle-bottom max-only'></span>" +
+            "<span class='glyphicon glyphicon-triangle-top min-only'></span>" +
+          "</button>" +
         "</h4>" +
         "<div class='thread-commission'></div>" +
         "<div class='messages'></div>" +
