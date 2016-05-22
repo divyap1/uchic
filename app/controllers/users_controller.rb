@@ -5,9 +5,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @review = Review.new
     @reviews = @user.reviews
-
-    @num_reviews = @reviews.nil? ? 0 : @reviews.length
-    @average_review = @num_reviews == 0  ? 0 : @reviews.map(&:rating).inject(0, &:+) / @num_reviews
   end
 
   def activity_feed

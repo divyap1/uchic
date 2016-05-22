@@ -7,10 +7,8 @@
            <%= @user.country_name %>
            <span class="divider" aria-hidden="true">&bull;</span>
            <span class="rating">
-           <% @average_review.times do %>
-              <span class="glyphicon glyphicon-star"></span>
-           <% end %>
-           (<%= @num_reviews %> ratings)
+           <%= user_rating(@user) %>
+           (<%= @reviews.size %> ratings)
            <br>
         </div>
       </div>

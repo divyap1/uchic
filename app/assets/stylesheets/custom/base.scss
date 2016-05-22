@@ -9,9 +9,15 @@ button {
   transition: all 0.2s ease-out;
 }
 
+h1, h2, h3 {
+  text-align: center;
+}
+
 h1 {
   font-weight: 700;
   font-size: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 p.lead {

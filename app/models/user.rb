@@ -19,11 +19,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :username, presence: true
   validates :address, presence: true
-  validates :rating, numericality: {
-    greater_than_or_equal_to: 0.0,
-    less_than_or_equal_to: 5.0,
-    allow_blank: true
-  }
 
   has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png", styles: { thumb:'128x128#' }
   validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
@@ -39,6 +34,12 @@ class User < ActiveRecord::Base
 
   def country_name
     country_name = ISO3166::Country[country]
+    return "Country Unknown" unless country_name
+
     country_name.translations[I18n.locale.to_s] || country_name.name
+  end
+
+  def rating
+    reviews.average(:rating)
   end
 end
