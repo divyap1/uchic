@@ -2,9 +2,11 @@
   <div id="content">
     <div class="container">
 
-    	<div class="box">
-            <h1>Results for '<%= params[:search] %>'</h1>
-        </div>
+      <% if params[:search].present? %>
+        <h1>Results for &ldquo;<%= params[:search] %>&rdquo;</h1>
+      <% else %>
+        <h1>All content</h1>
+      <% end %>
 
 		<ul class="nav nav-tabs" role="tablist">
 		    <li role="presentation" class="<%= 'active' if @commissions.length > 0 || @users.length == 0 %>"><a href="#products" aria-controls="home" role="tab" data-toggle="tab">Commissions</a></li>

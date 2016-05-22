@@ -6,6 +6,8 @@ class CommissionsController < ApplicationController
   # GET /commissions
   # GET /commissions.json
   def index
+    @page_title = params[:search].present? ? params[:search] : "All content"
+
     @commissions = Commission.publicly_visible
     @commissions = @commissions.contains(params[:search]) if params[:search].present?
     @commissions = Kaminari.paginate_array(@commissions).page(params[:page]).per(params[:display_size])
@@ -17,6 +19,8 @@ class CommissionsController < ApplicationController
   # GET /commissions/1.json
   def show
     @commission = Commission.find(params[:id])
+
+    @page_title = @commission.name
 
     if @commission.private? && @commission.buyer
       if @commission.related_to?(current_user)
@@ -45,13 +49,15 @@ class CommissionsController < ApplicationController
        flash.now[:alert] = "Guests can not sell items"
     end
 
+    @page_title = "List commission"
+
     @categories = Category.all
     @commission = Commission.new
   end
 
   # GET /commissions/1/edit
   def edit
-
+    @page_title = @commission.name
     @categories = Category.all
 
     #Can only edit commissions you added
@@ -96,6 +102,8 @@ class CommissionsController < ApplicationController
         format.html { redirect_to @commission, notice: 'Commission was successfully added.' }
         format.json { render :show, status: :created, location: @commission }
       else
+        @page_title = "List commission"
+
         format.html { render :new }
         format.json { render json: @commission.errors, status: :unprocessable_entity }
       end
@@ -105,6 +113,8 @@ class CommissionsController < ApplicationController
   # PATCH/PUT /commissions/1
   # PATCH/PUT /commissions/1.json
   def update
+    @page_title = @commission.name
+
     respond_to do |format|
       if @commission.update(commission_params)
         if @commission.message_thread
@@ -264,6 +274,7 @@ class CommissionsController < ApplicationController
   end
 
   def custom
+    @page_title = "Request custom commission"
     @seller = User.find(params[:id])
     @commission = Commission.new
     @categories = Category.all
