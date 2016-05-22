@@ -33,5 +33,20 @@
         </div>
         <% end %>
     </div>
+
+    <span class="commissions-number">
+      <span>Per page</span>
+      <!-- <span class="glyphicon glyphicon-th-large"></span> -->
+      <span class="buttons">
+        <% @display_sizes.each do |size| %>
+          <% if @display_size == size %>
+          <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-primary btn-sm" %>
+          <% else %>
+          <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-link btn-sm" %>
+          <% end %>
+        <% end %>
+      </span>
+    </span>
+
     <%= paginate @commissions %>
 </div>

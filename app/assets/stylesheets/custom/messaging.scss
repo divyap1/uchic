@@ -36,6 +36,10 @@
       display: inline;
     }
 
+    button {
+      margin-left: $padding-small-horizontal;
+    }
+
     .messages {
       max-height: 50vh;
     }
@@ -48,6 +52,18 @@
     &.minimised .thread-commission,
     &.minimised textarea {
       display: none;
+    }
+
+    .min-only {
+      display: none;
+    }
+
+    &.minimised .max-only {
+      display: none;
+    }
+
+    &.minimised .min-only {
+      display: inherit;
     }
   }
 }

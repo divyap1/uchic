@@ -13,3 +13,23 @@
 .breadcrumb {
   box-shadow: none;
 }
+
+.toggle-section {
+  border-radius: $border-radius-base;
+
+  &.collapsed {
+    margin-bottom: $padding-large-vertical;
+  }
+
+  &.collapsed .expanded-only {
+    display: none;
+  }
+
+  .collapsed-only {
+    display: none;
+  }
+
+  &.collapsed .collapsed-only {
+    display: inline-block;
+  }
+}

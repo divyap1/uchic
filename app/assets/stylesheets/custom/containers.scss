@@ -17,6 +17,12 @@
   &.box-muted {
     background: $gray-lightest;
   }
+
+  > h2:first-child {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
 }
 .box .box-header {
   margin: -20px -20px 20px;

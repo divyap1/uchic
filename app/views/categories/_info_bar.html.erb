@@ -1,42 +1,18 @@
-<div class="box">
-  <div class="row">
-    <div class="col-md-12  commissions-number-sort">
-      <!-- <div class="row"> -->
-        <form class="form-inline">
-          <div class="col-md-4">
-            <div class="commissions-number">
-              <strong>Show</strong>
-              <br>
-              <% @display_sizes.each do |size| %>
-                <% if @display_size == size %>
-                <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm btn-primary" %>
-                <% else %>
-                <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-default btn-sm" %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="commissions-sort-by">
-
-              <strong>Sort by</strong>
-              <br>
-              <% @order_options.each do |order| %>
-                <% if @order == order %>
-                  <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-primary btn-sm" %>
-                <% else %>
-                <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </form>
-    </div>
-
-
+<div class="row commissions-info-bar">
+  <div class="col-md-12  commissions-number-sort">
+    <span class="item-count-display"><%= page_entries_info @commissions %></span>
+    <span class="commissions-sort-by pull-right">
+      <span class="sr-only">Sort by</span>
+      <span class="glyphicon glyphicon-sort"></span>
+      <span class="btn-group">
+        <% @order_options.each do |order| %>
+          <% if @order == order %>
+            <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-primary btn-sm" %>
+          <% else %>
+          <%= link_to order, category_path(@category.id, params.except(:page).merge(order: order)), class:"btn btn-default btn-sm" %>
+          <% end %>
+        <% end %>
+      </span>
+    </span>
   </div>
 </div>
-
-<p class="text-right">
-<%= page_entries_info @commissions %>
-</p>

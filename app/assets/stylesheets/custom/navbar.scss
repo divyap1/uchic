@@ -97,6 +97,10 @@
 }
 
 .navbar .yamm-content {
+  .col-sm-4:nth-child(4) {
+    margin-top: 20px;
+  }
+
   h5 {
     font-size: 18px;
     font-weight: 400;

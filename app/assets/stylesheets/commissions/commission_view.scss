@@ -1,3 +1,24 @@
+.commissions-info-bar {
+  margin-bottom: 2rem;
+
+  .item-count-display {
+    display: inline-block;
+    padding: $padding-small-vertical 0;
+  }
+
+  .glyphicon {
+    position: relative;
+    top: 3px;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+  .buttons {
+    display: inline-block;
+    margin-right: 1rem;
+  }
+}
+
 .commission {
     > .profile-picture {
         display: block;
@@ -6,7 +27,7 @@
         margin: 0 auto;
         border-radius: 8rem;
     }
-    > #seller-details {
+    > .seller-details {
         text-align: center;
     }
 }

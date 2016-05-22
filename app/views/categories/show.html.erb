@@ -7,14 +7,16 @@
   </div>
 
   <div class="col-md-9">
-    <div class="box category-title">
+    <div class="category-title">
       <h1><%= @category.name %></h1>
     </div>
     <%= render partial: 'top_seller_bar' %>
 
-    <%= render partial: 'info_bar' %>
+    <div class="box">
+      <h2>Listings</h2>
+      <%= render partial: 'info_bar' %>
 
-    <%= render partial: 'commission_view' %>
-
+      <%= render partial: 'commission_view' %>
+    </div>
   </div>
 </div>

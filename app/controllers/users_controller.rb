@@ -3,34 +3,37 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    @page_title = @user.name
     @review = Review.new
     @reviews = @user.reviews
-
-    @num_reviews = @reviews.nil? ? 0 : @reviews.length
-    @average_review = @num_reviews == 0  ? 0 : @reviews.map(&:rating).inject(0, &:+) / @num_reviews
   end
 
   def activity_feed
     @user = current_user
+    @page_title = "Activity feed"
     @notifications = @user.notifications.order(created_at: :desc)
   end
 
   def listings
+    @page_title = "Listings"
     @open_commissions = Commission.where(seller_id: current_user.id, buyer_id: nil)
     @commissions = Commission.where(seller_id: current_user.id, active: true).where.not(buyer_id: nil)
   end
 
   def my_commissions
+    @page_title = "Commissions"
     @commissions = Commission.where(buyer_id: current_user.id, active: true)
   end
 
   def private_commission
     @commission = Commission.find(params[:id])
+    @page_title = @commission.title
     @seller = User.find(@commission.seller_id)
     @buyers = User.find(@commission.buyer_id)
   end
 
   def pay
+    @page_title = "Pay Now"
     @commission = Commission.find(params[:id])
   end
 
@@ -68,6 +71,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    @page_title = "Dashboard"
     @user = current_user
     if user_signed_in?
       # get most recently opened commissions by seller

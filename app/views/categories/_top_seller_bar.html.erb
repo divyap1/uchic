@@ -1,17 +1,24 @@
-<div class="box seller-bar hidden-xs">
+<button class="btn btn-default btn-block toggle-section hidden" data-target="#top_sellers">
+  <span class="collapsed-only glyphicon glyphicon-menu-down"></span>
+  <span class="expanded-only glyphicon glyphicon-menu-up"></span>
+
+  Top sellers
+</button>
+
+<div id="top_sellers" class="box seller-bar">
+  <h2>Top sellers</h2>
+
   <div class="row">
-      <% @top_sellers.each do |seller| %>
-      <div class="col-md-4 commissions-showing">
-        <div class="row">
-            <div class="col-md-6">
-                <img class="profile-picture img-responsive" alt="Profile picture" src="<%= seller.profile_picture.url %>">
-            </div>
-            <div class="col-md-6" , id="seller-details" style="padding:0px">
-                <h5><%= seller.name %></h5>
-                <%= link_to "View profile", user_profile_path(seller.id), class:"btn btn-primary btn-sm" %>
-            </div>
+    <% @top_sellers.each do |seller| %>
+      <div class="col-md-4">
+        <%= link_to user_profile_path(seller.id), class: "seller-display" do %>
+          <img class="profile-picture img-responsive" alt="Profile picture" src="<%= seller.profile_picture.url %>">
+          <div class="seller-details">
+            <h5><%= seller.name %></h5>
+            <span><%= user_rating(seller) %></span>
           </div>
+        <% end %>
       </div>
-      <% end %>
-    </div>
+    <% end %>
+  </div>
 </div>

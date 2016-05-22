@@ -13,7 +13,13 @@
       <meta name="user_id" content="<%= current_user.id %>">
     <% end %>
 
-    <title> Uchic: Social Marketplace </title>  <%# TODO: Change to website name  %>
+    <title>
+      <% if @page_title %>
+        <%= @page_title %> - Uchic
+      <% else %>
+        Uchic - A Social Marketplace
+      <% end %>
+    </title>
 
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 

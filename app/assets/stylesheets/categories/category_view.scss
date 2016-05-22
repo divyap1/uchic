@@ -1,31 +1,16 @@
-.category-title {
-  text-align: center;
-}
-
 .commissions {
-    text-align: center;
     > .pagination {
-        margin: 20px 0;
-        font-family: "Roboto", Helvetica, Arial, sans-serif;
-    }
-    > .pagination > span > a{
-        padding: 6px 12px;
-        line-height: 1.42857143;
-        text-decoration: none;
-        color: #323282;
-        background-color: #ffffff;
-        border: 1px solid #2f2f7b;
-        border-radius: 1000px;
-    }
+        float: right;
+        margin: 5px 0;
 
-    > .pagination .current{
-            padding: 6px 12px;
-            line-height: 1.42857143;
-            text-decoration: none;
-            border: 1px solid #2f2f7b;
-            border-radius: 1000px;
-            background-color: #323282;
-            color: #FFFFFF;
-    }
+        li:first-child > a {
+          border-top-left-radius: 1000px;
+          border-bottom-left-radius: 1000px;
+        }
 
+        li:last-child > a {
+          border-top-right-radius: 1000px;
+          border-bottom-right-radius: 1000px;
+        }
+    }
 }

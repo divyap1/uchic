@@ -6,6 +6,7 @@ class MessageThreadsController < ApplicationController
   # GET /message_threads
   # GET /message_threads.json
   def index
+    @page_title = "Messages"
     @message_threads = MessageThread.related_to(current_user)
     @message_thread = @message_threads.first
     @message_thread.mark_read!(current_user)
@@ -14,6 +15,7 @@ class MessageThreadsController < ApplicationController
   # GET /message_threads/1
   # GET /message_threads/1.json
   def show
+    @page_title = "Messages"
     @message_thread = MessageThread.find(params[:id])
     @message_thread.mark_read!(current_user)
     @message_threads = MessageThread.related_to(current_user)
@@ -27,6 +29,7 @@ class MessageThreadsController < ApplicationController
   # POST /message_threads
   # POST /message_threads.json
   def create
+    @page_title = "Messages"
     thread_params = message_thread_params
 
     if thread_params[:seller_id]
