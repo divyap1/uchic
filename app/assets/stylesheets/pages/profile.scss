@@ -1,28 +1,40 @@
 .user-profile {
-  > .profile-picture {
-    display: block;
-    width: 15rem;
-    height: 15rem;
-    margin: 0 auto;
-    border-radius: 8rem;
-  }
 
-  > .name {
-    margin-top: $padding-large-vertical;
-    font-size: 2.5rem;
+  > .profile-header {
+    width: 100%;
+    background-color: #FFFFFF;
     text-align: center;
-  }
 
-  > .info {
-    text-align: center;
-    margin-bottom: $padding-large-vertical;
-
-    .divider {
-      display: inline-block;
-      padding: 0 $padding-base-vertical;
+    .profile-picture {
+      display: block;
+      width: 15rem;
+      height: 15rem;
+      margin: 0 auto;
+      border-radius: 8rem;
+      border: 1px solid #888888; 
+      box-shadow: 0px 1px 1px #888888;
     }
+
+    > .name {
+      margin-top: $padding-large-vertical;
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    > .info {
+      text-align: center;
+      margin-bottom: $padding-large-vertical;
+
+      .divider {
+        display: inline-block;
+        padding: 0 $padding-base-vertical;
+      }
+    }
+
   }
 
+
+  
   .profile-buttons {
     padding: $padding-large-vertical $padding-base-horizontal;
 
@@ -34,4 +46,5 @@
       color: $gray;
     }
   }
+
 }

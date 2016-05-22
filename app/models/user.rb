@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   has_attached_file :profile_picture, default_url: "/images/no-profile-picture.png", styles: { thumb:'128x128#' }
   validates_attachment_content_type :profile_picture, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
+  has_attached_file :profile_background, default_url: "/images/no-profile-bg.jpg", styles: { thumb:'128x128#' }
+  validates_attachment_content_type :profile_background, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   scope :contains, -> (search) { where("name like ? OR username like ?", "#{search}%", "#{search}%")}
 
   def first_name

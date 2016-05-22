@@ -1,36 +1,40 @@
 <div class="row">
    <div class="user-profile col-md-12">
-      <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
-      <h1 class="name"><%= @user.name %></h1>
-      <div class="info">
-         <%=  @user.country_name %>
-         <span class="divider" aria-hidden="true">&bull;</span>
-         <span class="rating">
-         <% @average_review.times do %>
-            <span class="glyphicon glyphicon-star"></span>
-         <% end %>
-         (<%= @num_reviews %> ratings)
-         <br>
-
+      <div class="profile-header" style="background-image: <%="url(#{@user.profile_background.url})"%>">
+        <img class="profile-picture" alt="Profile picture" src="<%= @user.profile_picture.url %>">
+        <h1 class="name"><%= @user.name %></h1>
+        <div class="info">
+           <%= @user.country_name %>
+           <span class="divider" aria-hidden="true">&bull;</span>
+           <span class="rating">
+           <% @average_review.times do %>
+              <span class="glyphicon glyphicon-star"></span>
+           <% end %>
+           (<%= @num_reviews %> ratings)
+           <br>
+        </div>
       </div>
+
       <div class="row">
          <div class="col-md-12">
-            <% unless @user == current_user %>
             <div class="profile-buttons panel panel-default text-right">
-               <% if user_signed_in? && @user != current_user %>
-                  <% if current_user.followings.any? { |following| following.id == @user.id } %>
-                    <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: "Are you sure you want to unfollow #{@user.name}?" }, class: "btn btn-danger pull-left"%>
-                 <%else%>
-                  <%= link_to "Follow", friendships_path(:following_id => @user), :method => :post, class: "btn btn-success pull-left"%>
-                 <%end%>
-              <%end%>
-                <%= link_to "Request custom commission", custom_commission_path(@user.id), class: "btn btn-primary"%>
-                <button class="btn btn-default start-message" data-seller="<%= @user.id %>">
-                <span class="glyphicon glyphicon-comment"></span>
-                Send <%= @user.name %> a message
-                </button>
-            </div>
+            <% if @user == current_user %>
+              <%= link_to "Change photo",  edit_user_registration_path(@user), class: "btn btn-default "%>
+            <% else %>
+                 <% if user_signed_in? && @user != current_user %>
+                    <% if current_user.followings.any? { |following| following.id == @user.id } %>
+                      <%= link_to "Unfollow", friendship_path(:following_id => @user), method: :delete, data: { confirm: "Are you sure you want to unfollow #{@user.name}?" }, class: "btn btn-danger pull-left"%>
+                   <%else%>
+                    <%= link_to "Follow", friendships_path(:following_id => @user), :method => :post, class: "btn btn-success pull-left"%>
+                   <%end%>
+                <%end%>
+                  <%= link_to "Request custom commission", custom_commission_path(@user.id), class: "btn btn-primary"%>
+                  <button class="btn btn-default start-message" data-seller="<%= @user.id %>">
+                  <span class="glyphicon glyphicon-comment"></span>
+                  Send <%= @user.name %> a message
+                  </button>
             <% end %>
+            </div>
          </div>
       </div>
       <div class="row">

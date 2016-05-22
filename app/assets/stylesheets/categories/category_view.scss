@@ -8,7 +8,7 @@
         margin: 20px 0;
         font-family: "Roboto", Helvetica, Arial, sans-serif;
     }
-    > .pagination > span{
+    > .pagination > span > a{
         padding: 6px 12px;
         line-height: 1.42857143;
         text-decoration: none;
@@ -16,6 +16,16 @@
         background-color: #ffffff;
         border: 1px solid #2f2f7b;
         border-radius: 1000px;
+    }
+
+    > .pagination .current{
+            padding: 6px 12px;
+            line-height: 1.42857143;
+            text-decoration: none;
+            border: 1px solid #2f2f7b;
+            border-radius: 1000px;
+            background-color: #323282;
+            color: #FFFFFF;
     }
 
 }
