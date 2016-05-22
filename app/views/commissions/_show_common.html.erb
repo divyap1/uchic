@@ -31,6 +31,9 @@
 
     <p class="desc"><%=@commission.description%></p>
 
+    <% if @commission.seller == current_user && !@commission.buyer %>
+      <%=link_to "Delete Commission", commission_path(@commission), method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+    <% end %>
     <% if @commission.seller == current_user %>
       <%=link_to "Edit Commission",  edit_commission_path(@commission), class: "btn btn-primary" %>
     <% else %>

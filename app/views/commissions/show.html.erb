@@ -11,7 +11,7 @@
     <div class="row" id="productMain">
 
       <%= render partial: "show_common" %>
-
+      <% unless @commission.seller == current_user %>
       <div class="row">
         <h3>You may also like these products</h3>
         <% @similar_items.each do |similar_item| %>
@@ -43,6 +43,7 @@
         </div>
         <% end %>
       </div>
+      <% end %>
     </div>
   <!-- /.col-md-9 -->
 </div>

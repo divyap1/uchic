@@ -13,6 +13,6 @@
         <%= "#{notification.about_user.name} wants #{notification.commission.name}" %></h4>
         <%= link_to "View details", commission_path(notification.commission), "btn btn-default" %>
         <%= link_to "Accept", approve_commission_path(notification.commission), class: "btn btn-success", method: "post" %>
-        <%= link_to "Decline", commission_path(notification.commission), class: "btn btn-danger", method: "delete" %>
+        <%= link_to "Decline", commission_path(notification.commission), class: "btn btn-danger", method: "delete", data: { confirm: 'Are you sure?' } %>
 </div>
 </li>
