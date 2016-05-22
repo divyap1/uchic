@@ -2,8 +2,14 @@
 
   > .profile-header {
     width: 100%;
+    margin-top: -20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     background-color: #FFFFFF;
     text-align: center;
+
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.90);
 
     .profile-picture {
       display: block;
@@ -11,19 +17,18 @@
       height: 15rem;
       margin: 0 auto;
       border-radius: 8rem;
-      border: 1px solid #888888; 
       box-shadow: 0px 1px 1px #888888;
     }
 
     > .name {
       margin-top: $padding-large-vertical;
+      margin-bottom: $padding-large-vertical;
       font-size: 2.5rem;
       text-align: center;
     }
 
     > .info {
       text-align: center;
-      margin-bottom: $padding-large-vertical;
 
       .divider {
         display: inline-block;
@@ -37,6 +42,8 @@
   
   .profile-buttons {
     padding: $padding-large-vertical $padding-base-horizontal;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 
     .message {
       flex: 1;
