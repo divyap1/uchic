@@ -11,5 +11,43 @@
         <img class="img-responsive" src="/images/main/slider3.png" alt="">
       </div>
     </div>
+
+    <div class="box"><h1>Featured Products</h1></div>
+
+    <div class="row">
+    <% @commissions.each do |commission| %>
+    <div class="col-md-4">
+        <div class="commission">
+            <div class="flip-container">
+                <div class="flipper">
+                    <div class="front">
+                        <%= link_to commission_path(commission.id) do %>
+                        <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
+                        <% end %>
+                    </div>
+                    <div class="back">
+                        <%= link_to commission_path(commission.id) do %>
+                        <% image_tag commission.pictures.second ? commission.pictures.second.picture.url(:medium) : commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <%= link_to commission_path(commission.id), class: "invisible" do %>
+                <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
+            <% end %>
+            <div class="text">
+                <h3>
+                    <%= link_to commission.name, commission_path(commission.id) %>
+                </h3>
+                <p class="price"><%="$#{number_with_precision(commission.price, :precision => 2)}"%></p>
+                <p class="buttons">
+                    <%= link_to "View details", commission_path(commission.id), class:"btn btn-default" %>
+                </p>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    </div>
+
   </div>
 </div>

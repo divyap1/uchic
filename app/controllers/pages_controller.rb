@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   end
 
   def welcome
+  	@commissions = Commission.publicly_visible.sample(3)
   end
 
   def faq

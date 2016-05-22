@@ -43,7 +43,8 @@ print "Creating users "
     email: Faker::Internet.free_email(name),
     username: Faker::Internet.user_name(name),
     password: "0hsosecret",
-    password_confirmation: "0hsosecret"
+    password_confirmation: "0hsosecret",
+    country: "NZ"
   )
 end
 
@@ -171,10 +172,17 @@ print "Creating ongoing commissions "
   end
 end
 
+puts
+
 # Add reviews
 
 users = User.all.sample(25)
 reviewers = User.all - users.sample(15)
+
+COMMENTS = [
+  "Geat!", "Good service", "Thanks for the product!", "Loved it",
+  "Great seller", "A++!", "Really happy", "I really like the product"
+]
 
 print "Creating reviews "
 
@@ -188,9 +196,6 @@ print "Creating reviews "
     reviewer: reviewer,
     user: user, 
     rating: 1 + rand(5),
-    comment: Faker::Hacker.say_something_smart
+    comment: COMMENTS.sample
   )
-
 end
-
-puts
