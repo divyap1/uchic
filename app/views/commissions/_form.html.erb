@@ -45,7 +45,7 @@
 
   <div class="col-md-6">
     <div class="form-group">
-      <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/default.png" %>
+      <%= image_tag @commission.pictures.first ? @commission.pictures.first.picture.url(:medium) : "products/default.png", class:"img-responsive"  %>
       <%= f.label :picture, class: "sr-only"%>
       <%= f.file_field :pictures, {accept: 'image/png,image/jpeg', multiple: true} %>
     </div>

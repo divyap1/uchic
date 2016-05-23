@@ -13,7 +13,7 @@
     <div class="box">
       <h1>My Orders</h1>
 
-      <p class="lead">All the commissions you have ordered in one place.</p>
+      <p class="text-center lead">All the commissions you have ordered in one place.</p>
 
       <hr>
       <% if @commissions && @commissions.any? %>
@@ -33,7 +33,7 @@
             <tr data-link="<%=commission_path(commission)%>">
               <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %>
               &nbsp;&nbsp;&nbsp;<%= link_to commission.name, commission_path(commission) %></td>
-              <td class="hidden-xs"><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+              <td class="hidden-xs"><%= price_display(commission) %></td>
               <td class="hidden-xs"><%= commission.updated_at.strftime "%d %B %Y" %></td>
               <td class="hidden-xs"> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
               <td><%= link_to edit_commission_path(commission), class: "btn btn-link pull-right", style: "padding:0px" do %>
@@ -45,7 +45,7 @@
         </table>
       </div>
       <% else %>
-      <p>You have not commissioned any products yet</p>
+      <p style="margin-top:10px">You currently have no pending orders</p>
       <% end %>
     </div>
   </div>

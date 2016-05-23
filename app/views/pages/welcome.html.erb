@@ -39,7 +39,7 @@
                 <h3>
                     <%= link_to commission.name, commission_path(commission.id) %>
                 </h3>
-                <p class="price"><%="$#{number_with_precision(commission.price, :precision => 2)}"%></p>
+                <p class="price"><%= price_display(commission) %></p>
                 <p class="buttons">
                     <%= link_to "View details", commission_path(commission.id), class:"btn btn-default" %>
                 </p>

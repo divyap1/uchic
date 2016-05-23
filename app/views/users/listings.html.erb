@@ -11,7 +11,7 @@
   <div class="col-md-12" id="customer-orders">
     <div class="box">
       <h1>All Commissions</h1>
-      <p class="lead">Commissions you are offering in one place.</p>
+      <p class="text-center lead">Commissions you are offering in one place.</p>
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#open">My listings</a></li>
         <li><a data-toggle="tab" href="#requested">My commissions</a></li>
@@ -34,7 +34,7 @@
                 <tr data-link="<%=commission_path(commission)%>">
                   <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %>
                   &nbsp;&nbsp;&nbsp;<%= link_to commission.name, commission_path(commission) %></td>
-                  <td class="hidden-xs"><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+                  <td class="hidden-xs"><%= price_display(commission) %></td>
                   <td class="hidden-xs"><%= commission.created_at.strftime "%d %B %Y" %></td>
                   <td><%= link_to commission_path(commission), method: :delete, class: "btn btn-link pull-right", style: "padding:0px 5px 0px 5px", data: { confirm: 'Are you sure you want to remove #{commission.name}?' } do %>
                   <span class="glyphicon glyphicon-remove", aria-hidden="true"></span>
@@ -50,7 +50,7 @@
           <% else %>
           <div class="row">
             <div class="col-md-12">
-            <p>You have not listed any commissions yet</p>
+            <p style="margin-top:10px">You have not listed any commissions yet</p>
             </div>
           </div>
           <% end %>
@@ -73,7 +73,7 @@
                 <tr data-link="<%=commission_path(commission)%>">
                   <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %>
                   &nbsp;&nbsp;&nbsp;<%= link_to commission.name, commission_path(commission) %></td>
-                  <td class="hidden-xs"><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+                  <td class="hidden-xs"><%= price_display(commission) %></td>
                   <td class="hidden-xs"><%= commission.updated_at.strftime "%d %B %Y" %></td>
                   <td class="hidden-xs"> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
                   <td><%= link_to edit_commission_path(commission), class: "btn btn-link pull-right", style: "padding:0px" do %>
@@ -87,7 +87,7 @@
           <% else %>
           <div class="row">
             <div class="col-md-12">
-              <p>You have not recieved any commission requests yet</p>
+              <p style="margin-top:10px">You have not recieved any commission requests yet</p>
             </div>
           </div>
           <% end %>

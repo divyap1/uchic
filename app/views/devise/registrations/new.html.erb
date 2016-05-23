@@ -3,7 +3,8 @@
     <div class="box without-spacing">
       <h1>New account</h1>
 
-      <p class="lead">Not signed up yet? A fantastic new world of art, fashion and more is just a few clicks away!</p>
+      <p class="text-center lead" style="margin-bottom:2px">Not signed up yet? A fantastic new world of art, fashion and more is just a few clicks away!</p>
+      <p class="text-center">Already have an account? <%= link_to("Login", new_session_path(resource_name)) %></p>
       <hr>
 
       <%= devise_error_messages! %>
@@ -11,7 +12,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="row">
           <div class="col-md-6">
-            <h3><span class="circled-number">1</span> Login details</h3>
+            <h3 class="text-left"><span class="circled-number">1</span> Login details</h3>
 
             <div class="form-group has-feedback">
               <%= f.label :email, class: "sr-only" %>
@@ -35,7 +36,7 @@
               <%= f.password_field :password_confirmation, placeholder: "Confirm password", autocomplete: "off", class: "form-control" %>
             </div>
 
-            <h3><span class="circled-number">2</span> Personal details</h3>
+            <h3 class="text-left"><span class="circled-number">2</span> Personal details</h3>
 
             <div class="form-group has-feedback">
               <%= f.label :name, class: "sr-only" %>
@@ -53,15 +54,15 @@
             </div>
           </div>
           <div class="col-md-6 ">
-            <div class="optional">
+            <div class="optional" style="margin-top:25px">
               <h4>The following fields are optional</h4>
               <div class="form-group">
-                <h3><span class="circled-number">3</span> Profile Picture</h3>
+                <h3 class="text-left"><span class="circled-number">3</span> Profile Picture</h3>
                 <%= f.label :profile_picture, class: "sr-only"%>
                 <%= f.file_field :profile_picture %>
               </div>
 
-              <h3><span class="circled-number">4</span> Payment Details</h3>
+              <h3 class="text-left"><span class="circled-number">4</span> Payment Details</h3>
                 <img src="/images/creditcards.png" alt="Credit Cards" style="width:50%; display:block;
                 margin-right:auto; margin-bottom: 20px">
               <div class="form-group has-feedback">
@@ -96,5 +97,3 @@
     </div>
   </div>
 </div>
-
-<%= render partial: "devise/shared/links" %>
