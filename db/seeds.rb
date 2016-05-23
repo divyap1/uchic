@@ -79,10 +79,6 @@ PRODUCT_TYPES = {
     { name: "Ring", price: 60..600 },
     { name: "Necklace", price: 80..800 },
     { name: "Earrings", price: 70..500 }
-  ],
-  "Miscellaneous" => [
-    { name: "Loot Box", price: 10..80 },
-    { name: "Mystery Gift", price: 10..80 }
   ]
 }
 

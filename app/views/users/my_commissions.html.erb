@@ -13,7 +13,7 @@
     <div class="box">
       <h1>My Orders</h1>
 
-      <p class="lead">All the commissions you have ordered in one place.</p>
+      <p class="text-center lead">All the commissions you have ordered in one place.</p>
 
       <hr>
       <% if @commissions && @commissions.any? %>
@@ -45,7 +45,7 @@
         </table>
       </div>
       <% else %>
-      <p>You have not commissioned any products yet</p>
+      <p style="margin-top:10px">You currently have no pending orders</p>
       <% end %>
     </div>
   </div>
