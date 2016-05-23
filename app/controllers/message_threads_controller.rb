@@ -22,7 +22,14 @@ class MessageThreadsController < ApplicationController
 
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: thread_data(@message_thread) }
+
+      format.json do
+        if @message_thread.related_to?(current_user)
+          render json: thread_data(@message_thread)
+        else
+          render json: { error: "Access denied." }
+        end
+      end
     end
   end
 

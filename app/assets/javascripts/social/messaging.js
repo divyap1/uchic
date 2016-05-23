@@ -14,6 +14,11 @@
 
   function fetchMessages(popup, threadId) {
     $.get("/message_threads/" + threadId + ".json", function(thread) {
+      if (thread.error) {
+        removeMessagePopup(threadId);
+        return;
+      }
+
       var messages = thread.messages;
 
       for (var i = 0; i < messages.length; i++) {
@@ -97,6 +102,18 @@
     return savedPopups;
   }
 
+  function removeMessagePopup(threadId) {
+    for (var i = 0; i < messagePopups.length; i++) {
+      if (messagePopups[i].threadId.toString() === threadId.toString()) {
+        messagePopups[i].popup.remove();
+        messagePopups.splice(i, 1);
+        break;
+      }
+    }
+
+    unsaveMessagePopup(data.threadId);
+  }
+
   function createMessagePopup(data) {
     var savedPopups = unsaveMessagePopup(data.threadId);
     savedPopups.push(data);
@@ -130,11 +147,7 @@
 
     popup.on("click", function() { popup.removeClass("new"); });
     popup.find(".minimise").on("click", function() { popup.toggleClass("minimised"); });
-    popup.find(".delete").on("click", function() {
-      messagePopups.splice(index, 1);
-      unsaveMessagePopup(data.threadId);
-      popup.remove();
-    });
+    popup.find(".delete").on("click", removeMessagePopup.bind(null, data.threadId));
 
     fetchMessages(popup, data.threadId);
 

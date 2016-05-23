@@ -13,6 +13,10 @@ class MessageThread < ActiveRecord::Base
       .order(created_at: :desc)
   }
 
+  def related_to?(user)
+    buyer == user || seller == user
+  end
+
   def partner(user)
     seller == user ? buyer : seller
   end
