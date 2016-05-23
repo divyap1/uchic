@@ -136,12 +136,14 @@ class CommissionsController < ApplicationController
           end
         end
 
-        @commission.unaccept!(@commission.partner(current_user))
-        @commission.accept!(current_user)
+        if @commission.buyer
+          @commission.unaccept!(@commission.partner(current_user))
+          @commission.accept!(current_user)
 
-        @commission.seller.notifications.find_by(commission: @commission).destroy if @commission.seller.notifications.find_by(commission: @commission)
-        @commission.buyer.notifications.find_by(commission: @commission).destroy if @commission.buyer.notifications.find_by(commission: @commission)
-        @commission.buyer.notifications.create(about_user: @commission.seller, state: "counter offer", commission: @commission)
+          @commission.seller.notifications.find_by(commission: @commission).destroy if @commission.seller.notifications.find_by(commission: @commission)
+          @commission.buyer.notifications.find_by(commission: @commission).destroy if @commission.buyer.notifications.find_by(commission: @commission)
+          @commission.buyer.notifications.create(about_user: @commission.seller, state: "counter offer", commission: @commission)
+        end
 
         format.html { redirect_to @commission, notice: 'Commission was successfully updated' }
         format.json { render :show, status: :ok, location: @commission }
