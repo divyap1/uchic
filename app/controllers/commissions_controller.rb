@@ -21,7 +21,9 @@ class CommissionsController < ApplicationController
     @commission = Commission.find(params[:id])
 
     seller_country_code = ISO3166::Country.find_country_by_name(@commission.seller.country_name).currency.code
-    user_country_code = ISO3166::Country.find_country_by_name(current_user.country_name).currency.code
+    user_country = current_user.country_name if user_signed_in?
+    user_country ||= "New Zealand"
+    user_country_code = ISO3166::Country.find_country_by_name(user_country).currency.code
 
     @price = Money.new(@commission.price * 100, seller_country_code).exchange_to(user_country_code)
     @price = Money.new(@price, user_country_code).format
