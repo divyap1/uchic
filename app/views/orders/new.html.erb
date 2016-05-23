@@ -32,11 +32,11 @@
                 <tfoot>
                     <tr>
                         <th colspan="5" class="text-right">Subtotal  $NZD</th>
-                        <th class="text-right"><%= "#{number_with_precision(@commission.price, :precision => 2)}" %></th>
+                        <th class="text-right"><%= price_display(@commission) %></th>
                     </tr>
                     <tr>
                         <th colspan="5" class="text-right">Shipping and Handling  $NZD</th>
-                        <th class="text-right"><%= "#{number_with_precision(4.99, :precision => 2)}"%></th>
+                        <th class="text-right"><%= price_display(@commission) %></th>
                     </tr>
                     <tr>
                         <th colspan="5" class="text-right">Total  $NZD</th>

@@ -10,7 +10,7 @@
         <%= "#{notification.about_user.name} just listed a new product" %>
     </h3>
     <h4>
-        <%= "#{notification.commission.name}  $#{number_with_precision(notification.commission.price, :precision => 2)}" %>
+        <%= "#{notification.commission.name}  #{price_display(notification.commission)}" %>
     </h4>
     <p>
         <%= notification.commission.description %>

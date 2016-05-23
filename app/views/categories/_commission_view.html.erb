@@ -18,13 +18,13 @@
                     </div>
                 </div>
                 <%= link_to commission_path(commission.id), class: "invisible" do %>
-                    <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
+                <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
                 <% end %>
                 <div class="text">
                     <h3>
                         <%= link_to commission.name, commission_path(commission.id) %>
                     </h3>
-                    <p class="price"><%="$#{number_with_precision(commission.price, :precision => 2)}"%></p>
+                    <p class="price"><%= price_display(commission) %></p>
                     <p class="buttons">
                         <%= link_to "View details", commission_path(commission.id), class:"btn btn-default" %>
                     </p>
@@ -34,19 +34,21 @@
         <% end %>
     </div>
 
+    <% if @display_sizes %>
     <span class="commissions-number">
-      <span>Per page</span>
-      <!-- <span class="glyphicon glyphicon-th-large"></span> -->
-      <span class="buttons">
-        <% @display_sizes.each do |size| %>
-          <% if @display_size == size %>
-          <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-primary btn-sm" %>
-          <% else %>
-          <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-link btn-sm" %>
-          <% end %>
-        <% end %>
-      </span>
+        <span>Per page</span>
+        <!-- <span class="glyphicon glyphicon-th-large"></span> -->
+        <span class="buttons">
+            <% @display_sizes.each do |size| %>
+            <% if @display_size == size %>
+            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-primary btn-sm" %>
+        <% else %>
+            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-link btn-sm" %>
+            <% end %>
+            <% end %>
+        </span>
     </span>
 
     <%= paginate @commissions %>
+    <% end %>
 </div>

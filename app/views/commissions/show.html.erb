@@ -36,7 +36,7 @@
             <% end %>
             <div class="text">
               <h3><%= similar_item.name %></h3>
-              <p class="price"><%= "$#{number_with_precision(similar_item.price, :precision => 2)}" %></p>
+              <p class="price"><%= price_display(similar_item) %></p>
             </div>
           </div>
           <!-- /.product -->
