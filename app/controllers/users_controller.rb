@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @page_title = @user.name
     @review = Review.new
     @reviews = @user.reviews
-    
+
   end
 
   def activity_feed
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def private_commission
     @commission = Commission.find(params[:id])
-    @page_title = @commission.title
+    @page_title = @commission.name
     @seller = User.find(@commission.seller_id)
     @buyers = User.find(@commission.buyer_id)
   end
