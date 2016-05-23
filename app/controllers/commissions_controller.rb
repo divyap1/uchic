@@ -43,7 +43,7 @@ class CommissionsController < ApplicationController
     @section = @commission.name
 
     @similar_items = @category.commissions.select{|commission| commission.public && commission!=@commission}
-    @similar_items = @similar_items.sample(4)
+    @similar_items = @similar_items.sample(3)
 
 
     @new_commission = Commission.new

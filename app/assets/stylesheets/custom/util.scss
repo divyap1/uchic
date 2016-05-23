@@ -33,3 +33,15 @@
     display: inline-block;
   }
 }
+
+.media-list.centered-content {
+  .media-body {
+    vertical-align: middle;
+  }
+}
+
+.media-list.headings-only {
+  .media-heading {
+    margin-bottom: 0;
+  }
+}
