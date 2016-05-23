@@ -1,7 +1,10 @@
 <div class="activity-feed">
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <h1>
+          Activity Feed
+        </h1>
+        <% if @notifications.any? %>
+        <div class="col-md-8 col-md-offset-2">
             <div class="box">
                 <ul class="media-list">
                     <% @notifications.each do |notification| %>
@@ -19,8 +22,11 @@
                 </ul>
             </div>
         </div>
-        <!-- /.col-md-8 -->
-        <div class="col-md-2"></div>
+        <%end%>
+        </div>
+        <p class="text-center text-muted">
+        <em>The activity feed gives you a quick overview of all of your notifications. You do not current have any notifications.</em>
+      </p>
     </div>
 </div>
 <!-- /.activity-feed -->

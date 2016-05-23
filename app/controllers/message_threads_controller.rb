@@ -9,7 +9,9 @@ class MessageThreadsController < ApplicationController
     @page_title = "Messages"
     @message_threads = MessageThread.related_to(current_user)
     @message_thread = @message_threads.first
-    @message_thread.mark_read!(current_user)
+    if @message_thread
+      @message_thread.mark_read!(current_user)
+    end
   end
 
   # GET /message_threads/1

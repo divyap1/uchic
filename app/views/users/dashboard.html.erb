@@ -134,12 +134,13 @@
           <div class="col-md-3">
             <li class="media">
               <div class="media-left">
-                <a href="#">
+                <a href="<%=user_profile_path(follower)%>">
                   <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
                 </a>
               </div>
               <div class="media-body">
                 <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+                <p><%=follower.username%></p>
               </div>
             </li>
           </div>
