@@ -22,3 +22,5 @@
 
 # Ignore uploaded images
 /public/system
+
+.byebug_history
