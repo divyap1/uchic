@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.raise_runtime_errors = true
 
   # Windows 8 user's enables paperclip! (Comment out if unnecessary)
-  # Paperclip.options[:command_path] = 'C:\Program Files (x86)\GnuWin32\bin'
+  Paperclip.options[:command_path] = 'C:\Program Files (x86)\GnuWin32\bin'
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
