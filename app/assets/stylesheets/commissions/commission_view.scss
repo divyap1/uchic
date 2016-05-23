@@ -17,6 +17,19 @@
     display: inline-block;
     margin-right: 1rem;
   }
+
+  @media (max-width: $screen-xs-max) {
+    .item-count-display{
+      display: block;
+      text-align: center;
+    }
+
+    .commissions-sort-by.pull-right{
+        display: block;
+        text-align: center;
+        float: none !important;
+    }
+  }
 }
 
 .commission {

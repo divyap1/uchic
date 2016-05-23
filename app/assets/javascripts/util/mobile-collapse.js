@@ -1,4 +1,4 @@
-if ($(window).width() < 768) {
+if ($(window).width() < 992) {
   $(".toggle-section").each(function() {
     $($(this).data("target")).addClass("hidden");
     $(this).addClass("collapsed");
