@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @page_title = @user.name
     @review = Review.new
     @reviews = @user.reviews
+    
   end
 
   def activity_feed
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
 
   def listings
     @page_title = "Listings"
-    @open_commissions = Commission.where(seller_id: current_user.id, buyer_id: nil)
+    @open_commissions = Commission.where(seller_id: current_user.id, buyer_id: nil, active: true)
     @commissions = Commission.where(seller_id: current_user.id, active: true).where.not(buyer_id: nil)
   end
 

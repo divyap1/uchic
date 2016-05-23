@@ -22,6 +22,7 @@ class Commission < ActiveRecord::Base
   scope :contains, -> (name) { where("name like ?", "%#{name}%")}
 
   scope :publicly_visible, -> { where(public: true) }
+  default_scope { where(active: true)}
 
   STATES.each_key.with_index do |state, index|
     scope state, -> { where(state: state) }
