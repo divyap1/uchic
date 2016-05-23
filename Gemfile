@@ -35,6 +35,9 @@ gem 'thin'
 gem 'kaminari'
 
 gem 'country_select'
+gem 'money'
+gem 'google_currency'
+gem 'countries'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -34,7 +34,7 @@
                 <tr data-link="<%=commission_path(commission)%>">
                   <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %>
                   &nbsp;&nbsp;&nbsp;<%= link_to commission.name, commission_path(commission) %></td>
-                  <td class="hidden-xs"><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+                  <td class="hidden-xs"><%= price_display(commission) %></td>
                   <td class="hidden-xs"><%= commission.created_at.strftime "%d %B %Y" %></td>
                   <td><%= link_to commission_path(commission), method: :delete, class: "btn btn-link pull-right", style: "padding:0px 5px 0px 5px", data: { confirm: "Are you sure you want to remove #{commission.name}?" } do %>
                   <span class="glyphicon glyphicon-trash", aria-hidden="true"></span>
@@ -73,7 +73,7 @@
                 <tr data-link="<%=commission_path(commission)%>">
                   <td><%= image_tag commission.pictures.first ? commission.pictures.first.picture.url : "products/default.png", size: "32" %>
                   &nbsp;&nbsp;&nbsp;<%= link_to commission.name, commission_path(commission) %></td>
-                  <td class="hidden-xs"><%= "$#{number_with_precision(commission.price, :precision => 2)}" %></td>
+                  <td class="hidden-xs"><%= price_display(commission) %></td>
                   <td class="hidden-xs"><%= commission.updated_at.strftime "%d %B %Y" %></td>
                   <td class="hidden-xs"> <%= render partial: 'commissions/display_state', locals: {:state => commission.state} %></td>
                   <td><%= link_to edit_commission_path(commission), class: "btn btn-link pull-right", style: "padding:0px" do %>

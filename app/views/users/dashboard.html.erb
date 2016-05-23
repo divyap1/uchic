@@ -41,7 +41,7 @@
                 </table>
               </div>
               <% else %>
-              <p style="margin-top:10px">You currently have no pending orders</p>
+              <p class="text-center" style="margin-top:10px">You currently have no pending orders</p>
               <% end %>
             </div>
           </div>
@@ -85,7 +85,7 @@
                 </table>
               </div>
               <% else %>
-              <p style="margin-top:10px">You have not listed any commissions yet</p>
+              <p class="text-center" style="margin-top:10px">You have not listed any commissions yet</p>
               <% end %>
             </div>
             <div id="requested" class="tab-pane fade">
@@ -134,18 +134,19 @@
           <div class="col-md-3">
             <li class="media">
               <div class="media-left">
-                <a href="#">
+                <a href="<%=user_profile_path(follower)%>">
                   <%= image_tag follower.profile_picture.url, size: "64x64", :class => "media-object"%>
                 </a>
               </div>
               <div class="media-body">
                 <h4 class="media-heading"><%= link_to follower.name, user_profile_path(follower) %></h4>
+                <p><%=follower.username%></p>
               </div>
             </li>
           </div>
           <% end %>
           <% else %>
-          <p>You do not currently have any followers</p>
+          <p class="text-center">You do not currently have any followers</p>
           <% end %>
         </div>
       </div>

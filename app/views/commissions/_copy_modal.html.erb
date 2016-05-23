@@ -12,7 +12,7 @@
       <div class="modal-body">
         <p class="text-left"> Seller: <%= link_to @seller.name, user_profile_path(@seller.id) %> </p>
         <p class="text-left"> Price: <strong>
-          <%= "$#{number_with_precision(@commission.price, :precision => 2)} NZD" %> </strong></p>
+          <%= price_display(@commission) %> </strong></p>
         <%= hidden_field_tag "seller_id", @seller.id %>
         <%= hidden_field_tag "buyer_id", current_user.id %>
         <%= hidden_field_tag "commission_id", @commission.id %>

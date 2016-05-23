@@ -190,7 +190,7 @@ print "Creating reviews "
 
   user.reviews.create(
     reviewer: reviewer,
-    user: user, 
+    user: user,
     rating: 1 + rand(5),
     comment: COMMENTS.sample
   )

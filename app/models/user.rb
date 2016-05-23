@@ -28,13 +28,16 @@ class User < ActiveRecord::Base
 
   scope :contains, -> (search) { where("name like ? OR username like ?", "#{search}%", "#{search}%")}
 
+  def country
+    attributes["country"] || "NZ"
+  end
+
   def first_name
     name.split(/\s+/).first
   end
 
   def country_name
     country_name = ISO3166::Country[country]
-    return "Country Unknown" unless country_name
 
     country_name.translations[I18n.locale.to_s] || country_name.name
   end
