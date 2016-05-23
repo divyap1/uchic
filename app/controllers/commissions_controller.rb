@@ -56,6 +56,7 @@ class CommissionsController < ApplicationController
     end
 
     @page_title = "List commission"
+    @message_thread = MessageThread.find(params[:message_thread_id]) if params[:message_thread_id]
 
     @categories = Category.all
     @commission = Commission.new
@@ -78,7 +79,7 @@ class CommissionsController < ApplicationController
   def create
     if params[:message_thread_id]
       @message_thread = MessageThread.find(params[:message_thread_id])
-      @commission = @message_thread.commission = Commission.new(commission_params)
+      @commission = @message_thread.commission = Commission.new(commission_params.merge(public: false))
       @commission.buyer = @message_thread.buyer
     else
       @commission = Commission.new(commission_params)
@@ -164,7 +165,7 @@ class CommissionsController < ApplicationController
         @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request denied")
         Notification.find_by(commission: @commission).destroy
         respond_to do |format|
-          format.html { redirect_to :back, notice: 'Commission was successfully declined'}
+          format.html { redirect_to (params[:return_to] || user_dashboard_url), notice: 'Commission was successfully declined'}
           format.json { head :no_content }
         end
       else
