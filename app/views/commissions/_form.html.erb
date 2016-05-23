@@ -13,6 +13,8 @@
 <div class="row">
   <div class="col-md-6">
 
+    <%= hidden_field_tag :message_thread_id, params[:message_thread_id] if params[:message_thread_id] %>
+
     <div class="form-group has-feedback">
         <%= f.label :name, class: "sr-only"%>
         <%= f.text_field :name, placeholder: "Commission Name", required: true, class: "form-control" %>
