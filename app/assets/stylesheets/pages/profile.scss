@@ -46,7 +46,7 @@
     border-top-right-radius: 0;
 
     .message {
-      flex: 1;
+      padding: $padding-base-vertical 0;
     }
 
     .message.not-accepting {
@@ -54,4 +54,8 @@
     }
   }
 
+}
+
+.tab-pane table tr:first-child > td {
+  border-top: none;
 }

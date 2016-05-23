@@ -9,7 +9,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <div class="row">
           <div class="col-md-6">
-            <h3>Login details</h3>
+            <h3 class="text-left">Login details</h3>
 
             <div class="form-group editor has-feedback">
               <%= f.label :email, class: "sr-only" %>
@@ -33,7 +33,7 @@
               </div>
             </div>
 
-            <h3>Personal details</h3>
+            <h3 class="text-left">Personal details</h3>
 
             <div class="form-group has-feedback">
               <%= f.label :name, class: "sr-only" %>
@@ -54,19 +54,19 @@
           </div>
 
           <div class="col-md-6">
-            <h3>Change Profile Picture</h3>
+            <h3 class="text-left">Change Profile Picture</h3>
             <div class="form-group">
               <%= f.label :profile_picture, class: "sr-only" %>
               <%= f.file_field :profile_picture %>
             </div>
 
-            <h3>Change Profile Background</h3>
+            <h3 class="text-left">Change Profile Background</h3>
             <div class="form-group">
               <%= f.label :profile_background, class: "sr-only" %>
               <%= f.file_field :profile_background %>
             </div>
 
-            <h3>Payment Details</h3>
+            <h3 class="text-left">Payment Details</h3>
             <img src="/images/creditcards.png" alt="Credit Cards" style="width:50%; display:block;
             margin-right:auto; margin-bottom: 20px">
             <div class="well well-sm">
@@ -116,7 +116,7 @@
     <div class="box">
       <h3>Cancel account</h3>
 
-      <p>
+      <p class="text-center">
         Unhappy?
         <%= link_to "Cancel your account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
       </p>

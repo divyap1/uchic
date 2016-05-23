@@ -20,7 +20,7 @@
           <% end %>
         <% end %>
       </div>
-      <div style="position:relative">
+      <p style="position:relative">
         <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Start another conversation <span class="caret"></span>
         </button>
@@ -29,7 +29,7 @@
             <li><a href="#"><%= thread.partner(current_user).name %></a></li>
           <% end %>
         </ul>
-      </div>
+      </p>
     </div>
     <div class="col-md-8">
       <div class="panel panel-default message-container" data-thread="<%= @message_thread.id %>">

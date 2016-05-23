@@ -3,6 +3,11 @@
     text-align: left;
     font-size: 1.5rem;
   }
+
+  .list-group {
+    max-height: 60vh;
+    overflow: auto;
+  }
 }
 
 .message-container {

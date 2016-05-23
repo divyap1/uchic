@@ -59,7 +59,7 @@
                            </li>
                         <% end %>
                      <% else %>
-                        <p> <%=@user.first_name%> has no current listings</p>
+                        <p class="text-center text-muted"><%=@user.first_name%> has no current listings</p>
                      <% end %>
                   </ul>
                </div>
@@ -87,7 +87,7 @@
                         <% end %>
                         </ul>
                      <% else %>
-                     <p> <%=@user.name%> is not currently following any users<p>
+                     <p class="text-center text-muted"><%=@user.name%> is not currently following any users<p>
                      <% end %>
                </div>
             </div>
@@ -136,7 +136,7 @@
                      <% end %>
 
                   <% else %>
-                     <p>You must place an order with <%=@user.name%> before leaving a review</p>
+                     <p class="text-center text-muted">You must place an order with <%=@user.name%> before leaving a review</p>
                   <% end %>
                </div>
             </div>
@@ -169,7 +169,7 @@
                         </li>
                         <% end %>
                      <% else %>
-                        <p> <%=@user.first_name%> has no reviews</p>
+                        <p class="text-center text-muted"><%=@user.first_name%> has no reviews</p>
                      <% end %>
                   </ul>
                </div>
