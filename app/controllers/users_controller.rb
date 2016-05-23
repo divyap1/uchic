@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     @page_title = @user.name
     @review = Review.new
     @reviews = @user.reviews
-
   end
 
   def activity_feed

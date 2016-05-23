@@ -1,7 +1,6 @@
 .commissions {
-    > .pagination {
-        float: right;
-        margin: 5px 0;
+    .pagination {
+        margin:0 !important;
 
         li:first-child > a {
           border-top-left-radius: 1000px;

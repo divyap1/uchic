@@ -75,16 +75,16 @@
       </div>
       <hr>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <%= hidden_field_tag "seller_id", @commission.seller_id %>
           <%= hidden_field_tag "buyer_id", current_user.id %>
           <%= hidden_field_tag "commission_id", @commission.id %>
-          <div class="col-md-6">
+          <div class="col-xs-6">
             <div class="text-left">
               <%= link_to "Cancel", private_commission_path(@commission.id), class: "btn btn-warning" %>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-xs-6">
             <div class="text-right">
               <%= submit_tag "Pay now", class: "btn btn-success" %>
             </div>

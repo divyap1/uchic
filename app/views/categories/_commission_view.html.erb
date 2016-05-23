@@ -1,54 +1,57 @@
 <div class="commissions">
-    <div class="row commissions">
-        <% @commissions.each do |commission| %>
-        <div class="col-md-4">
-            <div class="commission">
-                <div class="flip-container">
-                    <div class="flipper">
-                        <div class="front">
-                            <%= link_to commission_path(commission.id) do %>
-                            <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
-                            <% end %>
-                        </div>
-                        <div class="back">
-                            <%= link_to commission_path(commission.id) do %>
-                            <% image_tag commission.pictures.second ? commission.pictures.second.picture.url(:medium) : commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                <%= link_to commission_path(commission.id), class: "invisible" do %>
-                <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
-                <% end %>
-                <div class="text">
-                    <h3>
-                        <%= link_to commission.name, commission_path(commission.id) %>
-                    </h3>
-                    <p class="price"><%= price_display(commission) %></p>
-                    <p class="buttons">
-                        <%= link_to "View details", commission_path(commission.id), class:"btn btn-default" %>
-                    </p>
-                </div>
+  <div class="row commissions">
+    <% @commissions.each do |commission| %>
+    <div class="col-md-4 col-sm-6">
+      <div class="commission">
+        <div class="flip-container">
+          <div class="flipper">
+            <div class="front">
+              <%= link_to commission_path(commission.id) do %>
+              <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
+              <% end %>
             </div>
+            <div class="back">
+              <%= link_to commission_path(commission.id) do %>
+              <% image_tag commission.pictures.second ? commission.pictures.second.picture.url(:medium) : commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
+              <% end %>
+            </div>
+          </div>
         </div>
+        <%= link_to commission_path(commission.id), class: "invisible" do %>
+        <%= image_tag commission.pictures.first ? commission.pictures.first.picture.url(:medium) : "products/default.png", alt: "", class:"img-responsive" %>
         <% end %>
+        <div class="text">
+          <h3>
+            <%= link_to commission.name, commission_path(commission.id) %>
+          </h3>
+          <p class="price"><%= price_display(commission) %></p>
+          <p class="buttons">
+            <%= link_to "View details", commission_path(commission.id), class:"btn btn-default" %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="row page-numbers">
+    <% if @display_sizes %>
+    <div class="col-sm-6 commissions-number">
+      <span>Per page</span>
+      <!-- <span class="glyphicon glyphicon-th-large"></span> -->
+      <span class="buttons">
+        <% @display_sizes.each do |size| %>
+        <% if @display_size == size %>
+        <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-primary btn-sm" %>
+        <% else %>
+        <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-link btn-sm" %>
+        <% end %>
+        <% end %>
+      </span>
     </div>
 
-    <% if @display_sizes %>
-    <span class="commissions-number">
-        <span>Per page</span>
-        <!-- <span class="glyphicon glyphicon-th-large"></span> -->
-        <span class="buttons">
-            <% @display_sizes.each do |size| %>
-            <% if @display_size == size %>
-            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-primary btn-sm" %>
-        <% else %>
-            <%= link_to size, category_path(@category.id, params.except(:page).merge(display_size: size)), class:"btn btn-link btn-sm" %>
-            <% end %>
-            <% end %>
-        </span>
-    </span>
-
-    <%= paginate @commissions %>
+    <div class="col-sm-6 pagination-numbers">
+      <%= paginate @commissions %>
+    </div>
     <% end %>
+  </div>
 </div>
