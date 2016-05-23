@@ -1,7 +1,7 @@
 <div class="commissions">
     <div class="row commissions">
         <% @commissions.each do |commission| %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6">
             <div class="commission">
                 <div class="flip-container">
                     <div class="flipper">
@@ -33,9 +33,9 @@
         </div>
         <% end %>
     </div>
-
+<div class="page-numbers">
     <% if @display_sizes %>
-    <span class="commissions-number">
+    <span class="commissions-number" style="float:left">
         <span>Per page</span>
         <!-- <span class="glyphicon glyphicon-th-large"></span> -->
         <span class="buttons">
@@ -51,4 +51,5 @@
 
     <%= paginate @commissions %>
     <% end %>
+  </div>
 </div>
