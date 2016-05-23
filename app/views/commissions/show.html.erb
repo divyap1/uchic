@@ -12,7 +12,14 @@
 
       <%= render partial: "show_common" %>
       <% unless @commission.seller == current_user %>
-      <div class="row">
+      <button class="btn btn-default btn-block toggle-section hidden" data-target="#similar_items">
+        <span class="collapsed-only glyphicon glyphicon-menu-down"></span>
+        <span class="expanded-only glyphicon glyphicon-menu-up"></span>
+
+        Similar items
+      </button>
+
+      <div id="similar_items" class="row">
         <h3>You may also like these products</h3>
         <% @similar_items.each do |similar_item| %>
         <div class="col-md-3">
