@@ -15,6 +15,7 @@
                     <%= render partial: "notifications/new_requested_notification", locals: {notification: notification} if notification.state == "new requested" %>
                     <%= render partial: "notifications/request_accepted_notification", locals: {notification: notification} if notification.state == "request accepted" %>
                     <%= render partial: "notifications/request_denied_notification", locals: {notification: notification} if notification.state == "request denied" %>
+                    <%= render partial: "notifications/counter_offer_notification", locals: {notification: notification} if notification.state == "counter offer" %>
                     <%= render partial: "notifications/new_review_notification", locals: {notification: notification} if notification.state == "new review" %>
                     <%= render partial: "notifications/payment_received_notification", locals: {notification: notification} if notification.state == "payment received" %>
                     <%= render partial: "notifications/item_delivered_notification", locals: {notification: notification} if notification.state == "item delivered" %>
@@ -24,9 +25,11 @@
         </div>
         <%end%>
         </div>
+        <% if !current_user.notifications || current_user.notifications.empty? %>
         <p class="text-center text-muted">
-        <em>The activity feed gives you a quick overview of all of your notifications. You do not current have any notifications.</em>
+        <em>The activity feed gives you a quick overview of all of your notifications. You do not currently have any notifications.</em>
       </p>
+      <% end %>
     </div>
 </div>
 <!-- /.activity-feed -->

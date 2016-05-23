@@ -139,6 +139,10 @@ class CommissionsController < ApplicationController
         @commission.unaccept!(@commission.partner(current_user))
         @commission.accept!(current_user)
 
+        @commission.seller.notifications.find_by(commission: @commission).destroy
+        @commission.buyer.notifications.find_by(commission: @commission).destroy
+        @commission.buyer.notifications.create(about_user: @commission.seller, state: "counter offer", commission: @commission)
+
         format.html { redirect_to @commission, notice: 'Commission was successfully updated' }
         format.json { render :show, status: :ok, location: @commission }
       else
@@ -289,7 +293,8 @@ class CommissionsController < ApplicationController
   def approve
     @commission = Commission.find(params[:id])
     @commission.accept!(current_user)
-    Notification.find_by(commission: @commission).destroy
+    @commission.seller.notifications.find_by(commission: @commission).destroy
+    @commission.buyer.notifications.find_by(commission: @commission).destroy
     @commission.buyer.notifications.create(about_user: current_user, commission: @commission, state: "request accepted");
     redirect_to @commission
   end
