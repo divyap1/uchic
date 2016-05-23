@@ -40,6 +40,19 @@
         color: white;
       }
     }
+
+    .icon-link {
+      position: relative;
+      padding-left: $padding-base-horizontal;
+      padding-right: $padding-base-horizontal;
+
+      .badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: auto;
+      }
+    }
   }
 
   .navbar-search {

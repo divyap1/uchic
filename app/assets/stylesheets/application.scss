@@ -16,32 +16,3 @@
 @import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
 
 @import "themes/default";
-
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
-@import "owl/owl.carousel";
-@import "owl/owl.theme";
-@import "owl/owl.transitions";
-
-@import "custom/base";
-@import "custom/containers";
-@import "custom/content";
-@import "custom/footer";
-@import "custom/forms";
-@import "custom/homepage";
-@import "custom/messaging";
-@import "custom/navbar";
-@import "custom/sidebar";
-@import "custom/style-switch";
-@import "custom/yamm";
-@import "custom/util";
-
-@import "pages/profile";
-@import "pages/activity_feed";
-@import "pages/message-threads";
-
-@import "commissions/commission_view";
-@import "categories/category_view";
-@import "categories/seller_bar";
-@import "devise/register";
