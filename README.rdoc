@@ -1,4 +1,0 @@
-== README
-
-Online shopping application.
-Base theme used: http://bootstrapious.com/p/obaju-e-commerce-template
