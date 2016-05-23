@@ -111,7 +111,7 @@
       }
     }
 
-    unsaveMessagePopup(data.threadId);
+    unsaveMessagePopup(threadId);
   }
 
   function createMessagePopup(data) {
